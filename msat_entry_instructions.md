@@ -30,6 +30,7 @@ Sometimes, papers will report averaged microsatellite diversity at a site in the
 
 If a paper reports temporal replicates (i.e. same site is sampled in multiple years and reported separately), only report ONE time point per site. Pick the temporal replicate with the largest sample size. If this is a tie, pick the most recent sample. (ex: if 50 individuals were sampled from site A in 2012, and 25 were sampled from site A in 2014, report the diversity from the 2012 sample).
 
+
 ## **Data to enter:**
 
 1. Spp
