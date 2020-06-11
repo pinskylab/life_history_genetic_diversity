@@ -2543,34 +2543,167 @@ Zearaja maugeana,Maugean skate,Weltz et al. (2018) Conservation Genetics 19:1505
 Zearaja maugeana,Maugean skate,Weltz et al. (2018) Conservation Genetics 19:1505–1512,0,Australia,Macquarie Harbour ,-42.320420,,,145.386667,,,2013-2014,1,L22,0,195,2,0.267,,The He data comes from the avg of all locations combined per locus.
 Zearaja maugeana,Maugean skate,Weltz et al. (2018) Conservation Genetics 19:1505–1512,0,Australia,Macquarie Harbour ,-42.320420,,,145.386667,,,2013-2014,1,L34,0,195,5,0.138,,The He data comes from the avg of all locations combined per locus.
 Zearaja maugeana,Maugean skate,Weltz et al. (2018) Conservation Genetics 19:1505–1512,0,Australia,Macquarie Harbour ,-42.320420,,,145.386667,,,2013-2014,1,L40,0,195,5,0.476,,The He data comes from the avg of all locations combined per locus.
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
+Clupea harengus,Atlantic herring,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Sweden,South Baltic,55.80,,,15.12,,,,1,,0.667,47,4,0.81,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Clupea harengus,Atlantic herring,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Sweden,Baltic Proper West,57.32,,,16.90,,,,1,,0.667,47,4,0.82,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Clupea harengus,Atlantic herring,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Estonia,Baltic Proper East,59.05,,,22.47,,,,1,,0.667,47,4,0.81,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Clupea harengus,Atlantic herring,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Finland,Gulf of Finland,60.50,,,27.76,,,,1,,0.667,47,4,0.80,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Clupea harengus,Atlantic herring,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Aland Islands,Bothnian Sea,60.19,,,19.61,,,,1,,0.667,47,4,0.81,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Clupea harengus,Atlantic herring,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Sweden,The Kvark,63.40,,,20.32,,,,1,,0.667,47,4,0.80,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Clupea harengus,Atlantic herring,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Finland,Bothnian Bay,65.62,,,24.87,,,,1,,0.667,47,4,0.80,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Esox lucius,Northern pike,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Sweden,South Baltic,56.13,,,15.03,,,,1,,0.73,20,2.54,0.55,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Esox lucius,Northern pike,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Sweden,Baltic Proper West 1,57.79,,,19.01,,,,1,,0.73,20,2.54,0.60,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Esox lucius,Northern pike,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Sweden,Baltic Proper West 2,58.03,,,16.77,,,,1,,0.73,44,2.54,0.61,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Esox lucius,Northern pike,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Sweden,Baltic Proper West 3,59.52,,,18.56,,,,1,,0.73,42,2.54,0.60,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Esox lucius,Northern pike,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Estonia,Baltic Proper East,58.70,,,23.40,,,,1,,0.73,34,2.54,0.57,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Esox lucius,Northern pike,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Finland,Gulf of Finland 1,60.22,,,25.20,,,,1,,0.73,30,2.54,0.63,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Esox lucius,Northern pike,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Finland,Gulf of Finland 2,60.43,,,26.04,,,,1,,0.73,16,2.54,0.59,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Esox lucius,Northern pike,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Aland Islands,Bothnian Sea,60.27,,,20.10,,,,1,,0.73,41,2.54,0.62,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Esox lucius,Northern pike,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Finland,The Kvark,62.90,,,21.30,,,,1,,0.73,41,2.54,0.60,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Esox lucius,Northern pike,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Finland,Bothnian Bay,65.50,,,24.40,,,,1,,0.73,27,2.54,0.66,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Coregonus lavaretus,European whitefish,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Sweden,Outside Baltic,59.08,,,11.23,,,,1,,0.09,22,3.54,0.67,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Coregonus lavaretus,European whitefish,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Germany,South Baltic,54.22,,,12.12,,,,1,,0.09,50,3.54,0.72,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Coregonus lavaretus,European whitefish,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Sweden,Baltic Proper West 1,57.47,,,16.70,,,,1,,0.09,47,3.54,0.77,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Coregonus lavaretus,European whitefish,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Sweden,Baltic Proper West 2,59.38,,,19.20,,,,1,,0.09,48,3.54,0.75,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Coregonus lavaretus,European whitefish,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Estonia,Baltic Proper East,58.36,,,21.90,,,,1,,0.09,43,3.54,0.71,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Coregonus lavaretus,European whitefish,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Russia,Gulf of Finland,60.07,,,29.83,,,,1,,0.09,13,3.54,0.77,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Coregonus lavaretus,European whitefish,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Finland,Bothnian Sea,61.09,,,21.29,,,,1,,0.09,48,3.54,0.72,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Coregonus lavaretus,European whitefish,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Sweden,The Kvark,63.73,,,20.79,,,,1,,0.09,34,3.54,0.72,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Coregonus lavaretus,European whitefish,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Finland,Bothnian Bay 1,64.28,,,23.80,,,,1,,0.09,21,3.54,0.73,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Coregonus lavaretus,European whitefish,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Finland,Bothnian Bay 2,65.11,,,24.69,,,,1,,0.09,20,3.54,0.73,,The He data comes from the avg of all loci together at the specific location. Avgs of crossSpp and repeats of loci in paper have been recorded.
+Gasterosteus aculeatus,Three-spined stickleback,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Sweden,Outside Baltic,58.23,,,11.40,,,,1,,,36,,0.77,,The He data comes from the avg of all loci together at the specific location. Unable to find crossSpp & repeat patterns.
+Gasterosteus aculeatus,Three-spined stickleback,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Sweden,South Baltic,55.37,,,13.15,,,,1,,,29,,0.75,,The He data comes from the avg of all loci together at the specific location. Unable to find crossSpp & repeat patterns.
+Gasterosteus aculeatus,Three-spined stickleback,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Sweden,Baltic Proper West 1,57.00,,,18.20,,,,1,,,36,,0.76,,The He data comes from the avg of all loci together at the specific location. Unable to find crossSpp & repeat patterns.
+Gasterosteus aculeatus,Three-spined stickleback,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Sweden,Baltic Proper West 2,58.65,,,17.00,,,,1,,,34,,0.75,,The He data comes from the avg of all loci together at the specific location. Unable to find crossSpp & repeat patterns.
+Gasterosteus aculeatus,Three-spined stickleback,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Finland,Baltic Proper East,59.83,,,23.20,,,,1,,,30,,0.75,,The He data comes from the avg of all loci together at the specific location. Unable to find crossSpp & repeat patterns.
+Gasterosteus aculeatus,Three-spined stickleback,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Russia,Gulf of Finland,60.35,,,28.62,,,,1,,,31,,0.73,,The He data comes from the avg of all loci together at the specific location. Unable to find crossSpp & repeat patterns.
+Gasterosteus aculeatus,Three-spined stickleback,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Aland Islands,Bothnian Sea 1,60.19,,,19.62,,,,1,,,33,,0.76,,The He data comes from the avg of all loci together at the specific location. Unable to find crossSpp & repeat patterns.
+Gasterosteus aculeatus,Three-spined stickleback,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Sweden,Bothnian Sea 2,61.72,,,17.11,,,,1,,,36,,0.74,,The He data comes from the avg of all loci together at the specific location. Unable to find crossSpp & repeat patterns.
+Gasterosteus aculeatus,Three-spined stickleback,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Sweden,The Kvark,62.51,,,17.72,,,,1,,,36,,0.76,,The He data comes from the avg of all loci together at the specific location. Unable to find crossSpp & repeat patterns.
+Gasterosteus aculeatus,Three-spined stickleback,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Sweden,Bothnian Bay,65.85,,,22.37,,,,1,,,36,,0.74,,The He data comes from the avg of all loci together at the specific location. Unable to find crossSpp & repeat patterns.
+Pungitius pungitius,Ninespine stickleback,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Sweden,South Baltic,56.15,,,15.58,,,,1,,,29,,0.58,,The He data comes from the avg of all loci together at the specific location. Unable to find crossSpp & repeat patterns.
+Pungitius pungitius,Ninespine stickleback,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Sweden,Baltic Proper West,58.65,,,17.10,,,,1,,,15,,0.59,,The He data comes from the avg of all loci together at the specific location. Unable to find crossSpp & repeat patterns.
+Pungitius pungitius,Ninespine stickleback,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Finland,Baltic Proper East,60.43,,,22.20,,,,1,,,20,,0.57,,The He data comes from the avg of all loci together at the specific location. Unable to find crossSpp & repeat patterns.
+Pungitius pungitius,Ninespine stickleback,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Finland,Gulf of Finland,60.45,,,26.25,,,,1,,,38,,0.60,,The He data comes from the avg of all loci together at the specific location. Unable to find crossSpp & repeat patterns.
+Pungitius pungitius,Ninespine stickleback,Wennerstrom et al. (2013) Biodivers Conserv 22:3045–3065,0,Sweden,Bothnian Sea,60.38,,,18.20,,,,1,,,17,,0.59,,The He data comes from the avg of all loci together at the specific location. Unable to find crossSpp & repeat patterns.
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,3: Berners Bay 09,58,39.3,,-134,58.5,,2009,0,Cha63,0,136,2,0.91,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,3: Berners Bay 09,58,39.3,,-134,58.5,,2009,,Cha1017,0,148,4,0.58,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,3: Berners Bay 09,58,39.3,,-134,58.5,,2009,,Cha1020,0,148,2,0.81,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,3: Berners Bay 09,58,39.3,,-134,58.5,,2009,,Cpa4,0,144,4,0.90,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,3: Berners Bay 09,58,39.3,,-134,58.5,,2009,,Cpa6,0,145,4,0.74,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,3: Berners Bay 09,58,39.3,,-134,58.5,,2009,,Cpa27,0,147,4,0.83,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,3: Berners Bay 09,58,39.3,,-134,58.5,,2009,,Cpa103,0,147,4,0.88,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,3: Berners Bay 09,58,39.3,,-134,58.5,,2009,,Cpa107,0,144,2,0.91,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,3: Berners Bay 09,58,39.3,,-134,58.5,,2009,,Cpa108,0,141,4,0.73,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,3: Berners Bay 09,58,39.3,,-134,58.5,,2009,,Cpa111,0,141,4,0.92,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,3: Berners Bay 09,58,39.3,,-134,58.5,,2009,,Cpa112,0,137,4,0.95,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,3: Berners Bay 09,58,39.3,,-134,58.5,,2009,,Cpa113,0,148,4,0.92,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,3: Berners Bay 09,58,39.3,,-134,58.5,,2009,,Cpa114,0,147,4,0.89,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,3: Berners Bay 09,58,39.3,,-134,58.5,,2009,,Cpa125,0,148,2,0.95,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,3: Berners Bay 09,58,39.3,,-134,58.5,,2009,,Cpa134,0,140,2,0.91,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,6: Lynn Canal 08b,58,29.6,,-134,49.2,,2008,,Cha63,0,97,2,0.91,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,6: Lynn Canal 08b,58,29.6,,-134,49.2,,2008,,Cha1017,0,96,4,0.58,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,6: Lynn Canal 08b,58,29.6,,-134,49.2,,2008,,Cha1020,0,98,2,0.84,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,6: Lynn Canal 08b,58,29.6,,-134,49.2,,2008,,Cpa4,0,95,4,0.90,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,6: Lynn Canal 08b,58,29.6,,-134,49.2,,2008,,Cpa6,0,98,4,0.80,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,6: Lynn Canal 08b,58,29.6,,-134,49.2,,2008,,Cpa27,0,97,4,0.79,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,6: Lynn Canal 08b,58,29.6,,-134,49.2,,2008,,Cpa103,0,98,4,0.88,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,6: Lynn Canal 08b,58,29.6,,-134,49.2,,2008,,Cpa107,0,90,2,0.91,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,6: Lynn Canal 08b,58,29.6,,-134,49.2,,2008,,Cpa108,0,92,4,0.71,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,6: Lynn Canal 08b,58,29.6,,-134,49.2,,2008,,Cpa111,0,94,4,0.93,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,6: Lynn Canal 08b,58,29.6,,-134,49.2,,2008,,Cpa112,0,94,4,0.95,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,6: Lynn Canal 08b,58,29.6,,-134,49.2,,2008,,Cpa113,0,86,4,0.92,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,6: Lynn Canal 08b,58,29.6,,-134,49.2,,2008,,Cpa114,0,97,4,0.90,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,6: Lynn Canal 08b,58,29.6,,-134,49.2,,2008,,Cpa125,0,96,2,0.96,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,6: Lynn Canal 08b,58,29.6,,-134,49.2,,2008,,Cpa134,0,98,2,0.92,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,7: Hobart Bay 07,57,27.6,,-133,21.1,,2008,,Cha63,0,128,2,0.91,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,7: Hobart Bay 07,57,27.6,,-133,21.1,,2008,,Cha1017,0,128,4,0.55,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,7: Hobart Bay 07,57,27.6,,-133,21.1,,2008,,Cha1020,0,123,2,0.83,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,7: Hobart Bay 07,57,27.6,,-133,21.1,,2008,,Cpa4,0,128,4,0.91,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,7: Hobart Bay 07,57,27.6,,-133,21.1,,2008,,Cpa6,0,123,4,0.76,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,7: Hobart Bay 07,57,27.6,,-133,21.1,,2008,,Cpa27,0,119,4,0.76,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,7: Hobart Bay 07,57,27.6,,-133,21.1,,2008,,Cpa103,0,127,4,0.89,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,7: Hobart Bay 07,57,27.6,,-133,21.1,,2008,,Cpa107,0,127,2,0.91,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,7: Hobart Bay 07,57,27.6,,-133,21.1,,2008,,Cpa108,0,126,4,0.74,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,7: Hobart Bay 07,57,27.6,,-133,21.1,,2008,,Cpa111,0,124,4,0.93,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,7: Hobart Bay 07,57,27.6,,-133,21.1,,2008,,Cpa112,0,118,4,0.95,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,7: Hobart Bay 07,57,27.6,,-133,21.1,,2008,,Cpa113,0,126,4,0.92,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,7: Hobart Bay 07,57,27.6,,-133,21.1,,2008,,Cpa114,0,128,4,0.88,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,7: Hobart Bay 07,57,27.6,,-133,21.1,,2008,,Cpa125,0,123,2,0.96,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,7: Hobart Bay 07,57,27.6,,-133,21.1,,2008,,Cpa134,0,125,2,0.92,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,8: Hoonah Sound 08,57,36.6,,-135,21.5,,2008,,Cha63,0,100,2,0.92,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,8: Hoonah Sound 08,57,36.6,,-135,21.5,,2008,,Cha1017,0,100,4,0.58,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,8: Hoonah Sound 08,57,36.6,,-135,21.5,,2008,,Cha1020,0,99,2,0.82,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,8: Hoonah Sound 08,57,36.6,,-135,21.5,,2008,,Cpa4,0,98,4,0.9,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,8: Hoonah Sound 08,57,36.6,,-135,21.5,,2008,,Cpa6,0,99,4,0.74,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,8: Hoonah Sound 08,57,36.6,,-135,21.5,,2008,,Cpa27,0,97,4,0.83,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,8: Hoonah Sound 08,57,36.6,,-135,21.5,,2008,,Cpa103,0,100,4,0.89,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,8: Hoonah Sound 08,57,36.6,,-135,21.5,,2008,,Cpa107,0,99,2,0.92,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,8: Hoonah Sound 08,57,36.6,,-135,21.5,,2008,,Cpa108,0,99,4,0.75,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,8: Hoonah Sound 08,57,36.6,,-135,21.5,,2008,,Cpa111,0,88,4,0.92,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,8: Hoonah Sound 08,57,36.6,,-135,21.5,,2008,,Cpa112,0,97,4,0.95,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,8: Hoonah Sound 08,57,36.6,,-135,21.5,,2008,,Cpa113,0,100,4,0.92,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,8: Hoonah Sound 08,57,36.6,,-135,21.5,,2008,,Cpa114,0,99,4,0.88,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,8: Hoonah Sound 08,57,36.6,,-135,21.5,,2008,,Cpa125,0,100,2,0.94,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,8: Hoonah Sound 08,57,36.6,,-135,21.5,,2008,,Cpa134,0,100,2,0.92,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,10: Sitka Sound 08,57,8.9,,-135,28.7,,2008,,Cha63,0,131,2,0.92,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,10: Sitka Sound 08,57,8.9,,-135,28.7,,2008,,Cha1017,0,131,4,0.54,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,10: Sitka Sound 08,57,8.9,,-135,28.7,,2008,,Cha1020,0,117,2,0.81,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,10: Sitka Sound 08,57,8.9,,-135,28.7,,2008,,Cpa4,0,129,4,0.92,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,10: Sitka Sound 08,57,8.9,,-135,28.7,,2008,,Cpa6,0,126,4,0.72,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,10: Sitka Sound 08,57,8.9,,-135,28.7,,2008,,Cpa27,0,130,4,0.81,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,10: Sitka Sound 08,57,8.9,,-135,28.7,,2008,,Cpa103,0,131,4,0.88,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,10: Sitka Sound 08,57,8.9,,-135,28.7,,2008,,Cpa107,0,123,2,0.91,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,10: Sitka Sound 08,57,8.9,,-135,28.7,,2008,,Cpa108,0,123,4,0.72,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,10: Sitka Sound 08,57,8.9,,-135,28.7,,2008,,Cpa111,0,124,4,0.93,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,10: Sitka Sound 08,57,8.9,,-135,28.7,,2008,,Cpa112,0,127,4,0.94,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,10: Sitka Sound 08,57,8.9,,-135,28.7,,2008,,Cpa113,0,113,4,0.91,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,10: Sitka Sound 08,57,8.9,,-135,28.7,,2008,,Cpa114,0,126,4,0.88,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,10: Sitka Sound 08,57,8.9,,-135,28.7,,2008,,Cpa125,0,127,2,0.95,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,10: Sitka Sound 08,57,8.9,,-135,28.7,,2008,,Cpa134,0,125,2,0.91,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,11: Nichols Bay 07,54,43.8,,-132,0.83,,2007,,Cha63,0,97,2,0.89,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,11: Nichols Bay 07,54,43.8,,-132,0.83,,2007,,Cha1017,0,97,4,0.53,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,11: Nichols Bay 07,54,43.8,,-132,0.83,,2007,,Cha1020,0,93,2,0.79,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,11: Nichols Bay 07,54,43.8,,-132,0.83,,2007,,Cpa4,0,92,4,0.92,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,11: Nichols Bay 07,54,43.8,,-132,0.83,,2007,,Cpa6,0,81,4,0.75,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,11: Nichols Bay 07,54,43.8,,-132,0.83,,2007,,Cpa27,0,97,4,0.76,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,11: Nichols Bay 07,54,43.8,,-132,0.83,,2007,,Cpa103,0,97,4,0.88,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,11: Nichols Bay 07,54,43.8,,-132,0.83,,2007,,Cpa107,0,97,2,0.89,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,11: Nichols Bay 07,54,43.8,,-132,0.83,,2007,,Cpa108,0,95,4,0.71,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,11: Nichols Bay 07,54,43.8,,-132,0.83,,2007,,Cpa111,0,93,4,0.93,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,11: Nichols Bay 07,54,43.8,,-132,0.83,,2007,,Cpa112,0,95,4,0.94,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,11: Nichols Bay 07,54,43.8,,-132,0.83,,2007,,Cpa113,0,91,4,0.92,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,11: Nichols Bay 07,54,43.8,,-132,0.83,,2007,,Cpa114,0,91,4,0.90,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,11: Nichols Bay 07,54,43.8,,-132,0.83,,2007,,Cpa125,0,97,2,0.94,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,11: Nichols Bay 07,54,43.8,,-132,0.83,,2007,,Cpa134,0,96,2,0.91,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,12: West Prince William Sound,60,13.6,,-148,11,,2007,,Cha63,0,99,2,0.92,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,12: West Prince William Sound,60,13.6,,-148,11,,2007,,Cha1017,0,99,4,0.50,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,12: West Prince William Sound,60,13.6,,-148,11,,2007,,Cha1020,0,98,2,0.85,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,12: West Prince William Sound,60,13.6,,-148,11,,2007,,Cpa4,0,97,4,0.91,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,12: West Prince William Sound,60,13.6,,-148,11,,2007,,Cpa6,0,98,4,0.74,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,12: West Prince William Sound,60,13.6,,-148,11,,2007,,Cpa27,0,98,4,0.83,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,12: West Prince William Sound,60,13.6,,-148,11,,2007,,Cpa103,0,98,4,0.88,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,12: West Prince William Sound,60,13.6,,-148,11,,2007,,Cpa107,0,97,2,0.92,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,12: West Prince William Sound,60,13.6,,-148,11,,2007,,Cpa108,0,98,4,0.71,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,12: West Prince William Sound,60,13.6,,-148,11,,2007,,Cpa111,0,87,4,0.93,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,12: West Prince William Sound,60,13.6,,-148,11,,2007,,Cpa112,0,99,4,0.95,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,12: West Prince William Sound,60,13.6,,-148,11,,2007,,Cpa113,0,98,4,0.91,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,12: West Prince William Sound,60,13.6,,-148,11,,2007,,Cpa114,0,98,4,0.89,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,12: West Prince William Sound,60,13.6,,-148,11,,2007,,Cpa125,0,99,2,0.96,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,12: West Prince William Sound,60,13.6,,-148,11,,2007,,Cpa134,0,99,2,0.91,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,13: East Prince William Sound,60,39.2,,-134,49.2,,2007,,Cha63,0,92,2,0.93,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,13: East Prince William Sound,60,39.2,,-134,49.2,,2007,,Cha1017,0,91,4,0.54,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,13: East Prince William Sound,60,39.2,,-134,49.2,,2007,,Cha1020,0,49,2,0.84,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,13: East Prince William Sound,60,39.2,,-134,49.2,,2007,,Cpa4,0,87,4,0.91,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,13: East Prince William Sound,60,39.2,,-134,49.2,,2007,,Cpa6,0,92,4,0.76,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,13: East Prince William Sound,60,39.2,,-134,49.2,,2007,,Cpa27,0,92,4,0.80,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,13: East Prince William Sound,60,39.2,,-134,49.2,,2007,,Cpa103,0,91,4,0.90,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,13: East Prince William Sound,60,39.2,,-134,49.2,,2007,,Cpa107,0,84,2,0.93,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,13: East Prince William Sound,60,39.2,,-134,49.2,,2007,,Cpa108,0,90,4,0.68,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,13: East Prince William Sound,60,39.2,,-134,49.2,,2007,,Cpa111,0,92,4,0.93,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,13: East Prince William Sound,60,39.2,,-134,49.2,,2007,,Cpa112,0,92,4,0.94,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,13: East Prince William Sound,60,39.2,,-134,49.2,,2007,,Cpa113,0,90,4,0.89,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,13: East Prince William Sound,60,39.2,,-134,49.2,,2007,,Cpa114,0,90,4,0.90,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,13: East Prince William Sound,60,39.2,,-134,49.2,,2007,,Cpa125,0,76,2,0.96,,
+Clupea pallasii,Pacific herring,Wildes et al. (2011) Fish. Bull. 109:382–393,0,USA,13: East Prince William Sound,60,39.2,,-134,49.2,,2007,,Cpa134,0,91,2,0.93,,
 ,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,
