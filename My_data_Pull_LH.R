@@ -13,8 +13,8 @@ library(rfishbase)
 library(tidyverse)
 
 #read in data
-msat_spp <- read.csv("fbdat_msat.csv", stringsAsFactors = FALSE) #read in msat species list
-mtdna_spp <- read.csv("fbdat_mtdna.csv", stringsAsFactors = FALSE) #read in mtdna species list
+msat_spp <- read.csv("Marial_Stuff/Marial_Diversity_Data/fbdat_msat.csv", stringsAsFactors = FALSE) #read in msat species list
+mtdna_spp <- read.csv("Marial_Stuff/Marial_Diversity_Data/fbdat_mtdna.csv", stringsAsFactors = FALSE) #read in mtdna species list
 
 #NOTE: Branchiostoma spps in mtdna NOT in fishbase -- will need to pull out before querying FB for data
 
@@ -45,17 +45,20 @@ for (i in 1:nrow(msat_spp)) { #get mortality data
 }
 
 #add fecundity from FB
-msat_spp$fecundity <- NA #create column to fill in
+library(sjmisc) #install for correct is_empty() function
+msat_spp$fecundity <- NA #create column to fill in for fecundity
+msat_spp$fecundity_mean <- NA #calculate mean fecundity (when vector is provided)
 
 for (i in 1:nrow(msat_spp)) { #get fecundity data
   cat(paste(i, " ", sep = ''))
   msat_spp$fecundity[i] <- fecundity(species=(msat_spp$fbsci[i]), field='FecundityMean')
-    if(is.na(msat_spp$fecundity[i])) { #if fecundity mean is NA, use fecundity minimum
-      msat_spp$fecundity[i] <- fecundity(species=(msat_spp$fbsci[i]), fields = 'FecundityMin')
-      if(is.na(msat_spp$fecundity[i])) { #if fecundity minimum is NA, use fecundity maximum
-        msat_spp$fecundity[i] <- fecundity(species=(msat_spp$fbsci[i]), fields = 'FecundityMax')
+    if(sjmisc::is_empty(unlist(msat_spp$fecundity[i]), all.na.empty = TRUE)) { #if fecundity mean is NA, use fecundity minimum
+      msat_spp$fecundity[i] <- fecundity(species=msat_spp$fbsci[i], field= 'FecundityMin')
+        if(sjmisc::is_empty(unlist(msat_spp$fecundity[i]), all.na.empty = TRUE)) { #if fecundity minimum is NA, use fecundity maximum
+          msat_spp$fecundity[i] <- fecundity(species=(msat_spp$fbsci[i]), fields = 'FecundityMax')
         }
     }
+  msat_spp$fecundity_mean[i] <- mean(unlist(msat_spp$fecundity[i]), na.rm = TRUE) #calculate mean fecundity
 }
 
 #add maturity length from FB
@@ -171,7 +174,6 @@ for (i in 1:nrow(mtdna_spp)) { #get fecundity data
     }
   }
 }
-
 
 #add spawning cycles from FB
 mtdna_spp$numberofspawningcycles <- NA #create column to fill in
