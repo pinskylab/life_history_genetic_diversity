@@ -13,8 +13,8 @@ library(rfishbase)
 library(tidyverse)
 
 #read in data
-msat_spp <- read.csv("Marial_Stuff/Marial_Diversity_Data/fbdat_msat.csv", stringsAsFactors = FALSE) #read in msat species list
-mtdna_spp <- read.csv("Marial_Stuff/Marial_Diversity_Data/fbdat_mtdna.csv", stringsAsFactors = FALSE) #read in mtdna species list
+msat_spp <- read.csv("fbdat_msat.csv", stringsAsFactors = FALSE) #read in msat species list
+mtdna_spp <- read.csv("fbdat_mtdna.csv", stringsAsFactors = FALSE) #read in mtdna species list
 
 #NOTE: Branchiostoma spps in mtdna NOT in fishbase -- will need to pull out before querying FB for data
 
@@ -52,22 +52,13 @@ msat_spp$fecundity_mean <- NA #calculate mean fecundity (when vector is provided
 for (i in 1:nrow(msat_spp)) { #get fecundity data
   cat(paste(i, " ", sep = ''))
   msat_spp$fecundity[i] <- fecundity(species=(msat_spp$fbsci[i]), field='FecundityMean')
-<<<<<<< HEAD
   if(sjmisc::is_empty(unlist(msat_spp$fecundity[i]), all.na.empty = TRUE)) { #if fecundity mean is NA, use fecundity minimum
     msat_spp$fecundity[i] <- fecundity(species=msat_spp$fbsci[i], field= 'FecundityMin')
     if(sjmisc::is_empty(unlist(msat_spp$fecundity[i]), all.na.empty = TRUE)) { #if fecundity minimum is NA, use fecundity maximum
       msat_spp$fecundity[i] <- fecundity(species=(msat_spp$fbsci[i]), fields = 'FecundityMax')
+  msat_spp$fecundity_mean[i] <- mean(unlist(msat_spp$fecundity[i]), na.rm = TRUE) #calculate mean fecundity
     }
   }
-=======
-    if(sjmisc::is_empty(unlist(msat_spp$fecundity[i]), all.na.empty = TRUE)) { #if fecundity mean is NA, use fecundity minimum
-      msat_spp$fecundity[i] <- fecundity(species=msat_spp$fbsci[i], field= 'FecundityMin')
-        if(sjmisc::is_empty(unlist(msat_spp$fecundity[i]), all.na.empty = TRUE)) { #if fecundity minimum is NA, use fecundity maximum
-          msat_spp$fecundity[i] <- fecundity(species=(msat_spp$fbsci[i]), fields = 'FecundityMax')
-        }
-    }
->>>>>>> 341beb08fa49d050eb5e7709a04fd28c323d475f
-  msat_spp$fecundity_mean[i] <- mean(unlist(msat_spp$fecundity[i]), na.rm = TRUE) #calculate mean fecundity
 }
 
 #add maturity length from FB
@@ -96,13 +87,9 @@ for (i in 1:nrow(msat_spp)) { #get spawning cycles data
   msat_spp$numberofspawningcycles[i] <- reproduction(species=(msat_spp$fbsci[i]), field='Spawning')
 }
 
-#add spawning ground from FB
-msat_spp$spawningground <- NA #create column to fill in
 
-for (i in 1:nrow(msat_spp)) { #get spawning ground data
-  cat(paste(i, " ", sep = ''))
-  msat_spp$spawningground[i] <- spawning(species_list=(msat_spp$fbsci[i]), field='SpawningGround')
-}
+#add reproductive season length from FB
+msat_spp$reproductiveseasonlength <- NA #create column to fill in
 
 #add fertilization from FB
 msat_spp$fertilization <- NA #create column to fill in
@@ -112,9 +99,6 @@ for (i in 1:nrow(msat_spp)) { #get fertilization data
   msat_spp$fertilization[i] <- reproduction(species=(msat_spp$fbsci[i]), field='Fertilization')
 }
 
-#add reproductive season length from FB
-msat_spp$reproductiveseasonlength <- NA #create column to fill in
-
 #add reproduction mode from FB
 msat_spp$reproductionmode <- NA #create column to fill in
 
@@ -123,12 +107,28 @@ for (i in 1:nrow(msat_spp)) { #get reproduction mode data
   msat_spp$reproductionmode[i] <- reproduction(species=(msat_spp$fbsci[i]), field='ReproMode')
 }
 
+#add spawning ground from FB
+msat_spp$spawningground <- NA #create column to fill in
+
+for (i in 1:nrow(msat_spp)) { #get spawning ground data
+  cat(paste(i, " ", sep = ''))
+  msat_spp$spawningground[i] <- spawning(species_list=(msat_spp$fbsci[i]), field='SpawningGround')
+}
+
 #add Batch Spawner information from FB
 msat_spp$batchspawner <- NA #create column to fill in
 
 for (i in 1:nrow(msat_spp)) { #get batch spawner data
   cat(paste(i, " ", sep = ''))
   msat_spp$batchspawner[i] <- reproduction(species_list=(msat_spp$fbsci[i]), field='BatchSpawner')
+}
+
+#add parental care from FB
+msat_spp$parentalcare <- NA #create column to fill in
+
+for (i in 1:nrow(msat_spp)) { #get parental care data
+  cat(paste(i, " ", sep = ''))
+  msat_spp$parentalcare[i] <- reproduction(species=(msat_spp$fbsci[i]), field='ParentalCareQ')
 }
 
 #add larvae size from FB
@@ -144,14 +144,6 @@ for (i in 1:nrow(msat_spp)) { #get larvae data
     }
   }
   msat_spp$larvae_mean[i] <- mean(unlist(msat_spp$larvaesize[i]), na.rm = TRUE) #calculate mean larvae size
-}
-
-#add parental care from FB
-msat_spp$parentalcare <- NA #create column to fill in
-
-for (i in 1:nrow(msat_spp)) { #get parental care data
-  cat(paste(i, " ", sep = ''))
-  msat_spp$parentalcare[i] <- reproduction(species=(msat_spp$fbsci[i]), field='ParentalCareQ')
 }
 
 summary(msat_spp)
@@ -201,35 +193,13 @@ for (i in 1:nrow(mtdna_spp)) { #get fecundity data
   mtdna_spp$fecundity_mean[i] <- mean(unlist(mtdna_spp$fecundity[i]), na.rm = TRUE) #calculate mean fecundity
 }
 
-<<<<<<< HEAD
-=======
-#add spawning cycles from FB
-mtdna_spp$numberofspawningcycles <- NA #create column to fill in
-
-for (i in 1:nrow(mtdna_spp)) { #get spawning cycles data
-  cat(paste(i, " ", sep = ''))
-  mtdna_spp$numberofspawningcycles[i] <- reproduction(species=(mtdna_spp$fbsci[i]), field='Spawning')
-}
-
-#add spawning ground from FB
-mtdna_spp$spawningground <- NA #create column to fill in
-
-for (i in 1:nrow(mtdna_spp)) { #get spawning ground data
-  cat(paste(i, " ", sep = ''))
-  mtdna_spp$spawningground[i] <- spawning(species_list=(mtdna_spp$fbsci[i]), field='SpawningGround')
-}
-
-#add reproductive season length from FB
-mtdna_spp$reproductiveseasonlength <- NA #create column to fill in
-
-
->>>>>>> 341beb08fa49d050eb5e7709a04fd28c323d475f
 #add maturity length from FB
 mtdna_spp$maturitylength <- NA #create column to fill in
 
 for (i in 1:nrow(mtdna_spp)) { #get maturity length data
   cat(paste(i, " ", sep = ''))
   mtdna_spp$maturitylength[i] <- maturity(species=(mtdna_spp$fbsci[i]), field='LengthMatMin')
+  mtdna_spp$maturitylength_mean[i] <- mean(unlist(mtdna_spp$maturitylength[i]), na.rm = TRUE) #calculate mean maturity length
 }
 
 #add maturity age from FB
@@ -238,6 +208,7 @@ mtdna_spp$maturityage <- NA #create column to fill in
 for (i in 1:nrow(mtdna_spp)) { #get maturity age data
   cat(paste(i, " ", sep = ''))
   mtdna_spp$maturityage[i] <- maturity(species=(mtdna_spp$fbsci[i]), field='AgeMatMin')
+  mtdna_spp$maturityage_mean[i] <- mean(unlist(mtdna_spp$maturityage[i]), na.rm = TRUE) #calculate mean maturity length
 }
 
 #add spawning cycles from FB
@@ -248,13 +219,8 @@ for (i in 1:nrow(mtdna_spp)) { #get spawning cycles data
   mtdna_spp$numberofspawningcycles[i] <- reproduction(species=(mtdna_spp$fbsci[i]), field='Spawning')
 }
 
-#add spawning ground from FB
-mtdna_spp$spawningground <- NA #create column to fill in
-
-for (i in 1:nrow(mtdna_spp)) { #get spawning ground data
-  cat(paste(i, " ", sep = ''))
-  mtdna_spp$spawningground[i] <- spawning(species_list=(mtdna_spp$fbsci[i]), field='SpawningGround')
-}
+#add reproductive season length from FB
+mtdna_spp$reproductiveseasonlength <- NA #create column to fill in
 
 #add fertilization from FB
 mtdna_spp$fertilization <- NA #create column to fill in
@@ -264,9 +230,6 @@ for (i in 1:nrow(mtdna_spp)) { #get fertilization data
   mtdna_spp$fertilization[i] <- reproduction(species=(mtdna_spp$fbsci[i]), field='Fertilization')
 }
 
-#add reproductive season length from FB
-mtdna_spp$reproductiveseasonlength <- NA #create column to fill in
-
 #add reproduction mode from FB
 mtdna_spp$reproductionmode <- NA #create column to fill in
 
@@ -275,12 +238,28 @@ for (i in 1:nrow(mtdna_spp)) { #get reproduction mode data
   mtdna_spp$reproductionmode[i] <- reproduction(species=(mtdna_spp$fbsci[i]), field='ReproMode')
 }
 
+#add spawning ground from FB
+mtdna_spp$spawningground <- NA #create column to fill in
+
+for (i in 1:nrow(mtdna_spp)) { #get spawning ground data
+  cat(paste(i, " ", sep = ''))
+  mtdna_spp$spawningground[i] <- spawning(species_list=(mtdna_spp$fbsci[i]), field='SpawningGround')
+}
+
 #add Batch Spawner information from FB
 mtdna_spp$batchspawner <- NA #create column to fill in
 
 for (i in 1:nrow(mtdna_spp)) { #get batch spawner data
   cat(paste(i, " ", sep = ''))
   mtdna_spp$batchspawner[i] <- reproduction(species_list=(mtdna_spp$fbsci[i]), field='BatchSpawner')
+}
+
+#add parental care from FB
+mtdna_spp$parentalcare <- NA #create column to fill in
+
+for (i in 1:nrow(mtdna_spp)) { #get parental care data
+  cat(paste(i, " ", sep = ''))
+  mtdna_spp$parentalcare[i] <- reproduction(species=(mtdna_spp$fbsci[i]), field='ParentalCareQ')
 }
 
 #add larvae size from FB
@@ -296,14 +275,6 @@ for (i in 1:nrow(mtdna_spp)) { #get larvae data
     }
   }
   mtdna_spp$larvae_mean[i] <- mean(unlist(mtdna_spp$larvaesize[i]), na.rm = TRUE) #calculate mean larvae size
-}
-
-#add parental care from FB
-mtdna_spp$parentalcare <- NA #create column to fill in
-
-for (i in 1:nrow(mtdna_spp)) { #get parental care data
-  cat(paste(i, " ", sep = ''))
-  mtdna_spp$parentalcare[i] <- reproduction(species=(mtdna_spp$fbsci[i]), field='ParentalCareQ')
 }
 
 summary(mtdna_spp)
