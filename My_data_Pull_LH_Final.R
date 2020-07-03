@@ -284,3 +284,33 @@ summary(mtdna_spp)
 #  cat(paste(i, " ", sep = ''))
 #  spps2$SpecCode[i] <- as.numeric(species(specieslist = spps2$fbsci[i], fields = 'SpecCode')$SpecCode)
 #}
+
+##########################################################################################################################################
+
+######## Merge data from mtdna_spp_final.csv and mtdna_assembled.csv togther########
+
+mtdna_spp_final_1 = read.csv("mtdna_spp_final.csv", header=TRUE, sep=",")
+mtdna_assembled_2 = read.csv("mtdna_assembled.csv", header=TRUE, sep=",")
+
+mtdna_full_data = merge(mtdna_spp_final_1, mtdna_assembled_2, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE, by="spp")
+
+mtdna_full_data$X.x <- NULL #removed unnecessary column
+mtdna_full_data$X.y <- NULL #removed unnecessary column
+
+###write csv for mtdna data###
+
+write.csv(mtdna_full_data, "mtdna_final_data.csv")
+
+######## Merge data from msat_spp_final.csv and msat_assembled.csv togther########
+
+msat_spp_final_1 = read.csv("msat_spp_final.csv", header=TRUE, sep=",")
+msat_assembled_2 = read.csv("msat_assembled.csv", header=TRUE, sep=",")
+
+msat_full_data = merge(msat_spp_final_1, msat_assembled_2, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE, by="spp")
+
+msat_full_data$X.x <- NULL #removed unnecessary column
+msat_full_data$X.y <- NULL #removed unnecessary column
+
+###write csv###
+
+write.csv(msat_full_data, "msat_final_data.csv")
