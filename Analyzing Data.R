@@ -132,21 +132,26 @@ polygon(density(mtdna_fecundity_He_no.na$fecundity_mean), main="Fecundity Mean D
 
 #Fertilization#
 
-external <- mtdna_final_fertilization_He_no.na$He[mtdna_final_fertilization_He_no.na$final_fertilization=="external"]
-internal <- mtdna_final_fertilization_He_no.na$He[mtdna_final_fertilization_He_no.na$final_fertilization=="internal (oviduct)"]
+external.mtdna <- mtdna_final_fertilization_He_no.na$He[mtdna_final_fertilization_He_no.na$final_fertilization=="external"]
+internal.mtdna <- mtdna_final_fertilization_He_no.na$He[mtdna_final_fertilization_He_no.na$final_fertilization=="internal (oviduct)"]
 
-t.test(external, internal, var.equal=TRUE)
+fertilization_ttest.mtdna <- t.test(external.mtdna, internal.mtdna, var.equal=TRUE)
 
-#Fecundity Mean#
+#Reproduction Mode#
 
-fecunditymean.mtdna<-data.matrix(mtdna_fecundity_He_no.na$fecundity_mean) #create fecundity mean vector that contains matrix for fecundity mean converted from dataset 
-He.mtdna<- data.matrix(mtdna_fecundity_He_no.na$He) #create He vector that contains matrix for He converted from dataset 
+dioecism.mtdna <- mtdna_final_reproductionmode_He_no.na$He[mtdna_final_reproductionmode_He_no.na$final_reproductionmode=="Dioecious"]
+hermaphrodite.mtdna <- mtdna_final_reproductionmode_He_no.na$He[mtdna_final_reproductionmode_He_no.na$final_reproductionmode=="Hermaphrodite"]
 
-t.test(fecunditymean.mtdna, He.mtdna, var.equal=TRUE) #run a t-test using both newly created vectors 
+reproductionmode_ttest.mtdna <- t.test(dioecism.mtdna, hermaphrodite.mtdna, var.equal=TRUE)
 
-#OR:: t.test(fecunditymean.mtdna, He., alt = "two.sided", mu = 0, paired = TRUE, var.equal = FALSE, conf.level = 0.95)
-#OR:: t.test(fecunditymean.mtdna, He., alt = "two.sided", mu = 0, paired = FALSE, var.equal = TRUE, conf.level = 0.95)
-#OR:: t.test(fecunditymean.mtdna, var.equal = FALSE, conf.level = 0.95)
+#Hermaphrodites#
+
+protogyny.mtdna <- mtdna_hermaphrodite_type_He_no.na$He[mtdna_hermaphrodite_type_He_no.na$hermaphrodite_type=="protogyny"]
+protandry.mtdna <- mtdna_hermaphrodite_type_He_no.na$He[mtdna_hermaphrodite_type_He_no.na$hermaphrodite_type=="protandry"]
+true.hermaphroditism.mtdna <- mtdna_hermaphrodite_type_He_no.na$He[mtdna_hermaphrodite_type_He_no.na$hermaphrodite_type=="true hermaphroditism"]
+
+anova(c("protogyny.mtdna", "protandry.mtdna", "true.hermaphroditism.mtdna")
+t.test(var.equal=TRUE)
 
 #####Wilcoxon Tests: Numerical Data#####
 
@@ -219,7 +224,7 @@ msat_data$hermaphrodite_type  [msat_data$reproductionmode =="true hermaphroditis
 msat_hermaphrodite_type_He_no.na <- msat_data[!is.na(msat_data$hermaphrodite_type ) & !is.na(msat_data$He),] #create new table that excludes NA's from columns of interest
 
 ggplot(msat_hermaphrodite_type_He_no.na) + geom_boxplot(aes(x = hermaphrodite_type , y = He)) + #hermaphrodite typemode & He box plot
-  ggtitle("mtDNA: Hermaphrodite Type vs. He") + #add plot title
+  ggtitle("msat: Hermaphrodite Type vs. He") + #add plot title
   xlab("Hermaphrodite") + ylab("He") + #add axis labels
   theme(                                 #specify characteristics of the plot 
     plot.title = element_text(size=14, face="bold"), 
@@ -231,7 +236,7 @@ ggplot(msat_hermaphrodite_type_He_no.na) + geom_boxplot(aes(x = hermaphrodite_ty
 #Max Length#
 msat_maxlength_He_no.na <- msat_data[!is.na(msat_data$maxlength) & !is.na(msat_data$He),] #create new table that excludes NA's from columns of interest
 
-ggplot(msat_maxlength_He_no.na, aes(x= He, y= maxlength)) + #max length & He scatter plot
+ggplot(msat_maxlength_He_no.na, aes(x= maxlength, y= He)) + #max length & He scatter plot
   geom_point(shape=1) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE) + 
@@ -247,14 +252,14 @@ ggplot(msat_maxlength_He_no.na, aes(x= He, y= maxlength)) + #max length & He sca
 #Fecundity Mean#
 msat_fecundity_He_no.na <- msat_data[!is.na(msat_data$fecundity_mean) & !is.na(msat_data$He),] #create new table that excludes NA's from columns of interest
        
-ggplot(msat_fecundity_He_no.na, aes(y= fecundity_mean, x= He)) + #fecundity mean& He scatter plot
+ggplot(msat_fecundity_He_no.na, aes(x= fecundity_mean, y= He)) + #fecundity mean& He scatter plot
   geom_point(shape=1) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
     se=TRUE) +
   ylim(0,1)+
   coord_cartesian(ylim = c(0, 1)) +
-  ggtitle("msat: Fecundity vs. He") + #add plot title
-  xlab("He") + ylab("Fecundity") + #add plot title
+  ggtitle("msat: Fecundity Mean vs. He") + #add plot title
+  xlab("Fecundity Mean") + ylab("He") + #add plot title
   theme(                                 #specifying characteristics of the plot 
     plot.title = element_text(size=14, face="bold"),
     axis.title.x = element_text(color="blue", size=14, face="bold"),
@@ -270,26 +275,30 @@ polygon(density(msat_maxlength_He_no.na$maxlength), main="msat: Max Length Densi
 plot(density(msat_fecundity_He_no.na$fecundity_mean), main="msat: Fecundity Mean Density") #create density plot for fecundity mean
 polygon(density(msat_fecundity_He_no.na$fecundity_mean), main="msat: Fecundity Mean Density", col="blue") #specify characteristics of plot
 
-#####T-Tests: Numerical Data#####
+#####T-Tests: Character Data#####
 
-#Max Length#
+#Fertilization#
 
-maxlength.msat<-data.matrix(msat_maxlength_He_no.na$maxlength) #create max length vector that contains matrix for max length converted from dataset 
-He.msat<- data.matrix(msat_maxlength_He_no.na$He) #create He vector that contains matrix for He converted from dataset 
+external.msat <- msat_final_fertilization_He_no.na$He[msat_final_fertilization_He_no.na$final_fertilization=="external"]
+internal.msat <- msat_final_fertilization_He_no.na$He[msat_final_fertilization_He_no.na$final_fertilization=="internal (oviduct)"]
 
-t.test(maxlength.msat, He.msat, var.equal=TRUE) #run a t-test using both newly created vectors 
+fertilization_ttest.msat <- t.test(external.msat, internal.msat, var.equal=TRUE)
 
-#Fecundity Mean#
+#Reproduction Mode#
 
-fecunditymean.msat<-data.matrix(msat_maxlength_He_no.na$fecundity_mean) #create fecundity mean vector that contains matrix for fecundity meanconverted from dataset 
-He.msat<- data.matrix(msat_maxlength_He_no.na$He) #create He vector that contains matrix for He converted from dataset 
+dioecism.msat <- msat_final_reproductionmode_He_no.na$He[msat_final_reproductionmode_He_no.na$final_reproductionmode=="Dioecious"]
+hermaphrodite.msat <- msat_final_reproductionmode_He_no.na$He[msat_final_reproductionmode_He_no.na$final_reproductionmode=="Hermaphrodite"]
 
-t.test(fecunditymean.msat, He.msat, var.equal=TRUE) #run a t-test using both newly created vectors 
+reproductionmode_ttest.msat <- t.test(dioecism.msat, hermaphrodite.msat, var.equal=TRUE)
 
-#OR:: t.test(fecunditymean.msat, He.msat, alt = "two.sided", mu = 0, paired = TRUE, var.equal = FALSE, conf.level = 0.95)
-#OR:: t.test(fecunditymean.msat, He.msat, alt = "two.sided", mu = 0, paired = FALSE, var.equal = TRUE, conf.level = 0.95)
-#OR:: t.test(fecunditymean.msat, var.equal = FALSE, conf.level = 0.95)
+#Hermaphrodites#
 
+protogyny.mtdna <- mtdna_hermaphrodite_type_He_no.na$He[mtdna_hermaphrodite_type_He_no.na$hermaphrodite_type=="protogyny"]
+protandry.mtdna <- mtdna_hermaphrodite_type_He_no.na$He[mtdna_hermaphrodite_type_He_no.na$hermaphrodite_type=="protandry"]
+true.hermaphroditism.mtdna <- mtdna_hermaphrodite_type_He_no.na$He[mtdna_hermaphrodite_type_He_no.na$hermaphrodite_type=="true hermaphroditism"]
+
+anova(c("protogyny.mtdna", "protandry.mtdna", "true.hermaphroditism.mtdna")
+      t.test(var.equal=TRUE)
 
 #####Wilcoxon Tests: Numerical Data#####
 
