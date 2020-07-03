@@ -11,7 +11,6 @@ remove(list = ls())
 
 #load libraries
 library(tidyverse)
-library(ggplot2)
 library(dplyr)
 
 #read in data
@@ -63,18 +62,39 @@ ggplot(mtdna_final_reproductionmode_He_no.na ) + geom_boxplot(aes(x = final_repr
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))
 
+#Hermaphrodites#
+
+mtdna_data$hermaphrodite_type <- NA #create new column to categorize hermaphrodite type
+
+mtdna_data$hermaphrodite_type  [mtdna_data$reproductionmode =="dioecism"]  <- NA
+mtdna_data$hermaphrodite_type  [mtdna_data$reproductionmode =="protogyny"] <- "protogyny"
+mtdna_data$hermaphrodite_type  [mtdna_data$reproductionmode =="protandry"] <- "protandry"
+mtdna_data$hermaphrodite_type  [mtdna_data$reproductionmode =="true hermaphroditism"] <- "true hermaphroditism"
+
+mtdna_hermaphrodite_type_He_no.na <- mtdna_data[!is.na(mtdna_data$hermaphrodite_type ) & !is.na(mtdna_data$He),] #create new table that excludes NA's from columns of interest
+
+ggplot(mtdna_hermaphrodite_type_He_no.na ) + geom_boxplot(aes(x = hermaphrodite_type , y = He)) + #hermaphrodite type mode & He box plot
+  ggtitle("mtDNA: Hermaphrodite Type vs. He") + #add plot title
+  xlab("Hermaphrodite") + ylab("He") + #add axis labels
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"), 
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))
+
 #####Scatter Plots: Numerical Data#####
 
 #Max Length#
 
 mtdna_maxlength_He_no.na <- mtdna_data[!is.na(mtdna_data$maxlength) & !is.na(mtdna_data$He),] #create new table that excludes NA's from columns of interest
 
-ggplot(mtdna_maxlength_He_no.na, aes(x= He, y= maxlength)) + #max length & He scatter plot
+ggplot(mtdna_maxlength_He_no.na, aes(x= maxlength, y= He)) + #max length & He scatter plot
   geom_point(shape=1) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE) +
-  ggtitle("mtDNA: He vs. Max Length") + #add plot title
-  xlab("He") + ylab("Max Length") + #add axis labels
+  ylim(0,1)+
+  coord_cartesian(ylim = c(0, 1)) +
+  ggtitle("mtDNA: Max Length vs. He") + #add plot title
+  xlab("Max Length") + ylab("He") + #add axis labels
   theme(                                 #specify characteristics of the plot 
     plot.title = element_text(size=14, face="bold"),
     axis.title.x = element_text(color="blue", size=14, face="bold"),
@@ -85,12 +105,14 @@ options(scipen = 999) #convert data from scientific notation to numeric
 
 mtdna_fecundity_He_no.na <- mtdna_data[!is.na(mtdna_data$fecundity_mean) & !is.na(mtdna_data$He),] #create new table that excludes NA's from columns of interest
  
-ggplot(mtdna_fecundity_He_no.na, aes(y= fecundity_mean, x= He)) + #fecundity mean & He scatter plot
+ggplot(mtdna_fecundity_He_no.na, aes(y= He, x= fecundity_mean)) + #fecundity mean & He scatter plot
   geom_point(shape=1) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE) +
-  ggtitle("mtDNA: He vs. Fecundity Mean") + #add plot title
-  xlab("He") + ylab("Fecundity Mean") + #add axis labels
+  ylim(0,1)+
+  coord_cartesian(ylim = c(0, 1)) +
+  ggtitle("mtDNA: Fecundity Mean vs. He") + #add plot title
+  xlab("Fecundity Mean") + ylab("He") + #add axis labels
   theme(                                 #specify characteristics of the plot 
     plot.title = element_text(size=14, face="bold"),
     axis.title.x = element_text(color="blue", size=14, face="bold"),
@@ -106,14 +128,31 @@ polygon(density(mtdna_maxlength_He_no.na$maxlength), main="Max Length Density", 
 plot(density(mtdna_fecundity_He_no.na$fecundity_mean), main="Fecundity Mean Density") #create density plot for fecundity mean
 polygon(density(mtdna_fecundity_He_no.na$fecundity_mean), main="Fecundity Mean Density", col="blue") #specify characteristics of plot
 
-#####T-Tests: Numerical Data#####
+#####T-Tests: Character Data#####
 
-#Max Length#
+#Fertilization#
 
-maxlength.mtdna<-data.matrix(mtdna_maxlength_He_no.na$maxlength) #create max length vector that contains matrix for max length converted from dataset 
-He.mtdna<- data.matrix(mtdna_maxlength_He_no.na$He) #create He vector that contains matrix for He converted from dataset 
+external_He <- data.matrix(mtdna_final_fertilization_He_no.na$He, c("external"))
+internal_He <- data.matrix(mtdna_final_fertilization_He_no.na$He, c("internal"))
+t.test(external_He, internal_He, var.equal=TRUE)
 
-t.test(maxlength.mtdna, He.mtdna, var.equal=TRUE) #run a t-test using both newly created vectors 
+
+#external_He <- mtdna_final_fertilization_He_no.na (
+ # ID=1:10,
+  #group1=sleep$He[1:10],
+  #group2=sleep$He[11:20]
+#)
+
+#external_He <-
+ # mtdna_final_fertilization_He_no.na(fun = t.test,
+                                    # vars = c("external"),
+                                     #group.var = "He",
+                                     #var.equal = TRUE)
+
+#maxlength.mtdna<-data.matrix(mtdna_maxlength_He_no.na$maxlength) #create max length vector that contains matrix for max length converted from dataset 
+#He.mtdna<- data.matrix(mtdna_maxlength_He_no.na$He) #create He vector that contains matrix for He converted from dataset 
+
+#t.test(maxlength.mtdna, He.mtdna, var.equal=TRUE) #run a t-test using both newly created vectors 
 
 #Fecundity Mean#
 
@@ -185,6 +224,25 @@ ggplot(msat_final_reproductionmode_He_no.na ) + geom_boxplot(aes(x = final_repro
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))
 
+#Hermaphrodites#
+
+msat_data$hermaphrodite_type <- NA #create new column to categorize hermaphrodite type
+
+msat_data$hermaphrodite_type  [msat_data$reproductionmode =="dioecism"]  <- NA
+msat_data$hermaphrodite_type  [msat_data$reproductionmode =="protogyny"] <- "protogyny"
+msat_data$hermaphrodite_type  [msat_data$reproductionmode =="protandry"] <- "protandry"
+msat_data$hermaphrodite_type  [msat_data$reproductionmode =="true hermaphroditism"] <- "true hermaphroditism"
+
+msat_hermaphrodite_type_He_no.na <- msat_data[!is.na(msat_data$hermaphrodite_type ) & !is.na(msat_data$He),] #create new table that excludes NA's from columns of interest
+
+ggplot(msat_hermaphrodite_type_He_no.na) + geom_boxplot(aes(x = hermaphrodite_type , y = He)) + #hermaphrodite typemode & He box plot
+  ggtitle("mtDNA: Hermaphrodite Type vs. He") + #add plot title
+  xlab("Hermaphrodite") + ylab("He") + #add axis labels
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"), 
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))
+
 #####Scatter Plots: Numerical Data#####
 
 #Max Length#
@@ -194,8 +252,10 @@ ggplot(msat_maxlength_He_no.na, aes(x= He, y= maxlength)) + #max length & He sca
   geom_point(shape=1) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE) + 
-  ggtitle("msat: He vs. Max Length") + #add plot title
-   xlab("He") + ylab("Max Length") + #add axis labels
+  ylim(0,1)+
+  coord_cartesian(ylim = c(0, 1)) +
+  ggtitle("msat: Max Length vs. He") + #add plot title
+   xlab("Max Length") + ylab("He") + #add axis labels
     theme(                                 #specifying characteristics of the plot 
       plot.title = element_text(size=14, face="bold"),
       axis.title.x = element_text(color="blue", size=14, face="bold"),
@@ -208,7 +268,9 @@ ggplot(msat_fecundity_He_no.na, aes(y= fecundity_mean, x= He)) + #fecundity mean
   geom_point(shape=1) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
     se=TRUE) +
-  ggtitle("msat: He vs. Fecundity") + #add plot title
+  ylim(0,1)+
+  coord_cartesian(ylim = c(0, 1)) +
+  ggtitle("msat: Fecundity vs. He") + #add plot title
   xlab("He") + ylab("Fecundity") + #add plot title
   theme(                                 #specifying characteristics of the plot 
     plot.title = element_text(size=14, face="bold"),
