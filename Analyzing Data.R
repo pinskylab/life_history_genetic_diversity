@@ -132,8 +132,30 @@ polygon(density(mtdna_fecundity_He_no.na$fecundity_mean), main="Fecundity Mean D
 
 #Fertilization#
 
-external_He <- data.matrix(mtdna_final_fertilization_He_no.na$He, c("external"))
-internal_He <- data.matrix(mtdna_final_fertilization_He_no.na$He, c("internal"))
+mtdna_final_fertilization_He_no.na %>%
+  select(He, final_fertilization,  contains("external"), [!(c("internal (oviduct)")])
+
+t_test_final_fertilization <- t.test(final_fertilization ~ He,
+                         data = mtdna_final_fertilization_He_no.na,
+                         alternative = "two.sided",
+                         mu = 0,
+                         paired = FALSE,
+                         var.equal = FALSE,
+                         conf.level = 0.95)
+
+mtdna_final_fertilization_He_no.na_internal <- mtdna_final_fertilization_He_no.na[!is.na(mtdna_final_fertilization_He_no.na$internal) & !is.na(mtdna_data$He),] #create new table that excludes NA's from columns of interest
+
+  
+external_He <- data.matrix(mtdna_final_fertilization_He_no.na$He, mtdna_final_fertilization_He_no.na$final_fertilization[!("internal (oviduct)")]) #(mtdna_data$final_fertilization) & !is.na(mtdna_data$He),]) #create new table that excludes NA's from columns of interest
+internal_He <- data.matrix(mtdna_final_fertilization_He_no.na[!mtdna_final_fertilization_He_no.na$final_fertilization=="internal"] & mtdna_final_fertilization_He_no.na$He) #(mtdna_data$final_fertilization) & !is.na(mtdna_data$He),]) #create new table that excludes NA's from columns of interest
+
+external_He <- mtdna_final_fertilization_He_no.na[mtdna_final_fertilization_He_no.na$He + (mtdna_final_fertilization_He_no.na$He == (c("external")))]
+
+
+external_He <- data.matrix(mtdna_final_fertilization_He_no.na$He, omit("internal (oviduct)")) #c("external"))
+
+external_He <- data.matrix(mtdna_final_fertilization_He_no.na$He & mtdna_final_fertilization_He_no.na$final_fertilization, ("external"))
+internal_He <- data.matrix(mtdna_final_fertilization_He_no.na$He, c("internal (oviduct)"))
 t.test(external_He, internal_He, var.equal=TRUE)
 
 
