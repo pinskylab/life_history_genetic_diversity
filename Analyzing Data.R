@@ -31,7 +31,7 @@ mtdna_data$final_fertilization [mtdna_data$fertilization =="in brood pouch or si
 
 mtdna_final_fertilization_He_no.na <- mtdna_data[!is.na(mtdna_data$final_fertilization) & !is.na(mtdna_data$He),] #create new table that excludes NA's from columns of interest
 
-theme_update(plot.title = element_text(hjust = 0.5)) #centered plot title
+theme_update(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
 
 ggplot(mtdna_final_fertilization_He_no.na) + geom_boxplot(aes(x = final_fertilization, y = He)) + #final fertilization & He box plot
   ggtitle("mtDNA: Fertilization Method vs. He") + #add plot title
@@ -85,6 +85,7 @@ ggplot(mtdna_hermaphrodite_type_He_no.na ) + geom_boxplot(aes(x = hermaphrodite_
 
 #Max Length#
 
+#w/ Rhincodon typus outlier
 mtdna_maxlength_He_no.na <- mtdna_data[!is.na(mtdna_data$maxlength) & !is.na(mtdna_data$He),] #create new table that excludes NA's from columns of interest
 
 ggplot(mtdna_maxlength_He_no.na, aes(x= maxlength, y= He)) + #max length & He scatter plot
@@ -99,6 +100,23 @@ ggplot(mtdna_maxlength_He_no.na, aes(x= maxlength, y= He)) + #max length & He sc
     plot.title = element_text(size=14, face="bold"),
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))
+
+#w/out Rhincodon typus outlier
+mtdna_maxlength_He_no.na_nowhaleshark <- mtdna_maxlength_He_no.na[!(mtdna_maxlength_He_no.na$spp=="Rhincodon typus"),] #exclude Rhincodon typus
+
+ggplot(mtdna_maxlength_He_no.na_nowhaleshark, aes(x= maxlength, y= He)) + #max length & He scatter plot
+  geom_point(shape=1) +    # Use hollow circles
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE) +
+  ylim(0,1)+
+  coord_cartesian(ylim = c(0, 1)) +
+  ggtitle("mtDNA: Max Length vs. He", subtitle= "(no Rhincodon typus)") + #add plot title
+  xlab("Max Length") + ylab("He") + #add axis labels
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))
+
 
 #Fecundity Mean#
 options(scipen = 999) #convert data from scientific notation to numeric
@@ -144,14 +162,9 @@ hermaphrodite.mtdna <- mtdna_final_reproductionmode_He_no.na$He[mtdna_final_repr
 
 reproductionmode_ttest.mtdna <- t.test(dioecism.mtdna, hermaphrodite.mtdna, var.equal=TRUE)
 
-#Hermaphrodites#
+#Hermaphrodites: ANOVA TEST#
 
-protogyny.mtdna <- mtdna_hermaphrodite_type_He_no.na$He[mtdna_hermaphrodite_type_He_no.na$hermaphrodite_type=="protogyny"]
-protandry.mtdna <- mtdna_hermaphrodite_type_He_no.na$He[mtdna_hermaphrodite_type_He_no.na$hermaphrodite_type=="protandry"]
-true.hermaphroditism.mtdna <- mtdna_hermaphrodite_type_He_no.na$He[mtdna_hermaphrodite_type_He_no.na$hermaphrodite_type=="true hermaphroditism"]
-
-anova(c("protogyny.mtdna", "protandry.mtdna", "true.hermaphroditism.mtdna")
-t.test(var.equal=TRUE)
+hermaphroditesanovamtdna <- aov(He ~ hermaphrodite_type, data = mtdna_hermaphrodite_type_He_no.na)
 
 #####Wilcoxon Tests: Numerical Data#####
 
@@ -234,6 +247,8 @@ ggplot(msat_hermaphrodite_type_He_no.na) + geom_boxplot(aes(x = hermaphrodite_ty
 #####Scatter Plots: Numerical Data#####
 
 #Max Length#
+
+#w/ Rhincodon typus outlier
 msat_maxlength_He_no.na <- msat_data[!is.na(msat_data$maxlength) & !is.na(msat_data$He),] #create new table that excludes NA's from columns of interest
 
 ggplot(msat_maxlength_He_no.na, aes(x= maxlength, y= He)) + #max length & He scatter plot
@@ -248,6 +263,22 @@ ggplot(msat_maxlength_He_no.na, aes(x= maxlength, y= He)) + #max length & He sca
       plot.title = element_text(size=14, face="bold"),
       axis.title.x = element_text(color="blue", size=14, face="bold"),
       axis.title.y = element_text(color="red", size=14, face="bold"))
+
+#w/out Rhincodon typus outlier
+msat_maxlength_He_no.na_nowhaleshark <- msat_maxlength_He_no.na[!(msat_maxlength_He_no.na$spp=="Rhincodon typus"),] #exclude Rhincodon typus
+
+ggplot(msat_maxlength_He_no.na_nowhaleshark, aes(x= maxlength, y= He)) + #max length & He scatter plot
+  geom_point(shape=1) +    # Use hollow circles
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE) +
+  ylim(0,1)+
+  coord_cartesian(ylim = c(0, 1)) +
+  ggtitle("msat: Max Length vs. He", subtitle= "(no Rhincodon typus)") + #add plot title
+  xlab("Max Length") + ylab("He") + #add axis labels
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))
 
 #Fecundity Mean#
 msat_fecundity_He_no.na <- msat_data[!is.na(msat_data$fecundity_mean) & !is.na(msat_data$He),] #create new table that excludes NA's from columns of interest
@@ -291,14 +322,9 @@ hermaphrodite.msat <- msat_final_reproductionmode_He_no.na$He[msat_final_reprodu
 
 reproductionmode_ttest.msat <- t.test(dioecism.msat, hermaphrodite.msat, var.equal=TRUE)
 
-#Hermaphrodites#
+#Hermaphrodites: ANOVA TEST#
 
-protogyny.mtdna <- mtdna_hermaphrodite_type_He_no.na$He[mtdna_hermaphrodite_type_He_no.na$hermaphrodite_type=="protogyny"]
-protandry.mtdna <- mtdna_hermaphrodite_type_He_no.na$He[mtdna_hermaphrodite_type_He_no.na$hermaphrodite_type=="protandry"]
-true.hermaphroditism.mtdna <- mtdna_hermaphrodite_type_He_no.na$He[mtdna_hermaphrodite_type_He_no.na$hermaphrodite_type=="true hermaphroditism"]
-
-anova(c("protogyny.mtdna", "protandry.mtdna", "true.hermaphroditism.mtdna")
-      t.test(var.equal=TRUE)
+hermaphroditesanovamsat <- aov(He ~ hermaphrodite_type, data = msat_hermaphrodite_type_He_no.na)
 
 #####Wilcoxon Tests: Numerical Data#####
 
