@@ -174,9 +174,9 @@ hermaphrodite.mtdna <- mtdna_final_reproductionmode_He_no.na$He[mtdna_final_repr
 
 reproductionmode_ttest.mtdna <- t.test(dioecism.mtdna, hermaphrodite.mtdna, var.equal=TRUE)
 
-#Hermaphrodites: ANOVA TEST#
+#Specific Reproduction Modes: ANOVA TEST#
 
-hermaphroditesanovamtdna <- aov(He ~ hermaphrodite_type, data = mtdna_hermaphrodite_type_He_no.na)
+specific.repro_modeanovamtdna <- aov(He ~ specific.repro_mode, data = mtdna_reproduction_type_He_no.na)
 
 #####Wilcoxon Tests: Numerical Data#####
 
@@ -311,7 +311,7 @@ ggplot(msat_fecundity_He_no.na, aes(x= fecundity_mean, y= He)) + #fecundity mean
     plot.title = element_text(size=14, face="bold"),
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))+
-  annotate("text", x = 25000000, y = 0.956, label = lm_eqn(msat_fecundity_He_no.na$fecundity_mean, msat_fecundity_He_no.na$He, msat_fecundity_He_no.na), color="black", size = 5, parse=TRUE) #add regression line equation
+  annotate("text", x = 20000000, y = 0.956, label = lm_eqn(msat_fecundity_He_no.na$fecundity_mean, msat_fecundity_He_no.na$He, msat_fecundity_He_no.na), color="black", size = 5, parse=TRUE) #add regression line equation
 
 #####Density Plots: Numerical Data#####
 
@@ -339,9 +339,9 @@ hermaphrodite.msat <- msat_final_reproductionmode_He_no.na$He[msat_final_reprodu
 
 reproductionmode_ttest.msat <- t.test(dioecism.msat, hermaphrodite.msat, var.equal=TRUE)
 
-#Hermaphrodites: ANOVA TEST#
+#Specific Reproduction Modes: ANOVA TEST#
 
-hermaphroditesanovamsat <- aov(He ~ hermaphrodite_type, data = msat_hermaphrodite_type_He_no.na)
+specific.repro_modeanovamsat <- aov(He ~ specific.repro_mode, data = msat_reproduction_type_He_no.na)
 
 #####Wilcoxon Tests: Numerical Data#####
 
@@ -390,14 +390,14 @@ final_fertilization_all$markertype [final_fertilization_all$file ==	"ppdat"]  <-
 
 theme_update(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
 
-ggplot(final_fertilization_all) + geom_boxplot(aes(x = markertype, y = He, fill=final_fertilization)) + #final fertilization & He box plot
+ggplot(final_fertilization_all) + geom_boxplot(aes(x = final_fertilization, y = He, fill=markertype)) + #final fertilization & He box plot
   ggtitle("Fertilization Method vs. He", subtitle= "msat vs. mtDNA") + #add plot title
   xlab("Fertilization Method") + ylab("He") + #add axis labels
   theme(                                 #specify characteristics of the plot 
     plot.title = element_text(size=14, face="bold"), 
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))+
-  scale_fill_manual(values=c("darkcyan", "turquoise2"))
+  scale_fill_manual(values=c("turquoise2", "darkcyan"))
 
 #Reproduction Mode#
 reproductionmode_all = merge(msat_final_reproductionmode_He_no.na, mtdna_final_reproductionmode_He_no.na, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE) #merge final fertilization data form mtdna and msat together
@@ -424,14 +424,14 @@ reproductionmode_all$markertype [reproductionmode_all$file ==	"ppdat"]  <- "msat
 
 theme_update(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
 
-ggplot(reproductionmode_all) + geom_boxplot(aes(x = markertype, y = He, fill=final_reproductionmode)) + #final fertilization & He box plot
+ggplot(reproductionmode_all) + geom_boxplot(aes(x = final_reproductionmode, y = He, fill= markertype)) + #final fertilization & He box plot
   ggtitle("Reproduction Mode vs. He", subtitle= "msat vs. mtDNA") + #add plot title
   xlab("Reproduction Mode") + ylab("He") + #add axis labels
   theme(                                 #specify characteristics of the plot 
     plot.title = element_text(size=14, face="bold"), 
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))+
-  scale_fill_manual(values=c("darkcyan", "turquoise2"))
+  scale_fill_manual(values=c("turquoise2", "darkcyan"))
 
 
 #Specific Reproduction Mode#
@@ -459,12 +459,144 @@ specificreproductionmode_all$markertype [specificreproductionmode_all$file ==	"p
 
 theme_update(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
 
-ggplot(specificreproductionmode_all) + geom_boxplot(aes(x = markertype, y = He, fill=specific.repro_mode)) + #final fertilization & He box plot
+ggplot(specificreproductionmode_all) + geom_boxplot(aes(x = specific.repro_mode, y = He, fill=markertype)) + #final fertilization & He box plot
   ggtitle("Specific Reproduction Modes vs. He", subtitle= "msat vs. mtDNA") + #add plot title
   xlab("Specific Reproduction Mode") + ylab("He") + #add axis labels
   theme(                                 #specify characteristics of the plot 
     plot.title = element_text(size=14, face="bold"), 
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))+
-  scale_fill_brewer(palette="Blues")
+  scale_fill_manual(values=c("turquoise2", "darkcyan"))
+
+
+#####Scatter Plots: Numerical Data#####
+
+#Max Length#
+
+#w/ Rhincodon typus outlier
+final_maxlength_all = merge(mtdna_maxlength_He_no.na, msat_maxlength_He_no.na, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE) #merge final fertilization data form mtdna and msat together
+
+final_maxlength_all$markertype <- NA #create new column to categorize marker type
+
+#add marker type based on file type
+final_maxlength_all$markertype [final_maxlength_all$file == "mtdna101"]  <- "mtDNA"
+final_maxlength_all$markertype [final_maxlength_all$file == "mtdna102"]  <- "mtDNA"
+final_maxlength_all$markertype [final_maxlength_all$file == "mtdna103"]  <- "mtDNA"
+final_maxlength_all$markertype [final_maxlength_all$file == "msats000"]  <- "msat" 
+final_maxlength_all$markertype [final_maxlength_all$file == "msats001"]  <- "msat"
+final_maxlength_all$markertype [final_maxlength_all$file == "msats002"]  <- "msat"
+final_maxlength_all$markertype [final_maxlength_all$file == "msats200"]  <- "msat" 
+final_maxlength_all$markertype [final_maxlength_all$file == "msats201"]  <- "msat" 
+final_maxlength_all$markertype [final_maxlength_all$file == "msats100"]  <- "msat" 
+final_maxlength_all$markertype [final_maxlength_all$file == "msats101"]  <- "msat" 
+final_maxlength_all$markertype [final_maxlength_all$file == "msats301"]  <- "msat" 
+final_maxlength_all$markertype [final_maxlength_all$file == "msats302"]  <- "msat" 
+final_maxlength_all$markertype [final_maxlength_all$file == "msats303"]  <- "msat" 
+final_maxlength_all$markertype [final_maxlength_all$file == "msats304"]  <- "msat" 
+final_maxlength_all$markertype [final_maxlength_all$file == "msats305"]  <- "msat"
+final_maxlength_all$markertype [final_maxlength_all$file ==	"ppdat"]  <- "msat" 
+
+theme_update(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
+
+ggplot(final_maxlength_all, aes(x=maxlength, y=He, col=markertype, shape=markertype)) + #max length & He scatter plot
+  geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
+  geom_smooth(method=lm,   # Add linear regression line
+             se=TRUE) + 
+  ylim(0,1)+
+  coord_cartesian(ylim = c(0, 1)) +
+  ggtitle("Max Length vs. He", subtitle = "(w/ Rhincodon typus) msat vs. mtDNA") + #add plot title
+  xlab("Max Length") + ylab("He") + #add axis labels
+  theme(                                 #specifying characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  annotate("text", x = 1150, y = 0.60, label = lm_eqn(msat_maxlength_He_no.na$maxlength, msat_maxlength_He_no.na$He, msat_maxlength_He_no.na), color="black", size = 5, parse=TRUE) + #add regression line equation
+  annotate("text", x = 1000, y = 0.15, label = lm_eqn(mtdna_maxlength_He_no.na$maxlength, mtdna_maxlength_He_no.na$He, mtdna_maxlength_He_no.na), color="black", size = 5, parse=TRUE) + #add regression line equation
+  scale_color_manual(values=c("skyblue2","blue")) +
+  scale_shape(solid = FALSE)
+
+#w/out Rhincodon typus outlier
+final_maxlength.nowhaleshark_all = merge(msat_maxlength_He_no.na_nowhaleshark, mtdna_maxlength_He_no.na_nowhaleshark, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE) #merge final fertilization data form mtdna and msat together
+
+final_maxlength.nowhaleshark_all$markertype <- NA #create new column to categorize marker type
+
+#add marker type based on file type
+final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "mtdna101"]  <- "mtDNA"
+final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "mtdna102"]  <- "mtDNA"
+final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "mtdna103"]  <- "mtDNA"
+final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats000"]  <- "msat" 
+final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats001"]  <- "msat"
+final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats002"]  <- "msat"
+final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats200"]  <- "msat" 
+final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats201"]  <- "msat" 
+final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats100"]  <- "msat" 
+final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats101"]  <- "msat" 
+final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats301"]  <- "msat" 
+final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats302"]  <- "msat" 
+final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats303"]  <- "msat" 
+final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats304"]  <- "msat" 
+final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats305"]  <- "msat"
+final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file ==	"ppdat"]  <- "msat" 
+
+theme_update(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
+
+ggplot(final_maxlength.nowhaleshark_all, aes(x=maxlength, y=He, col=markertype, shape=markertype)) + #max length & He scatter plot
+  geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE) + 
+  ylim(0,1)+
+  coord_cartesian(ylim = c(0, 1)) +
+  ggtitle("Max Length vs. He", subtitle = "(no Rhincodon typus) msat vs. mtDNA") + #add plot title
+  xlab("Max Length") + ylab("He") + #add axis labels
+  theme(                                 #specifying characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  annotate("text", x = 400, y = 0.68, label = lm_eqn(msat_maxlength_He_no.na_nowhaleshark$maxlength, msat_maxlength_He_no.na_nowhaleshark$He, msat_maxlength_He_no.na_nowhaleshark), color="black", size = 5, parse=TRUE) + #add regression line equation
+  annotate("text", x = 400, y = 0.30, label = lm_eqn(mtdna_maxlength_He_no.na_nowhaleshark$maxlength, mtdna_maxlength_He_no.na_nowhaleshark$He, mtdna_maxlength_He_no.na_nowhaleshark), color="black", size = 5, parse=TRUE) + #add regression line equation
+  scale_color_manual(values=c("skyblue2","blue")) +
+  scale_shape(solid = FALSE)
+
+#Fecundity Mean#
+
+final_fecunditymean_all = merge(msat_fecundity_He_no.na, mtdna_fecundity_He_no.na, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE) #merge final fertilization data form mtdna and msat together
+
+final_fecunditymean_all$markertype <- NA #create new column to categorize marker type
+
+#add marker type based on file type
+final_fecunditymean_all$markertype [final_fecunditymean_all$file == "mtdna101"]  <- "mtDNA"
+final_fecunditymean_all$markertype [final_fecunditymean_all$file == "mtdna102"]  <- "mtDNA"
+final_fecunditymean_all$markertype [final_fecunditymean_all$file == "mtdna103"]  <- "mtDNA"
+final_fecunditymean_all$markertype [final_fecunditymean_all$file == "msats000"]  <- "msat" 
+final_fecunditymean_all$markertype [final_fecunditymean_all$file == "msats001"]  <- "msat"
+final_fecunditymean_all$markertype [final_fecunditymean_all$file == "msats002"]  <- "msat"
+final_fecunditymean_all$markertype [final_fecunditymean_all$file == "msats200"]  <- "msat" 
+final_fecunditymean_all$markertype [final_fecunditymean_all$file == "msats201"]  <- "msat" 
+final_fecunditymean_all$markertype [final_fecunditymean_all$file == "msats100"]  <- "msat" 
+final_fecunditymean_all$markertype [final_fecunditymean_all$file == "msats101"]  <- "msat" 
+final_fecunditymean_all$markertype [final_fecunditymean_all$file == "msats301"]  <- "msat" 
+final_fecunditymean_all$markertype [final_fecunditymean_all$file == "msats302"]  <- "msat" 
+final_fecunditymean_all$markertype [final_fecunditymean_all$file == "msats303"]  <- "msat" 
+final_fecunditymean_all$markertype [final_fecunditymean_all$file == "msats304"]  <- "msat" 
+final_fecunditymean_all$markertype [final_fecunditymean_all$file == "msats305"]  <- "msat"
+final_fecunditymean_all$markertype [final_fecunditymean_all$file ==	"ppdat"]  <- "msat" 
+
+theme_update(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
+
+ggplot(final_fecunditymean_all, aes(x=fecundity_mean, y=He, col=markertype, shape=markertype)) + #max length & He scatter plot
+  geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE) + 
+  ylim(0,1)+
+  coord_cartesian(ylim = c(0, 1)) +
+  ggtitle("Fecundity Mean vs. He", subtitle = "msat vs. mtDNA") + #add plot title
+  xlab("Fecundity Mean") + ylab("He") + #add axis labels
+  theme(                                 #specifying characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  annotate("text", x = 20000000, y = 0.64, label = lm_eqn(msat_fecundity_He_no.na$fecundity_mean, msat_fecundity_He_no.na$He, msat_fecundity_He_no.na), color="black", size = 5, parse=TRUE) + #add regression line equation
+  annotate("text", x = 15000000, y = 0.95, label = lm_eqn(mtdna_fecundity_He_no.na$fecundity_mean, mtdna_fecundity_He_no.na$He, mtdna_fecundity_He_no.na), color="black", size = 5, parse=TRUE) + #add regression line equation
+  scale_color_manual(values=c("skyblue2","blue")) +
+  scale_shape(solid = FALSE)
 
