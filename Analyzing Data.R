@@ -88,6 +88,13 @@ ggplot(mtdna_reproduction_type_He_no.na ) + geom_boxplot(aes(x = specific.repro_
 #w/ Rhincodon typus outlier
 mtdna_maxlength_He_no.na <- mtdna_data[!is.na(mtdna_data$maxlength) & !is.na(mtdna_data$He),] #create new table that excludes NA's from columns of interest
 
+mtdna_maxlength_He_no.na$logtransform.maxlength <- NA #add column to do a log transformation for max length
+
+for (i in 1:nrow(mtdna_maxlength_He_no.na)) { #get log transformation data
+  cat(paste(i, " ", sep = ''))
+  mtdna_maxlength_He_no.na$logtransform.maxlength <- log(mtdna_maxlength_He_no.na$maxlength)
+}
+
 lm_eqn = function(x, y, df){ #set up formula for regression line equation
   m <- lm(y ~ x, df);
   eq <- substitute(italic(y) == b %.% italic(x) + a,
@@ -96,56 +103,70 @@ lm_eqn = function(x, y, df){ #set up formula for regression line equation
   as.character(as.expression(eq));                 
 }
 
-ggplot(mtdna_maxlength_He_no.na, aes(x=maxlength, y = He)) + #max length & He scatter plot
+ggplot(mtdna_maxlength_He_no.na, aes(x=logtransform.maxlength, y = He)) + #max length & He scatter plot
   geom_point(shape=1) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, formula = y ~ x) +
   ylim(0,1)+
   coord_cartesian(ylim = c(0, 1)) +
   ggtitle("mtDNA: Max Length vs. He") + #add plot title
-  xlab("Max Length") + ylab("He") + #add axis labels
+  xlab("Max Length (log(cm))") + ylab("He") + #add axis labels
   theme(                                 #specify characteristics of the plot 
     plot.title = element_text(size=14, face="bold"),
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))+
-    annotate("text", x = 1200, y = 0.67, label = lm_eqn(mtdna_maxlength_He_no.na$maxlength, mtdna_maxlength_He_no.na$He, mtdna_maxlength_He_no.na), color="black", size = 5, parse=TRUE) #add regression line equation
-
+  annotate(geom="label", x = 6, y = .78, label = lm_eqn(mtdna_maxlength_He_no.na$logtransform.maxlength, mtdna_maxlength_He_no.na$He, mtdna_maxlength_He_no.na), 
+           color="black", size = 5, parse=TRUE, alpha=0.80)  #add regression line equation
 
 #w/out Rhincodon typus outlier
 mtdna_maxlength_He_no.na_nowhaleshark <- mtdna_maxlength_He_no.na[!(mtdna_maxlength_He_no.na$spp=="Rhincodon typus"),] #exclude Rhincodon typus
 
-ggplot(mtdna_maxlength_He_no.na_nowhaleshark, aes(x= maxlength, y= He)) + #max length & He scatter plot
+mtdna_maxlength_He_no.na_nowhaleshark$logtransform.maxlength_noRT <- NA #add column to do a log transformation for max length
+
+for (i in 1:nrow(mtdna_maxlength_He_no.na_nowhaleshark)) { #get log transformation data
+  cat(paste(i, " ", sep = ''))
+  mtdna_maxlength_He_no.na_nowhaleshark$logtransform.maxlength_noRT <- log(mtdna_maxlength_He_no.na_nowhaleshark$maxlength)
+}
+
+ggplot(mtdna_maxlength_He_no.na_nowhaleshark, aes(x= logtransform.maxlength_noRT, y= He)) + #max length & He scatter plot
   geom_point(shape=1) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE) +
   ylim(0,1)+
   coord_cartesian(ylim = c(0, 1)) +
   ggtitle("mtDNA: Max Length vs. He", subtitle= "(no Rhincodon typus)") + #add plot title
-  xlab("Max Length") + ylab("He") + #add axis labels
+  xlab("Max Length (loc(cm))") + ylab("He") + #add axis labels
   theme(                                 #specify characteristics of the plot 
     plot.title = element_text(size=14, face="bold"),
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))+
-  annotate("text", x = 450, y = 0.67, label = lm_eqn(mtdna_maxlength_He_no.na_nowhaleshark$maxlength, mtdna_maxlength_He_no.na_nowhaleshark$He, mtdna_maxlength_He_no.na_nowhaleshark), color="black", size = 5, parse=TRUE) #add regression line equation
+  annotate(geom="label", x = 3.3, y = 0.67, label = lm_eqn(mtdna_maxlength_He_no.na_nowhaleshark$logtransform.maxlength_noRT, mtdna_maxlength_He_no.na_nowhaleshark$He, mtdna_maxlength_He_no.na_nowhaleshark), 
+           color="black", size = 5, parse=TRUE, alpha=0.80) #add regression line equation
 
 #Fecundity Mean#
-options(scipen = 999) #convert data from scientific notation to numeric
-
-mtdna_fecundity_He_no.na <- mtdna_data[!is.na(mtdna_data$fecundity_mean) & !is.na(mtdna_data$He),] #create new table that excludes NA's from columns of interest
+ mtdna_fecundity_He_no.na <- mtdna_data[!is.na(mtdna_data$fecundity_mean) & !is.na(mtdna_data$He),] #create new table that excludes NA's from columns of interest
  
-ggplot(mtdna_fecundity_He_no.na, aes(y= He, x= fecundity_mean)) + #fecundity mean & He scatter plot
+mtdna_fecundity_He_no.na$logtransform.fecundity <- NA #add column to do a log transformation for fecundity mean
+
+for (i in 1:nrow(mtdna_fecundity_He_no.na)) { #get log transformation data
+  cat(paste(i, " ", sep = ''))
+  mtdna_fecundity_He_no.na$logtransform.fecundity <- log(mtdna_fecundity_He_no.na$fecundity_mean)
+}
+
+ggplot(mtdna_fecundity_He_no.na, aes(x= logtransform.fecundity, y= He)) + #fecundity mean & He scatter plot
   geom_point(shape=1) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE) +
   ylim(0,1)+
   coord_cartesian(ylim = c(0, 1)) +
   ggtitle("mtDNA: Fecundity Mean vs. He") + #add plot title
-  xlab("Fecundity Mean") + ylab("He") + #add axis labels
+  xlab("Fecundity Mean (log)") + ylab("He") + #add axis labels
   theme(                                 #specify characteristics of the plot 
     plot.title = element_text(size=14, face="bold"),
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))+
-  annotate("text", x = 5000000, y = 0.67, label = lm_eqn(mtdna_fecundity_He_no.na$fecundity_mean, mtdna_fecundity_He_no.na$He, mtdna_fecundity_He_no.na), color="black", size = 5, parse=TRUE) #add regression line equation
+  annotate(geom="label", x = 7.80, y = 0.5, label = lm_eqn(mtdna_fecundity_He_no.na$logtransform.fecundity, mtdna_fecundity_He_no.na$He, mtdna_fecundity_He_no.na), 
+           color="black", size = 5, parse=TRUE, alpha=0.80) #add regression line equation
 
 
 #####Density Plots: Numerical Data#####
@@ -263,55 +284,79 @@ ggplot(msat_reproduction_type_He_no.na ) + geom_boxplot(aes(x = specific.repro_m
 #w/ Rhincodon typus outlier
 msat_maxlength_He_no.na <- msat_data[!is.na(msat_data$maxlength) & !is.na(msat_data$He),] #create new table that excludes NA's from columns of interest
 
-ggplot(msat_maxlength_He_no.na, aes(x= maxlength, y= He)) + #max length & He scatter plot
+msat_maxlength_He_no.na$logtransform.maxlength <- NA #add column to do a log transformation for max length
+
+for (i in 1:nrow(msat_maxlength_He_no.na)) { #get log transformation data
+  cat(paste(i, " ", sep = ''))
+  msat_maxlength_He_no.na$logtransform.maxlength <- log(msat_maxlength_He_no.na$maxlength)
+}
+
+ggplot(msat_maxlength_He_no.na, aes(x= logtransform.maxlength, y= He)) + #max length & He scatter plot
   geom_point(shape=1) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE) + 
   ylim(0,1)+
   coord_cartesian(ylim = c(0, 1)) +
   ggtitle("msat: Max Length vs. He") + #add plot title
-   xlab("Max Length") + ylab("He") + #add axis labels
+   xlab("Max Length (log(cm))") + ylab("He") + #add axis labels
     theme(                                 #specifying characteristics of the plot 
       plot.title = element_text(size=14, face="bold"),
       axis.title.x = element_text(color="blue", size=14, face="bold"),
       axis.title.y = element_text(color="red", size=14, face="bold"))+
-  annotate("text", x = 1200, y = 0.67, label = lm_eqn(msat_maxlength_He_no.na$maxlength, msat_maxlength_He_no.na$He, msat_maxlength_He_no.na), color="black", size = 5, parse=TRUE) #add regression line equation
+  annotate(geom = "label", x = 4, y = 0.85, label = lm_eqn(msat_maxlength_He_no.na$logtransform.maxlength, msat_maxlength_He_no.na$He, msat_maxlength_He_no.na), 
+           color="black", size = 5, parse=TRUE, alpha = 0.8) #add regression line equation
 
 
 #w/out Rhincodon typus outlier
 msat_maxlength_He_no.na_nowhaleshark <- msat_maxlength_He_no.na[!(msat_maxlength_He_no.na$spp=="Rhincodon typus"),] #exclude Rhincodon typus
 
-ggplot(msat_maxlength_He_no.na_nowhaleshark, aes(x= maxlength, y= He)) + #max length & He scatter plot
+msat_maxlength_He_no.na_nowhaleshark$logtransform.maxlength <- NA #add column to do a log transformation for max length
+
+for (i in 1:nrow(msat_maxlength_He_no.na_nowhaleshark)) { #get log transformation data
+  cat(paste(i, " ", sep = ''))
+  msat_maxlength_He_no.na_nowhaleshark$logtransform.maxlength <- log(msat_maxlength_He_no.na_nowhaleshark$maxlength)
+}
+
+ggplot(msat_maxlength_He_no.na_nowhaleshark, aes(x= logtransform.maxlength, y= He)) + #max length & He scatter plot
   geom_point(shape=1) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE) +
   ylim(0,1)+
   coord_cartesian(ylim = c(0, 1)) +
   ggtitle("msat: Max Length vs. He", subtitle= "(no Rhincodon typus)") + #add plot title
-  xlab("Max Length") + ylab("He") + #add axis labels
+  xlab("Max Length (log(cm))") + ylab("He") + #add axis labels
   theme(                                 #specify characteristics of the plot 
     plot.title = element_text(size=14, face="bold"),
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))+
-  annotate("text", x = 450, y = 1, label = lm_eqn(msat_maxlength_He_no.na_nowhaleshark$maxlength, msat_maxlength_He_no.na_nowhaleshark$He, msat_maxlength_He_no.na_nowhaleshark), color="black", size = 5, parse=TRUE) #add regression line equation
+  annotate(geom="label", x = 4, y = 0.85, label = lm_eqn(msat_maxlength_He_no.na_nowhaleshark$logtransform.maxlength, msat_maxlength_He_no.na_nowhaleshark$He, msat_maxlength_He_no.na_nowhaleshark), 
+           color="black", size = 5, parse=TRUE, alpha = 0.8) #add regression line equation
 
 
 #Fecundity Mean#
 msat_fecundity_He_no.na <- msat_data[!is.na(msat_data$fecundity_mean) & !is.na(msat_data$He),] #create new table that excludes NA's from columns of interest
+
+msat_fecundity_He_no.na$logtransform.fecundity <- NA #add column to do a log transformation for fecundity mean
+
+for (i in 1:nrow(msat_fecundity_He_no.na)) { #get log transformation data
+  cat(paste(i, " ", sep = ''))
+  msat_fecundity_He_no.na$logtransform.fecundity <- log(msat_fecundity_He_no.na$fecundity_mean)
+}
        
-ggplot(msat_fecundity_He_no.na, aes(x= fecundity_mean, y= He)) + #fecundity mean& He scatter plot
+ggplot(msat_fecundity_He_no.na, aes(x= logtransform.fecundity, y= He)) + #fecundity mean& He scatter plot
   geom_point(shape=1) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
     se=TRUE) +
   ylim(0,1)+
   coord_cartesian(ylim = c(0, 1)) +
   ggtitle("msat: Fecundity Mean vs. He") + #add plot title
-  xlab("Fecundity Mean") + ylab("He") + #add plot title
+  xlab("Fecundity Mean (log)") + ylab("He") + #add plot title
   theme(                                 #specifying characteristics of the plot 
     plot.title = element_text(size=14, face="bold"),
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))+
-  annotate("text", x = 20000000, y = 0.956, label = lm_eqn(msat_fecundity_He_no.na$fecundity_mean, msat_fecundity_He_no.na$He, msat_fecundity_He_no.na), color="black", size = 5, parse=TRUE) #add regression line equation
+  annotate(geom="label", x = 10, y = 0.83, label = lm_eqn(msat_fecundity_He_no.na$logtransform.fecundity, msat_fecundity_He_no.na$He, msat_fecundity_He_no.na), 
+           color="black", size = 5, parse=TRUE, alpha = 0.8) #add regression line equation
 
 #####Density Plots: Numerical Data#####
 
@@ -498,20 +543,22 @@ final_maxlength_all$markertype [final_maxlength_all$file ==	"ppdat"]  <- "msat"
 
 theme_update(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
 
-ggplot(final_maxlength_all, aes(x=maxlength, y=He, col=markertype, shape=markertype)) + #max length & He scatter plot
+ggplot(final_maxlength_all, aes(x=logtransform.maxlength, y=He, col=markertype, shape=markertype)) + #max length & He scatter plot
   geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
              se=TRUE) + 
   ylim(0,1)+
   coord_cartesian(ylim = c(0, 1)) +
   ggtitle("Max Length vs. He", subtitle = "(w/ Rhincodon typus) msat vs. mtDNA") + #add plot title
-  xlab("Max Length") + ylab("He") + #add axis labels
+  xlab("Max Length (log(cm))") + ylab("He") + #add axis labels
   theme(                                 #specifying characteristics of the plot 
     plot.title = element_text(size=14, face="bold"),
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))+
-  annotate("text", x = 1150, y = 0.60, label = lm_eqn(msat_maxlength_He_no.na$maxlength, msat_maxlength_He_no.na$He, msat_maxlength_He_no.na), color="black", size = 5, parse=TRUE) + #add regression line equation
-  annotate("text", x = 1000, y = 0.15, label = lm_eqn(mtdna_maxlength_He_no.na$maxlength, mtdna_maxlength_He_no.na$He, mtdna_maxlength_He_no.na), color="black", size = 5, parse=TRUE) + #add regression line equation
+  annotate(geom="label", x = 3, y = 0.65, label = lm_eqn(msat_maxlength_He_no.na$logtransform.maxlength, msat_maxlength_He_no.na$He, msat_maxlength_He_no.na), 
+           color="skyblue2", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
+  annotate(geom="label", x = 4, y = 0.91, label = lm_eqn(mtdna_maxlength_He_no.na$logtransform.maxlength, mtdna_maxlength_He_no.na$He, mtdna_maxlength_He_no.na), 
+           color="blue", size = 5, parse=TRUE, alpha = 0.8) + #add regression line equation
   scale_color_manual(values=c("skyblue2","blue")) +
   scale_shape(solid = FALSE)
 
@@ -540,20 +587,22 @@ final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$fi
 
 theme_update(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
 
-ggplot(final_maxlength.nowhaleshark_all, aes(x=maxlength, y=He, col=markertype, shape=markertype)) + #max length & He scatter plot
+ggplot(final_maxlength.nowhaleshark_all, aes(x=logtransform.maxlength, y=He, col=markertype, shape=markertype)) + #max length & He scatter plot
   geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE) + 
   ylim(0,1)+
   coord_cartesian(ylim = c(0, 1)) +
   ggtitle("Max Length vs. He", subtitle = "(no Rhincodon typus) msat vs. mtDNA") + #add plot title
-  xlab("Max Length") + ylab("He") + #add axis labels
+  xlab("Max Length (log(cm))") + ylab("He") + #add axis labels
   theme(                                 #specifying characteristics of the plot 
     plot.title = element_text(size=14, face="bold"),
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))+
-  annotate("text", x = 400, y = 0.68, label = lm_eqn(msat_maxlength_He_no.na_nowhaleshark$maxlength, msat_maxlength_He_no.na_nowhaleshark$He, msat_maxlength_He_no.na_nowhaleshark), color="black", size = 5, parse=TRUE) + #add regression line equation
-  annotate("text", x = 400, y = 0.30, label = lm_eqn(mtdna_maxlength_He_no.na_nowhaleshark$maxlength, mtdna_maxlength_He_no.na_nowhaleshark$He, mtdna_maxlength_He_no.na_nowhaleshark), color="black", size = 5, parse=TRUE) + #add regression line equation
+  annotate(geom="label", x = 2.6, y = 0.68, label = lm_eqn(msat_maxlength_He_no.na_nowhaleshark$logtransform.maxlength, msat_maxlength_He_no.na_nowhaleshark$He, msat_maxlength_He_no.na_nowhaleshark), 
+           color="skyblue2", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
+  annotate(geom="label", x = 4, y = 0.90, label = lm_eqn(mtdna_maxlength_He_no.na_nowhaleshark$logtransform.maxlength, mtdna_maxlength_He_no.na_nowhaleshark$He, mtdna_maxlength_He_no.na_nowhaleshark), 
+           color="blue", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
   scale_color_manual(values=c("skyblue2","blue")) +
   scale_shape(solid = FALSE)
 
@@ -583,20 +632,22 @@ final_fecunditymean_all$markertype [final_fecunditymean_all$file ==	"ppdat"]  <-
 
 theme_update(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
 
-ggplot(final_fecunditymean_all, aes(x=fecundity_mean, y=He, col=markertype, shape=markertype)) + #max length & He scatter plot
+ggplot(final_fecunditymean_all, aes(x=logtransform.fecundity, y=He, col=markertype, shape=markertype)) + #max length & He scatter plot
   geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE) + 
   ylim(0,1)+
   coord_cartesian(ylim = c(0, 1)) +
   ggtitle("Fecundity Mean vs. He", subtitle = "msat vs. mtDNA") + #add plot title
-  xlab("Fecundity Mean") + ylab("He") + #add axis labels
+  xlab("Fecundity Mean (log)") + ylab("He") + #add axis labels
   theme(                                 #specifying characteristics of the plot 
     plot.title = element_text(size=14, face="bold"),
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))+
-  annotate("text", x = 20000000, y = 0.64, label = lm_eqn(msat_fecundity_He_no.na$fecundity_mean, msat_fecundity_He_no.na$He, msat_fecundity_He_no.na), color="black", size = 5, parse=TRUE) + #add regression line equation
-  annotate("text", x = 15000000, y = 0.95, label = lm_eqn(mtdna_fecundity_He_no.na$fecundity_mean, mtdna_fecundity_He_no.na$He, mtdna_fecundity_He_no.na), color="black", size = 5, parse=TRUE) + #add regression line equation
+  annotate(geom="label", x = 4.6, y = 0.83, label = lm_eqn(msat_fecundity_He_no.na$logtransform.fecundity, msat_fecundity_He_no.na$He, msat_fecundity_He_no.na), 
+           color="skyblue2", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
+  annotate(geom="label", x = 7, y = 0.5, label = lm_eqn(mtdna_fecundity_He_no.na$logtransform.fecundity, mtdna_fecundity_He_no.na$He, mtdna_fecundity_He_no.na), 
+           color="blue", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
   scale_color_manual(values=c("skyblue2","blue")) +
   scale_shape(solid = FALSE)
 
