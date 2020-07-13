@@ -689,8 +689,72 @@ specific.repro_modeanovamsat <- aov(He ~ specific.repro_mode, data = msat_reprod
 
 #w/ Rhincodon typus outlier
 
-mtdna_maxlength_He_no.na$statmaxl.mtdna <- NA
+cbind(round(He*n), round((1-He)*n))
   
-statmaxl.mtdna <- glm(formula=(cbind(round("He"*n), round((1-"He")*n))~n="maxlength"), family='binomial', data= mtdna_reproduction_type_He_no.na, nrow(mtdna_reproduction_type_He_no.na))
+He.maxlength.mtdna <- mtdna_maxlength_He_no.na$He
+#n<- 2027
+maxlength.mtdna <- mtdna_maxlength_He_no.na$maxlength
+#n <- 2
+
+#range(mtdna_maxlength_He_no.na$maxlength)
+
+statmaxl.mtdna <- glm(formula=(cbind(round(He.maxlength.mtdna*n), round((1-He.maxlength.mtdna)*n))~maxlength.mtdna), family='binomial', data=mtdna_maxlength_He_no.na)
+
+#Max Length#
+
+#w/ Rhincodon typus
+ggplot(mtdna_maxlength_He_no.na, aes(x=maxlength, y=He)) +
+  stat_smooth(method="glm", mapping = aes(maxlength, He), formula=round(He.maxlength.mtdna*n), round((1-He.maxlength.mtdna)*n))~maxlength.mtdna +
+  ggtitle("Max Length vs. He") +
+  xlab("Max Length") + ylab("He") +
+  geom_point(shape=1) +
+  ylim(0,1) +
+  annotate(geom="label", x = 1000, y = .807, label = lm_eqn(mtdna_maxlength_He_no.na$maxlength, mtdna_maxlength_He_no.na$He, mtdna_maxlength_He_no.na), 
+           color="black", size = 5, parse=TRUE, alpha=0.80) 
+
+#w/out Rhincodon typus
+
+He.maxlength.mtdna <- mtdna_maxlength_He_no.na$He
+maxlength.mtdna <- mtdna_maxlength_He_no.na$maxlength
+
+statmaxl.mtdna <- glm(formula=(cbind(round(He.maxlength.mtdna*n), round((1-He.maxlength.mtdna)*n))~maxlength.mtdna), family='binomial', data=mtdna_maxlength_He_no.na)
+
+ggplot(mtdna_maxlength_He_no.na, aes(x=maxlength, y=He)) +
+  stat_smooth(method="glm", data= statmaxl.mtdna) +
+  ggtitle("Max Length vs. He") +
+  xlab("Max Length") + ylab("He") +
+  geom_point(shape=1) +
+  ylim(0,1)
+
+#Fecundity Mean#
+ggplot(mtdna_maxlength_He_no.na, aes(x=maxlength, y=He)) +
+  stat_smooth(method="glm", data= statmaxl.mtdna) +
+  ggtitle("Max Length vs. He") +
+  xlab("Max Length") + ylab("He") +
+  geom_point(shape=1) +
+  ylim(0,1)
+
+#plot(mtdna_maxlength_He_no.na$maxlength, mtdna_maxlength_He_no.na$He, pch = 16, xlab = "Max Length", ylab = "He")
+
+#ggplot(mtdna_maxlength_He_no.na, aes(x=maxlength, y=He)) +
+# stat_smooth(method="glm", formula=((round(He*n), round((1-He)*n))~maxlength)) +
+#ggtitle("Max Length vs. He") +
+#xlab("Max Length") + ylab("He") +
+#geom_point(shape=1)
+
+
+#ggplot(mtdna_maxlength_He_no.na, aes(x=maxlength, y=He)) +
+#stat_smooth(method="glm", data= statmaxl.mtdna, mapping = aes(x=maxlength, y= He), y~x) +
+#ggtitle("Max Length vs. He") +
+#xlab("Max Length") + ylab("He") +
+#geom_point(shape=1)
+
+#ggplot(mtdna_maxlength_He_no.na, aes(x=maxlength, y=He)) +
+# stat_smooth(method="glm", data= statmaxl.mtdna) +
+#ggtitle("Max Length vs. He") +
+#xlab("Max Length") + ylab("He") +
+#geom_point(shape=1)
+
+
 
 
