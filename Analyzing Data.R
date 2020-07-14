@@ -681,80 +681,112 @@ specific.repro_modeanovamsat <- aov(He ~ specific.repro_mode, data = msat_reprod
 
 ####################################################################################
 
+############### mtDNA: Statistical Models ############### 
+
+#####Numerical Data#####
+
+#Max Length#
+
+#w/ Rhincodon typus
+
+mtdna_maxlength_He_no.na$success <- round(mtdna_maxlength_He_no.na$He*mtdna_maxlength_He_no.na$n)
+mtdna_maxlength_He_no.na$failure <- round((1-mtdna_maxlength_He_no.na$He)*mtdna_maxlength_He_no.na$n)
+
+ggplot(mtdna_maxlength_He_no.na, aes(x=maxlength, y=He)) +
+  stat_smooth(method="glm",  method.args = list(family = "binomial"), formula= cbind(mtdna_maxlength_He_no.na$success, mtdna_maxlength_He_no.na$failure)~x) +
+  ggtitle("mtDNA:Max Length vs. He") +
+  xlab("Max Length (cm)") + ylab("He") +
+  geom_point(shape=1) +
+  ylim(0,1)+
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))
+
+#w/out Rhincodon typus
+
+mtdna_maxlength_He_no.na_nowhaleshark$success <- round(mtdna_maxlength_He_no.na_nowhaleshark$He*mtdna_maxlength_He_no.na_nowhaleshark$n)
+mtdna_maxlength_He_no.na_nowhaleshark$failure <- round((1-mtdna_maxlength_He_no.na_nowhaleshark$He)*mtdna_maxlength_He_no.na_nowhaleshark$n)
+
+ggplot(mtdna_maxlength_He_no.na_nowhaleshark, aes(x=maxlength, y=He)) +
+  stat_smooth(method="glm",  method.args = list(family = "binomial"), formula= cbind(mtdna_maxlength_He_no.na_nowhaleshark$success, mtdna_maxlength_He_no.na_nowhaleshark$failure)~x) +
+  ggtitle("Max Length vs. He", subtitle= "(no Rhincodon typus)") +
+  xlab("Max Length (cm)") + ylab("He") +
+  geom_point(shape=1) +
+  ylim(0,1)+
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))
+
+#Fecundity Mean#
+
+mtdna_fecundity_He_no.na$success <- round(mtdna_fecundity_He_no.na$He*mtdna_fecundity_He_no.na$n)
+mtdna_fecundity_He_no.na$failure <- round((1-mtdna_fecundity_He_no.na$He)*mtdna_fecundity_He_no.na$n)
+
+ggplot(mtdna_fecundity_He_no.na, aes(x=fecundity_mean, y=He)) +
+  stat_smooth(method="glm",  method.args = list(family = "binomial"), formula= cbind(mtdna_fecundity_He_no.na$success, mtdna_fecundity_He_no.na$failure)~x) +
+  ggtitle("Fecundity Mean vs. He") +
+  xlab("Fecundity Mean") + ylab("He") +
+  geom_point(shape=1) +
+  ylim(0,1)+
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))
+
 ############### msat: Statistical Models ############### 
 
 #####Numerical Data#####
 
 #Max Length#
 
-#w/ Rhincodon typus outlier
-
-cbind(round(He*n), round((1-He)*n))
-  
-He.maxlength.mtdna <- mtdna_maxlength_He_no.na$He
-#n<- 2027
-maxlength.mtdna <- mtdna_maxlength_He_no.na$maxlength
-#n <- 2
-
-#range(mtdna_maxlength_He_no.na$maxlength)
-
-statmaxl.mtdna <- glm(formula=(cbind(round(He.maxlength.mtdna*n), round((1-He.maxlength.mtdna)*n))~maxlength.mtdna), family='binomial', data=mtdna_maxlength_He_no.na)
-
-#Max Length#
-
 #w/ Rhincodon typus
-ggplot(mtdna_maxlength_He_no.na, aes(x=maxlength, y=He)) +
-  stat_smooth(method="glm", mapping = aes(maxlength, He), formula=round(He.maxlength.mtdna*n), round((1-He.maxlength.mtdna)*n))~maxlength.mtdna +
-  ggtitle("Max Length vs. He") +
-  xlab("Max Length") + ylab("He") +
+
+msat_maxlength_He_no.na.n <- msat_maxlength_He_no.na[!is.na(msat_maxlength_He_no.na$n),][!(msat_maxlength_He_no.na.n$n=="25-32"),]  #exclude NA & n=25-32
+
+msat_maxlength_He_no.na.n$success <- round(msat_maxlength_He_no.na.n$He*msat_maxlength_He_no.na.n$n)
+msat_maxlength_He_no.na.n$failure <- round((1-msat_maxlength_He_no.na.n$He)*msat_maxlength_He_no.na.n$n)
+
+ggplot(msat_maxlength_He_no.na, aes(x=maxlength, y=He)) +
+  stat_smooth(method="glm",  method.args = list(family = "binomial"), formula= cbind(msat_maxlength_He_no.na$success, msat_maxlength_He_no.na$failure)~x) +
+  ggtitle("msat: Max Length vs. He") +
+  xlab("Max Length (cm)") + ylab("He") +
   geom_point(shape=1) +
-  ylim(0,1) +
-  annotate(geom="label", x = 1000, y = .807, label = lm_eqn(mtdna_maxlength_He_no.na$maxlength, mtdna_maxlength_He_no.na$He, mtdna_maxlength_He_no.na), 
-           color="black", size = 5, parse=TRUE, alpha=0.80) 
+  ylim(0,1)+
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))
 
 #w/out Rhincodon typus
 
-He.maxlength.mtdna <- mtdna_maxlength_He_no.na$He
-maxlength.mtdna <- mtdna_maxlength_He_no.na$maxlength
+msat_maxlength_He_no.na_nowhaleshark$success <- round(msat_maxlength_He_no.na_nowhaleshark$He*msat_maxlength_He_no.na_nowhaleshark$n)
+msat_maxlength_He_no.na_nowhaleshark$failure <- round((1-msat_maxlength_He_no.na_nowhaleshark$He)*msat_maxlength_He_no.na_nowhaleshark$n)
 
-statmaxl.mtdna <- glm(formula=(cbind(round(He.maxlength.mtdna*n), round((1-He.maxlength.mtdna)*n))~maxlength.mtdna), family='binomial', data=mtdna_maxlength_He_no.na)
-
-ggplot(mtdna_maxlength_He_no.na, aes(x=maxlength, y=He)) +
-  stat_smooth(method="glm", data= statmaxl.mtdna) +
-  ggtitle("Max Length vs. He") +
-  xlab("Max Length") + ylab("He") +
+ggplot(mtdna_maxlength_He_no.na_nowhaleshark, aes(x=maxlength, y=He)) +
+  stat_smooth(method="glm",  method.args = list(family = "binomial"), formula= cbind(mtdna_maxlength_He_no.na_nowhaleshark$success, mtdna_maxlength_He_no.na_nowhaleshark$failure)~x) +
+  ggtitle("msat: Max Length vs. He", subtitle= "(no Rhincodon typus)") +
+  xlab("Max Length (cm)") + ylab("He") +
   geom_point(shape=1) +
-  ylim(0,1)
+  ylim(0,1)+
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))
 
 #Fecundity Mean#
-ggplot(mtdna_maxlength_He_no.na, aes(x=maxlength, y=He)) +
-  stat_smooth(method="glm", data= statmaxl.mtdna) +
-  ggtitle("Max Length vs. He") +
-  xlab("Max Length") + ylab("He") +
+
+msat_fecundity_He_no.na $success <- round(msat_fecundity_He_no.na $He*msat_fecundity_He_no.na $n)
+msat_fecundity_He_no.na $failure <- round((1-msat_fecundity_He_no.na $He)*msat_fecundity_He_no.na $n)
+
+ggplot(msat_fecundity_He_no.na , aes(x=fecundity_mean, y=He)) +
+  stat_smooth(method="glm",  method.args = list(family = "binomial"), formula= cbind(msat_fecundity_He_no.na $success, msat_fecundity_He_no.na $failure)~x) +
+  ggtitle("msatl: Fecundity Mean vs. He") +
+  xlab("Fecundity Mean") + ylab("He") +
   geom_point(shape=1) +
-  ylim(0,1)
-
-#plot(mtdna_maxlength_He_no.na$maxlength, mtdna_maxlength_He_no.na$He, pch = 16, xlab = "Max Length", ylab = "He")
-
-#ggplot(mtdna_maxlength_He_no.na, aes(x=maxlength, y=He)) +
-# stat_smooth(method="glm", formula=((round(He*n), round((1-He)*n))~maxlength)) +
-#ggtitle("Max Length vs. He") +
-#xlab("Max Length") + ylab("He") +
-#geom_point(shape=1)
-
-
-#ggplot(mtdna_maxlength_He_no.na, aes(x=maxlength, y=He)) +
-#stat_smooth(method="glm", data= statmaxl.mtdna, mapping = aes(x=maxlength, y= He), y~x) +
-#ggtitle("Max Length vs. He") +
-#xlab("Max Length") + ylab("He") +
-#geom_point(shape=1)
-
-#ggplot(mtdna_maxlength_He_no.na, aes(x=maxlength, y=He)) +
-# stat_smooth(method="glm", data= statmaxl.mtdna) +
-#ggtitle("Max Length vs. He") +
-#xlab("Max Length") + ylab("He") +
-#geom_point(shape=1)
-
-
-
-
+  ylim(0,1)+
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))
