@@ -444,6 +444,8 @@ ggplot(final_fertilization_all) + geom_boxplot(aes(x = final_fertilization, y = 
     axis.title.y = element_text(color="red", size=14, face="bold"))+
   scale_fill_manual(values=c("turquoise2", "darkcyan"))
 
+#geom_text(data = Tukey_test, aes(x = Genotype, y = Value, label = Letters_Tukey))
+
 #Reproduction Mode#
 reproductionmode_all = merge(msat_final_reproductionmode_He_no.na, mtdna_final_reproductionmode_He_no.na, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE) #merge final fertilization data form mtdna and msat together
 
@@ -663,21 +665,15 @@ ggplot(final_fecunditymean_all, aes(x=logtransform.fecundity, y=He, col=markerty
 
 #Fertilization#
 
-external.all <- final_fertilization_all$He[final_fertilization_all$final_fertilization=="external"]
-internal.all <- final_fertilization_all$He[final_fertilization_all$final_fertilization=="internal (oviduct)"]
-
-fertilization_ttest.all <- t.test(external.all, internal.all, var.equal=TRUE)
+fertilizationanova.all <- aov(He ~ final_fertilization + markertype, data = final_fertilization_all)
 
 #Reproduction Mode#
 
-dioecism.all <- reproductionmode_all$He[reproductionmode_all$final_reproductionmode=="Dioecious"]
-hermaphrodite.all <- reproductionmode_all$He[reproductionmode_all$final_reproductionmode=="Hermaphrodite"]
-
-reproductionmode_ttest.all <- t.test(dioecism.all, hermaphrodite.all, var.equal=TRUE)
+reproductionmodeanova.all <- aov(He ~ final_reproductionmode + markertype, data = reproductionmode_all)
 
 #Specific Reproduction Modes: ANOVA TEST#
 
-specific.repro_modeanovaall <- aov(He ~ specific.repro_mode, data = specificreproductionmode_all)
+specific.repro_modeanova.all <- aov(He ~ specific.repro_mode + markertype, data = specificreproductionmode_all)
 
 ####################################################################################
 
