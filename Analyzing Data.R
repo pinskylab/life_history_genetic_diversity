@@ -12,6 +12,7 @@ remove(list = ls())
 #load libraries
 library(tidyverse)
 library(dplyr)
+library(ggpubr)
 
 #read in data
 mtdna_data <- read.csv("mtdna_final_data.csv", stringsAsFactors = FALSE) #read in 
@@ -444,6 +445,67 @@ ggplot(final_fertilization_all) + geom_boxplot(aes(x = final_fertilization, y = 
     axis.title.y = element_text(color="red", size=14, face="bold"))+
   scale_fill_manual(values=c("turquoise2", "darkcyan"))
 
+
+  stat_compare_means(method = "anova", label.y = 1.1)+
+  stat_compare_means(comparisons = list(), method = "anova", label.y = 1.2)+
+  geom_bracket(
+      xmin = "external", xmax = "1", y.position = 30,
+      label = "t-test, p < 0.05", 
+      tip.length = c(0.2, 0.02), vjust = -1
+    )
+  
+  
+  annotate(
+    geom = "text", x = xrng[1], y = yrng[2], 
+    label = caption, hjust = 0, vjust = 1, size = 4
+  )
+  
+  geom_signif(comparisons = list(c("msat", "mtdna")), 
+              map_signif_level=TRUE)
+  
+  stat_compare_means(comparisons = fertilization_comparisons, label.y = c(1, 1.3))+
+  stat_compare_means(label.y = 1.5)
+  
+library(ggplot2)
+aov(He ~ final_fertilization * markertype, 
+              final_fertilization_all, 
+              confidence = .99,
+              ggplot.component = theme(axis.text.x = element_text(size=13, color="darkred")))
+
+aov(He ~ final_fertilization + markertype, data=final_fertilization_all
+
+labs(
+    subtitle = get_test_label(res.aov, detailed = TRUE),
+    caption = get_fertilizationanova.all_label(fertilizationanova.all),
+    ylab("He"), xlab("Fertilization Method")
+  )
+  #stat_compare_means(method = "anova", label.y = 1.5)+
+  #stat_compare_means(comparisons = list(c("msat","mtdna", "external", "internal")), method = "anova", label.y = 1.5, inherit.aes=TRUE)
+  
+  stat_compare_means(inherit.aes = TRUE, data= fertilizationanova.all, method = "anova", label.x = 1.5, label.y = 40, aes(label = ..p.format..), aes(x = final_fertilization, y = He))
+  
+
+  stat.test <- df %>%
+    group_by(supp) %>%
+    t_test(len ~ dose, ref.group = "0.5") 
+  
+fertilizationanova.all <- final_fertilization_all %>% add_xy_position(x = "Final Fertilization")
+
+fertilization_comparisons = list( c( "external", "internal"), c("msat", "mtdna"))
+
+my_comparisons = list( c("0.5", "1"), c("1", "2"), c("0.5", "2") )
+
+ggboxplot(ToothGrowth, x = "dose", y = "len",
+          color = "dose", palette = "jco")+ 
+  stat_compare_means(comparisons = my_comparisons, label.y = c(29, 35, 40))+
+  stat_compare_means(label.y = 45)
+
+  final_fertilization_all %>%
+    group_by(markertype) %>%
+    aov(He ~ final_fertilization + markertype, ref.group= "0.5")
+
+ fertilizationanova.all <- aov(He ~ final_fertilization + markertype, data=final_fertilization_all)
+ 
 #geom_text(data = Tukey_test, aes(x = Genotype, y = Value, label = Letters_Tukey))
 
 #Reproduction Mode#
@@ -661,7 +723,7 @@ ggplot(final_fecunditymean_all, aes(x=logtransform.fecundity, y=He, col=markerty
   scale_shape(solid = FALSE)
 
 
-#####T-Tests: Combined Marker Character Data#####
+#####Anova Test: Combined Marker Character Data#####
 
 #Fertilization#
 
@@ -671,7 +733,7 @@ fertilizationanova.all <- aov(He ~ final_fertilization + markertype, data = fina
 
 reproductionmodeanova.all <- aov(He ~ final_reproductionmode + markertype, data = reproductionmode_all)
 
-#Specific Reproduction Modes: ANOVA TEST#
+#Specific Reproduction Modes: ANOVA#
 
 specific.repro_modeanova.all <- aov(He ~ specific.repro_mode + markertype, data = specificreproductionmode_all)
 
