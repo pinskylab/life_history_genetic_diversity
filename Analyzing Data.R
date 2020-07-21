@@ -1,6 +1,6 @@
 ################################################### Script for Analyzing Data  #######################################################
 
-#analyzes data 
+#analyzes mtDNA & msat datasets
 
 ##########################################################################################################################################
 
@@ -12,7 +12,6 @@ remove(list = ls())
 #load libraries
 library(tidyverse)
 library(dplyr)
-library(ggpubr)
 
 #read in data
 mtdna_data <- read.csv("mtdna_final_data.csv", stringsAsFactors = FALSE) #read in 
@@ -108,7 +107,7 @@ ggplot(mtdna_maxlength_He_no.na, aes(x=logtransform.maxlength, y = He)) + #max l
   geom_point(shape=1) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, formula = y ~ x) +
-  ylim(0,1)+
+  ylim(0,1)+                              #create limits
   coord_cartesian(ylim = c(0, 1)) +
   ggtitle("mtDNA: Max Length vs. He") + #add plot title
   xlab("Max Length (log(cm))") + ylab("He") + #add axis labels
@@ -133,7 +132,7 @@ ggplot(mtdna_maxlength_He_no.na_nowhaleshark, aes(x= logtransform.maxlength_noRT
   geom_point(shape=1) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE) +
-  ylim(0,1)+
+  ylim(0,1)+                              #create limits
   coord_cartesian(ylim = c(0, 1)) +
   ggtitle("mtDNA: Max Length vs. He", subtitle= "(no Rhincodon typus)") + #add plot title
   xlab("Max Length (loc(cm))") + ylab("He") + #add axis labels
@@ -158,7 +157,7 @@ ggplot(mtdna_fecundity_He_no.na, aes(x= logtransform.fecundity, y= He)) + #fecun
   geom_point(shape=1) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE) +
-  ylim(0,1)+
+  ylim(0,1)+                              #create limits
   coord_cartesian(ylim = c(0, 1)) +
   ggtitle("mtDNA: Fecundity Mean vs. He") + #add plot title
   xlab("Fecundity Mean (log)") + ylab("He") + #add axis labels
@@ -184,21 +183,21 @@ polygon(density(mtdna_fecundity_He_no.na$fecundity_mean), main="Fecundity Mean D
 
 #Fertilization#
 
-external.mtdna <- mtdna_final_fertilization_He_no.na$He[mtdna_final_fertilization_He_no.na$final_fertilization=="external"]
-internal.mtdna <- mtdna_final_fertilization_He_no.na$He[mtdna_final_fertilization_He_no.na$final_fertilization=="internal (oviduct)"]
+external.mtdna <- mtdna_final_fertilization_He_no.na$He[mtdna_final_fertilization_He_no.na$final_fertilization=="external"] #create vector for one aspect of t-test
+internal.mtdna <- mtdna_final_fertilization_He_no.na$He[mtdna_final_fertilization_He_no.na$final_fertilization=="internal (oviduct)"] #create vector
 
-fertilization_ttest.mtdna <- t.test(external.mtdna, internal.mtdna, var.equal=TRUE)
+fertilization_ttest.mtdna <- t.test(external.mtdna, internal.mtdna, var.equal=TRUE) #combine created vectors & perform t-test
 
 #Reproduction Mode#
 
-dioecism.mtdna <- mtdna_final_reproductionmode_He_no.na$He[mtdna_final_reproductionmode_He_no.na$final_reproductionmode=="Dioecious"]
-hermaphrodite.mtdna <- mtdna_final_reproductionmode_He_no.na$He[mtdna_final_reproductionmode_He_no.na$final_reproductionmode=="Hermaphrodite"]
+dioecism.mtdna <- mtdna_final_reproductionmode_He_no.na$He[mtdna_final_reproductionmode_He_no.na$final_reproductionmode=="Dioecious"] #create vector for one aspect of t-test
+hermaphrodite.mtdna <- mtdna_final_reproductionmode_He_no.na$He[mtdna_final_reproductionmode_He_no.na$final_reproductionmode=="Hermaphrodite"] #create vector
 
-reproductionmode_ttest.mtdna <- t.test(dioecism.mtdna, hermaphrodite.mtdna, var.equal=TRUE)
+reproductionmode_ttest.mtdna <- t.test(dioecism.mtdna, hermaphrodite.mtdna, var.equal=TRUE) #combine created vectors & perform t-test
 
 #Specific Reproduction Modes: ANOVA TEST#
 
-specific.repro_modeanovamtdna <- aov(He ~ specific.repro_mode, data = mtdna_reproduction_type_He_no.na)
+specific.repro_modeanovamtdna <- aov(He ~ specific.repro_mode, data = mtdna_reproduction_type_He_no.na) #perform anova test
 
 #####Wilcoxon Tests: Numerical Data#####
 
@@ -296,7 +295,7 @@ ggplot(msat_maxlength_He_no.na, aes(x= logtransform.maxlength, y= He)) + #max le
   geom_point(shape=1) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE) + 
-  ylim(0,1)+
+  ylim(0,1)+                              #create limits
   coord_cartesian(ylim = c(0, 1)) +
   ggtitle("msat: Max Length vs. He") + #add plot title
    xlab("Max Length (log(cm))") + ylab("He") + #add axis labels
@@ -322,7 +321,7 @@ ggplot(msat_maxlength_He_no.na_nowhaleshark, aes(x= logtransform.maxlength_noRT,
   geom_point(shape=1) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE) +
-  ylim(0,1)+
+  ylim(0,1)+                              #create limits
   coord_cartesian(ylim = c(0, 1)) +
   ggtitle("msat: Max Length vs. He", subtitle= "(no Rhincodon typus)") + #add plot title
   xlab("Max Length (log(cm))") + ylab("He") + #add axis labels
@@ -344,11 +343,11 @@ for (i in 1:nrow(msat_fecundity_He_no.na)) { #get log transformation data
   msat_fecundity_He_no.na$logtransform.fecundity <- log10(msat_fecundity_He_no.na$fecundity_mean)
 }
        
-ggplot(msat_fecundity_He_no.na, aes(x= logtransform.fecundity, y= He)) + #fecundity mean& He scatter plot
+ggplot(msat_fecundity_He_no.na, aes(x= logtransform.fecundity, y= He)) + #fecundity mean & He scatter plot
   geom_point(shape=1) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
     se=TRUE) +
-  ylim(0,1)+
+  ylim(0,1)+                              #create limits
   coord_cartesian(ylim = c(0, 1)) +
   ggtitle("msat: Fecundity Mean vs. He") + #add plot title
   xlab("Fecundity Mean (log)") + ylab("He") + #add plot title
@@ -373,21 +372,21 @@ polygon(density(msat_fecundity_He_no.na$fecundity_mean), main="msat: Fecundity M
 
 #Fertilization#
 
-external.msat <- msat_final_fertilization_He_no.na$He[msat_final_fertilization_He_no.na$final_fertilization=="external"]
-internal.msat <- msat_final_fertilization_He_no.na$He[msat_final_fertilization_He_no.na$final_fertilization=="internal (oviduct)"]
+external.msat <- msat_final_fertilization_He_no.na$He[msat_final_fertilization_He_no.na$final_fertilization=="external"] #create vector for one aspect of t-test
+internal.msat <- msat_final_fertilization_He_no.na$He[msat_final_fertilization_He_no.na$final_fertilization=="internal (oviduct)"] #create vector
 
-fertilization_ttest.msat <- t.test(external.msat, internal.msat, var.equal=TRUE)
+fertilization_ttest.msat <- t.test(external.msat, internal.msat, var.equal=TRUE) #combine created vectors & perform t-test
 
 #Reproduction Mode#
 
-dioecism.msat <- msat_final_reproductionmode_He_no.na$He[msat_final_reproductionmode_He_no.na$final_reproductionmode=="Dioecious"]
-hermaphrodite.msat <- msat_final_reproductionmode_He_no.na$He[msat_final_reproductionmode_He_no.na$final_reproductionmode=="Hermaphrodite"]
+dioecism.msat <- msat_final_reproductionmode_He_no.na$He[msat_final_reproductionmode_He_no.na$final_reproductionmode=="Dioecious"] #create vector for one aspect of t-test
+hermaphrodite.msat <- msat_final_reproductionmode_He_no.na$He[msat_final_reproductionmode_He_no.na$final_reproductionmode=="Hermaphrodite"] #create vector
 
-reproductionmode_ttest.msat <- t.test(dioecism.msat, hermaphrodite.msat, var.equal=TRUE)
+reproductionmode_ttest.msat <- t.test(dioecism.msat, hermaphrodite.msat, var.equal=TRUE) #combine created vectors & perform t-test
 
 #Specific Reproduction Modes: ANOVA TEST#
 
-specific.repro_modeanovamsat <- aov(He ~ specific.repro_mode, data = msat_reproduction_type_He_no.na)
+specific.repro_modeanovamsat <- aov(He ~ specific.repro_mode, data = msat_reproduction_type_He_no.na) #perform anova test
 
 #####Wilcoxon Tests: Numerical Data#####
 
@@ -443,12 +442,8 @@ ggplot(final_fertilization_all) + geom_boxplot(aes(x = final_fertilization, y = 
     plot.title = element_text(size=14, face="bold"), 
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))+
-  scale_fill_manual(values=c("turquoise2", "darkcyan"))+
+  scale_fill_manual(values=c("turquoise2", "darkcyan"))
  
-
- 
-#geom_text(data = Tukey_test, aes(x = Genotype, y = Value, label = Letters_Tukey))
-
 #Reproduction Mode#
 reproductionmode_all = merge(msat_final_reproductionmode_He_no.na, mtdna_final_reproductionmode_He_no.na, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE) #merge final fertilization data form mtdna and msat together
 
@@ -555,7 +550,7 @@ ggplot(final_maxlength_all, aes(x=logtransform.maxlength, y=He, col=markertype, 
              se=TRUE, color = "black", size = 1.5, fill = NA) + 
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, size = 1.1, fill = NA) +
-  ylim(0,1)+
+  ylim(0,1)+                              #create limits
   coord_cartesian(ylim = c(0, 1)) +
   ggtitle("Max Length vs. He", subtitle = "(w/ Rhincodon typus) msat vs. mtDNA") + #add plot title
   xlab("Max Length (log(cm))") + ylab("He") + #add axis labels
@@ -595,13 +590,13 @@ final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$fi
 
 theme_update(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
 
-ggplot(final_maxlength.nowhaleshark_all, aes(x=logtransform.maxlength_noRT, y=He, col=markertype, shape=markertype)) + #max length & He scatter plot
+ggplot(final_maxlength.nowhaleshark_all, aes(x=logtransform.maxlength_noRT, y=He, col=markertype, shape=markertype)) + #max length w/out Rhincodon typus & He scatter plot
   geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "black", size = 1.5, fill = NA) + 
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, size = 1.1, fill = NA) +
-  ylim(0,1)+
+  ylim(0,1)+                              #create limits
   coord_cartesian(ylim = c(0, 1)) +
   ggtitle("Max Length vs. He", subtitle = "(no Rhincodon typus) msat vs. mtDNA") + #add plot title
   xlab("Max Length (log(cm))") + ylab("He") + #add axis labels
@@ -642,13 +637,13 @@ final_fecunditymean_all$markertype [final_fecunditymean_all$file ==	"ppdat"]  <-
 
 theme_update(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
 
-ggplot(final_fecunditymean_all, aes(x=logtransform.fecundity, y=He, col=markertype, shape=markertype)) + #max length & He scatter plot
+ggplot(final_fecunditymean_all, aes(x=logtransform.fecundity, y=He, col=markertype, shape=markertype)) + #fecundity mean & He scatter plot
   geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "black", size = 1.5, fill = NA) + 
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, size = 1.1, fill = NA) +
-  ylim(0,1)+
+  ylim(0,1)+                              #create limits
   coord_cartesian(ylim = c(0, 1)) +
   ggtitle("Fecundity Mean vs. He", subtitle = "msat vs. mtDNA") + #add plot title
   xlab("Fecundity Mean (log)") + ylab("He") + #add axis labels
@@ -668,17 +663,16 @@ ggplot(final_fecunditymean_all, aes(x=logtransform.fecundity, y=He, col=markerty
 
 #Fertilization#
 
-fertilizationanova.all <- aov(He ~ final_fertilization * markertype, data = final_fertilization_all)
-capture.output(summary(fertilizationanova.all),file="test.doc")
+fertilizationanova.all <- aov(He ~ final_fertilization * markertype, data = final_fertilization_all) #perform anova test for combined data
 
 #Reproduction Mode#
 
-reproductionmodeanova.all <- aov(He ~ final_reproductionmode * markertype, data = reproductionmode_all)
+reproductionmodeanova.all <- aov(He ~ final_reproductionmode * markertype, data = reproductionmode_all) #perform anova test for combined data
 
 #Specific Reproduction Modes: ANOVA#
 
-specific.repro_modeanova.all <- aov(He ~ specific.repro_mode * markertype, data = specificreproductionmode_all)
-TukeyHSD(specific.repro_modeanova.all)
+specific.repro_modeanova.all <- aov(He ~ specific.repro_mode * markertype, data = specificreproductionmode_all) #perform anova test for combined data
+TukeyHSD(specific.repro_modeanova.all) #perform TukeyHSD to see full table of results
 
 ####################################################################################
 
@@ -690,15 +684,15 @@ TukeyHSD(specific.repro_modeanova.all)
 
 #w/ Rhincodon typus
 
-mtdna_maxlength_He_no.na$success <- round(mtdna_maxlength_He_no.na$He*mtdna_maxlength_He_no.na$n)
-mtdna_maxlength_He_no.na$failure <- round((1-mtdna_maxlength_He_no.na$He)*mtdna_maxlength_He_no.na$n)
+mtdna_maxlength_He_no.na$success <- round(mtdna_maxlength_He_no.na$He*mtdna_maxlength_He_no.na$n) #create column of successes
+mtdna_maxlength_He_no.na$failure <- round((1-mtdna_maxlength_He_no.na$He)*mtdna_maxlength_He_no.na$n) #create column of failures
 
-ggplot(mtdna_maxlength_He_no.na, aes(x=maxlength, y=He)) +
+ggplot(mtdna_maxlength_He_no.na, aes(x=maxlength, y=He)) + #max length vs. He scatter plot with statistical model
   geom_point(shape=1) +
-  stat_smooth(method="glm",  method.args = list(family = "binomial"), formula= cbind(mtdna_maxlength_He_no.na$success, mtdna_maxlength_He_no.na$failure)~x) +
-  ggtitle("mtDNA:Max Length vs. He") +
-  xlab("Max Length (cm)") + ylab("He") +
-  ylim(0,1)+
+  stat_smooth(method="glm",  method.args = list(family = "binomial"), formula= cbind(mtdna_maxlength_He_no.na$success, mtdna_maxlength_He_no.na$failure)~x) + #add generalized liner model line
+  ggtitle("mtDNA:Max Length vs. He") + #add plot title
+  xlab("Max Length (cm)") + ylab("He") + #add axis labels
+  ylim(0,1)+                              #create limits
   theme(                                 #specify characteristics of the plot 
     plot.title = element_text(size=14, face="bold"),
     axis.title.x = element_text(color="blue", size=14, face="bold"),
@@ -706,15 +700,15 @@ ggplot(mtdna_maxlength_He_no.na, aes(x=maxlength, y=He)) +
 
 #w/out Rhincodon typus
 
-mtdna_maxlength_He_no.na_nowhaleshark$success <- round(mtdna_maxlength_He_no.na_nowhaleshark$He*mtdna_maxlength_He_no.na_nowhaleshark$n)
-mtdna_maxlength_He_no.na_nowhaleshark$failure <- round((1-mtdna_maxlength_He_no.na_nowhaleshark$He)*mtdna_maxlength_He_no.na_nowhaleshark$n)
+mtdna_maxlength_He_no.na_nowhaleshark$success <- round(mtdna_maxlength_He_no.na_nowhaleshark$He*mtdna_maxlength_He_no.na_nowhaleshark$n) #create column of successes
+mtdna_maxlength_He_no.na_nowhaleshark$failure <- round((1-mtdna_maxlength_He_no.na_nowhaleshark$He)*mtdna_maxlength_He_no.na_nowhaleshark$n) #create column of failures
 
-ggplot(mtdna_maxlength_He_no.na_nowhaleshark, aes(x=maxlength, y=He)) +
+ggplot(mtdna_maxlength_He_no.na_nowhaleshark, aes(x=maxlength, y=He)) + #max length w/out Rhincodon tyous vs. He scatter plot with statistical model
   geom_point(shape=1) +
-  stat_smooth(method="glm",  method.args = list(family = "binomial"), formula= cbind(mtdna_maxlength_He_no.na_nowhaleshark$success, mtdna_maxlength_He_no.na_nowhaleshark$failure)~x) +
-  ggtitle("mtDNA: Max Length vs. He", subtitle= "(no Rhincodon typus)") +
-  xlab("Max Length (cm)") + ylab("He") +
-  ylim(0,1)+
+  stat_smooth(method="glm",  method.args = list(family = "binomial"), formula= cbind(mtdna_maxlength_He_no.na_nowhaleshark$success, mtdna_maxlength_He_no.na_nowhaleshark$failure)~x) + #add generalized liner model line
+  ggtitle("mtDNA: Max Length vs. He", subtitle= "(no Rhincodon typus)") + #add plot  title
+  xlab("Max Length (cm)") + ylab("He") + #add axis labels
+  ylim(0,1)+                              #create limits
   theme(                                 #specify characteristics of the plot 
     plot.title = element_text(size=14, face="bold"),
     axis.title.x = element_text(color="blue", size=14, face="bold"),
@@ -722,15 +716,15 @@ ggplot(mtdna_maxlength_He_no.na_nowhaleshark, aes(x=maxlength, y=He)) +
 
 #Fecundity Mean#
 
-mtdna_fecundity_He_no.na$success <- round(mtdna_fecundity_He_no.na$He*mtdna_fecundity_He_no.na$n)
-mtdna_fecundity_He_no.na$failure <- round((1-mtdna_fecundity_He_no.na$He)*mtdna_fecundity_He_no.na$n)
+mtdna_fecundity_He_no.na$success <- round(mtdna_fecundity_He_no.na$He*mtdna_fecundity_He_no.na$n) #create column of successes
+mtdna_fecundity_He_no.na$failure <- round((1-mtdna_fecundity_He_no.na$He)*mtdna_fecundity_He_no.na$n) #create column of failures
 
-ggplot(mtdna_fecundity_He_no.na, aes(x=fecundity_mean, y=He)) +
+ggplot(mtdna_fecundity_He_no.na, aes(x=fecundity_mean, y=He)) + #fecundity mean vs. He scatter plot with statistical model
   geom_point(shape=1) +
-  stat_smooth(method="glm",  method.args = list(family = "binomial"), formula= cbind(mtdna_fecundity_He_no.na$success, mtdna_fecundity_He_no.na$failure)~x) +
-  ggtitle("mtDNA: Fecundity Mean vs. He") +
-  xlab("Fecundity Mean") + ylab("He") +
-  ylim(0,1)+
+  stat_smooth(method="glm",  method.args = list(family = "binomial"), formula= cbind(mtdna_fecundity_He_no.na$success, mtdna_fecundity_He_no.na$failure)~x) + #add generalized liner model line
+  ggtitle("mtDNA: Fecundity Mean vs. He") + #add plot title
+  xlab("Fecundity Mean") + ylab("He") + #add axis labels
+  ylim(0,1)+                              #create limits
   theme(                                 #specify characteristics of the plot 
     plot.title = element_text(size=14, face="bold"),
     axis.title.x = element_text(color="blue", size=14, face="bold"),
@@ -744,36 +738,36 @@ ggplot(mtdna_fecundity_He_no.na, aes(x=fecundity_mean, y=He)) +
 
 #w/ Rhincodon typus
 
-msat_maxlength_He_no.nan <- msat_maxlength_He_no.na[!is.na(msat_maxlength_He_no.na$n),] #exclude NA & n=25-32
-msat_maxlength_He_no.nan <- msat_maxlength_He_no.nan[!(msat_maxlength_He_no.nan$n=="25-32"),]  #exclude NA & n=25-32
+msat_maxlength_He_no.nan <- msat_maxlength_He_no.na[!is.na(msat_maxlength_He_no.na$n),] #exclude NA
+msat_maxlength_He_no.nan <- msat_maxlength_He_no.nan[!(msat_maxlength_He_no.nan$n=="25-32"),]  #exclude n=25-32
 
-msat_maxlength_He_no.nan$success <- round(as.numeric(msat_maxlength_He_no.nan$He)*(as.numeric(msat_maxlength_He_no.nan$n)))
-msat_maxlength_He_no.nan$failure <- round(as.numeric((1-msat_maxlength_He_no.nan$He)*(as.numeric(msat_maxlength_He_no.nan$n))))
+msat_maxlength_He_no.nan$success <- round(as.numeric(msat_maxlength_He_no.nan$He)*(as.numeric(msat_maxlength_He_no.nan$n))) #create column of successes
+msat_maxlength_He_no.nan$failure <- round(as.numeric((1-msat_maxlength_He_no.nan$He)*(as.numeric(msat_maxlength_He_no.nan$n)))) #create column of failures
 
-ggplot(msat_maxlength_He_no.nan, aes(x=maxlength, y=He)) +
+ggplot(msat_maxlength_He_no.nan, aes(x=maxlength, y=He)) + #max length vs. He scatter plot with statistical model
   geom_point(shape=1) +
-  stat_smooth(method="glm",  method.args = list(family = "binomial"), formula= cbind(msat_maxlength_He_no.nan$success, msat_maxlength_He_no.nan$failure)~x) +
-  ggtitle("msat: Max Length vs. He") +
-  xlab("Max Length (cm)") + ylab("He") +
-  ylim(0,1)+
+  stat_smooth(method="glm",  method.args = list(family = "binomial"), formula= cbind(msat_maxlength_He_no.nan$success, msat_maxlength_He_no.nan$failure)~x) + #add generalized liner model line
+  ggtitle("msat: Max Length vs. He") + #add plot title
+  xlab("Max Length (cm)") + ylab("He") + #add axis labels
+  ylim(0,1)+                             #create limits
   theme(                                 #specify characteristics of the plot 
     plot.title = element_text(size=14, face="bold"),
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))
 
 #w/out Rhincodon typus
-msat_maxlength_He_no.na_nowhalesharkn <- msat_maxlength_He_no.na_nowhaleshark[!is.na(msat_maxlength_He_no.na_nowhaleshark$n),] #exclude NA & n=25-32
-msat_maxlength_He_no.na_nowhalesharkn <- msat_maxlength_He_no.na_nowhalesharkn[!(msat_maxlength_He_no.na_nowhalesharkn$n=="25-32"),] 
+msat_maxlength_He_no.na_nowhalesharkn <- msat_maxlength_He_no.na_nowhaleshark[!is.na(msat_maxlength_He_no.na_nowhaleshark$n),] #exclude NA
+msat_maxlength_He_no.na_nowhalesharkn <- msat_maxlength_He_no.na_nowhalesharkn[!(msat_maxlength_He_no.na_nowhalesharkn$n=="25-32"),] #exclude n=25-32
 
-msat_maxlength_He_no.na_nowhalesharkn$success <- round(as.numeric(msat_maxlength_He_no.na_nowhalesharkn$He)*(as.numeric(msat_maxlength_He_no.na_nowhalesharkn$n)))
-msat_maxlength_He_no.na_nowhalesharkn$failure <- round(as.numeric(1-msat_maxlength_He_no.na_nowhalesharkn$He)*(as.numeric(msat_maxlength_He_no.na_nowhalesharkn$n)))
+msat_maxlength_He_no.na_nowhalesharkn$success <- round(as.numeric(msat_maxlength_He_no.na_nowhalesharkn$He)*(as.numeric(msat_maxlength_He_no.na_nowhalesharkn$n))) #create column of successes
+msat_maxlength_He_no.na_nowhalesharkn$failure <- round(as.numeric(1-msat_maxlength_He_no.na_nowhalesharkn$He)*(as.numeric(msat_maxlength_He_no.na_nowhalesharkn$n))) #create column of failures
 
-ggplot(msat_maxlength_He_no.na_nowhalesharkn, aes(x=maxlength, y=He)) +
+ggplot(msat_maxlength_He_no.na_nowhalesharkn, aes(x=maxlength, y=He)) + #max length w/out Rhincodon typus vs. He scatter plot with statistical model
   geom_point(shape=1) +
-  stat_smooth(method="glm",  method.args = list(family = "binomial"), formula= cbind(msat_maxlength_He_no.na_nowhalesharkn$success, msat_maxlength_He_no.na_nowhalesharkn$failure)~x) +
-  ggtitle("msat: Max Length vs. He", subtitle= "(no Rhincodon typus)") +
-  xlab("Max Length (cm)") + ylab("He") +
-  ylim(0,1)+
+  stat_smooth(method="glm",  method.args = list(family = "binomial"), formula= cbind(msat_maxlength_He_no.na_nowhalesharkn$success, msat_maxlength_He_no.na_nowhalesharkn$failure)~x) + #add generalized liner model line
+  ggtitle("msat: Max Length vs. He", subtitle= "(no Rhincodon typus)") + #add plot title
+  xlab("Max Length (cm)") + ylab("He") + #add axis labels
+  ylim(0,1)+                              #create limits
   theme(                                 #specify characteristics of the plot 
     plot.title = element_text(size=14, face="bold"),
     axis.title.x = element_text(color="blue", size=14, face="bold"),
@@ -781,18 +775,18 @@ ggplot(msat_maxlength_He_no.na_nowhalesharkn, aes(x=maxlength, y=He)) +
 
 #Fecundity Mean#
 
-msat_fecundity_He_no.nan <- msat_fecundity_He_no.na[!is.na(msat_fecundity_He_no.na$n),] #exclude NA & n=25-32
-msat_fecundity_He_no.nan <- msat_fecundity_He_no.nan[!(msat_fecundity_He_no.nan$n=="25-32"),] 
+msat_fecundity_He_no.nan <- msat_fecundity_He_no.na[!is.na(msat_fecundity_He_no.na$n),] #exclude NA 
+msat_fecundity_He_no.nan <- msat_fecundity_He_no.nan[!(msat_fecundity_He_no.nan$n=="25-32"),] #exclude n=25-32
 
-msat_fecundity_He_no.nan$success <- round(as.numeric(msat_fecundity_He_no.nan$He)*(as.numeric(msat_fecundity_He_no.nan$n)))
-msat_fecundity_He_no.nan$failure <- round(as.numeric(1-msat_fecundity_He_no.nan$He)*(as.numeric(msat_fecundity_He_no.nan$n)))
+msat_fecundity_He_no.nan$success <- round(as.numeric(msat_fecundity_He_no.nan$He)*(as.numeric(msat_fecundity_He_no.nan$n))) #create column of successes
+msat_fecundity_He_no.nan$failure <- round(as.numeric(1-msat_fecundity_He_no.nan$He)*(as.numeric(msat_fecundity_He_no.nan$n))) #create column of failures
 
-ggplot(msat_fecundity_He_no.nan , aes(x=fecundity_mean, y=He)) +
+ggplot(msat_fecundity_He_no.nan , aes(x=fecundity_mean, y=He)) + #fecundity mean vs. He scatter plot with statistical model
   geom_point(shape=1) +
-  stat_smooth(method="glm",  method.args = list(family = "binomial"), formula= cbind(msat_fecundity_He_no.nan$success, msat_fecundity_He_no.nan$failure)~x) +
-  ggtitle("msat: Fecundity Mean vs. He") +
-  xlab("Fecundity Mean") + ylab("He") +
-  ylim(0,1)+
+  stat_smooth(method="glm",  method.args = list(family = "binomial"), formula= cbind(msat_fecundity_He_no.nan$success, msat_fecundity_He_no.nan$failure)~x) + #add generalized liner model line
+  ggtitle("msat: Fecundity Mean vs. He") + #add plot title
+  xlab("Fecundity Mean") + ylab("He") + #add axis labels
+  ylim(0,1)+                              #create limits
   theme(                                 #specify characteristics of the plot 
     plot.title = element_text(size=14, face="bold"),
     axis.title.x = element_text(color="blue", size=14, face="bold"),
@@ -804,25 +798,25 @@ ggplot(msat_fecundity_He_no.nan , aes(x=fecundity_mean, y=He)) +
 
 #w/ Rhincodon typus
 
-final_maxlength_alln <- final_maxlength_all[!is.na(final_maxlength_all$n),] #exclude NA & n=25-32
-final_maxlength_alln <- final_maxlength_alln[!(final_maxlength_alln$n=="25-32"),] 
+final_maxlength_alln <- final_maxlength_all[!is.na(final_maxlength_all$n),] #exclude NA 
+final_maxlength_alln <- final_maxlength_alln[!(final_maxlength_alln$n=="25-32"),] #exclude n=25-32
 
-final_maxlength_alln$success <- round(as.numeric(final_maxlength_alln$He)*(as.numeric(final_maxlength_alln$n)))
-final_maxlength_alln$failure <- round(as.numeric(1-final_maxlength_alln$He)*(as.numeric(final_maxlength_alln$n)))
+final_maxlength_alln$success <- round(as.numeric(final_maxlength_alln$He)*(as.numeric(final_maxlength_alln$n))) #create column of successes
+final_maxlength_alln$failure <- round(as.numeric(1-final_maxlength_alln$He)*(as.numeric(final_maxlength_alln$n))) #create column of failures
 
 ggplot(final_maxlength_alln, aes(x=maxlength, y=He, col=markertype, shape=markertype)) + #max length & He scatter plot
   geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
   geom_smooth(data= msat_maxlength_He_no.nan, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
-              formula= cbind(msat_maxlength_He_no.nan$success, msat_maxlength_He_no.nan$failure)~x, inherit.aes = FALSE,   # Add linear regression line
+              formula= cbind(msat_maxlength_He_no.nan$success, msat_maxlength_He_no.nan$failure)~x, inherit.aes = FALSE,   #Add linear regression line outline
               se=TRUE, color = "black", size = 2, fill = NA) + 
-  stat_smooth(data= msat_maxlength_He_no.nan, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
+  stat_smooth(data= msat_maxlength_He_no.nan, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line
               formula= cbind(msat_maxlength_He_no.nan$success, msat_maxlength_He_no.nan$failure)~x, inherit.aes = FALSE, color= "skyblue2") +
   geom_smooth(data= mtdna_maxlength_He_no.na, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
-              formula= cbind(mtdna_maxlength_He_no.na$success, mtdna_maxlength_He_no.na$failure)~x, inherit.aes=FALSE,  # Add linear regression line
+              formula= cbind(mtdna_maxlength_He_no.na$success, mtdna_maxlength_He_no.na$failure)~x, inherit.aes=FALSE,  #Add linear regression line outline
               se=TRUE, color = "black", size = 2, fill = NA) + 
-  stat_smooth(data= mtdna_maxlength_He_no.na, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
+  stat_smooth(data= mtdna_maxlength_He_no.na, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line
               formula= cbind(mtdna_maxlength_He_no.na$success, mtdna_maxlength_He_no.na$failure)~x, inherit.aes=FALSE, color= "blue") +
-  ylim(0,1)+
+  ylim(0,1)+                              #create limits
   coord_cartesian(ylim = c(0, 1)) +
   ggtitle("Max Length vs. He", subtitle = "(w/ Rhincodon typus) msat vs. mtDNA") + #add plot title
   xlab("Max Length (cm)") + ylab("He") + #add axis labels
@@ -835,25 +829,25 @@ ggplot(final_maxlength_alln, aes(x=maxlength, y=He, col=markertype, shape=marker
 
 #w/out Rhincodon typus
 
-final_maxlength.nowhaleshark_alln <- final_maxlength.nowhaleshark_all[!is.na(final_maxlength.nowhaleshark_all$n),] #exclude NA & n=25-32
-final_maxlength.nowhaleshark_alln <- final_maxlength.nowhaleshark_alln[!(final_maxlength.nowhaleshark_alln$n=="25-32"),] 
+final_maxlength.nowhaleshark_alln <- final_maxlength.nowhaleshark_all[!is.na(final_maxlength.nowhaleshark_all$n),] #exclude NA 
+final_maxlength.nowhaleshark_alln <- final_maxlength.nowhaleshark_alln[!(final_maxlength.nowhaleshark_alln$n=="25-32"),] #exclude n=25-32
 
-final_maxlength.nowhaleshark_alln$success <- round(as.numeric(final_maxlength.nowhaleshark_alln$He)*(as.numeric(final_maxlength.nowhaleshark_alln$n)))
-final_maxlength.nowhaleshark_alln$failure <- round(as.numeric(1-final_maxlength.nowhaleshark_alln$He)*(as.numeric(final_maxlength.nowhaleshark_alln$n)))
+final_maxlength.nowhaleshark_alln$success <- round(as.numeric(final_maxlength.nowhaleshark_alln$He)*(as.numeric(final_maxlength.nowhaleshark_alln$n))) #create column of successes
+final_maxlength.nowhaleshark_alln$failure <- round(as.numeric(1-final_maxlength.nowhaleshark_alln$He)*(as.numeric(final_maxlength.nowhaleshark_alln$n))) #create column of failures
 
-ggplot(final_maxlength.nowhaleshark_alln, aes(x=maxlength, y=He, col=markertype, shape=markertype)) + #max length & He scatter plot
+ggplot(final_maxlength.nowhaleshark_alln, aes(x=maxlength, y=He, col=markertype, shape=markertype)) + #max length w/out Rhincodon typus & He scatter plot
   geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
   geom_smooth(data= msat_maxlength_He_no.na_nowhalesharkn, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
-              formula= cbind(msat_maxlength_He_no.na_nowhalesharkn$success, msat_maxlength_He_no.na_nowhalesharkn$failure)~x, inherit.aes = FALSE,   # Add linear regression line
+              formula= cbind(msat_maxlength_He_no.na_nowhalesharkn$success, msat_maxlength_He_no.na_nowhalesharkn$failure)~x, inherit.aes = FALSE,   #Add linear regression line outline
               se=TRUE, color = "black", size = 2, fill = NA) + 
-  stat_smooth(data= msat_maxlength_He_no.na_nowhalesharkn, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
+  stat_smooth(data= msat_maxlength_He_no.na_nowhalesharkn, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line
               formula= cbind(msat_maxlength_He_no.na_nowhalesharkn$success, msat_maxlength_He_no.na_nowhalesharkn$failure)~x, inherit.aes = FALSE, color= "skyblue2") +
   geom_smooth(data= mtdna_maxlength_He_no.na_nowhaleshark, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
-              formula= cbind(mtdna_maxlength_He_no.na_nowhaleshark$success, mtdna_maxlength_He_no.na_nowhaleshark$failure)~x, inherit.aes=FALSE,  # Add linear regression line
+              formula= cbind(mtdna_maxlength_He_no.na_nowhaleshark$success, mtdna_maxlength_He_no.na_nowhaleshark$failure)~x, inherit.aes=FALSE,  #Add linear regression line outline
               se=TRUE, color = "black", size = 2, fill = NA) + 
-  stat_smooth(data= mtdna_maxlength_He_no.na_nowhaleshark, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
+  stat_smooth(data= mtdna_maxlength_He_no.na_nowhaleshark, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line
               formula= cbind(mtdna_maxlength_He_no.na_nowhaleshark$success, mtdna_maxlength_He_no.na_nowhaleshark$failure)~x, inherit.aes=FALSE, color= "blue") +
-  ylim(0,1)+
+  ylim(0,1)+                              #create limits
   coord_cartesian(ylim = c(0, 1)) +
   ggtitle("Max Length vs. He", subtitle = "(w/out Rhincodon typus) msat vs. mtDNA") + #add plot title
   xlab("Max Length (cm)") + ylab("He") + #add axis labels
@@ -867,25 +861,25 @@ ggplot(final_maxlength.nowhaleshark_alln, aes(x=maxlength, y=He, col=markertype,
 
 #Fecundity Mean
 
-final_fecunditymean_alln <- final_fecunditymean_all[!is.na(final_fecunditymean_all$n),] #exclude NA & n=25-32
-final_fecunditymean_alln <- final_fecunditymean_alln[!(final_fecunditymean_alln$n=="25-32"),] 
+final_fecunditymean_alln <- final_fecunditymean_all[!is.na(final_fecunditymean_all$n),] #exclude NA
+final_fecunditymean_alln <- final_fecunditymean_alln[!(final_fecunditymean_alln$n=="25-32"),] #exclude n=25-32
 
-final_fecunditymean_alln$success <- round(as.numeric(final_fecunditymean_alln$He)*(as.numeric(final_fecunditymean_alln$n)))
-final_fecunditymean_alln$failure <- round(as.numeric(1-final_fecunditymean_alln$He)*(as.numeric(final_fecunditymean_alln$n)))
+final_fecunditymean_alln$success <- round(as.numeric(final_fecunditymean_alln$He)*(as.numeric(final_fecunditymean_alln$n))) #create column of successes
+final_fecunditymean_alln$failure <- round(as.numeric(1-final_fecunditymean_alln$He)*(as.numeric(final_fecunditymean_alln$n))) #create column of failures
 
-ggplot(final_fecunditymean_alln, aes(x=fecundity_mean, y=He, col=markertype, shape=markertype)) + #max length & He scatter plot
+ggplot(final_fecunditymean_alln, aes(x=fecundity_mean, y=He, col=markertype, shape=markertype)) + #fecundity mean & He scatter plot
   geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
   geom_smooth(data= msat_fecundity_He_no.nan , aes(x=fecundity_mean, y=He), method="glm",  method.args = list(family = "binomial"), 
-              formula= cbind(msat_fecundity_He_no.nan $success, msat_fecundity_He_no.nan $failure)~x, inherit.aes = FALSE,   # Add linear regression line
+              formula= cbind(msat_fecundity_He_no.nan $success, msat_fecundity_He_no.nan $failure)~x, inherit.aes = FALSE,   #Add linear regression line outline
               se=TRUE, color = "black", size = 2, fill = NA) + 
-  stat_smooth(data= msat_fecundity_He_no.nan , aes(x=fecundity_mean, y=He), method="glm",  method.args = list(family = "binomial"), 
+  stat_smooth(data= msat_fecundity_He_no.nan , aes(x=fecundity_mean, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line
               formula= cbind(msat_fecundity_He_no.nan $success, msat_fecundity_He_no.nan $failure)~x, inherit.aes = FALSE, color= "skyblue2") +
   geom_smooth(data= mtdna_fecundity_He_no.na, aes(x=fecundity_mean, y=He), method="glm",  method.args = list(family = "binomial"), 
-              formula= cbind(mtdna_fecundity_He_no.na$success, mtdna_fecundity_He_no.na$failure)~x, inherit.aes=FALSE,  # Add linear regression line
+              formula= cbind(mtdna_fecundity_He_no.na$success, mtdna_fecundity_He_no.na$failure)~x, inherit.aes=FALSE,  #Add linear regression line outline
               se=TRUE, color = "black", size = 2, fill = NA) + 
-  stat_smooth(data= mtdna_fecundity_He_no.na, aes(x=fecundity_mean, y=He), method="glm",  method.args = list(family = "binomial"), 
+  stat_smooth(data= mtdna_fecundity_He_no.na, aes(x=fecundity_mean, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line
               formula= cbind(mtdna_fecundity_He_no.na$success, mtdna_fecundity_He_no.na$failure)~x, inherit.aes=FALSE, color= "blue") +
-  ylim(0,1)+
+  ylim(0,1)+                              #create limits
   coord_cartesian(ylim = c(0, 1)) +
   ggtitle("Fecundity Mean vs. He", subtitle = "msat vs. mtDNA") + #add plot title
   xlab("Fecundity Mean") + ylab("He") + #add axis labels
