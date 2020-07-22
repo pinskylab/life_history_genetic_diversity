@@ -664,10 +664,12 @@ ggplot(final_fecunditymean_all, aes(x=logtransform.fecundity, y=He, col=markerty
 #Fertilization#
 
 fertilizationanova.all <- aov(He ~ final_fertilization * markertype, data = final_fertilization_all) #perform anova test for combined data
+TukeyHSD(fertilizationanova.all) #perform TukeyHSD to see full table of results
 
 #Reproduction Mode#
 
 reproductionmodeanova.all <- aov(He ~ final_reproductionmode * markertype, data = reproductionmode_all) #perform anova test for combined data
+TukeyHSD(reproductionmodeanova.all) #perform TukeyHSD to see full table of results
 
 #Specific Reproduction Modes: ANOVA#
 
