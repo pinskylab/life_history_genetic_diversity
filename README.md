@@ -18,6 +18,8 @@ Collected life history data for microsatellites and mitochondrial DNA. Created p
 
 ## Directory
 
-1. Graphs: contains scatter and box plots for information regarding research project work.
-2. msat.collection: contains information for the lab paper collection
-3. Project: contains data relevant to research project pertaing to life history traits and expected heterozygosity
+1. Graphs: contains scatter and box plots for information regarding research project work
+2. Project: contains data relevant to research project pertaing to life history traits and expected heterozygosity
+3. msat.collection: contains information for the lab paper collection
+4. 
+
