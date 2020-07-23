@@ -839,16 +839,26 @@ final_maxlength.nowhaleshark_alln$failure <- round(as.numeric(1-final_maxlength.
 
 ggplot(final_maxlength.nowhaleshark_alln, aes(x=maxlength, y=He, col=markertype, shape=markertype)) + #max length w/out Rhincodon typus & He scatter plot
   geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
-  geom_smooth(data= msat_maxlength_He_no.na_nowhalesharkn, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
-              formula= cbind(msat_maxlength_He_no.na_nowhalesharkn$success, msat_maxlength_He_no.na_nowhalesharkn$failure)~x, inherit.aes = FALSE,   #Add linear regression line outline
+  geom_smooth(data= msat_maxlength_He_no.nan, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
+              formula= cbind(msat_maxlength_He_no.nan$success, msat_maxlength_He_no.nan$failure)~x, inherit.aes = FALSE,   #Add linear regression line outline
               se=TRUE, color = "black", size = 2, fill = NA) + 
-  stat_smooth(data= msat_maxlength_He_no.na_nowhalesharkn, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line
-              formula= cbind(msat_maxlength_He_no.na_nowhalesharkn$success, msat_maxlength_He_no.na_nowhalesharkn$failure)~x, inherit.aes = FALSE, color= "skyblue2") +
-  geom_smooth(data= mtdna_maxlength_He_no.na_nowhaleshark, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
-              formula= cbind(mtdna_maxlength_He_no.na_nowhaleshark$success, mtdna_maxlength_He_no.na_nowhaleshark$failure)~x, inherit.aes=FALSE,  #Add linear regression line outline
+  stat_smooth(data= msat_maxlength_He_no.nan, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line
+              formula= cbind(msat_maxlength_He_no.nan$success, msat_maxlength_He_no.nan$failure)~x, inherit.aes = FALSE, color= "skyblue2") +
+  geom_smooth(data= mtdna_maxlength_He_no.na, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
+              formula= cbind(mtdna_maxlength_He_no.na$success, mtdna_maxlength_He_no.na$failure)~x, inherit.aes=FALSE,  #Add linear regression line outline
               se=TRUE, color = "black", size = 2, fill = NA) + 
-  stat_smooth(data= mtdna_maxlength_He_no.na_nowhaleshark, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line
-              formula= cbind(mtdna_maxlength_He_no.na_nowhaleshark$success, mtdna_maxlength_He_no.na_nowhaleshark$failure)~x, inherit.aes=FALSE, color= "blue") +
+  stat_smooth(data= mtdna_maxlength_He_no.na, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line
+              formula= cbind(mtdna_maxlength_He_no.na$success, mtdna_maxlength_He_no.na$failure)~x, inherit.aes=FALSE, color= "blue") +
+  #geom_smooth(data= msat_maxlength_He_no.na_nowhalesharkn, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
+   #           formula= cbind(msat_maxlength_He_no.na_nowhalesharkn$success, msat_maxlength_He_no.na_nowhalesharkn$failure)~x, inherit.aes = FALSE,   #Add linear regression line outline
+    #          se=TRUE, color = "black", size = 2, fill = NA) + 
+  #stat_smooth(data= msat_maxlength_He_no.na_nowhalesharkn, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line
+   #           formula= cbind(msat_maxlength_He_no.na_nowhalesharkn$success, msat_maxlength_He_no.na_nowhalesharkn$failure)~x, inherit.aes = FALSE, color= "skyblue2") +
+  #geom_smooth(data= mtdna_maxlength_He_no.na_nowhaleshark, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
+   #           formula= cbind(mtdna_maxlength_He_no.na_nowhaleshark$success, mtdna_maxlength_He_no.na_nowhaleshark$failure)~x, inherit.aes=FALSE,  #Add linear regression line outline
+    #          se=TRUE, color = "black", size = 2, fill = NA) + 
+  #stat_smooth(data= mtdna_maxlength_He_no.na_nowhaleshark, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line
+   #           formula= cbind(mtdna_maxlength_He_no.na_nowhaleshark$success, mtdna_maxlength_He_no.na_nowhaleshark$failure)~x, inherit.aes=FALSE, color= "blue") +
   ylim(0,1)+                              #create limits
   coord_cartesian(ylim = c(0, 1)) +
   ggtitle("Max Length vs. He", subtitle = "(w/out Rhincodon typus) msat vs. mtDNA") + #add plot title
