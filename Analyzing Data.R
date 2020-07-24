@@ -1,4 +1,4 @@
-################################################### Script for Analyzing Data  ########################################################
+################################################### Script for Analyzing Data  #######################################################
 
 #analyzes mtDNA & msat datasets
 
@@ -433,6 +433,8 @@ final_fertilization_all$markertype [final_fertilization_all$file == "msats304"] 
 final_fertilization_all$markertype [final_fertilization_all$file == "msats305"]  <- "msat"
 final_fertilization_all$markertype [final_fertilization_all$file ==	"ppdat"]  <- "msat" 
 
+theme_update(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
+
 ggplot(final_fertilization_all) + geom_boxplot(aes(x = final_fertilization, y = He, fill=markertype)) + #final fertilization & He box plot
   ggtitle("Fertilization Method vs. He", subtitle= "msat vs. mtDNA") + #add plot title
   xlab("Fertilization Method") + ylab("He") + #add axis labels
@@ -464,6 +466,8 @@ reproductionmode_all$markertype [reproductionmode_all$file == "msats303"]  <- "m
 reproductionmode_all$markertype [reproductionmode_all$file == "msats304"]  <- "msat" 
 reproductionmode_all$markertype [reproductionmode_all$file == "msats305"]  <- "msat"
 reproductionmode_all$markertype [reproductionmode_all$file ==	"ppdat"]  <- "msat" 
+
+theme_update(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
 
 ggplot(reproductionmode_all) + geom_boxplot(aes(x = final_reproductionmode, y = He, fill= markertype)) + #final fertilization & He box plot
   ggtitle("Reproduction Mode vs. He", subtitle= "msat vs. mtDNA") + #add plot title
@@ -497,6 +501,8 @@ specificreproductionmode_all$markertype [specificreproductionmode_all$file == "m
 specificreproductionmode_all$markertype [specificreproductionmode_all$file == "msats304"]  <- "msat" 
 specificreproductionmode_all$markertype [specificreproductionmode_all$file == "msats305"]  <- "msat"
 specificreproductionmode_all$markertype [specificreproductionmode_all$file ==	"ppdat"]  <- "msat" 
+
+theme_update(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
 
 ggplot(specificreproductionmode_all) + geom_boxplot(aes(x = specific.repro_mode, y = He, fill=markertype)) + #final fertilization & He box plot
   ggtitle("Specific Reproduction Modes vs. He", subtitle= "msat vs. mtDNA") + #add plot title
@@ -535,6 +541,8 @@ final_maxlength_all$markertype [final_maxlength_all$file == "msats303"]  <- "msa
 final_maxlength_all$markertype [final_maxlength_all$file == "msats304"]  <- "msat" 
 final_maxlength_all$markertype [final_maxlength_all$file == "msats305"]  <- "msat"
 final_maxlength_all$markertype [final_maxlength_all$file ==	"ppdat"]  <- "msat" 
+
+theme_update(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
 
 ggplot(final_maxlength_all, aes(x=logtransform.maxlength, y=He, col=markertype, shape=markertype)) + #max length & He scatter plot
   geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
@@ -579,6 +587,8 @@ final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$fi
 final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats304"]  <- "msat" 
 final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats305"]  <- "msat"
 final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file ==	"ppdat"]  <- "msat" 
+
+theme_update(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
 
 ggplot(final_maxlength.nowhaleshark_all, aes(x=logtransform.maxlength_noRT, y=He, col=markertype, shape=markertype)) + #max length w/out Rhincodon typus & He scatter plot
   geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
@@ -625,6 +635,8 @@ final_fecunditymean_all$markertype [final_fecunditymean_all$file == "msats304"] 
 final_fecunditymean_all$markertype [final_fecunditymean_all$file == "msats305"]  <- "msat"
 final_fecunditymean_all$markertype [final_fecunditymean_all$file ==	"ppdat"]  <- "msat" 
 
+theme_update(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
+
 ggplot(final_fecunditymean_all, aes(x=logtransform.fecundity, y=He, col=markertype, shape=markertype)) + #fecundity mean & He scatter plot
   geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
@@ -652,12 +664,10 @@ ggplot(final_fecunditymean_all, aes(x=logtransform.fecundity, y=He, col=markerty
 #Fertilization#
 
 fertilizationanova.all <- aov(He ~ final_fertilization * markertype, data = final_fertilization_all) #perform anova test for combined data
-TukeyHSD(fertilizationanova.all) #perform TukeyHSD to see full table of results
 
 #Reproduction Mode#
 
 reproductionmodeanova.all <- aov(He ~ final_reproductionmode * markertype, data = reproductionmode_all) #perform anova test for combined data
-TukeyHSD(reproductionmodeanova.all) #perform TukeyHSD to see full table of results
 
 #Specific Reproduction Modes: ANOVA#
 
@@ -827,30 +837,18 @@ final_maxlength.nowhaleshark_alln$failure <- round(as.numeric(1-final_maxlength.
 
 ggplot(final_maxlength.nowhaleshark_alln, aes(x=maxlength, y=He, col=markertype, shape=markertype)) + #max length w/out Rhincodon typus & He scatter plot
   geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
-  geom_smooth(data= msat_maxlength_He_no.nan, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
-              formula= cbind(msat_maxlength_He_no.nan$success, msat_maxlength_He_no.nan$failure)~x, inherit.aes = FALSE,   #Add linear regression line outline from data including Rhincodon Typus
+  geom_smooth(data= msat_maxlength_He_no.na_nowhalesharkn, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
+              formula= cbind(msat_maxlength_He_no.na_nowhalesharkn$success, msat_maxlength_He_no.na_nowhalesharkn$failure)~x, inherit.aes = FALSE,   #Add linear regression line outline
               se=TRUE, color = "black", size = 2, fill = NA) + 
-  stat_smooth(data= msat_maxlength_He_no.nan, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line from data including Rhincodon Typus
-              formula= cbind(msat_maxlength_He_no.nan$success, msat_maxlength_He_no.nan$failure)~x, inherit.aes = FALSE, color= "skyblue2") +
-  geom_smooth(data= mtdna_maxlength_He_no.na, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
-              formula= cbind(mtdna_maxlength_He_no.na$success, mtdna_maxlength_He_no.na$failure)~x, inherit.aes=FALSE,  #Add linear regression line outline from data including Rhincodon Typus
+  stat_smooth(data= msat_maxlength_He_no.na_nowhalesharkn, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line
+              formula= cbind(msat_maxlength_He_no.na_nowhalesharkn$success, msat_maxlength_He_no.na_nowhalesharkn$failure)~x, inherit.aes = FALSE, color= "skyblue2") +
+  geom_smooth(data= mtdna_maxlength_He_no.na_nowhaleshark, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
+              formula= cbind(mtdna_maxlength_He_no.na_nowhaleshark$success, mtdna_maxlength_He_no.na_nowhaleshark$failure)~x, inherit.aes=FALSE,  #Add linear regression line outline
               se=TRUE, color = "black", size = 2, fill = NA) + 
-  stat_smooth(data= mtdna_maxlength_He_no.na, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line from data including Rhincodon Typus
-              formula= cbind(mtdna_maxlength_He_no.na$success, mtdna_maxlength_He_no.na$failure)~x, inherit.aes=FALSE, color= "blue") +
-  ##Following code below include glm line for data not including Rhincodon typus; include if needed##
-  #geom_smooth(data= msat_maxlength_He_no.na_nowhalesharkn, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
-   #           formula= cbind(msat_maxlength_He_no.na_nowhalesharkn$success, msat_maxlength_He_no.na_nowhalesharkn$failure)~x, inherit.aes = FALSE,   #Add linear regression line outline
-    #          se=TRUE, color = "black", size = 2, fill = NA) + 
-  #stat_smooth(data= msat_maxlength_He_no.na_nowhalesharkn, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line
-   #           formula= cbind(msat_maxlength_He_no.na_nowhalesharkn$success, msat_maxlength_He_no.na_nowhalesharkn$failure)~x, inherit.aes = FALSE, color= "skyblue2") +
-  #geom_smooth(data= mtdna_maxlength_He_no.na_nowhaleshark, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
-   #           formula= cbind(mtdna_maxlength_He_no.na_nowhaleshark$success, mtdna_maxlength_He_no.na_nowhaleshark$failure)~x, inherit.aes=FALSE,  #Add linear regression line outline
-    #          se=TRUE, color = "black", size = 2, fill = NA) + 
-  #stat_smooth(data= mtdna_maxlength_He_no.na_nowhaleshark, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line
-   #           formula= cbind(mtdna_maxlength_He_no.na_nowhaleshark$success, mtdna_maxlength_He_no.na_nowhaleshark$failure)~x, inherit.aes=FALSE, color= "blue") +
+  stat_smooth(data= mtdna_maxlength_He_no.na_nowhaleshark, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line
+              formula= cbind(mtdna_maxlength_He_no.na_nowhaleshark$success, mtdna_maxlength_He_no.na_nowhaleshark$failure)~x, inherit.aes=FALSE, color= "blue") +
   ylim(0,1)+                              #create limits
-  coord_cartesian(ylim = c(0, 1)) + #add y limit
-  coord_cartesian(xlim = c(0, 700)) + #add x limit to see graph better
+  coord_cartesian(ylim = c(0, 1)) +
   ggtitle("Max Length vs. He", subtitle = "(w/out Rhincodon typus) msat vs. mtDNA") + #add plot title
   xlab("Max Length (cm)") + ylab("He") + #add axis labels
   theme(                                 #specifying characteristics of the plot 
