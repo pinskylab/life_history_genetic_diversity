@@ -837,7 +837,7 @@ ggplot(final_maxlength.nowhaleshark_alln, aes(x=maxlength, y=He, col=markertype,
               se=TRUE, color = "black", size = 2, fill = NA) + 
   stat_smooth(data= mtdna_maxlength_He_no.na, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line from data including Rhincodon Typus
               formula= cbind(mtdna_maxlength_He_no.na$success, mtdna_maxlength_He_no.na$failure)~x, inherit.aes=FALSE, color= "blue") +
-  ##Following code below include glm line for data not including Rhincodon typus; include if needed##
+  ###Following code below include glm line for data not including Rhincodon typus; include if needed###
   #geom_smooth(data= msat_maxlength_He_no.na_nowhalesharkn, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
    #           formula= cbind(msat_maxlength_He_no.na_nowhalesharkn$success, msat_maxlength_He_no.na_nowhalesharkn$failure)~x, inherit.aes = FALSE,   #Add linear regression line outline
     #          se=TRUE, color = "black", size = 2, fill = NA) + 
