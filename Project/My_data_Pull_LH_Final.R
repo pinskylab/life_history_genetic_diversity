@@ -56,9 +56,9 @@ for (i in 1:nrow(msat_spp)) { #get fecundity data
     msat_spp$fecundity[i] <- fecundity(species=msat_spp$fbsci[i], field= 'FecundityMin')
     if(sjmisc::is_empty(unlist(msat_spp$fecundity[i]), all.na.empty = TRUE)) { #if fecundity minimum is NA, use fecundity maximum
       msat_spp$fecundity[i] <- fecundity(species=(msat_spp$fbsci[i]), fields = 'FecundityMax')
-  msat_spp$fecundity_mean[i] <- mean(unlist(msat_spp$fecundity[i]), na.rm = TRUE) #calculate mean fecundity
     }
   }
+  msat_spp$fecundity_mean[i] <- mean(unlist(msat_spp$fecundity[i]), na.rm = TRUE) #calculate mean fecundity
 }
 
 #add maturity length from FB
