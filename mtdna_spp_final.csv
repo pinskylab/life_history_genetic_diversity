@@ -1,0 +1,270 @@
+﻿,spp,fbsci,maxlength,mortalitywild,fecundity,fecundity_mean,maturitylength,maturitylength_mean,maturityage,maturityage_mean,numberofspawningcycles,reproductiveseasonlength,fertilization,reproductionmode,spawningground,batchspawner,parentalcare,larvaesize,larvae_mean
+1,Abudefduf saxatilis,Abudefduf saxatilis,22.9,NA,NA,NaN,10.1,10.1,NA,NaN,NA,8 months,external,dioecism,"c(NA, ""coastal"")",0,1,2.64,2.64
+2,Acanthocybium solandri,Acanthocybium solandri,250,NA,6000000,6000000,"c(NA, NA, 85, NA, 86, NA)",85.5,"c(NA, 1, NA, NA, 1, 1)",1,NA,NA,external,dioecism,"c(NA, NA, NA, NA, NA, NA)",0,3,NA,NaN
+3,Acanthopagrus schlegelii,Acanthopagrus schlegelii,50,NA,NA,NaN,"c(29, 10.1, NA)",19.55,"c(NA, NA, NA)",NaN,one clear seasonal peak per year,3.2 months,external,protandry,"c(""coastal"", ""coastal"", ""coastal"", NA, ""coastal"")",0,3,2,2
+4,Acanthurus nigrofuscus,Acanthurus nigrofuscus,21,NA,NA,NaN,"c(13, 10)",11.5,"c(NA, NA)",NaN,one clear seasonal peak per year,NA,external,dioecism,coastal,-1,3,NA,NaN
+5,Acanthurus nigroris,Acanthurus nigroris,25,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,2,NA,NaN
+6,Acanthurus triostegus,Acanthurus triostegus,27,NA,192145,192145,"c(NA, NA)",NaN,"c(1, NA)",1,NA,4 months,external,dioecism,coastal,0,1,1.7,1.7
+7,Aetobatus narinari,Aetobatus narinari,330,NA,1,1,"c(NA, 110, NA)",110,"c(4, NA, NA)",4,no obvious seasonal peak,2 months,internal (oviduct),dioecism,NA,0,NA,NA,NaN
+8,Alopias vulpinus,Alopias vulpinus,573.3,25,2,2,"c(350, NA, 350, 260, 226, 184, NA, 155, NA, NA, NA, NA)",254.1666667,"c(NA, NA, 7, 5, NA, NA, NA, NA, NA, NA, NA, NA)",6,NA,NA,internal (oviduct),dioecism,coastal,0,NA,NA,NaN
+9,Amblyraja radiata,Amblyraja radiata,105,28,"c(17, 13, 56)",28.66666667,"c(NA, NA, 50, NA, NA, 60, NA)",55,"c(NA, NA, NA, NA, NA, NA, NA)",NaN,NA,NA,internal (oviduct),dioecism,NA,0,3,NA,NaN
+10,Ammodytes personatus,Ammodytes personatus,15,NA,8774.5,8774.5,NA,NaN,NA,NaN,one clear seasonal peak per year,3 months,NA,NA,"c(NA, NA)",NA,NA,0.472,0.472
+11,Amphiprion akallopisos,Amphiprion akallopisos,11,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,protandry,NA,0,1,NA,NaN
+12,Amphiprion latezonatus,Amphiprion latezonatus,14,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,protandry,NA,0,1,NA,NaN
+13,Amphiprion melanopus,Amphiprion melanopus,12,5,7200,7200,4.5,4.5,1.67,1.67,NA,NA,external,protandry,coastal,0,1,NA,NaN
+14,Anoplopoma fimbria,Anoplopoma fimbria,120,94,"c(NA, 1e+05, 241200)",170600,"c(NA, NA, 58, NA, 60, NA, NA)",59,"c(NA, NA, NA, NA, 5, NA, NA)",5,NA,NA,external,dioecism,"c(NA, ""coastal"", ""oceanic"", ""shelf"")",0,3,6,6
+15,Archosargus probatocephalus,Archosargus probatocephalus,91,NA,13427,13427,NA,NaN,NA,NaN,NA,NA,NA,NA,"c(NA, ""coastal"")",NA,NA,NA,NaN
+16,Atherinella brasiliensis,Atherinella brasiliensis,17.7,NA,2050,2050,"c(NA, NA)",NaN,"c(NA, NA)",NaN,NA,NA,NA,NA,"c(NA, NA, NA)",NA,NA,NA,NaN
+17,Auxis rochei,Auxis rochei,50,NA,217,217,"c(35, 36.5, NA, NA, NA)",35.75,"c(NA, NA, 2, NA, NA)",2,Variable throughout range,NA,external,dioecism,"c(""coastal"", ""coastal"", NA, NA, NA, NA, NA)",-1,3,3.3,3.3
+18,Auxis thazard,Auxis thazard,65,5,"c(2e+05, NA, NA)",200000,"c(35, 29, NA, NA, NA, NA, NA)",32,"c(NA, NA, NA, NA, NA, NA, NA)",NaN,Variable throughout range,NA,external,dioecism,"c(NA, NA, NA, NA, NA)",0,3,3.26,3.26
+19,Balistes capriscus,Balistes capriscus,60,NA,NA,772415,"c(13, NA, NA, NA, NA, NA, NA)",13,"c(NA, NA, NA, NA, NA, NA, NA)",NaN,one clear seasonal peak per year,NA,external,dioecism,"c(""coastal"", ""coastal"", ""coastal"", ""coastal"", ""coastal"")",0,1,NA,NaN
+20,Bathygobius cocosensis,Bathygobius cocosensis,12,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+21,Bathytoshia brevicaudata,Bathytoshia brevicaudata,430,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,internal (oviduct),dioecism,NA,0,NA,NA,NaN
+22,Bathytoshia centroura,Bathytoshia centroura,300,NA,"c(2, 2)",2,"c(66, 80, 140, 130)",104,"c(NA, NA, NA, NA)",NaN,one clear seasonal peak per year,NA,internal (oviduct),dioecism,NA,0,NA,NA,NaN
+23,Bellapiscis lesleyae,Bellapiscis lesleyae,6.03,3,NA,NaN,4,4,NA,NaN,one clear seasonal peak per year,NA,external,dioecism,coastal,0,1,NA,NaN
+24,Bellapiscis medius,Bellapiscis medius,7.5,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,NA,NaN
+25,Beringraja pulchra,Beringraja pulchra,115,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,internal (oviduct),dioecism,NA,0,3,NA,NaN
+26,Beryx decadactylus,Beryx decadactylus,100,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,NA,NA,NaN
+27,Beryx splendens,Beryx splendens,70,23,270000,270000,"c(30, NA, NA, 19)",24.5,"c(4, NA, NA, 2)",3,NA,NA,external,dioecism,NA,-1,NA,NA,NaN
+28,Boreogadus saida,Boreogadus saida,40,7,"c(30000, 9000, 9000, 5500, 30000, NA)",16700,"c(NA, NA, NA, NA)",NaN,"c(3, 2, 4, 2)",2.75,once in a lifetime,NA,external,dioecism,"c(""coastal"", NA, ""coastal"", ""coastal"")",0,1,5,5
+29,Branchiostegus japonicus,Branchiostegus japonicus,46,12,NA,NaN,"c(21.4, 23.7, NA)",22.55,"c(NA, NA, 2)",2,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+30,Branchiostoma belcheri,NA,NA,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+31,Branchiostoma japonicum,NA,NA,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+32,Caffrogobius caffer,Caffrogobius caffer,18,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+33,Carcharhinus altimus,Carcharhinus altimus,300,NA,3,3,"c(226, 190, NA, NA, 205)",207,"c(NA, NA, NA, NA, NA)",NaN,NA,NA,internal (oviduct),dioecism,"c(NA, ""shelf"")",0,3,NA,NaN
+34,Carcharhinus galapagensis,Carcharhinus galapagensis,370,24,4,4,"c(250, 210, 250, 210, 215, 205)",223.3333333,"c(NA, NA, NA, NA, 6.5, 6)",6.25,NA,NA,internal (oviduct),dioecism,NA,0,NA,NA,NaN
+35,Carcharodon carcharias,Carcharodon carcharias,640,36,"c(10, 7)",8.5,"c(450, 360, 454, 332, 379, 372)",391.1666667,"c(12, 12, NA, NA, NA, 8)",10.66666667,NA,NA,internal (oviduct),dioecism,NA,0,1,NA,NaN
+36,Centrophorus harrissoni,Centrophorus harrissoni,111.4,NA,1,1,"c(NA, 75)",75,"c(23, 15)",19,NA,NA,internal (oviduct),dioecism,NA,0,NA,NA,NaN
+37,Centrophorus moluccensis,Centrophorus moluccensis,100,NA,2,2,"c(69, 80, 89, 69)",76.75,"c(NA, NA, NA, NA)",NaN,NA,NA,internal (oviduct),dioecism,NA,0,NA,NA,NaN
+38,Centrophorus uyato,Centrophorus uyato,110,NA,1,1,"c(75, 81)",78,"c(NA, NA)",NaN,NA,NA,internal (oviduct),dioecism,NA,0,NA,NA,NaN
+39,Centrophorus zeehaani,Centrophorus zeehaani,91,NA,NA,1,NA,NaN,NA,NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+40,Centropristis striata,Centropristis striata,66,20,NA,280000,"c(NA, NA, 11.8)",11.8,"c(NA, NA, NA)",NaN,NA,NA,external,protogyny,NA,0,3,NA,NaN
+41,Centroscymnus crepidater,Centroscymnus crepidater,130,54,4,4,"c(82, 64, NA, NA, NA)",73,"c(NA, NA, 9, NA, NA)",9,NA,NA,internal (oviduct),dioecism,NA,0,NA,NA,NaN
+42,Cephalopholis argus,Cephalopholis argus,60,NA,NA,NaN,"c(52, 22)",37,"c(NA, NA)",NaN,NA,NA,external,protogyny,NA,0,3,NA,NaN
+43,Cephalopholis fulva,Cephalopholis fulva,44,11,67000,67000,"c(NA, NA, NA)",NaN,"c(NA, NA, NA)",NaN,one clear seasonal peak per year,4.8 months,external,protogyny,"c(NA, NA, ""coastal"", NA, NA)",0,1,NA,NaN
+44,Cetengraulis edentulus,Cetengraulis edentulus,18.2,NA,9608,9608,"c(NA, NA, NA, 12, NA, NA)",12,"c(NA, NA, NA, NA, NA, NA)",NaN,NA,NA,external,dioecism,"c(""coastal"", NA, ""coastal"")",0,3,NA,NaN
+45,Chaetodon austriacus,Chaetodon austriacus,13,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,NA,NaN
+46,Chaetodon lunulatus,Chaetodon lunulatus,14,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,NA,NA,NaN
+47,Chaetodon melapterus,Chaetodon melapterus,13,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,NA,NaN
+48,Chaetodon meyeri,Chaetodon meyeri,20,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,NA,NaN
+49,Chaetodon ornatissimus,Chaetodon ornatissimus,20,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,NA,NaN
+50,Chaetodon tricinctus,Chaetodon tricinctus,15,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,NA,NaN
+51,Chaetodon trifasciatus,Chaetodon trifasciatus,15,NA,NA,NaN,12.5,12.5,NA,NaN,NA,NA,external,dioecism,NA,0,1,NA,NaN
+52,Chromis multilineata,Chromis multilineata,20,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,2.09,2.09
+53,Chromis viridis,Chromis viridis,10,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,"c(NA, NA)",NaN
+54,Chrysiptera talboti,Chrysiptera talboti,6,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,NA,NaN
+55,Chrysoblephus laticeps,Chrysoblephus laticeps,50,NA,NA,NaN,"c(NA, NA, NA)",NaN,"c(NA, NA, NA)",NaN,NA,NA,external,protogyny,NA,0,3,NA,NaN
+56,Chrysoblephus puniceus,Chrysoblephus puniceus,85,NA,NA,NaN,NA,NaN,NA,NaN,NA,5 months,external,protogyny,coastal,0,NA,NA,NaN
+57,Cirrhilabrus punctatus,Cirrhilabrus punctatus,13,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,NA,NA,NaN
+58,Cleisthenes herzensteini,Cleisthenes herzensteini,47,15,NA,NaN,"c(22, 25)",23.5,"c(NA, 5)",5,NA,NA,external,dioecism,coastal,0,1,NA,NaN
+59,Clupea pallasii pallasii,Clupea pallasii pallasii,46,19,"c(NA, 6300, 6300, 9000, NA, NA, NA)",7200,"c(NA, 21, 28, 24, 12, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)",21.25,"c(2, NA, NA, NA, NA, NA, 2, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)",2,one clear seasonal peak per year,3.5 months,external,dioecism,"c(NA, ""coastal"", ""estuarine"", NA, NA, NA, NA, NA)",-1,1,5.6,5.6
+60,Collichthys lucidus,Collichthys lucidus,17,NA,NA,NaN,13,13,NA,NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+61,Conger conger,Conger conger,300,NA,3000000,3000000,"c(NA, 50, NA)",50,"c(NA, NA, 5)",5,once in a lifetime,NA,external,dioecism,NA,0,NA,NA,NaN
+62,Coris bulbifrons,Coris bulbifrons,60,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,NA,NA,NaN
+63,Coryphaenoides mediterraneus,Coryphaenoides mediterraneus,73,NA,NA,NaN,62,62,NA,NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+64,Crystallias matsushimae,Crystallias matsushimae,38,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+65,Cynoscion nebulosus,Cynoscion nebulosus,100,18,"c(NA, 102369, NA)",102369,"c(NA, NA, 21, 24.7)",22.85,"c(NA, NA, 1, NA)",1,NA,5 months,external,dioecism,"c(""coastal"", ""coastal"")",-1,3,NA,NaN
+66,Dalatias licha,Dalatias licha,182,NA,"c(10, 3)",6.5,"c(120, 100, 117, 100, 117, 77, NA)",105.1666667,"c(NA, NA, NA, NA, NA, NA, 15.5)",15.5,"throughout the year, but peaking once",NA,internal (oviduct),dioecism,"c(NA, NA, ""shelf"")",0,1,NA,NaN
+67,Dasyatis pastinaca,Dasyatis pastinaca,64,NA,4,4,NA,NaN,NA,NaN,NA,NA,internal (oviduct),dioecism,NA,0,1,NA,NaN
+68,Diaphus theta,Diaphus theta,11.4,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,NA,3,3
+69,Dicentrarchus labrax,Dicentrarchus labrax,103,30,231875,231875,"c(NA, NA, 36, NA, 31, 32, 23, 17, 38.5, NA, 40, 31)",31.0625,"c(NA, NA, NA, NA, NA, NA, NA, NA, 3, 4, 5, 4)",4,one clear seasonal peak per year,4.2 months,external,dioecism,"c(NA, NA, NA, NA, ""oceanic"")",-1,1,3.83,3.83
+70,Diplodus sargus,Diplodus sargus,45,10,"c(33660, 64650)",49155,"c(NA, 25, 20, NA, NA, NA, NA, NA)",22.5,"c(NA, 4, 3, NA, NA, NA, NA, NA)",3.5,one clear seasonal peak per year,5.1 months,external,protandry,"c(NA, NA, ""coastal"", ""coastal"", ""coastal"", ""coastal"", ""coastal"", ""coastal"", ""coastal"", ""coastal"")",0,3,2.9,2.9
+71,Diplodus vulgaris,Diplodus vulgaris,45,NA,NA,15437,NA,NaN,NA,NaN,one clear seasonal peak per year,2 months,external,dioecism,"c(NA, NA, NA)",0,3,NA,NaN
+72,Dipturus oxyrinchus,Dipturus oxyrinchus,150,NA,NA,75,NA,NaN,NA,NaN,NA,NA,internal (oviduct),dioecism,NA,0,3,NA,NaN
+73,Dipturus trachyderma,Dipturus trachyderma,264,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,internal (oviduct),dioecism,NA,0,3,NA,NaN
+74,Eleginops maclovinus,Eleginops maclovinus,90,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,protandry,NA,0,NA,NA,NaN
+75,Engraulis australis,Engraulis australis,15,6,NA,NaN,6,6,1,1,Two seasonal peaks per year,7 months,external,dioecism,coastal,-1,1,2.9,2.9
+76,Engraulis capensis,Engraulis capensis,17,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,-1,1,NA,NaN
+77,Engraulis encrasicolus,Engraulis encrasicolus,20,5,"c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 11710)",11710,"c(10, 11, 13, NA, NA, NA, NA, NA, 9, 8.2, 6.7, 5.5, NA, NA, NA, NA, 10, NA, NA, NA, NA, NA, NA, 10.41, 10.25, NA, NA, NA)",9.406,"c(NA, 1, 1, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 1)",1,one clear seasonal peak per year,5 months,external,dioecism,"c(NA, NA, NA, ""shelf"", ""coastal"", ""estuarine"", ""shelf"", ""coastal"", NA, ""coastal"", NA, NA, NA, ""coastal"", NA, ""coastal"", NA, ""coastal"", ""estuarine"", ""estuarine"")",-1,1,3,3
+78,Engraulis eurystole,Engraulis eurystole,15.5,NA,NA,NaN,NA,NaN,NA,NaN,NA,2 months,external,dioecism,NA,-1,1,2,2
+79,Engraulis japonicus,Engraulis japonicus,18,4,NA,NaN,"c(NA, 10, NA, NA)",10,"c(2, 1, NA, NA)",1.5,Variable throughout range,5.5 months,external,dioecism,"c(""coastal"", ""coastal"", ""coastal"", ""coastal"", NA, NA, ""coastal"", ""coastal"", ""coastal"")",-1,1,NA,NaN
+80,Epinephelus akaara,Epinephelus akaara,58,NA,NA,NaN,"c(23, 30)",26.5,"c(NA, NA)",NaN,NA,3 months,external,protogyny,coastal,0,3,NA,NaN
+81,Epinephelus fasciatus,Epinephelus fasciatus,40,NA,NA,NaN,"c(24, 16, 17.5)",19.16666667,"c(NA, NA, NA)",NaN,NA,NA,external,true hermaphroditism,NA,0,3,NA,NaN
+82,Epinephelus itajara,Epinephelus itajara,250,37,NA,NaN,"c(NA, NA)",NaN,"c(NA, NA)",NaN,NA,NA,external,protogyny,"c(NA, ""coastal"")",0,3,NA,NaN
+83,Epinephelus merra,Epinephelus merra,32,NA,NA,NaN,"c(19, NA)",19,"c(NA, NA)",NaN,NA,NA,external,protogyny,NA,0,3,NA,NaN
+84,Epinephelus striatus,Epinephelus striatus,122,29,NA,NaN,NA,NaN,NA,NaN,one clear seasonal peak per year,2.5 months,external,protogyny,"c(NA, ""shelf"", NA, NA, NA, NA, ""coastal"")",0,3,NA,NaN
+85,Etelis carbunculus,Etelis carbunculus,127,32,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,-1,1,NA,NaN
+86,Etelis coruscans,Etelis coruscans,120,NA,NA,NaN,52.2,52.2,NA,NaN,NA,NA,external,dioecism,NA,-1,1,NA,NaN
+87,Euthynnus affinis,Euthynnus affinis,100,NA,"c(NA, 434227, NA)",434227,"c(50, 40, NA, NA, NA, NA, NA, NA)",45,"c(3, NA, NA, NA, NA, NA, NA, NA)",3,Variable throughout range,NA,external,dioecism,"c(NA, NA, NA, ""coastal"")",-1,3,NA,NaN
+88,Eviota albolineata,Eviota albolineata,3.6,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+89,Eviota queenslandica,Eviota queenslandica,2.4,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+90,Fistularia commersonii,Fistularia commersonii,160,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,NA,5.4,5.4
+91,Forsterygion capito,Forsterygion capito,9.4,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,NA,NaN
+92,Forsterygion gymnotum,Forsterygion gymnotum,7.6,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,NA,NaN
+93,Forsterygion lapillum,Forsterygion lapillum,6.69,3,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,NA,NaN
+94,Forsterygion nigripenne,Forsterygion nigripenne,9,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,NA,NaN
+95,Forsterygion varium,Forsterygion varium,13,4,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,NA,NaN
+96,Gadus macrocephalus,Gadus macrocephalus,119,25,"c(1e+06, 860000, 3e+06, 1500000, 1200000, NA, NA)",1512000,"c(50, 50, 67, 40, 40, NA, 65, 60, 65, 60, 60, 55, 60, 55, 55, 50, NA, NA)",55.46666667,"c(3, 3, 5, 2, 2, NA, 5, 5, 5, 5, 5, 5, 5, 5, 4, 3, NA, 3)",4.0625,one clear seasonal peak per year,2.7 months,external,dioecism,"c(NA, NA, NA, NA, NA, NA, NA)",0,1,3.5,3.5
+97,Gadus morhua,Gadus morhua,200,25,"c(2700000, 2500000, 5e+05, 5e+05, NA, NA, NA, 1576000, 2963683, 2732327, 285000, NA, NA, NA, 544000, 131209, 265600, 230000, 14000, 145300, 23171, 145500, 309900, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)",915628.8235,"c(NA, NA, NA, NA, NA, 52, 50, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 70, 70, 50, 70, 75, 38.5, 60, 42.5, NA, NA, NA, NA, NA, NA, NA, 51, 81, 71, 41, 51, 46, 31.4, 31, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 35, 20, 45, NA, NA, NA, NA, NA, NA, 50, 41, 34, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 58.7, NA, NA, NA, NA, NA, 64, 48, NA)",51.0037037,"c(NA, 2, 4, NA, NA, 5, 5, 2.5, 7, 6, 6, 3, NA, NA, NA, NA, NA, NA, 6, 6, 3, 6, 7, 2.5, 3, 2.5, NA, NA, NA, NA, NA, 5, 3, NA, NA, NA, NA, NA, NA, 4, 4, 3, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 3, 1, 2, NA, NA, 2, NA, 2, 2, 2, 2, 3, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 5, NA, 3, 3, NA, NA, 3, 2, NA)",3.625,one clear seasonal peak per year,3.9 monts,external,dioecism,"c(NA, NA, NA, ""shelf"", NA, NA, ""coastal"", NA, ""coastal"", NA, NA, NA, NA, NA, NA, NA, NA, NA, ""shelf"", ""coastal"", ""coastal"", NA, NA, NA, NA, ""coastal"", NA, ""coastal"", ""coastal"", NA, ""coastal"")",-1,1,3.3,3.3
+98,Galeus melastomus,Galeus melastomus,75,NA,"c(97, 1, 15)",37.66666667,"c(NA, NA, 56, 48, NA)",52,"c(NA, NA, NA, NA, 3)",3,NA,NA,internal (oviduct),dioecism,NA,0,3,NA,NaN
+99,Genypterus capensis,Genypterus capensis,180,NA,NA,NaN,"c(60, 50, 50)",53.33333333,"c(NA, NA, 4)",4,NA,3 months,external,dioecism,NA,0,1,NA,NaN
+100,Ginglymostoma cirratum,Ginglymostoma cirratum,430,25,21,21,"c(230, 225)",227.5,"c(NA, NA)",NaN,NA,NA,internal (oviduct),dioecism,NA,0,NA,NA,NaN
+101,Girella punctata,Girella punctata,50,NA,NA,NaN,39,39,NA,NaN,NA,3.5 months,NA,NA,"c(NA, NA)",NA,NA,NA,NaN
+102,Glyptocephalus stelleri,Glyptocephalus stelleri,52,23,NA,NaN,"c(24, 23, 26)",24.33333333,"c(NA, NA, 7)",7,NA,NA,external,dioecism,coastal,0,1,NA,NaN
+103,Halichoeres cyanocephalus,Halichoeres cyanocephalus,30,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,NA,NA,NaN
+104,Halichoeres garnoti,Halichoeres garnoti,19.3,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,protogyny,NA,0,NA,1.7,1.7
+105,Halichoeres maculipinna,Halichoeres maculipinna,18,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,protogyny,NA,0,NA,1.7,1.7
+106,Heptranchias perlo,Heptranchias perlo,137,NA,9,9,"c(100, 75, 93, 85, 75, 75, NA)",83.83333333,"c(NA, NA, NA, NA, NA, NA, NA)",NaN,NA,NA,internal (oviduct),dioecism,shelf,0,NA,NA,NaN
+107,Hexagrammos agrammus,Hexagrammos agrammus,30,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+108,Hexagrammos otakii,Hexagrammos otakii,57,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,NA,NA,NaN
+109,Hexanchus griseus,Hexanchus griseus,482,NA,22,22,"c(400, 315, NA, 325, 420, 315)",355,"c(NA, NA, NA, NA, NA, NA)",NaN,NA,NA,internal (oviduct),dioecism,shelf,0,1,NA,NaN
+110,Hippocampus hippocampus,Hippocampus hippocampus,15,NA,865,865,NA,NaN,0.33,0.33,NA,7 months,in brood pouch or similar structure,dioecism,"c(""coastal"", NA)",-1,1,9.3,9.3
+111,Hippocampus ingens,Hippocampus ingens,30,NA,400,400,NA,NaN,0.33,0.33,NA,NA,in brood pouch or similar structure,dioecism,coastal,-1,1,8.5,8.5
+112,Hippocampus kuda,Hippocampus kuda,30,NA,"c(20, NA)",20,"c(NA, NA)",NaN,"c(0.58, 0.5)",0.54,NA,NA,in brood pouch or similar structure,dioecism,"c(""coastal"", ""estuarine"")",-1,1,7,7
+113,Hippocampus mohnikei,Hippocampus mohnikei,8,NA,NA,NaN,NA,NaN,0.5,0.5,NA,NA,in brood pouch or similar structure,dioecism,NA,-1,1,NA,NaN
+114,Hippocampus trimaculatus,Hippocampus trimaculatus,22,NA,"c(400, NA)",400,"c(NA, NA)",NaN,"c(0.5, NA)",0.5,NA,NA,in brood pouch or similar structure,dioecism,"c(""coastal"", NA)",-1,1,6.1,6.1
+115,Hippoglossus stenolepis,Hippoglossus stenolepis,258,55,2250000,2250000,"c(NA, NA, 134, 125, NA)",129.5,"c(7, 5, 12.1, 10.9, NA)",8.75,NA,3 months,external,dioecism,NA,0,1,NA,NaN
+116,Holocentrus adscensionis,Holocentrus adscensionis,61,NA,NA,153069,"c(NA, NA)",NaN,"c(NA, NA)",NaN,NA,NA,external,dioecism,"c(NA, NA)",0,3,NA,NaN
+117,Hoplostethus atlanticus,Hoplostethus atlanticus,75,149,"c(10000, 10000, 10000, 21620, 10670, 15700, 21780, 25550, 66000, 20352)",21167.2,"c(NA, 28, NA, 18, 31.6, 15.9, 26.5, 39, NA, 29, NA, NA, NA, NA)",26.85714286,"c(NA, 20, NA, 6, 11, 5, 9, NA, NA, NA, NA, NA, NA, NA)",10.2,one clear seasonal peak per year,2.1 months,external,dioecism,"c(""shelf"", ""shelf"", ""shelf"", NA, ""shelf"", ""shelf"", NA)",0,NA,NA,NaN
+118,Hyperoglyphe antarctica,Hyperoglyphe antarctica,140,15,NA,NaN,"c(61, 62)",61.5,"c(5, 6)",5.5,NA,NA,NA,dioecism,"c(NA, NA, NA, NA)",0,NA,NA,NaN
+119,Isurus oxyrinchus,Isurus oxyrinchus,445,32,4,4,"c(280, 195, NA, NA, 280, 195, 275, 180, 275, 180, NA, NA, NA, NA)",232.5,"c(NA, NA, NA, NA, NA, NA, 19, 7, NA, NA, NA, 18, NA, 13)",14.25,NA,NA,internal (oviduct),dioecism,NA,0,1,NA,NaN
+120,Katsuwonus pelamis,Katsuwonus pelamis,110,12,"c(80000, NA, 1e+06, 61516, 205947)",336865.75,"c(NA, NA, 43.5, NA, 40, 40, NA, 40, 51)",42.9,"c(NA, NA, NA, NA, NA, 1, NA, NA, NA)",1,Variable throughout range,7.6 months,external,dioecism,"c(NA, NA, NA, NA, NA)",-1,3,NA,NaN
+121,Labroides dimidiatus,Labroides dimidiatus,14,4,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,protogyny,NA,0,1,NA,NaN
+122,Larabicus quadrilineatus,Larabicus quadrilineatus,11.5,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,NA,NA,NaN
+123,Larimichthys polyactis,Larimichthys polyactis,40,23,14729,14729,"c(NA, NA, NA)",NaN,"c(NA, NA, NA)",NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+124,Lepidorhombus boscii,Lepidorhombus boscii,40,NA,119390,119390,"c(NA, NA, NA, NA)",NaN,"c(NA, NA, NA, 1)",1,one clear seasonal peak per year,3.5 months,external,dioecism,"c(NA, NA)",0,3,NA,NaN
+125,Lethrinus harak,Lethrinus harak,50,15,NA,NaN,"c(NA, NA)",NaN,"c(NA, 1)",1,NA,10 months,external,protogyny,"c(""shelf"", ""coastal"")",0,NA,NA,NaN
+126,Lethrinus mahsena,Lethrinus mahsena,65,27,26700,26700,"c(19, NA)",19,"c(3, NA)",3,"Throughout the year, but peaking once",2 months,external,protogyny,"c(""coastal"", NA)",0,3,NA,NaN
+127,Lethrinus nebulosus,Lethrinus nebulosus,87,28,NA,NaN,"c(NA, NA, NA, NA, 32.5, 28, 40.8, 35.5, 46, 40, NA, NA)",37.13333333,"c(NA, NA, NA, NA, 4, NA, 7, 6, NA, NA, NA, NA)",5.666666667,"throughout the year, but peaking once",9.3 months,external,dioecism,"c(NA, NA, NA, NA, NA, NA)",0,3,1.86,1.86
+128,Leuresthes tenuis,Leuresthes tenuis,19,8,18000,18000,"c(NA, NA, NA)",NaN,"c(NA, NA, NA)",NaN,one clear seasonal peak per year,NA,external,dioecism,"c(""coastal"", ""coastal"")",-1,1,6.5,6.5
+129,Lichia amia,Lichia amia,200,NA,NA,NaN,60,60,NA,NaN,NA,NA,external,dioecism,NA,0,4,NA,NaN
+130,Lipophrys pholis,Lipophrys pholis,17,10,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,NA,5,5
+131,Lithognathus mormyrus,Lithognathus mormyrus,55,12,NA,NaN,"c(NA, NA, NA, 20.3, 18.4, 14.1)",17.6,"c(NA, NA, NA, NA, NA, 2)",2,one clear seasonal peak per year,4.3 months,external,protandry,"c(NA, ""shelf"", NA)",0,3,NA,NaN
+132,Lutjanus analis,Lutjanus analis,94,29,NA,NaN,"c(40, 41, 38, NA, 31.2, 28, 29.5)",34.61666667,"c(NA, NA, NA, NA, NA, NA, NA)",NaN,NA,5.75 months,external,dioecism,"c(NA, NA, NA, ""coastal"")",-1,1,NA,NaN
+133,Lutjanus carponotatus,Lutjanus carponotatus,40,20,7074,7074,"c(NA, NA)",NaN,"c(NA, NA)",NaN,NA,6 months,external,dioecism,coastal,-1,1,NA,NaN
+134,Lutjanus fulvus,Lutjanus fulvus,40,34,NA,NaN,"c(20, NA, NA)",20,"c(NA, NA, NA)",NaN,Variable throughout range,NA,external,dioecism,"c(NA, ""coastal"")",-1,1,NA,NaN
+135,Lutjanus jocu,Lutjanus jocu,128,NA,NA,NaN,"c(30, 32, 43, 48, NA, 30.5, 10)",32.25,"c(NA, NA, NA, NA, NA, NA, NA)",NaN,NA,NA,external,dioecism,"c(NA, NA, NA, NA, ""coastal"")",-1,1,NA,NaN
+136,Lutjanus kasmira,Lutjanus kasmira,40,NA,NA,NaN,"c(20, 23, 17)",20,"c(NA, NA, NA)",NaN,Variable throughout range,NA,external,dioecism,"c(NA, NA)",-1,1,1.83,1.83
+137,Lutjanus purpureus,Lutjanus purpureus,100,18,NA,NaN,"c(NA, NA, 42, NA, 78.9, NA, NA, 40, NA, NA, NA)",53.63333333,"c(NA, NA, 5.5, NA, NA, NA, NA, NA, NA, NA, NA)",5.5,NA,NA,external,dioecism,"c(NA, NA, ""coastal"", ""coastal"", ""coastal"", ""coastal"", ""coastal"", ""coastal"", ""coastal"", ""coastal"", ""coastal"", ""coastal"")",-1,1,NA,NaN
+138,Lutjanus synagris,Lutjanus synagris,60,10,NA,45075,"c(NA, NA, NA, 20, 18, NA, 19, 18, 13, 15, 23.5, 21.4, 17, 15, NA, 15.7, NA, 15.5)",17.59166667,"c(NA, NA, NA, NA, NA, NA, NA, NA, NA, 1, 1, NA, NA, NA, NA, NA, NA, NA)",1,NA,8.5 months,external,dioecism,"c(NA, NA, ""coastal"", NA, NA, NA)",-1,1,NA,NaN
+139,Macrodon ancylodon,Macrodon ancylodon,45,NA,12400,12400,"c(23.3, 25, 19, 22, NA, NA, NA, NA, NA, NA, NA, 17.7, NA, NA, NA, 22, NA, NA, NA, 19.5, NA)",21.21428571,"c(NA, 2.7, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)",2.7,two seasonal peaks per year,NA,external,dioecism,"c(""coastal"", ""estuarine"", ""riverine"", NA, ""coastal"", ""coastal"", ""coastal"", ""coastal"", ""coastal"", ""coastal"", ""coastal"", ""coastal"", ""coastal"", ""coastal"", ""coastal"")",-1,3,NA,NaN
+140,Makaira nigricans,Makaira nigricans,500,NA,NA,6094000,"c(50, 80)",65,"c(NA, NA)",NaN,NA,3 months,external,dioecism,NA,0,3,NA,NaN
+141,Menidia menidia,Menidia menidia,15,2,179,179,NA,NaN,NA,NaN,NA,3.8 months,external,dioecism,"c(""coastal"", NA, NA, NA, ""coastal"", NA)",-1,2,3.85,3.85
+142,Menticirrhus americanus,Menticirrhus americanus,50,NA,"c(35571, 58884)",47227.5,"c(NA, NA, NA, NA, NA, NA, NA, 16.3)",16.3,"c(NA, NA, NA, NA, NA, NA, NA, NA)",NaN,NA,NA,external,dioecism,"c(NA, ""coastal"", ""coastal"", ""coastal"", ""coastal"")",0,NA,1.7,1.7
+143,Merlangius merlangus,Merlangius merlangus,91.5,20,"c(109358, 2e+05, 83900, NA, NA, NA, NA, 212600, 450000)",211171.6,"c(NA, 28, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)",28,"c(3, NA, 2, 1, NA, NA, NA, NA, NA, NA, NA, 1, 1, NA)",1.6,Variable throughout range,7.6 months,external,dioecism,"c(NA, NA, NA, NA, ""coastal"")",-1,1,3.3,3.3
+144,Merluccius albidus,Merluccius albidus,40.6,NA,340000,340000,"c(NA, NA)",NaN,"c(NA, NA)",NaN,NA,NA,external,dioecism,"c(NA, NA, NA, NA)",0,NA,NA,NaN
+145,Merluccius bilinearis,Merluccius bilinearis,76,12,700000,700000,"c(NA, NA, NA, NA, NA)",NaN,"c(3, NA, NA, NA, NA)",3,one clear seasonal peak per year,3.5 months,external,dioecism,"c(""shelf"", NA, NA, NA)",-1,3,2.6,2.6
+146,Merluccius capensis,Merluccius capensis,140,NA,NA,NaN,"c(NA, NA, NA, NA)",NaN,"c(NA, NA, NA, NA)",NaN,NA,NA,external,dioecism,"c(NA, NA)",0,3,NA,NaN
+147,Merluccius paradoxus,Merluccius paradoxus,115,NA,NA,NaN,"c(NA, NA, NA, NA)",NaN,"c(NA, NA, NA, NA)",NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+148,Micropogonias furnieri,Micropogonias furnieri,60,7,"c(NA, 1800000)",1800000,"c(NA, NA, NA, NA, NA, NA, 20, NA, 23.5)",21.75,"c(NA, NA, NA, 3, NA, NA, 2, NA, NA)",2.5,NA,7.2 months,external,dioecism,"c(NA, NA, ""estuarine"", ""coastal"", ""coastal"", ""coastal"", ""coastal"", ""coastal"", ""coastal"")",0,3,NA,NaN
+149,Micropogonias undulatus,Micropogonias undulatus,55,5,NA,NaN,"c(27.5, 18, 17, 14)",19.125,"c(NA, NA, NA, NA)",NaN,NA,NA,NA,NA,"c(NA, NA, NA)",NA,NA,NA,NaN
+150,Microstomus pacificus,Microstomus pacificus,76,56,"c(37000, NA, 83000, 39748)",53249.33333,"c(38, 36, 33.2, NA, NA, NA)",35.73333333,"c(NA, 5.5, 9, 5, 4, NA)",5.875,one clear seasonal peak per year,NA,external,dioecism,"c(NA, ""coastal"")",-1,1,NA,NaN
+151,Miichthys miiuy,Miichthys miiuy,70,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,NA,2.47,2.47
+152,Mulloidichthys flavolineatus,Mulloidichthys flavolineatus,43,NA,NA,NaN,"c(12.3, 11.2, NA, 15, 14)",13.125,"c(NA, NA, NA, NA, NA)",NaN,NA,6.5 months,external,dioecism,"c(NA, ""coastal"", ""coastal"")",0,NA,NA,NaN
+153,Mustelus asterias,Mustelus asterias,140,NA,7,7,"c(85, 78, NA, NA)",81.5,"c(NA, NA, 2, 2.3)",2.15,NA,NA,internal (oviduct),dioecism,NA,0,NA,NA,NaN
+154,Mustelus mustelus,Mustelus mustelus,200,24,4,4,"c(80, 70, NA, NA)",75,"c(NA, NA, 12, 6)",9,NA,NA,internal (oviduct),dioecism,NA,0,NA,NA,NaN
+155,Mustelus punctulatus,Mustelus punctulatus,190,NA,NA,NaN,"c(60, 50, 90, NA)",66.66666667,"c(NA, NA, 1.3, 1.3)",1.3,NA,NA,internal (oviduct),dioecism,NA,0,NA,NA,NaN
+156,Myripristis berndti,Myripristis berndti,30,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,3,NA,NaN
+157,Myripristis jacobus,Myripristis jacobus,25,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,3,NA,NaN
+158,Naso unicornis,Naso unicornis,70,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,3,NA,NaN
+159,Nuchequula mannusella,Nuchequula mannusella,10.1,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+160,Odonus niger,Odonus niger,50,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,NA,NaN
+161,Okamejei kenojei,Okamejei kenojei,57,NA,40,40,39,39,NA,NaN,"throughout the year, but peaking once",NA,internal (oviduct),dioecism,NA,-1,3,NA,NaN
+162,Ophiodon elongatus,Ophiodon elongatus,152,25,60000,60000,"c(70, 46, NA, 61, NA)",59,"c(NA, NA, NA, 3, NA)",3,NA,4 months,external,dioecism,"c(NA, NA)",0,NA,NA,NaN
+163,Opistognathus aurifrons,Opistognathus aurifrons,10,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,NA,NaN
+164,Oplegnathus fasciatus,Oplegnathus fasciatus,80,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+165,Pagellus erythrinus,Pagellus erythrinus,60,NA,"c(31000, 22200, 11140)",21446.66667,"c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 15, NA, 13, NA, NA, 13, 12, NA, NA, NA)",13.25,"c(NA, NA, NA, NA, 1, NA, NA, NA, NA, NA, NA, NA, 2.5, NA, NA, NA, NA, NA, NA, NA)",1.75,two seasonal peaks per year,NA,external,protogyny,"c(NA, NA, NA, NA, NA, NA, NA, NA, ""coastal"")",0,3,NA,NaN
+166,Pagrus major,Pagrus major,100,NA,NA,NaN,"c(54, NA, NA)",54,"c(NA, NA, NA)",NaN,NA,NA,external,dioecism,NA,0,NA,NA,NaN
+167,Pagrus pagrus,Pagrus pagrus,91,NA,48660,48660,"c(NA, NA, NA, NA, 21.3, 18.8, 30.4, NA)",23.5,"c(NA, NA, NA, NA, NA, 0.9, 2.5, NA)",1.7,NA,NA,external,protogyny,"c(NA, NA, NA, NA, ""coastal"")",0,3,2.5,2.5
+168,Pampus argenteus,Pampus argenteus,60,7,"c(44650, NA, NA, NA, NA)",44650,"c(18, NA, NA)",18,"c(NA, NA, NA)",NaN,NA,NA,external,dioecism,"c(NA, NA, ""coastal"", ""coastal"")",0,1,NA,NaN
+169,Pampus chinensis,Pampus chinensis,40,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,NA,NaN
+170,Pampus minor,Pampus minor,13.44,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,NA,NaN
+171,Paralichthys californicus,Paralichthys californicus,152,30,500000,500000,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,3,NA,NaN
+172,Paralichthys olivaceus,Paralichthys olivaceus,103,NA,10000000,10000000,"c(40, 30)",35,"c(3, 3)",3,NA,NA,external,dioecism,"c(""coastal"", ""coastal"")",0,3,NA,NaN
+173,Parupeneus multifasciatus,Parupeneus multifasciatus,35,NA,7929,7929,"c(18, 13.5, NA, 10)",13.83333333,"c(NA, NA, NA, NA)",NaN,NA,NA,external,dioecism,coastal,-1,NA,NA,NaN
+174,Pennahia argentata,Pennahia argentata,40,NA,NA,NaN,"c(17, 13.9)",15.45,"c(NA, NA)",NaN,one clear seasonal peak per year,NA,external,dioecism,"c(NA, ""coastal"")",0,NA,NA,NaN
+175,Pholis fangi,Pholis fangi,16.8,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+176,Plectropomus leopardus,Plectropomus leopardus,120,26,457900,457900,"c(NA, 21, 30, 21, NA, NA, 36, 42)",30,"c(NA, 2, 3, NA, 2, 3, NA, NA)",2.5,one clear seasonal peak per year,NA,external,protogyny,"c(""coastal"", ""coastal"", ""shelf"", ""shelf"")",-1,3,1.62,1.62
+177,Plectropomus maculatus,Plectropomus maculatus,125,NA,NA,NaN,"c(NA, NA, 54)",54,"c(2, 3, NA)",2.5,NA,NA,external,protogyny,"c(""coastal"", ""coastal"")",0,3,NA,NaN
+178,Pleuragramma antarctica,Pleuragramma antarctica,25,20,"c(NA, 7500)",7500,"c(12.5, 13)",12.75,"c(NA, 3)",3,NA,NA,external,dioecism,"c(NA, ""shelf"", NA)",0,NA,9,9
+179,Polyprion oxygeneios,Polyprion oxygeneios,160,60,1500000,1500000,"c(NA, NA, NA, NA, NA)",NaN,"c(NA, NA, 10, NA, NA)",10,NA,NA,external,dioecism,"c(NA, ""coastal"")",0,NA,NA,NaN
+180,Pomacentrus coelestis,Pomacentrus coelestis,9,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,NA,NaN
+181,Pomacentrus moluccensis,Pomacentrus moluccensis,9,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,NA,NaN
+182,Pontinus kuhlii,Pontinus kuhlii,52,NA,NA,NaN,NA,NaN,6,6,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+183,Prionace glauca,Prionace glauca,400,20,"c(NA, NA, 34, 60, 32)",42,"c(182, NA, 182, NA, NA, NA, 170, 190, 210, 210, 170, 190, 185, NA, 200, NA, NA, NA, NA, NA, NA, NA)",188.9,"c(NA, NA, NA, 6, NA, NA, 7, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)",6.5,NA,NA,internal (oviduct),dioecism,NA,0,NA,NA,NaN
+184,Pristipomoides filamentosus,Pristipomoides filamentosus,100,44,NA,NaN,"c(35, NA, 36.6, 40)",37.2,"c(NA, NA, NA, NA)",NaN,NA,NA,external,dioecism,"c(NA, NA)",-1,1,NA,NaN
+185,Pristipomoides zonatus,Pristipomoides zonatus,57.5,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,NA,NaN
+186,Pseudopleuronectes herzensteini,Pseudopleuronectes herzensteini,50,15,NA,NaN,"c(22, 23, 18)",21,"c(NA, NA, NA)",NaN,NA,NA,external,dioecism,coastal,0,1,NA,NaN
+187,Pseudopleuronectes yokohamae,Pseudopleuronectes yokohamae,45,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,NA,NaN
+188,Pterois miles,Pterois miles,35,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+189,Raja clavata,Raja clavata,105,15,"c(52, NA, 27, 35, 68)",45.5,"c(NA, NA, NA, NA, NA, NA, NA, NA, 47.5, 47, NA, NA, NA, NA, NA, NA, 47, 57, 56, 47)",50.25,"c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)",NaN,NA,NA,internal (oviduct),dioecism,NA,0,3,NA,NaN
+190,Raja miraletus,Raja miraletus,63,NA,NA,NaN,"c(44, 40)",42,"c(NA, NA)",NaN,NA,NA,internal (oviduct),dioecism,NA,0,3,NA,NaN
+191,Raja polystigma,Raja polystigma,60,NA,20,20,NA,NaN,NA,NaN,NA,NA,internal (oviduct),dioecism,NA,0,3,NA,NaN
+192,Raja radula,Raja radula,70,NA,80,80,NA,NaN,NA,NaN,"throughout the year, but peaking once",NA,internal (oviduct),dioecism,NA,0,3,NA,NaN
+193,Rastrelliger kanagurta,Rastrelliger kanagurta,42.1,4,"c(NA, 44754, NA)",44754,"c(23, NA, NA, NA, 12, NA, NA, 19.5, 19.5, NA, NA)",18.5,"c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)",NaN,NA,NA,external,dioecism,"c(NA, NA, ""coastal"", NA, ""coastal"")",-1,3,NA,NaN
+194,Reinhardtius hippoglossoides,Reinhardtius hippoglossoides,110,30,"c(NA, NA, NA, 28100, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)",28100,"c(60, NA, NA, NA, NA, NA, 65, 55, NA, NA, NA, NA, 65)",61.25,"c(9, 11, NA, NA, NA, NA, 9, 7, NA, NA, NA, NA, NA)",9,one clear seasonal peak per year,NA,external,dioecism,"c(NA, NA, NA, NA)",-1,1,NA,NaN
+195,Rhincodon typus,Rhincodon typus,1700,80.4,"c(16, NA)",16,"c(NA, 440, 903, 300, 760, NA)",600.75,"c(NA, NA, NA, NA, NA, NA)",NaN,NA,NA,internal (oviduct),dioecism,coastal,0,1,NA,NaN
+196,Rhizoprionodon acutus,Rhizoprionodon acutus,175,8,"c(1, 3, 2, 2)",2,"c(70, 68, 82.5, 70, 70)",72.1,"c(NA, NA, NA, NA, NA)",NaN,NA,NA,internal (oviduct),dioecism,"c(NA, ""coastal"")",0,NA,NA,NaN
+197,Ruanoho whero,Ruanoho whero,9,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,1,NA,NaN
+198,Sardinella lemuru,Sardinella lemuru,23,NA,NA,NaN,"c(13.5, 14, 17.61)",15.03666667,"c(NA, NA, NA)",NaN,NA,NA,external,dioecism,"c(NA, NA, NA)",0,3,NA,NaN
+199,Sardinops sagax,Sardinops sagax,39.5,25,"c(30000, 10000)",20000,"c(7, 24, NA, NA, 22, 18, NA, 24, NA, NA, 21, NA, 18)",19.14285714,"c(1, NA, 1, NA, NA, 1, NA, NA, NA, NA, NA, NA, NA)",1,Two seasonal peaks per year,NA,external,dioecism,"c(NA, NA, ""coastal"", ""coastal"", ""coastal"", ""coastal"", ""coastal"", ""coastal"", NA, NA, NA, ""coastal"")",-1,3,3.5,3.5
+200,Saurida elongata,Saurida elongata,50,7,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,3,NA,NaN
+201,Scarus ghobban,Scarus ghobban,75,13,NA,NaN,"c(49, NA)",49,"c(NA, NA)",NaN,NA,NA,external,protogyny,NA,0,2,NA,NaN
+202,Scarus psittacus,Scarus psittacus,34,5,NA,NaN,10.5,10.5,NA,NaN,NA,NA,external,protogyny,NA,0,2,NA,NaN
+203,Scomber australasicus,Scomber australasicus,44,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,NA,NA,NA,NA,NA,3.2,3.2
+204,Scomber japonicus,Scomber japonicus,64,18,"c(86616, 195400, 441795, 101859)",206417.5,"c(NA, NA, NA, NA, 31.5, NA, NA, 29, NA)",30.25,"c(NA, 2, NA, NA, NA, NA, NA, NA, NA)",2,Variable throughout range,NA,external,dioecism,"c(NA, NA, NA, NA, NA, NA)",-1,3,2.7,2.7
+205,Scomber scombrus,Scomber scombrus,60,17,"c(NA, 2e+05, 2e+05, 211000, 285000, NA, NA, 130000, 88000, 255000, 140000, 208500, 243400, 155900, NA)",192436.3636,"c(34, 32, 30, NA, NA, NA, NA, NA, NA, NA, NA, 30, 30, 24, NA, NA, NA)",30,"c(2, 2, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 2, 1, NA, NA, NA)",1.75,one clear seasonal peak per year,NA,external,dioecism,"c(NA, NA, NA, NA, NA, ""coastal"", NA, NA, NA)",-1,1,2.46,2.46
+206,Scomberomorus brasiliensis,Scomberomorus brasiliensis,125,NA,NA,NaN,"c(NA, NA, NA, NA, NA, NA, NA)",NaN,"c(3, NA, NA, NA, NA, NA, NA)",3,"Throughout the year, but peaking once",NA,external,dioecism,"c(NA, NA, NA, NA, NA)",0,3,NA,NaN
+207,Scomberomorus cavalla,Scomberomorus cavalla,184,14,"c(345000, 69264, 969206, 160722, 185608, NA)",345960,"c(77, 84, 73, 58.5, 54.5, 45, 60, 65, NA, NA, NA, NA, NA)",64.625,"c(NA, NA, NA, 2, 2, NA, NA, NA, NA, NA, NA, NA, NA)",2,Variable throughout range,NA,external,dioecism,"c(NA, NA, ""shelf"", NA, NA, NA, NA, NA, NA, NA)",0,3,NA,NaN
+208,Scomberomorus commerson,Scomberomorus commerson,240,NA,"c(590000, 320000, 320000)",410000,"c(70, 65, 80, 55, 70.1, 72, NA, NA, 89.8, 70.6, NA, NA, NA)",71.5625,"c(NA, 2, 2, NA, 2, NA, NA, NA, 2, 1, NA, NA, NA)",1.8,Variable throughout range,NA,external,dioecism,"c(NA, NA, ""shelf"", NA, ""coastal"", NA, NA, NA, ""shelf"", ""shelf"", ""shelf"", NA, ""coastal"", NA, NA, NA, NA, ""coastal"", NA, NA)",0,3,NA,NaN
+209,Scomberomorus concolor,Scomberomorus concolor,77,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,3,NA,NaN
+210,Scomberomorus niphonius,Scomberomorus niphonius,113.2,NA,550000,550000,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,3,NA,NaN
+211,Scomberomorus semifasciatus,Scomberomorus semifasciatus,120,NA,NA,NaN,"c(75, 64)",69.5,"c(1, 1)",1,NA,NA,external,dioecism,coastal,0,3,NA,NaN
+212,Scomberomorus sierra,Scomberomorus sierra,99,NA,NA,NaN,26,26,NA,NaN,NA,NA,external,dioecism,"c(NA, NA, NA)",0,3,NA,NaN
+213,Scombrops boops,Scombrops boops,150,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+214,Scombrops gilberti,Scombrops gilberti,120,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+215,Scyliorhinus canicula,Scyliorhinus canicula,100,12,"c(96, 23, 38, 105, 2, 26)",48.33333333,"c(44, 39, 54, 54, 54, 54, NA, NA, 52, 49, 41, 43, NA, NA)",48.4,"c(NA, NA, NA, NA, NA, NA, NA, 3, NA, NA, NA, NA, NA, NA)",3,NA,NA,internal (oviduct),dioecism,"c(""coastal"", ""coastal"")",0,3,NA,NaN
+216,Scyliorhinus stellaris,Scyliorhinus stellaris,170,19,"c(1, 9, 77)",29,77,77,NA,NaN,NA,NA,internal (oviduct),dioecism,"c(NA, NA)",0,3,NA,NaN
+217,Sebastes emphaeus,Sebastes emphaeus,18,NA,"c(NA, 3295)",3295,NA,NaN,NA,NaN,NA,NA,internal (oviduct),dioecism,NA,0,NA,NA,NaN
+218,Sebastes flavidus,Sebastes flavidus,66,64,"c(NA, 125000)",125000,"c(27, NA, 30, NA, 41, NA)",32.66666667,"c(4, NA, 4, NA, 11, NA)",6.333333333,one clear seasonal peak per year,NA,internal (oviduct),dioecism,NA,0,NA,NA,NaN
+219,Sebastes helvomaculatus,Sebastes helvomaculatus,41,87,NA,NaN,"c(20, 22, NA)",21,"c(5, 7, NA)",6,NA,NA,internal (oviduct),dioecism,NA,0,NA,NA,NaN
+220,Sebastes miniatus,Sebastes miniatus,91,60,"c(NA, 151000)",151000,"c(37, 35, NA)",36,"c(4, 5, NA)",4.5,NA,NA,internal (oviduct),dioecism,NA,0,NA,NA,NaN
+221,Sebastes oculatus,Sebastes oculatus,40.8,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,internal (oviduct),dioecism,NA,0,NA,NA,NaN
+222,Sebastes schlegelii,Sebastes schlegelii,65,20,44000,44000,"c(26, 33.8)",29.9,"c(NA, NA)",NaN,NA,NA,internal (oviduct),dioecism,coastal,0,NA,NA,NaN
+223,Sebastiscus marmoratus,Sebastiscus marmoratus,36.2,NA,NA,NaN,8,8,NA,NaN,one clear seasonal peak per year,NA,internal (oviduct),dioecism,"c(NA, NA)",-1,NA,NA,NaN
+224,Selar crumenophthalmus,Selar crumenophthalmus,70,NA,NA,NaN,"c(NA, NA)",NaN,"c(NA, NA)",NaN,NA,NA,external,dioecism,"c(NA, NA, ""coastal"")",0,4,NA,NaN
+225,Seriola dumerili,Seriola dumerili,190,15,NA,NaN,"c(80, 61, 75, NA)",72,"c(3, 2, 3, NA)",2.666666667,one clear seasonal peak per year,NA,external,dioecism,"c(NA, NA, NA)",-1,4,3.5,3.5
+226,Seriola lalandi,Seriola lalandi,250,12,NA,NaN,50.6,50.6,2,2,NA,NA,external,dioecism,"c(NA, ""shelf"")",-1,4,NA,NaN
+227,Seriola rivoliana,Seriola rivoliana,160,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,4,NA,NaN
+228,Seriolella brama,Seriolella brama,76,15,285000,285000,"c(NA, 30)",30,"c(3, NA)",3,NA,NA,external,dioecism,"c(NA, NA, NA)",-1,NA,4.2,4.2
+229,Seriolella punctata,Seriolella punctata,66,15,NA,NaN,NA,NaN,3,3,NA,NA,NA,dioecism,"c(NA, NA)",0,NA,2.3,2.3
+230,Siganus fuscescens,Siganus fuscescens,40,NA,"c(3e+05, 286384)",293192,"c(NA, NA)",NaN,"c(NA, NA)",NaN,NA,NA,external,dioecism,"c(NA, ""coastal"")",-1,2,NA,NaN
+231,Siganus guttatus,Siganus guttatus,42,NA,NA,NaN,"c(12, NA)",12,"c(NA, NA)",NaN,NA,NA,external,dioecism,NA,0,2,1.5,1.5
+232,Siganus spinus,Siganus spinus,28,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,2,NA,NaN
+233,Sillago japonica,Sillago japonica,30,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,3,NA,NaN
+234,Solea solea,Solea solea,70,26.4,"c(10000, 1e+05, 1e+05, 1e+05, NA, NA, NA, 70000)",76000,"c(NA, NA, NA, NA, 23, NA, NA, NA, 23, 26.5, NA, 30, NA, NA, 24, NA, NA, NA, NA, NA, 25, NA, NA)",25.25,"c(NA, NA, NA, NA, NA, NA, NA, NA, 3, 3, NA, 3, NA, NA, 2, NA, NA, NA, NA, NA, NA, NA, NA)",2.75,one clear seasonal peak per year,NA,external,dioecism,"c(NA, ""coastal"", NA, NA, NA, NA, NA, ""coastal"", ""coastal"")",-1,1,3.1,3.1
+235,Somniosus rostratus,Somniosus rostratus,143,NA,NA,NaN,"c(82, 71)",76.5,"c(NA, NA)",NaN,NA,NA,internal (oviduct),dioecism,"c(NA, NA)",0,NA,NA,NaN
+236,Sparus aurata,Sparus aurata,70,11,NA,NaN,"c(33, 20, 27)",26.66666667,"c(2, 1, NA)",1.5,NA,NA,external,protandry,"c(""coastal"", NA, NA)",0,3,2.5,2.5
+237,Sphaeramia orbicularis,Sphaeramia orbicularis,10,NA,NA,NaN,"c(6, 7)",6.5,"c(NA, NA)",NaN,NA,NA,external,dioecism,NA,0,NA,NA,NaN
+238,Sphyraena barracuda,Sphyraena barracuda,200,NA,NA,NaN,"c(NA, 58, NA)",58,"c(2, 4, NA)",3,NA,NA,external,dioecism,NA,-1,3,NA,NaN
+239,Sphyraena viridensis,Sphyraena viridensis,128,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+240,Sphyrna lewini,Sphyrna lewini,430,35,"c(NA, NA, NA, 40)",40,"c(250, 180, 140, NA, NA, 185, 200, 140, NA, 220, 165, 240, NA, NA, NA, 140, 200, 128)",182.3333333,"c(15, 10, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 3, NA, NA)",9.333333333,NA,NA,internal (oviduct),dioecism,"c(NA, NA)",0,NA,NA,NaN
+241,Sprattus sprattus,Sprattus sprattus,16,6,"c(8848, 8700, 333, 426, 28193, 3825, 2939, 8700, 2000, 242800, 5000, 6000, 8000, 333)",23292.64286,"c(NA, 11, 8, 10, NA, NA, NA, 8.8, NA, NA, NA, NA, NA, NA, NA, NA)",9.45,"c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 2, NA, 1, NA, NA, NA)",1.5,Variable throughout range,NA,external,dioecism,"c(""coastal"", NA, NA, NA, ""coastal"", ""coastal"")",-1,3,3,3
+242,Squalus blainville,Squalus blainville,100,NA,3,3,"c(60, 50, 57, 45, NA, NA)",53,"c(NA, NA, NA, NA, NA, NA)",NaN,"throughout the year, but peaking once",NA,internal (oviduct),dioecism,NA,0,1,NA,NaN
+243,Squatina aculeata,Squatina aculeata,188,NA,NA,NaN,124,124,NA,NaN,NA,NA,internal (oviduct),dioecism,NA,0,NA,NA,NaN
+244,Squatina oculata,Squatina oculata,160,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,internal (oviduct),dioecism,shelf,0,NA,NA,NaN
+245,Stenobrachius leucopsarus,Stenobrachius leucopsarus,13,8,NA,NaN,NA,NaN,4,4,NA,NA,external,dioecism,"c(NA, NA)",0,NA,2,2
+246,Stenobrachius nannochir,Stenobrachius nannochir,11,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+247,Stichaeus grigorjewi,Stichaeus grigorjewi,60,NA,37120,37120,NA,NaN,NA,NaN,NA,NA,NA,NA,coastal,NA,NA,NA,NaN
+248,Syngnathus leptorhynchus,Syngnathus leptorhynchus,32.5,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,in brood pouch or similar structure,dioecism,"c(NA, NA)",-1,1,NA,NaN
+249,Takifugu rubripes,Takifugu rubripes,80,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,coastal,0,3,NA,NaN
+250,Thalassoma bifasciatum,Thalassoma bifasciatum,25,3,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,protogyny,NA,0,NA,1.48,1.48
+251,Thamnaconus hypargyreus,Thamnaconus hypargyreus,17.8,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+252,Thunnus albacares,Thunnus albacares,239,9,"c(2e+05, 2e+06, 7136000, 398705, 2306062)",2408153.4,"c(50, 101, 120, 120, NA, NA, 78)",93.8,"c(1, 2, 3.5, 5, NA, NA, NA)",2.875,"Throughout the year, but peaking once",NA,external,dioecism,"c(NA, ""coastal"", ""coastal"", ""coastal"", ""coastal"", NA, NA, NA, NA, NA, ""coastal"", NA, NA)",-1,3,NA,NaN
+253,Thunnus obesus,Thunnus obesus,250,11,"c(2900000, 8163715)",5531857.5,"c(130, 100, NA, 100, 67, 91)",97.6,"c(NA, NA, NA, 3, NA, 3)",3,Variable throughout range,NA,external,dioecism,"c(NA, NA, NA, NA)",-1,3,NA,NaN
+254,Torpedo marmorata,Torpedo marmorata,100,NA,5,5,"c(39, 24)",31.5,"c(NA, NA)",NaN,NA,NA,internal (oviduct),dioecism,NA,0,NA,NA,NaN
+255,Totoaba macdonaldi,Totoaba macdonaldi,200,24,NA,NaN,"c(NA, NA)",NaN,"c(NA, NA)",NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+256,Trachurus mediterraneus,Trachurus mediterraneus,60,NA,NA,NaN,"c(NA, NA)",NaN,"c(NA, NA)",NaN,NA,NA,external,dioecism,NA,0,4,NA,NaN
+257,Trachurus murphyi,Trachurus murphyi,70,16,NA,NaN,"c(36, 39, 31)",35.33333333,"c(NA, NA, NA)",NaN,NA,NA,external,dioecism,NA,0,4,NA,NaN
+258,Trachurus picturatus,Trachurus picturatus,60,NA,NA,NaN,"c(24.5, NA, NA, 24.1, 26.2)",24.93333333,"c(NA, NA, NA, NA, NA)",NaN,NA,NA,external,dioecism,"c(NA, ""coastal"")",0,4,NA,NaN
+259,Trachurus trachurus,Trachurus trachurus,70,NA,"c(NA, 77090, 76000, 50000, 168000, 12700, NA, NA, 344700, 19225, 247057, 260023, 4551, 168000)",129758.7273,"c(NA, NA, NA, 21, NA, NA, 23, 22, NA, NA, NA, NA, 33, 18, 26, 20, NA, 25, 24, NA, NA, NA)",23.55555556,"c(NA, NA, NA, 2.5, NA, NA, 4, 3, NA, NA, NA, NA, 4, NA, NA, NA, NA, 3, 3.5, NA, NA, NA)",3.333333333,one clear seasonal peak per year,NA,external,dioecism,"c(NA, ""shelf"", NA, NA)",-1,4,2.2,2.2
+260,Triaenodon obesus,Triaenodon obesus,213,25,1,1,"c(105, 104, 100, NA, 125, 100, 105)",106.5,"c(NA, NA, 5, 8, NA, NA, NA)",6.5,NA,NA,internal (oviduct),dioecism,"c(NA, NA)",0,NA,NA,NaN
+261,Trygonorrhina dumerilii,Trygonorrhina dumerilii,146,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+262,Trygonorrhina fasciata,Trygonorrhina fasciata,126,NA,NA,NaN,"c(NA, 65)",65,"c(NA, NA)",NaN,NA,NA,internal (oviduct),dioecism,NA,0,NA,NA,NaN
+263,Tylosurus acus imperialis,Tylosurus acus imperialis,140,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,NA,0,3,NA,NaN
+264,Uropterygius micropterus,Uropterygius micropterus,30,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,NA,NA,NA,NA,NA,NA,NaN
+265,Verasper variegatus,Verasper variegatus,60,NA,NA,NaN,NA,NaN,NA,NaN,NA,NA,external,dioecism,coastal,0,1,NA,NaN
+266,Xiphias gladius,Xiphias gladius,455,NA,"c(1e+06, 2e+06)",1500000,"c(150, NA, NA, 156)",153,"c(5, NA, NA, NA)",5,Variable throughout range,NA,external,dioecism,"c(NA, ""oceanic"", NA, NA, NA, ""oceanic"", NA, NA, NA, NA, NA, NA, ""oceanic"")",-1,3,4.2,4.2
+267,Xyrichtys novacula,Xyrichtys novacula,38,8,NA,NaN,NA,NaN,NA,NaN,one clear seasonal peak per year,NA,external,protogyny,NA,0,NA,NA,NaN
+268,Zearaja chilensis,Zearaja chilensis,210,NA,NA,NaN,"c(97, 98, 79, 76)",87.5,"c(10, 11, 7, 7)",8.75,NA,NA,internal (oviduct),dioecism,NA,0,3,NA,NaN
+269,Zebrasoma flavescens,Zebrasoma flavescens,20,NA,1176224,1176224,NA,NaN,NA,NaN,"throughout the year, but peaking once",NA,external,dioecism,coastal,-1,3,NA,NaN
