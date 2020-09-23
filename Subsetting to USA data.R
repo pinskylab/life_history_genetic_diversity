@@ -44,9 +44,8 @@ unique(mtdna_papers_latlon$Country ) #find unique values to allow for the subset
 
 mtdna_papers_USA <- mtdna_papers_latlon  %>% 
   select(X, spp, CommonName, Source, Country, Site, lat, lon, stockid, CollectionYear, MarkerName, n, bp, He, Hese, Pi, Pise, file) %>%
-  filter(Country %in% c("United States", "USA", "USA, Western North Atlantic"), .preserve = TRUE) #subset data for just continental USA
+  filter(Country %in% c("United States", "USA", "USA, Western North Atlantic","Northwestern Pacific Ocean "), .preserve = TRUE) #subset data for just continental USA
 
-# , "Northwestern Pacific Ocean ")
 #Subset msat data
 unique(msat_papers_latlon$Country ) #find unique values to allow for the subsetting to just continental USA
 
@@ -63,7 +62,7 @@ unique(mtdna_papers$Country ) #find unique values to allow for the subsetting to
 
 mtdna_papers_latlon2 <- mtdna_papers  %>% 
   select(X, spp, CommonName, Source, Country, Site, lat, lon, stockid, CollectionYear, MarkerName, n, bp, He, Hese, Pi, Pise, file) %>%
-  filter(Country %in% c("United States", "USA", "USA, Western North Atlantic"), .preserve = TRUE) #subset data for just continental USA
+  filter(Country %in% c("United States", "USA", "USA, Western North Atlantic","Northwestern Pacific Ocean ")), .preserve = TRUE) #subset data for just continental USA
 
 #Subset msat data
 unique(msat_papers$Country ) #find unique values to allow for the subsetting to just continental USA
