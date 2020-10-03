@@ -14,8 +14,8 @@ library(tidyverse)
 library(dplyr)
 
 #read in data
-mtdna_data <- read.csv("mtdna_final_data.csv", stringsAsFactors = FALSE) #read in 
-msat_data <- read.csv("msat_final_data.csv", stringsAsFactors = FALSE) #read in 
+mtdna_data <- read.csv("mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
+msat_data <- read.csv("msat_full_US_data.csv", stringsAsFactors = FALSE) #read in 
 
 ############### mtDNA data set ############### 
 
@@ -119,29 +119,29 @@ ggplot(mtdna_maxlength_He_no.na, aes(x=logtransform.maxlength, y = He)) + #max l
            color="black", size = 5, parse=TRUE, alpha=0.80)  #add regression line equation
 
 #w/out Rhincodon typus outlier
-mtdna_maxlength_He_no.na_nowhaleshark <- mtdna_maxlength_He_no.na[!(mtdna_maxlength_He_no.na$spp=="Rhincodon typus"),] #exclude Rhincodon typus
+#mtdna_maxlength_He_no.na_nowhaleshark <- mtdna_maxlength_He_no.na[!(mtdna_maxlength_He_no.na$spp=="Rhincodon typus"),] #exclude Rhincodon typus
 
-mtdna_maxlength_He_no.na_nowhaleshark$logtransform.maxlength_noRT <- NA #add column to do a log transformation for max length
+#mtdna_maxlength_He_no.na_nowhaleshark$logtransform.maxlength_noRT <- NA #add column to do a log transformation for max length
 
-for (i in 1:nrow(mtdna_maxlength_He_no.na_nowhaleshark)) { #get log transformation data
-  cat(paste(i, " ", sep = ''))
-  mtdna_maxlength_He_no.na_nowhaleshark$logtransform.maxlength_noRT <- log10(mtdna_maxlength_He_no.na_nowhaleshark$maxlength)
-}
+#for (i in 1:nrow(mtdna_maxlength_He_no.na_nowhaleshark)) { #get log transformation data
+ # cat(paste(i, " ", sep = ''))
+  #mtdna_maxlength_He_no.na_nowhaleshark$logtransform.maxlength_noRT <- log10(mtdna_maxlength_He_no.na_nowhaleshark$maxlength)
+#}
 
-ggplot(mtdna_maxlength_He_no.na_nowhaleshark, aes(x= logtransform.maxlength_noRT, y= He)) + #max length & He scatter plot
-  geom_point(shape=1) +    # Use hollow circles
-  geom_smooth(method=lm,   # Add linear regression line
-              se=TRUE) +
-  ylim(0,1)+                              #create limits
-  coord_cartesian(ylim = c(0, 1)) +
-  ggtitle("mtDNA: Max Length vs. He", subtitle= "(no Rhincodon typus)") + #add plot title
-  xlab("Max Length (loc(cm))") + ylab("He") + #add axis labels
-  theme(                                 #specify characteristics of the plot 
-    plot.title = element_text(size=14, face="bold"),
-    axis.title.x = element_text(color="blue", size=14, face="bold"),
-    axis.title.y = element_text(color="red", size=14, face="bold"))+
-  annotate(geom="label", x = 1.5, y = 0.65, label = lm_eqn(mtdna_maxlength_He_no.na_nowhaleshark$logtransform.maxlength_noRT, mtdna_maxlength_He_no.na_nowhaleshark$He, mtdna_maxlength_He_no.na_nowhaleshark), 
-           color="black", size = 5, parse=TRUE, alpha=0.80) #add regression line equation
+#ggplot(mtdna_maxlength_He_no.na_nowhaleshark, aes(x= logtransform.maxlength_noRT, y= He)) + #max length & He scatter plot
+ # geom_point(shape=1) +    # Use hollow circles
+  #geom_smooth(method=lm,   # Add linear regression line
+   #           se=TRUE) +
+ # ylim(0,1)+                              #create limits
+  #coord_cartesian(ylim = c(0, 1)) +
+  #ggtitle("mtDNA: Max Length vs. He", subtitle= "(no Rhincodon typus)") + #add plot title
+ # xlab("Max Length (loc(cm))") + ylab("He") + #add axis labels
+  #theme(                                 #specify characteristics of the plot 
+  #  plot.title = element_text(size=14, face="bold"),
+   # axis.title.x = element_text(color="blue", size=14, face="bold"),
+  #  axis.title.y = element_text(color="red", size=14, face="bold"))+
+ # annotate(geom="label", x = 1.5, y = 0.65, label = lm_eqn(mtdna_maxlength_He_no.na_nowhaleshark$logtransform.maxlength_noRT, mtdna_maxlength_He_no.na_nowhaleshark$He, mtdna_maxlength_He_no.na_nowhaleshark), 
+  #         color="black", size = 5, parse=TRUE, alpha=0.80) #add regression line equation
 
 #Fecundity Mean#
  mtdna_fecundity_He_no.na <- mtdna_data[!is.na(mtdna_data$fecundity_mean) & !is.na(mtdna_data$He),] #create new table that excludes NA's from columns of interest
@@ -308,29 +308,29 @@ ggplot(msat_maxlength_He_no.na, aes(x= logtransform.maxlength, y= He)) + #max le
 
 
 #w/out Rhincodon typus outlier
-msat_maxlength_He_no.na_nowhaleshark <- msat_maxlength_He_no.na[!(msat_maxlength_He_no.na$spp=="Rhincodon typus"),] #exclude Rhincodon typus
+#msat_maxlength_He_no.na_nowhaleshark <- msat_maxlength_He_no.na[!(msat_maxlength_He_no.na$spp=="Rhincodon typus"),] #exclude Rhincodon typus
 
-msat_maxlength_He_no.na_nowhaleshark$logtransform.maxlength_noRT <- NA #add column to do a log transformation for max length
+#msat_maxlength_He_no.na_nowhaleshark$logtransform.maxlength_noRT <- NA #add column to do a log transformation for max length
 
-for (i in 1:nrow(msat_maxlength_He_no.na_nowhaleshark)) { #get log transformation data
-  cat(paste(i, " ", sep = ''))
-  msat_maxlength_He_no.na_nowhaleshark$logtransform.maxlength_noRT <- log10(msat_maxlength_He_no.na_nowhaleshark$maxlength)
-}
+#for (i in 1:nrow(msat_maxlength_He_no.na_nowhaleshark)) { #get log transformation data
+ # cat(paste(i, " ", sep = ''))
+  #msat_maxlength_He_no.na_nowhaleshark$logtransform.maxlength_noRT <- log10(msat_maxlength_He_no.na_nowhaleshark$maxlength)
+#}
 
-ggplot(msat_maxlength_He_no.na_nowhaleshark, aes(x= logtransform.maxlength_noRT, y= He)) + #max length & He scatter plot
-  geom_point(shape=1) +    # Use hollow circles
-  geom_smooth(method=lm,   # Add linear regression line
-              se=TRUE) +
-  ylim(0,1)+                              #create limits
-  coord_cartesian(ylim = c(0, 1)) +
-  ggtitle("msat: Max Length vs. He", subtitle= "(no Rhincodon typus)") + #add plot title
-  xlab("Max Length (log(cm))") + ylab("He") + #add axis labels
-  theme(                                 #specify characteristics of the plot 
-    plot.title = element_text(size=14, face="bold"),
-    axis.title.x = element_text(color="blue", size=14, face="bold"),
-    axis.title.y = element_text(color="red", size=14, face="bold"))+
-  annotate(geom="label", x = 1.9, y = 0.83, label = lm_eqn(msat_maxlength_He_no.na_nowhaleshark$logtransform.maxlength_noRT, msat_maxlength_He_no.na_nowhaleshark$He, msat_maxlength_He_no.na_nowhaleshark), 
-           color="black", size = 5, parse=TRUE, alpha = 0.8) #add regression line equation
+#ggplot(msat_maxlength_He_no.na_nowhaleshark, aes(x= logtransform.maxlength_noRT, y= He)) + #max length & He scatter plot
+ # geom_point(shape=1) +    # Use hollow circles
+  #geom_smooth(method=lm,   # Add linear regression line
+   #           se=TRUE) +
+ # ylim(0,1)+                              #create limits
+  #coord_cartesian(ylim = c(0, 1)) +
+  #ggtitle("msat: Max Length vs. He", subtitle= "(no Rhincodon typus)") + #add plot title
+  #xlab("Max Length (log(cm))") + ylab("He") + #add axis labels
+  #theme(                                 #specify characteristics of the plot 
+   # plot.title = element_text(size=14, face="bold"),
+    #axis.title.x = element_text(color="blue", size=14, face="bold"),
+    #axis.title.y = element_text(color="red", size=14, face="bold"))+
+  #annotate(geom="label", x = 1.9, y = 0.83, label = lm_eqn(msat_maxlength_He_no.na_nowhaleshark$logtransform.maxlength_noRT, msat_maxlength_He_no.na_nowhaleshark$He, msat_maxlength_He_no.na_nowhaleshark), 
+           #color="black", size = 5, parse=TRUE, alpha = 0.8) #add regression line equation
 
 
 #Fecundity Mean#
@@ -544,7 +544,7 @@ ggplot(final_maxlength_all, aes(x=logtransform.maxlength, y=He, col=markertype, 
               se=TRUE, size = 1.1, fill = NA) +
   ylim(0,1)+                              #create limits
   coord_cartesian(ylim = c(0, 1)) +
-  ggtitle("Max Length vs. He", subtitle = "(w/ Rhincodon typus) msat vs. mtDNA") + #add plot title
+  ggtitle("Max Length vs. He", subtitle = "msat vs. mtDNA") + #add plot title
   xlab("Max Length (log(cm))") + ylab("He") + #add axis labels
   theme(                                 #specifying characteristics of the plot 
     plot.title = element_text(size=14, face="bold"),
@@ -558,48 +558,48 @@ ggplot(final_maxlength_all, aes(x=logtransform.maxlength, y=He, col=markertype, 
   scale_shape(solid = FALSE)
 
 #w/out Rhincodon typus outlier
-final_maxlength.nowhaleshark_all = merge(msat_maxlength_He_no.na_nowhaleshark, mtdna_maxlength_He_no.na_nowhaleshark, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE) #merge final fertilization data form mtdna and msat together
+#final_maxlength.nowhaleshark_all = merge(msat_maxlength_He_no.na_nowhaleshark, mtdna_maxlength_He_no.na_nowhaleshark, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE) #merge final fertilization data form mtdna and msat together
 
-final_maxlength.nowhaleshark_all$markertype <- NA #create new column to categorize marker type
+#final_maxlength.nowhaleshark_all$markertype <- NA #create new column to categorize marker type
 
 #add marker type based on file type
-final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "mtdna101"]  <- "mtDNA"
-final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "mtdna102"]  <- "mtDNA"
-final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "mtdna103"]  <- "mtDNA"
-final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats000"]  <- "msat" 
-final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats001"]  <- "msat"
-final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats002"]  <- "msat"
-final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats200"]  <- "msat" 
-final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats201"]  <- "msat" 
-final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats100"]  <- "msat" 
-final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats101"]  <- "msat" 
-final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats301"]  <- "msat" 
-final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats302"]  <- "msat" 
-final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats303"]  <- "msat" 
-final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats304"]  <- "msat" 
-final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats305"]  <- "msat"
-final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file ==	"ppdat"]  <- "msat" 
+#final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "mtdna101"]  <- "mtDNA"
+#final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "mtdna102"]  <- "mtDNA"
+#final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "mtdna103"]  <- "mtDNA"
+#final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats000"]  <- "msat" 
+#final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats001"]  <- "msat"
+#final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats002"]  <- "msat"
+#final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats200"]  <- "msat" 
+#final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats201"]  <- "msat" 
+#final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats100"]  <- "msat" 
+#final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats101"]  <- "msat" 
+#final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats301"]  <- "msat" 
+#final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats302"]  <- "msat" 
+#final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats303"]  <- "msat" 
+#final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats304"]  <- "msat" 
+#final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file == "msats305"]  <- "msat"
+#final_maxlength.nowhaleshark_all$markertype [final_maxlength.nowhaleshark_all$file ==	"ppdat"]  <- "msat" 
 
-ggplot(final_maxlength.nowhaleshark_all, aes(x=logtransform.maxlength_noRT, y=He, col=markertype, shape=markertype)) + #max length w/out Rhincodon typus & He scatter plot
-  geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
-  geom_smooth(method=lm,   # Add linear regression line
-              se=TRUE, color = "black", size = 1.5, fill = NA) + 
-  geom_smooth(method=lm,   # Add linear regression line
-              se=TRUE, size = 1.1, fill = NA) +
-  ylim(0,1)+                              #create limits
-  coord_cartesian(ylim = c(0, 1)) +
-  ggtitle("Max Length vs. He", subtitle = "(no Rhincodon typus) msat vs. mtDNA") + #add plot title
-  xlab("Max Length (log(cm))") + ylab("He") + #add axis labels
-  theme(                                 #specifying characteristics of the plot 
-    plot.title = element_text(size=14, face="bold"),
-    axis.title.x = element_text(color="blue", size=14, face="bold"),
-    axis.title.y = element_text(color="red", size=14, face="bold"))+
-  annotate(geom="label", x = 1.4, y = 0.62, label = lm_eqn(msat_maxlength_He_no.na_nowhaleshark$logtransform.maxlength, msat_maxlength_He_no.na_nowhaleshark$He, msat_maxlength_He_no.na_nowhaleshark), 
-           color="skyblue2", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
-  annotate(geom="label", x = 2, y = 0.90, label = lm_eqn(mtdna_maxlength_He_no.na_nowhaleshark$logtransform.maxlength, mtdna_maxlength_He_no.na_nowhaleshark$He, mtdna_maxlength_He_no.na_nowhaleshark), 
-           color="blue", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
-  scale_color_manual(values=c("skyblue2","blue")) +
-  scale_shape(solid = FALSE)
+#ggplot(final_maxlength.nowhaleshark_all, aes(x=logtransform.maxlength_noRT, y=He, col=markertype, shape=markertype)) + #max length w/out Rhincodon typus & He scatter plot
+ # geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
+ # geom_smooth(method=lm,   # Add linear regression line
+     #         se=TRUE, color = "black", size = 1.5, fill = NA) + 
+  #geom_smooth(method=lm,   # Add linear regression line
+  #            se=TRUE, size = 1.1, fill = NA) +
+  #ylim(0,1)+                              #create limits
+  #coord_cartesian(ylim = c(0, 1)) +
+ # ggtitle("Max Length vs. He", subtitle = "(no Rhincodon typus) msat vs. mtDNA") + #add plot title
+ # xlab("Max Length (log(cm))") + ylab("He") + #add axis labels
+ # theme(                                 #specifying characteristics of the plot 
+  #  plot.title = element_text(size=14, face="bold"),
+   # axis.title.x = element_text(color="blue", size=14, face="bold"),
+   # axis.title.y = element_text(color="red", size=14, face="bold"))+
+  #annotate(geom="label", x = 1.4, y = 0.62, label = lm_eqn(msat_maxlength_He_no.na_nowhaleshark$logtransform.maxlength, msat_maxlength_He_no.na_nowhaleshark$He, msat_maxlength_He_no.na_nowhaleshark), 
+   #        color="skyblue2", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
+  #annotate(geom="label", x = 2, y = 0.90, label = lm_eqn(mtdna_maxlength_He_no.na_nowhaleshark$logtransform.maxlength, mtdna_maxlength_He_no.na_nowhaleshark$He, mtdna_maxlength_He_no.na_nowhaleshark), 
+  #         color="blue", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
+  #scale_color_manual(values=c("skyblue2","blue")) +
+  #scale_shape(solid = FALSE)
 
 #Fecundity Mean#
 
@@ -819,24 +819,24 @@ ggplot(final_maxlength_alln, aes(x=maxlength, y=He, col=markertype, shape=marker
 
 #w/out Rhincodon typus
 
-final_maxlength.nowhaleshark_alln <- final_maxlength.nowhaleshark_all[!is.na(final_maxlength.nowhaleshark_all$n),] #exclude NA 
-final_maxlength.nowhaleshark_alln <- final_maxlength.nowhaleshark_alln[!(final_maxlength.nowhaleshark_alln$n=="25-32"),] #exclude n=25-32
+#final_maxlength.nowhaleshark_alln <- final_maxlength.nowhaleshark_all[!is.na(final_maxlength.nowhaleshark_all$n),] #exclude NA 
+#final_maxlength.nowhaleshark_alln <- final_maxlength.nowhaleshark_alln[!(final_maxlength.nowhaleshark_alln$n=="25-32"),] #exclude n=25-32
 
-final_maxlength.nowhaleshark_alln$success <- round(as.numeric(final_maxlength.nowhaleshark_alln$He)*(as.numeric(final_maxlength.nowhaleshark_alln$n))) #create column of successes
-final_maxlength.nowhaleshark_alln$failure <- round(as.numeric(1-final_maxlength.nowhaleshark_alln$He)*(as.numeric(final_maxlength.nowhaleshark_alln$n))) #create column of failures
+#final_maxlength.nowhaleshark_alln$success <- round(as.numeric(final_maxlength.nowhaleshark_alln$He)*(as.numeric(final_maxlength.nowhaleshark_alln$n))) #create column of successes
+#final_maxlength.nowhaleshark_alln$failure <- round(as.numeric(1-final_maxlength.nowhaleshark_alln$He)*(as.numeric(final_maxlength.nowhaleshark_alln$n))) #create column of failures
 
-ggplot(final_maxlength.nowhaleshark_alln, aes(x=maxlength, y=He, col=markertype, shape=markertype)) + #max length w/out Rhincodon typus & He scatter plot
-  geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
-  geom_smooth(data= msat_maxlength_He_no.nan, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
-              formula= cbind(msat_maxlength_He_no.nan$success, msat_maxlength_He_no.nan$failure)~x, inherit.aes = FALSE,   #Add linear regression line outline from data including Rhincodon Typus
-              se=TRUE, color = "black", size = 2, fill = NA) + 
-  stat_smooth(data= msat_maxlength_He_no.nan, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line from data including Rhincodon Typus
-              formula= cbind(msat_maxlength_He_no.nan$success, msat_maxlength_He_no.nan$failure)~x, inherit.aes = FALSE, color= "skyblue2") +
-  geom_smooth(data= mtdna_maxlength_He_no.na, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
-              formula= cbind(mtdna_maxlength_He_no.na$success, mtdna_maxlength_He_no.na$failure)~x, inherit.aes=FALSE,  #Add linear regression line outline from data including Rhincodon Typus
-              se=TRUE, color = "black", size = 2, fill = NA) + 
-  stat_smooth(data= mtdna_maxlength_He_no.na, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line from data including Rhincodon Typus
-              formula= cbind(mtdna_maxlength_He_no.na$success, mtdna_maxlength_He_no.na$failure)~x, inherit.aes=FALSE, color= "blue") +
+#ggplot(final_maxlength.nowhaleshark_alln, aes(x=maxlength, y=He, col=markertype, shape=markertype)) + #max length w/out Rhincodon typus & He scatter plot
+ # geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
+  #geom_smooth(data= msat_maxlength_He_no.nan, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
+   #           formula= cbind(msat_maxlength_He_no.nan$success, msat_maxlength_He_no.nan$failure)~x, inherit.aes = FALSE,   #Add linear regression line outline from data including Rhincodon Typus
+    #          se=TRUE, color = "black", size = 2, fill = NA) + 
+ # stat_smooth(data= msat_maxlength_He_no.nan, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line from data including Rhincodon Typus
+  #            formula= cbind(msat_maxlength_He_no.nan$success, msat_maxlength_He_no.nan$failure)~x, inherit.aes = FALSE, color= "skyblue2") +
+ # geom_smooth(data= mtdna_maxlength_He_no.na, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
+  #            formula= cbind(mtdna_maxlength_He_no.na$success, mtdna_maxlength_He_no.na$failure)~x, inherit.aes=FALSE,  #Add linear regression line outline from data including Rhincodon Typus
+   #           se=TRUE, color = "black", size = 2, fill = NA) + 
+  #stat_smooth(data= mtdna_maxlength_He_no.na, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line from data including Rhincodon Typus
+   #           formula= cbind(mtdna_maxlength_He_no.na$success, mtdna_maxlength_He_no.na$failure)~x, inherit.aes=FALSE, color= "blue") +
   ###Following code below include glm line for data not including Rhincodon typus; include if needed###
   #geom_smooth(data= msat_maxlength_He_no.na_nowhalesharkn, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), 
    #           formula= cbind(msat_maxlength_He_no.na_nowhalesharkn$success, msat_maxlength_He_no.na_nowhalesharkn$failure)~x, inherit.aes = FALSE,   #Add linear regression line outline
@@ -847,18 +847,18 @@ ggplot(final_maxlength.nowhaleshark_alln, aes(x=maxlength, y=He, col=markertype,
    #           formula= cbind(mtdna_maxlength_He_no.na_nowhaleshark$success, mtdna_maxlength_He_no.na_nowhaleshark$failure)~x, inherit.aes=FALSE,  #Add linear regression line outline
     #          se=TRUE, color = "black", size = 2, fill = NA) + 
   #stat_smooth(data= mtdna_maxlength_He_no.na_nowhaleshark, aes(x=maxlength, y=He), method="glm",  method.args = list(family = "binomial"), #Add linear regression line
-   #           formula= cbind(mtdna_maxlength_He_no.na_nowhaleshark$success, mtdna_maxlength_He_no.na_nowhaleshark$failure)~x, inherit.aes=FALSE, color= "blue") +
-  ylim(0,1)+                              #create limits
-  coord_cartesian(ylim = c(0, 1)) + #add y limit
-  coord_cartesian(xlim = c(0, 700)) + #add x limit to see graph better
-  ggtitle("Max Length vs. He", subtitle = "(w/out Rhincodon typus) msat vs. mtDNA") + #add plot title
-  xlab("Max Length (cm)") + ylab("He") + #add axis labels
-  theme(                                 #specifying characteristics of the plot 
-    plot.title = element_text(size=14, face="bold"),
-    axis.title.x = element_text(color="blue", size=14, face="bold"),
-    axis.title.y = element_text(color="red", size=14, face="bold"))+
-  scale_colour_manual(values=c("skyblue2","blue")) +
-  scale_shape(solid = FALSE) 
+   ###           formula= cbind(mtdna_maxlength_He_no.na_nowhaleshark$success, mtdna_maxlength_He_no.na_nowhaleshark$failure)~x, inherit.aes=FALSE, color= "blue") +
+ # ylim(0,1)+                              #create limits
+  #coord_cartesian(ylim = c(0, 1)) + #add y limit
+ # coord_cartesian(xlim = c(0, 700)) + #add x limit to see graph better
+  #ggtitle("Max Length vs. He", subtitle = "(w/out Rhincodon typus) msat vs. mtDNA") + #add plot title
+  #xlab("Max Length (cm)") + ylab("He") + #add axis labels
+ # theme(                                 #specifying characteristics of the plot 
+   # plot.title = element_text(size=14, face="bold"),
+   # axis.title.x = element_text(color="blue", size=14, face="bold"),
+   # axis.title.y = element_text(color="red", size=14, face="bold"))+
+  #scale_colour_manual(values=c("skyblue2","blue")) +
+  #scale_shape(solid = FALSE) 
 
 
 #Fecundity Mean
