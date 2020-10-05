@@ -85,7 +85,6 @@ ggplot(mtdna_reproduction_type_He_no.na ) + geom_boxplot(aes(x = specific.repro_
 
 #Max Length#
 
-#w/ Rhincodon typus outlier
 mtdna_maxlength_He_no.na <- mtdna_data[!is.na(mtdna_data$maxlength) & !is.na(mtdna_data$He),] #create new table that excludes NA's from columns of interest
 
 mtdna_maxlength_He_no.na$logtransform.maxlength <- NA #add column to do a log transformation for max length
@@ -118,7 +117,7 @@ ggplot(mtdna_maxlength_He_no.na, aes(x=logtransform.maxlength, y = He)) + #max l
   annotate(geom="label", x = 2.4, y = .807, label = lm_eqn(mtdna_maxlength_He_no.na$logtransform.maxlength, mtdna_maxlength_He_no.na$He, mtdna_maxlength_He_no.na), 
            color="black", size = 5, parse=TRUE, alpha=0.80)  #add regression line equation
 
-#w/out Rhincodon typus outlier
+####w/out Rhincodon typus outlier####
 #mtdna_maxlength_He_no.na_nowhaleshark <- mtdna_maxlength_He_no.na[!(mtdna_maxlength_He_no.na$spp=="Rhincodon typus"),] #exclude Rhincodon typus
 
 #mtdna_maxlength_He_no.na_nowhaleshark$logtransform.maxlength_noRT <- NA #add column to do a log transformation for max length
@@ -143,7 +142,7 @@ ggplot(mtdna_maxlength_He_no.na, aes(x=logtransform.maxlength, y = He)) + #max l
  # annotate(geom="label", x = 1.5, y = 0.65, label = lm_eqn(mtdna_maxlength_He_no.na_nowhaleshark$logtransform.maxlength_noRT, mtdna_maxlength_He_no.na_nowhaleshark$He, mtdna_maxlength_He_no.na_nowhaleshark), 
   #         color="black", size = 5, parse=TRUE, alpha=0.80) #add regression line equation
 
-#Fecundity Mean#
+#Fecundity Mean##
  mtdna_fecundity_He_no.na <- mtdna_data[!is.na(mtdna_data$fecundity_mean) & !is.na(mtdna_data$He),] #create new table that excludes NA's from columns of interest
  
 mtdna_fecundity_He_no.na$logtransform.fecundity <- NA #add column to do a log transformation for fecundity mean
@@ -168,6 +167,22 @@ ggplot(mtdna_fecundity_He_no.na, aes(x= logtransform.fecundity, y= He)) + #fecun
   annotate(geom="label", x = 4, y = 0.57, label = lm_eqn(mtdna_fecundity_He_no.na$logtransform.fecundity, mtdna_fecundity_He_no.na$He, mtdna_fecundity_He_no.na), 
            color="black", size = 5, parse=TRUE, alpha=0.80) #add regression line equation
 
+#Fecundity Mean excluding points before x = 4
+ggplot(mtdna_fecundity_He_no.na, aes(x= logtransform.fecundity, y= He)) + #fecundity mean & He scatter plot
+  geom_point(shape=1) +    # Use hollow circles
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE) +
+  ylim(0,1)+                              #create limits
+  coord_cartesian(ylim = c(0, 1)) +
+  ggtitle("mtDNA: Fecundity Mean vs. He", subtitle = "Excluded points before Fecundity Mean = 4 ") + #add plot title
+  xlab("Fecundity Mean (log)") + ylab("He") +  #add axis labels
+  xlim(4,7) +
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  annotate(geom="label", x = 5, y = 0.57, label = lm_eqn(mtdna_fecundity_He_no.na$logtransform.fecundity, mtdna_fecundity_He_no.na$He, mtdna_fecundity_He_no.na), 
+           color="black", size = 5, parse=TRUE, alpha=0.80) #add regression line equation
 
 #####Density Plots: Numerical Data#####
 
@@ -307,7 +322,7 @@ ggplot(msat_maxlength_He_no.na, aes(x= logtransform.maxlength, y= He)) + #max le
            color="black", size = 5, parse=TRUE, alpha = 0.8) #add regression line equation
 
 
-#w/out Rhincodon typus outlier
+### w/out Rhincodon typus outlier ####
 #msat_maxlength_He_no.na_nowhaleshark <- msat_maxlength_He_no.na[!(msat_maxlength_He_no.na$spp=="Rhincodon typus"),] #exclude Rhincodon typus
 
 #msat_maxlength_He_no.na_nowhaleshark$logtransform.maxlength_noRT <- NA #add column to do a log transformation for max length
@@ -357,6 +372,33 @@ ggplot(msat_fecundity_He_no.na, aes(x= logtransform.fecundity, y= He)) + #fecund
     axis.title.y = element_text(color="red", size=14, face="bold"))+
   annotate(geom="label", x = 3.5, y = 0.83, label = lm_eqn(msat_fecundity_He_no.na$logtransform.fecundity, msat_fecundity_He_no.na$He, msat_fecundity_He_no.na), 
            color="black", size = 5, parse=TRUE, alpha = 0.8) #add regression line equation
+
+#Fecundity Mean excluding points before x = 3
+msat_fecundity_He_no.na <- msat_data[!is.na(msat_data$fecundity_mean) & !is.na(msat_data$He),] #create new table that excludes NA's from columns of interest
+
+msat_fecundity_He_no.na$logtransform.fecundity <- NA #add column to do a log transformation for fecundity mean
+
+for (i in 1:nrow(msat_fecundity_He_no.na)) { #get log transformation data
+  cat(paste(i, " ", sep = ''))
+  msat_fecundity_He_no.na$logtransform.fecundity <- log10(msat_fecundity_He_no.na$fecundity_mean)
+}
+
+ggplot(msat_fecundity_He_no.na, aes(x= logtransform.fecundity, y= He)) + #fecundity mean & He scatter plot
+  geom_point(shape=1) +    # Use hollow circles
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE) +
+  ylim(0,1)+                              #create limits
+  coord_cartesian(ylim = c(0, 1)) +
+  ggtitle("msat: Fecundity Mean vs. He", subtitle = "Excluded points before Fecundity Mean = 3.5 ") + #add plot title
+  xlab("Fecundity Mean (log)") + ylab("He") + #add plot title
+  xlim(3.5,7) +
+  theme(                                 #specifying characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  annotate(geom="label", x = 5, y = 0.5, label = lm_eqn(msat_fecundity_He_no.na$logtransform.fecundity, msat_fecundity_He_no.na$He, msat_fecundity_He_no.na), 
+           color="black", size = 5, parse=TRUE, alpha = 0.8) #add regression line equation
+
 
 #####Density Plots: Numerical Data#####
 
@@ -557,7 +599,7 @@ ggplot(final_maxlength_all, aes(x=logtransform.maxlength, y=He, col=markertype, 
   scale_colour_manual(values=c("skyblue2","blue")) +
   scale_shape(solid = FALSE)
 
-#w/out Rhincodon typus outlier
+### w/out Rhincodon typus outlier ####
 #final_maxlength.nowhaleshark_all = merge(msat_maxlength_He_no.na_nowhaleshark, mtdna_maxlength_He_no.na_nowhaleshark, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE) #merge final fertilization data form mtdna and msat together
 
 #final_maxlength.nowhaleshark_all$markertype <- NA #create new column to categorize marker type
@@ -647,6 +689,7 @@ ggplot(final_fecunditymean_all, aes(x=logtransform.fecundity, y=He, col=markerty
   scale_shape(solid = FALSE)
 
 
+
 #####Anova Test: Combined Marker Character Data#####
 
 #Fertilization#
@@ -665,6 +708,27 @@ specific.repro_modeanova.all <- aov(He ~ specific.repro_mode * markertype, data 
 TukeyHSD(specific.repro_modeanova.all) #perform TukeyHSD to see full table of results
 
 ####################################################################################
+
+############### mtDNA: Multiple Analyses ############### 
+
+#Max Length vs He (w/ Fecundity Mean)
+(split_plot <- ggplot(aes(maxlength, He), data = mtdna_data) + 
+   geom_point() + 
+   facet_wrap(~ fecundity_mean) + # create a facet for each mountain range
+   xlab("Max Length") + 
+   ylab("He"))
+
+#Specific 
+
+############### mtDNA: Multiple Analyses ############### 
+
+#Max Length vs He (w/ Fecundity Mean)
+(split_plot <- ggplot(aes(fecundity_mean, He), data = msat_data, msat_data[!is.na(msat_data$Condition),]) + 
+   geom_point() + 
+   facet_wrap(~ maxlength) + # create a facet for each mountain range
+   xlab("Fecundity Mean") + 
+   ylab("He"))
+
 
 ############### mtDNA: Statistical Models ############### 
 
