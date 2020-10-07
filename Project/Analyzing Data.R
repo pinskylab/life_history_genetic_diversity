@@ -729,6 +729,16 @@ TukeyHSD(specific.repro_modeanova.all) #perform TukeyHSD to see full table of re
    xlab("Fecundity Mean") + 
    ylab("He"))
 
+############### Compare Data Frames ############### 
+
+mtdna_data1 <- mtdna_data(x = "spp", stringsAsFactors = FALSE)
+msat_data2 <- msat_data(x = factor("spp"))
+all_equal(mtdna_data1, msat_data2)
+
+intersect(mtdna_data(colnames(spp)),msat_data(colnames(spp)))
+
+mtdna_data.where(mtdna_data.spp==msat_data.spp).notna()
+
 
 ############### mtDNA: Statistical Models ############### 
 
