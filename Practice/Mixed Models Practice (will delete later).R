@@ -1,4 +1,4 @@
-######### Mixed Models 1#########
+########## Mixed Models 1 ##########
 
 remove(list = ls())
 
@@ -52,7 +52,7 @@ Est.means <- coef(ft.estu)$Estuary[,1]+coef(ft.estu)$Estuary[,2]*is.mod #Model m
 stripchart(Est.means~ sort(unique(Estuary)),data=Estuaries,pch=18,col="red",vertical = TRUE,add=TRUE)
 
 ##########################################################################################################################################
-######### Mixed Models 2 #########
+########## Mixed Models 2 ##########
 
 #Look at data and cross tabulation
 Estuaries[1:10,]
@@ -106,7 +106,7 @@ mean(lrStat>lrObs) #P-value for test of Estuary effect
 anova(ft.mod.0,ft.mod)
 
 ##########################################################################################################################################
-######### Mixed Models 3 #########
+########## Mixed Models 3 ##########
 
 #Create variable to model presence/absence
 Estuaries$HydroidPres <- Estuaries$Hydroid > 0
