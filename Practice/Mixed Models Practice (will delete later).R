@@ -3,6 +3,9 @@
 remove(list = ls())
 
 library(lme4)
+library(dplyr)
+library(Hmisc)
+library(ggplot2)
 
 Estuaries <- read.csv("Estuaries.csv", header = T)
 
