@@ -16,6 +16,7 @@ library(dplyr)
 #read in data
 mtdna_data <- read.csv("mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
 msat_data <- read.csv("msat_full_US_data.csv", stringsAsFactors = FALSE) #read in 
+mtdna_data_new <- read.csv("new_mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
 
 ############### mtDNA data set ############### 
 
@@ -231,6 +232,221 @@ shapiro.test(mtdna_maxlength_He_no.na$maxlength) #run Shapiro-Wilk test on max l
 #Fecundity Mean#
 shapiro.test(mtdna_fecundity_He_no.na$fecundity_mean) #run Shapiro-Wilk test on max length & He
 
+####################################################################################
+
+############### mtDNA new data set: focus on Pi ############### 
+
+#####Box Plots: Character Data#####
+
+#Fertilization#
+
+mtdna_data_new$final_fertilization <- NA #create new column to categorize fertilization methods
+
+mtdna_data_new$final_fertilization [mtdna_data_new$fertilization =="external"]  <- "external"
+mtdna_data_new$final_fertilization [mtdna_data_new$fertilization =="internal (oviduct)"] <- "internal (oviduct)"
+mtdna_data_new$final_fertilization [mtdna_data_new$fertilization =="in brood pouch or similar structure"] <- "internal (oviduct)" #convert "in brood pouch or similar structure" to internal fertilization
+
+mtdna_final_fertilization_Pi_no.na <- mtdna_data_new[!is.na(mtdna_data_new$final_fertilization) & !is.na(mtdna_data_new$Pi),] #create new table that excludes NA's from columns of interest
+
+theme_update(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
+
+ggplot(mtdna_final_fertilization_Pi_no.na) + geom_boxplot(aes(x = final_fertilization, y = Pi)) + #final fertilization & Pi box plot
+  ggtitle("mtDNA: Fertilization Method vs. Pi") + #add plot title
+  xlab("Fertilization Method") + ylab("Pi") + #add axis labels
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"), 
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))
+
+#Reproduction Mode#
+
+#combine protandry, protogyny, and true hermaphroditism into "Hermpahrodites"
+
+mtdna_data_new$final_reproductionmode <- NA #create new column to categorize reproduction mode
+
+mtdna_data_new$final_reproductionmode  [mtdna_data_new$reproductionmode =="dioecism"]  <- "Dioecious"
+mtdna_data_new$final_reproductionmode  [mtdna_data_new$reproductionmode =="protogyny"] <- "Hermaphrodite" #for protogyny, label as "Hermpahrodites"
+mtdna_data_new$final_reproductionmode  [mtdna_data_new$reproductionmode =="protandry"] <- "Hermaphrodite" #for protandry, label as "Hermpahrodites"
+mtdna_data_new$final_reproductionmode  [mtdna_data_new$reproductionmode =="true hermaphroditism"] <- "Hermaphrodite" #for true hermaphroditism, label as "Hermpahrodites"
+
+mtdna_final_reproductionmode_Pi_no.na <- mtdna_data_new[!is.na(mtdna_data_new$final_reproductionmode ) & !is.na(mtdna_data_new$Pi),] #create new table that excludes NA's from columns of interest
+
+ggplot(mtdna_final_reproductionmode_Pi_no.na ) + geom_boxplot(aes(x = final_reproductionmode , y = Pi)) + #final reproduction mode & Pi box plot
+  ggtitle("mtDNA: Reproduction Mode vs. Pi") + #add plot title
+  xlab("Reproduction Mode ") + ylab("Pi") + #add axis labels
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"), 
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))
+
+#Specific Reproduction Modes#
+
+mtdna_data_new$specific.repro_mode <- NA #create new column to categorize hermaphrodite type
+
+mtdna_data_new$specific.repro_mode  [mtdna_data_new$reproductionmode =="dioecism"]  <- "Dioecism"
+mtdna_data_new$specific.repro_mode  [mtdna_data_new$reproductionmode =="protogyny"] <- "Protogyny"
+mtdna_data_new$specific.repro_mode  [mtdna_data_new$reproductionmode =="protandry"] <- "Protandry"
+mtdna_data_new$specific.repro_mode  [mtdna_data_new$reproductionmode =="true hermaphroditism"] <- "True Hermaphroditism"
+
+mtdna_reproduction_type_Pi_no.na <- mtdna_data_new[!is.na(mtdna_data_new$specific.repro_mode ) & !is.na(mtdna_data_new$Pi),] #create new table that excludes NA's from columns of interest
+
+ggplot(mtdna_reproduction_type_Pi_no.na ) + geom_boxplot(aes(x = specific.repro_mode , y = Pi)) + #hermaphrodite type mode & Pi box plot
+  ggtitle("mtDNA: Specific Reproduction Modes vs. Pi") + #add plot title
+  xlab("Specific Reproduction Mode") + ylab("Pi") + #add axis labels
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"), 
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))
+
+#####Scatter Plots: Numerical Data#####
+
+#Max Length#
+
+mtdna_maxlength_Pi_no.na <- mtdna_data_new[!is.na(mtdna_data_new$maxlength) & !is.na(mtdna_data_new$Pi),] #create new table that excludes NA's from columns of interest
+
+mtdna_maxlength_Pi_no.na$logtransform.maxlength <- NA #add column to do a log transformation for max length
+
+for (i in 1:nrow(mtdna_maxlength_Pi_no.na)) { #get log transformation data
+  cat(paste(i, " ", sep = ''))
+  mtdna_maxlength_Pi_no.na$logtransform.maxlength <- log10(mtdna_maxlength_Pi_no.na$maxlength)
+}
+
+lm_eqn = function(x, y, df){ #set up formula for regression line equation
+  m <- lm(y ~ x, df);
+  eq <- substitute(italic(y) == b %.% italic(x) + a,
+                   list(a = format(coef(m)[[1]], digits = 2), 
+                        b = format(coef(m)[[2]], digits = 2)))
+  as.character(as.expression(eq));                 
+}
+
+ggplot(mtdna_maxlength_Pi_no.na, aes(x=logtransform.maxlength, y = Pi)) + #max length & Pi scatter plot
+  geom_point(shape=1) +    # Use hollow circles
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, formula = y ~ x) +
+  ylim(0,1)+                              #create limits
+  coord_cartesian(ylim = c(0, 0.1)) +
+  ggtitle("mtDNA: Max Length vs. He") + #add plot title
+  xlab("Max Length (log(cm))") + ylab("He") + #add axis labels
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  annotate(geom="label", x = 2, y = .09, label = lm_eqn(mtdna_maxlength_Pi_no.na$logtransform.maxlength, mtdna_maxlength_Pi_no.na$Pi, mtdna_maxlength_Pi_no.na), 
+           color="black", size = 5, parse=TRUE, alpha=0.80)  #add regression line equation
+
+####w/out Rhincodon typus outlier####
+#mtdna_maxlength_He_no.na_nowhaleshark <- mtdna_maxlength_He_no.na[!(mtdna_maxlength_He_no.na$spp=="Rhincodon typus"),] #exclude Rhincodon typus
+
+#mtdna_maxlength_He_no.na_nowhaleshark$logtransform.maxlength_noRT <- NA #add column to do a log transformation for max length
+
+#for (i in 1:nrow(mtdna_maxlength_He_no.na_nowhaleshark)) { #get log transformation data
+# cat(paste(i, " ", sep = ''))
+#mtdna_maxlength_He_no.na_nowhaleshark$logtransform.maxlength_noRT <- log10(mtdna_maxlength_He_no.na_nowhaleshark$maxlength)
+#}
+
+#ggplot(mtdna_maxlength_He_no.na_nowhaleshark, aes(x= logtransform.maxlength_noRT, y= He)) + #max length & He scatter plot
+# geom_point(shape=1) +    # Use hollow circles
+#geom_smooth(method=lm,   # Add linear regression line
+#           se=TRUE) +
+# ylim(0,1)+                              #create limits
+#coord_cartesian(ylim = c(0, 1)) +
+#ggtitle("mtDNA: Max Length vs. He", subtitle= "(no Rhincodon typus)") + #add plot title
+# xlab("Max Length (loc(cm))") + ylab("He") + #add axis labels
+#theme(                                 #specify characteristics of the plot 
+#  plot.title = element_text(size=14, face="bold"),
+# axis.title.x = element_text(color="blue", size=14, face="bold"),
+#  axis.title.y = element_text(color="red", size=14, face="bold"))+
+# annotate(geom="label", x = 1.5, y = 0.65, label = lm_eqn(mtdna_maxlength_He_no.na_nowhaleshark$logtransform.maxlength_noRT, mtdna_maxlength_He_no.na_nowhaleshark$He, mtdna_maxlength_He_no.na_nowhaleshark), 
+#         color="black", size = 5, parse=TRUE, alpha=0.80) #add regression line equation
+
+#Fecundity Mean##
+mtdna_fecundity_Pi_no.na <- mtdna_data_new[!is.na(mtdna_data_new$fecundity_mean) & !is.na(mtdna_data_new$Pi),] #create new table that excludes NA's from columns of interest
+
+mtdna_fecundity_Pi_no.na$logtransform.fecundity <- NA #add column to do a log transformation for fecundity mean
+
+for (i in 1:nrow(mtdna_fecundity_Pi_no.na)) { #get log transformation data
+  cat(paste(i, " ", sep = ''))
+  mtdna_fecundity_Pi_no.na$logtransform.fecundity <- log10(mtdna_fecundity_Pi_no.na$fecundity_mean)
+}
+
+ggplot(mtdna_fecundity_Pi_no.na, aes(x= logtransform.fecundity, y= Pi)) + #fecundity mean & Pi scatter plot
+  geom_point(shape=1) +    # Use hollow circles
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE) +
+  ylim(0,1)+                              #create limits
+  coord_cartesian(ylim = c(0, 0.1)) +
+  ggtitle("mtDNA: Fecundity Mean vs. Pi") + #add plot title
+  xlab("Fecundity Mean (log)") + ylab("Pi") + #add axis labels
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  annotate(geom="label", x = 4, y = 0.09, label = lm_eqn(mtdna_fecundity_Pi_no.na$logtransform.fecundity, mtdna_fecundity_Pi_no.na$Pi, mtdna_fecundity_Pi_no.na), 
+           color="black", size = 5, parse=TRUE, alpha=0.80) #add regression line equation
+
+#Fecundity Mean excluding points before x = 4
+ggplot(mtdna_fecundity_He_no.na, aes(x= logtransform.fecundity, y= He)) + #fecundity mean & He scatter plot
+  geom_point(shape=1) +    # Use hollow circles
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE) +
+  ylim(0,1)+                              #create limits
+  coord_cartesian(ylim = c(0, 1)) +
+  ggtitle("mtDNA: Fecundity Mean vs. He", subtitle = "Excluded points before Fecundity Mean = 4 ") + #add plot title
+  xlab("Fecundity Mean (log)") + ylab("He") +  #add axis labels
+  xlim(4,7) +
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  annotate(geom="label", x = 5, y = 0.57, label = lm_eqn(mtdna_fecundity_He_no.na$logtransform.fecundity, mtdna_fecundity_He_no.na$He, mtdna_fecundity_He_no.na), 
+           color="black", size = 5, parse=TRUE, alpha=0.80) #add regression line equation
+
+#####Density Plots: Numerical Data#####
+
+#Max Length#
+plot(density(mtdna_maxlength_He_no.na$maxlength), main="Max Length Density") #create density plot for max length
+polygon(density(mtdna_maxlength_He_no.na$maxlength), main="Max Length Density", col="blue") #specify characteristics of plot
+
+#Fecundity Mean#
+plot(density(mtdna_fecundity_He_no.na$fecundity_mean), main="Fecundity Mean Density") #create density plot for fecundity mean
+polygon(density(mtdna_fecundity_He_no.na$fecundity_mean), main="Fecundity Mean Density", col="blue") #specify characteristics of plot
+
+#####T-Tests: Character Data#####
+
+#Fertilization#
+
+external.mtdna <- mtdna_final_fertilization_He_no.na$He[mtdna_final_fertilization_He_no.na$final_fertilization=="external"] #create vector for one aspect of t-test
+internal.mtdna <- mtdna_final_fertilization_He_no.na$He[mtdna_final_fertilization_He_no.na$final_fertilization=="internal (oviduct)"] #create vector
+
+fertilization_ttest.mtdna <- t.test(external.mtdna, internal.mtdna, var.equal=TRUE) #combine created vectors & perform t-test
+
+#Reproduction Mode#
+
+dioecism.mtdna <- mtdna_final_reproductionmode_He_no.na$He[mtdna_final_reproductionmode_He_no.na$final_reproductionmode=="Dioecious"] #create vector for one aspect of t-test
+hermaphrodite.mtdna <- mtdna_final_reproductionmode_He_no.na$He[mtdna_final_reproductionmode_He_no.na$final_reproductionmode=="Hermaphrodite"] #create vector
+
+reproductionmode_ttest.mtdna <- t.test(dioecism.mtdna, hermaphrodite.mtdna, var.equal=TRUE) #combine created vectors & perform t-test
+
+#Specific Reproduction Modes: ANOVA TEST#
+
+specific.repro_modeanovamtdna <- aov(He ~ specific.repro_mode, data = mtdna_reproduction_type_He_no.na) #perform anova test
+
+#####Wilcoxon Tests: Numerical Data#####
+
+#Max Length#
+wilcox.test( mtdna_maxlength_He_no.na[ ,'maxlength'] , mtdna_maxlength_He_no.na[ , 'He'], paired=T) #run Wilcoxon test on max length & He
+
+
+#Fecundity Mean#
+wilcox.test( mtdna_fecundity_He_no.na[ ,'fecundity_mean'] , mtdna_fecundity_He_no.na[ , 'He'], paired=T) #run Wilcoxon test on max length & He
+
+#####Shapiro-Wilk Tests: Numerical Data#####
+
+#Max Length#
+shapiro.test(mtdna_maxlength_He_no.na$maxlength) #run Shapiro-Wilk test on max length & He
+
+#Fecundity Mean#
+shapiro.test(mtdna_fecundity_He_no.na$fecundity_mean) #run Shapiro-Wilk test on max length & He
 
 ####################################################################################
 
