@@ -2,31 +2,43 @@
 He & spp,20.2228,29.0045,-7.1114,14.2228,135,269.4,-274.6,
 He & site,19.219986,27.9986,-6.6084,13.2169,135,2742,-2801,
 He & source,20.2198,29.0016,-7.1099,14.2198,135,269.4,-274.6,
+He & marker name,20.254,29.0357,-7.127,14.254,135,260,-265,
 Max Length & spp,63.0831,71.8648,-28.5415,57.0831,135,10.121693,-0.002648,
 Max Length & site,65.3193,74.1011,-29.6597,59.3193,135,10.42135,0.02578,
 Max Length & source,53.5951,62.3769,-23.7975,47.5951,135,11.078129,-0.003463,
-Fecundity Mean (log) & site,42.0797,49.9546,-18.0399,36.0797,99,290.48,-44.88,
+Max Length & marker name,98.6402,107.422,-46.3201,92.6402,135,3.288835,-0.008121,
 Fecundity Mean (log) & spp,40.5168,48.3917,-17.2584,34.5168,99,14.657,-0.897,
+Fecundity Mean (log) & site,42.0797,49.9546,-18.0399,36.0797,99,290.48,-44.88,
 Fecundity Mean (log) & source,33.9569,41.8318,-13.9784,27.9569,99,15.987,-0.905,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
+Fecundity Mean (log) & marker name,59.4709,67.3458,-26.7354,53.4709,99,11.861,-0.663,
+Fertilization & spp,63.0323,79.7652,-28.5161,57.0323,1951,5.3519,0.1666,In brood/puch was changed to internal fertilizaiton for these models
+Fertilization & site,66.0985,74.7469,-30.0492,60.0985,129,-18.91,29.31,In brood/puch was changed to internal fertilizaiton for these models
+Fertilization & source,53.1003,61.7487,-23.5502,47.1003,129,-14.62,24.44,In brood/puch was changed to internal fertilizaiton for these models
+Fertilization & maker name,,,,,,,,In brood/puch was changed to internal fertilizaiton for these models
+Reproduction mode & spp,62.9469,71.5953,-28.4735,56.9469,129,11.188,-1.385,
+Reproduction mode & site,68.6777,77.3261,-31.3389,62.6777,129,11.3952,-0.4287,
+Reproduction mode & source,53.5174,62.1658,-23.7587,47.5174,129,12.068,-1.365,
+Reproduction mode & marker name,99.238,107.8865,-46.619,93.238,129,3.123,-0.55,
 ,,,,,,,,
 msat,,,,,,,,
 He & spp,125.1371,142.7154,-59.5686,119.1371,2587,2.374,7.441,
-He & CrossSpp,128.286,145.8643,-61.143,122.286,2587,2.031,7.646,
 He & site,119.7435,137.3217,-56.8717,113.7435,2587,6.374,7.841,
 He & source,120.896,138.4743,-57.448,114.896,2587,3.538,7.089,
-He & repeat,117.6148,131.1412,-55.8074,111.6148,1821,1.581,7.17,
 Max Length & spp,172.5848,190.1549,-83.2924,166.5848,2580,6.040547,0.002044,
-Max Length & CrossSpp,176.0644,193.6345,-85.0322,170.0644,2580,5.3882532,-0.0003235,
 Max Length & site,163.7408,181.3109,-78.8704,157.7408,2580,9.682013,0.0001639,
 Max Length & source,162.1508,179.7209,-78.0754,156.1508,2580,8.25,-0.00009875,
-Max Length & repeat,158.9533,175.4697,-76.4766,152.9533,1815,4.486032,0.003004,
 Fecundity Mean (log) & spp,62.1966,78.9295,-28.0983,56.1966,1951,6.6419,0.1741,
-Fecundity Mean (log) & CrossSpp,63.0323,79.7652,-28.5161,57.0323,1951,5.3519,0.1666,Has same values as source & site
-Fecundity Mean (log) & site,63.0323,79.7652,-28.5161,57.0323,1951,5.3519,0.1666,Has same values as CrossSpp & source
-Fecundity Mean (log) & source,63.0323,79.7652,-28.5161,57.0323,1951,5.3519,0.1666,Has same values as CrossSpp & site
-Fecundity Mean (log) & repeat,60.4788,76.1792,-27.2394,54.4788,1382,5.2502,0.1199,
+Fecundity Mean (log) & site,63.0323,79.7652,-28.5161,57.0323,1951,5.3519,0.1666,Has same values as source
+Fecundity Mean (log) & source,63.0323,79.7652,-28.5161,57.0323,1951,5.3519,0.1666,Has same values as site
+Fertilization & spp,172.4089,189.9416,-83.2044,166.4089,2548,6.21122,0.003995,In brood/puch was changed to internal fertilizaiton for these models
+Fertilization & site,,,,,,,,In brood/puch was changed to internal fertilizaiton for these models
+Fertilization & source,161.9406,179.4733,-77.9703,155.9406,2548,8.6017,-0.3777,In brood/puch was changed to internal fertilizaiton for these models
+Reproduction mode & spp,170.3846,187.915,-82.1923,164.3846,2546,-22.49,28.388,
+Reproduction mode & site,163.0968,180.6272,-78.5484,157.0968,2546,-14.3,23.7,
+Reproduction mode & source,,,,,,,,
+Repeat & spp ,154.4388,170.9652,-74.2194,148.4388,1821,6.1358,-0.1331,
+Repeat & site ,147.0989,163.6252,-70.5494,141.0989,1821,10.4512,-0.4685,
+Repeat & source,144.3617,160.8881,-69.1809,138.3617,1821,8.4499,-0.3581,
+CrossSpp & spp,166.527,184.1053,-80.2635,160.527,2587,7.197,-1.868,
+CrossSpp & site,159.5502,177.1285,-76.7751,153.5502,2587,10.49,-1.821,
+CrossSpp & source,157.3681,174.9463,-75.684,151.3681,2587,8.417,-1.894,
