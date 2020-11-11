@@ -168,6 +168,73 @@ fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.maxlength.1 + fertilizations.or
 
 fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.maxlength.1 + reproductionmodes.or.f + (1|MarkerName), family=binomial, data=mtdna_data)
 
+##More Mixed Models with multiple fixed variables (He, max length, fecundity constant for the following code)##
+
+#spp as Random variable
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + (1|spp), family=binomial, data=mtdna_data)
+
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.maxlength.1 + logtransform.fecundity_mean.1 + reproductionmodes.or.f + (1|spp), family=binomial, data=mtdna_data)
+
+#site as Random variable
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + (1|Site), family=binomial, data=mtdna_data)
+
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.maxlength.1 + logtransform.fecundity_mean.1 + reproductionmodes.or.f + (1|Site), family=binomial, data=mtdna_data)
+
+#source/study as Random variable
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + (1|Source), family=binomial, data=mtdna_data)
+
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.maxlength.1 + logtransform.fecundity_mean.1 + reproductionmodes.or.f + (1|Source), family=binomial, data=mtdna_data)
+
+#MarkerName as Random variable
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + (1|MarkerName), family=binomial, data=mtdna_data)
+
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.maxlength.1 + logtransform.fecundity_mean.1 + reproductionmodes.or.f + (1|MarkerName), family=binomial, data=mtdna_data)
+
+##More Mixed Models with multiple fixed variables (He & fecundity constant for the following code)##
+
+#spp as Random variable
+fit.bin <- glmer(mtdnas.or.f ~ He +  logtransform.fecundity_mean.1 +  logtransform.maxlength.1 +(1|spp), family=binomial, data=mtdna_data)
+
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.fecundity_mean.1 + fertilizations.or.f + (1|spp), family=binomial, data=mtdna_data)
+
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.fecundity_mean.1 + reproductionmodes.or.f + (1|spp), family=binomial, data=mtdna_data)
+
+#site as Random variable
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.fecundity_mean.1 + logtransform.maxlength.1 + (1|Site), family=binomial, data=mtdna_data)
+
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.fecundity_mean.1 + fertilizations.or.f + (1|Site), family=binomial, data=mtdna_data)
+
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.fecundity_mean.1 + reproductionmodes.or.f + (1|Site), family=binomial, data=mtdna_data)
+
+#source/study as Random variable
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.fecundity_mean.1 + logtransform.maxlength.1 + (1|Source), family=binomial, data=mtdna_data)
+
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.fecundity_mean.1 + fertilizations.or.f + (1|Source), family=binomial, data=mtdna_data)
+
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.fecundity_mean.1 + reproductionmodes.or.f + (1|Source), family=binomial, data=mtdna_data)
+
+#MarkerName as Random variable
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.fecundity_mean.1 + logtransform.maxlength.1 + (1|MarkerName), family=binomial, data=mtdna_data)
+
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.fecundity_mean.1 + fertilizations.or.f + (1|MarkerName), family=binomial, data=mtdna_data)
+
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.fecundity_mean.1 + reproductionmodes.or.f + (1|MarkerName), family=binomial, data=mtdna_data)
+
+
+##ALL VARIABLES MODELED TOGETHER##
+
+#spp as Random variable
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + (1|spp), family=binomial, data=mtdna_data)
+
+#site as Random variable
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + (1|Site), family=binomial, data=mtdna_data)
+
+#source/study as Random variable
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + (1|Source), family=binomial, data=mtdna_data)
+
+#MarkerName as Random variable
+fit.bin <- glmer(mtdnas.or.f ~ He + logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + (1|MarkerName), family=binomial, data=mtdna_data)
+
 ################################################### msat data set ################################################### 
 
 ##Create variable to model success/failures
@@ -319,6 +386,86 @@ fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + reproductionmodes.
 fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + Repeat + (1|Source), family=binomial, data=msat_data)
 
 fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + CrossSpp + (1|Source), family=binomial, data=msat_data)
+
+##More Mixed Models with multiple fixed variables (He, max length, fecundity constant for the following code)##
+
+#spp as Random variable
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f + (1|spp), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + reproductionmodes.or.f + (1|spp), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + Repeat + (1|spp), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + CrossSpp + (1|spp), family=binomial, data=msat_data)
+
+#site as Random variable 
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f + (1|Site), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + reproductionmodes.or.f + (1|Site), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + Repeat + (1|Site), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + CrossSpp + (1|Site), family=binomial, data=msat_data)
+
+#source/study as Random variable 
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f + (1|Source), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + reproductionmodes.or.f + (1|Source), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + Repeat + (1|Source), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + CrossSpp + (1|Source), family=binomial, data=msat_data)
+
+##More Mixed Models with multiple fixed variables (He, max length, fecundity, fertilization constant for the following code)##
+
+#spp as Random variable
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f + reproductionmodes.or.f +  (1|spp), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f + Repeat + (1|spp), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f + CrossSpp + (1|spp), family=binomial, data=msat_data)
+
+#site as Random variable 
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f + reproductionmodes.or.f +  (1|Site), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f + Repeat + (1|Site), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f + CrossSpp + (1|Site), family=binomial, data=msat_data)
+
+#source/study as Random variable 
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f + reproductionmodes.or.f +  (1|Source), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f + Repeat + (1|Source), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f + CrossSpp + (1|Source), family=binomial, data=msat_data)
+
+##More Mixed Models with multiple fixed variables (He, max length, fecundity, fertilization, reproduction constant for the following code)##
+
+#spp as Random variable
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f + reproductionmodes.or.f + Repeat + (1|spp), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f + reproductionmodes.or.f + CrossSpp + (1|spp), family=binomial, data=msat_data)
+
+#site as Random variable 
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f + reproductionmodes.or.f + Repeat + (1|Site), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f + reproductionmodes.or.f + CrossSpp + (1|Site), family=binomial, data=msat_data)
+
+#source/study as Random variable 
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f + reproductionmodes.or.f + Repeat + (1|Source), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f + reproductionmodes.or.f + CrossSpp + (1|Source), family=binomial, data=msat_data)
+
+##All variables modeled together##
+
+#spp as Random variable
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f + reproductionmodes.or.f + Repeat + CrossSpp + (1|spp), family=binomial, data=msat_data)
+
+#site as Random variable 
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f + reproductionmodes.or.f + Repeat + CrossSpp + (1|Site), family=binomial, data=msat_data)
+
+#source/study as Random variable 
+fit.bin <- glmer(msats.or.f ~ He + logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f + reproductionmodes.or.f + Repeat + CrossSpp + (1|Source), family=binomial, data=msat_data)
 
 ######################################################################################################
 #Examine residual plots to check assumptions
