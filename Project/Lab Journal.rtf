@@ -4,7 +4,7 @@
 }
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c100000\c0;\cssrgb\c100000\c100000\c99985\c0;
 }
-\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\margl1440\margr1440\vieww28600\viewh18000\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
 \f0\fs24 \cf0 6/29/2020:\
@@ -191,4 +191,308 @@ Worked on US mtDNA and msat datasets. Worked on mixed models. Recorded results o
 Worked on US mtDNA and msat datasets. Worked on mixed models. Recorded results on separate spreadsheet. Fixed max length and fecundity to be log transformed.\
 \
 11/11/2020\
-Worked on US mtDNA and msat datasets. Worked on mixed models. Recorded results on separate spreadsheet. }
+Worked on US mtDNA and msat datasets. Worked on mixed models. Recorded results on separate spreadsheet. \
+\
+11/16/2020\
+Worked on US mtDNA and msat datasets. Worked on mixed models. Recorded results on separate spreadsheet. Removed He as a fixed variable and fixed the code.\
+~List of all combinations:\
+mtDNA:\
+- Spp &\
+	> Maxlength\
+	> Maxlength & fecundity\
+	> Maxlength & fertilization method\
+	> Maxlength & reproduction mode\
+	> Maxlength, fecundity, fertilization method\
+	> Maxlength, fecundity, fertilization, reproduction mode\
+	> Fecundity\
+	> Fecundity & maxlength\
+	> Fecundity & fertilization method\
+	> Fecundity & reproduction mode\
+	> Fecundity, maxlength, fertilization method\
+	> Fecundity, maxlength, fertilization method, reproduction mode\
+	> Fertilization method\
+	> Fertilization method & maxlength\
+	> Fertilization method & fecundity\
+	> Fertilization method & reproduction mode\
+	> Fertilization method, maxlength,  fecundity\
+	> Fertilization method, maxlength, fecundity, reproduction mode\
+	> Reproduction mode\
+	> Reproduction mode & maxlength\
+	> Reproduction mode & fecundity\
+	> Reproduction mode & fertilization method\
+	> Reproduction mode, maxlength, fecundity, \
+	> Reproduction mode, maxlength, fecundity, fertilization method\
+- Site &\
+	> Maxlength\
+	> Maxlength & fecundity\
+	> Maxlength & fertilization method\
+	> Maxlength & reproduction mode\
+	> Maxlength, fecundity, fertilization method\
+	> Maxlength, fecundity, fertilization, reproduction mode\
+	> Fecundity\
+	> Fecundity & maxlength\
+	> Fecundity & fertilization method\
+	> Fecundity & reproduction mode\
+	> Fecundity, maxlength, fertilization method\
+	> Fecundity, maxlength, fertilization method, reproduction mode\
+	> Fertilization method\
+	> Fertilization method & maxlength\
+	> Fertilization method & fecundity\
+	> Fertilization method & reproduction mode\
+	> Fertilization method, maxlength,  fecundity\
+	> Fertilization method, maxlength, fecundity, reproduction mode\
+	> Reproduction mode\
+	> Reproduction mode & maxlength\
+	> Reproduction mode & fecundity\
+	> Reproduction mode & fertilization method\
+	> Reproduction mode, maxlength, fecundity, \
+	> Reproduction mode, maxlength, fecundity, fertilization method\
+- Source &\
+	> Maxlength\
+	> Maxlength & fecundity\
+	> Maxlength & fertilization method\
+	> Maxlength & reproduction mode\
+	> Maxlength, fecundity, fertilization method\
+	> Maxlength, fecundity, fertilization, reproduction mode\
+	> Fecundity\
+	> Fecundity & maxlength\
+	> Fecundity & fertilization method\
+	> Fecundity & reproduction mode\
+	> Fecundity, maxlength, fertilization method\
+	> Fecundity, maxlength, fertilization method, reproduction mode\
+	> Fertilization method\
+	> Fertilization method & maxlength\
+	> Fertilization method & fecundity\
+	> Fertilization method & reproduction mode\
+	> Fertilization method, maxlength,  fecundity\
+	> Fertilization method, maxlength, fecundity, reproduction mode\
+	> Reproduction mode\
+	> Reproduction mode & maxlength\
+	> Reproduction mode & fecundity\
+	> Reproduction mode & fertilization method\
+	> Reproduction mode, maxlength, fecundity, \
+	> Reproduction mode, maxlength, fecundity, fertilization method\
+- Marker Name &\
+	> Maxlength\
+	> Maxlength & fecundity\
+	> Maxlength & fertilization method\
+	> Maxlength & reproduction mode\
+	> Maxlength, fecundity, fertilization method\
+	> Maxlength, fecundity, fertilization, reproduction mode\
+	> Fecundity\
+	> Fecundity & maxlength\
+	> Fecundity & fertilization method\
+	> Fecundity & reproduction mode\
+	> Fecundity, maxlength, fertilization method\
+	> Fecundity, maxlength, fertilization method, reproduction mode\
+	> Fertilization method\
+	> Fertilization method & maxlength\
+	> Fertilization method & fecundity\
+	> Fertilization method & reproduction mode\
+	> Fertilization method, maxlength,  fecundity\
+	> Fertilization method, maxlength, fecundity, reproduction mode\
+	> Reproduction mode\
+	> Reproduction mode & maxlength\
+	> Reproduction mode & fecundity\
+	> Reproduction mode & fertilization method\
+	> Reproduction mode, maxlength, fecundity, \
+	> Reproduction mode, maxlength, fecundity, fertilization method\
+Msat:\
+- Spp &\
+	> Maxlength\
+	> Maxlength & fecundity\
+	> Maxlength & fertilization method\
+	> Maxlength & reproduction mode\
+	> Maxlength & repeat\
+	> Maxlength & crossspp\
+	> Maxlength, fecundity, fertilization method\
+	> Maxlength, fecundity, fertilization method, reproduction mode\
+	> Maxlength, fecundity, fertilization method, repeat\
+	> Maxlength, fecundity, fertilization method, crossspp\
+	> Maxlength, fecundity, fertilization method, reproduction mode, repeat\
+	> Maxlength, fecundity, fertilization method, reproduction mode, crossspp\
+	> Maxlength, fecundity, fertilization method, reproduction mode, repeat, crossspp\
+	> Fecundity\
+	> Fecundity & maxlength\
+	> Fecundity & fertilization method\
+	> Fecundity & reproduction mode\
+	> Fecundity & repeat\
+	> Fecundity & crossspp\
+	> Fecundity, maxlength, fertilization method\
+	> Fecundity, maxlength, fertilization method, reproduction mode\
+	> Fecundity, maxlength, fertilization method, repeat\
+	> Fecundity, maxlength, fertilization method, crossspp\
+	> Fecundity, maxlength, fertilization method, reproduction mode, repeat\
+	> Fecundity, maxlength, fertilization method, reproduction mode, crossspp\
+	> Fecundity, maxlength, fertilization method, reproduction mode, repeat, crossspp\
+	> Fertilization method\
+	> Fertilization method & maxlength\
+	> Fertilization method & fecundity\
+	> Fertilization method & reproduction mode\
+	> Fertilization method & repeat\
+	> Fertilization method & crossspp\
+	> Fertilization method, maxlength, fecundity,\
+	> Fertilization method, maxlength, fecundity, reproduction mode\
+	> Fertilization method, maxlength, fecundity, repeat\
+	> Fertilization method, maxlength, fecundity, crossspp\
+	> Fertilization method, maxlength, fecundity, reproduction mode, repeat\
+	> Fertilization method, maxlength, fecundity, reproduction mode, crossspp\
+	> Fertilization method, maxlength, fecundity, reproduction mode, repeat, crossspp\
+	> Reproduction mode\
+	> Reproduction mode & maxlength\
+	> Reproduction mode & fecundity\
+	> Reproduction mode & fertilization method\
+	> Reproduction mode & repeat\
+	> Reproduction mode & crossspp\
+	> Reproduction mode, maxlength, fecundity, \
+	> Reproduction mode, maxlength, fecundity, fertilization method\
+	> Reproduction mode, maxlength, fecundity, repeat\
+	> Reproduction mode, maxlength, fecundity, crossspp\
+	> Reproduction mode, maxlength, fecundity, fertilization method, repeat\
+	> Reproduction mode, maxlength, fecundity, fertilization method, crossspp\
+	> Reproduction mode, maxlength, fecundity, fertilization method, repeat, crossspp\
+	> Repeat\
+	> Repeat & maxlength\
+	> Repeat & fecundity\
+	> Repeat & fertilization method\
+	> Repeat & reproduction mode\
+	> Repeat & crossspp\
+	> Repeat, maxlength, fecundity, \
+	> Repeat maxlength, fecundity, fertilization method\
+	> Repeat, maxlength, fecundity, reproduction mode\
+	> Repeat, maxlength, fecundity, crossspp\
+	> Repeat, maxlength, fecundity, fertilization method, reproduction mode\
+	> Repeat, maxlength, fecundity, fertilization method, crossspp\
+	> Repeat, maxlength, fecundity, fertilization method, reproduction mode, crossspp\
+- Site &\
+	> Maxlength\
+	> Maxlength & fecundity\
+	> Maxlength & fertilization method\
+	> Maxlength & reproduction mode\
+	> Maxlength & repeat\
+	> Maxlength & crossspp\
+	> Maxlength, fecundity, fertilization method\
+	> Maxlength, fecundity, fertilization method, reproduction mode\
+	> Maxlength, fecundity, fertilization method, repeat\
+	> Maxlength, fecundity, fertilization method, crossspp\
+	> Maxlength, fecundity, fertilization method, reproduction mode, repeat\
+	> Maxlength, fecundity, fertilization method, reproduction mode, crossspp\
+	> Maxlength, fecundity, fertilization method, reproduction mode, repeat, crossspp\
+	> Fecundity\
+	> Fecundity & maxlength\
+	> Fecundity & fertilization method\
+	> Fecundity & reproduction mode\
+	> Fecundity & repeat\
+	> Fecundity & crossspp\
+	> Fecundity, maxlength, fertilization method\
+	> Fecundity, maxlength, fertilization method, reproduction mode\
+	> Fecundity, maxlength, fertilization method, repeat\
+	> Fecundity, maxlength, fertilization method, crossspp\
+	> Fecundity, maxlength, fertilization method, reproduction mode, repeat\
+	> Fecundity, maxlength, fertilization method, reproduction mode, crossspp\
+	> Fecundity, maxlength, fertilization method, reproduction mode, repeat, crossspp\
+	> Fertilization method\
+	> Fertilization method & maxlength\
+	> Fertilization method & fecundity\
+	> Fertilization method & reproduction mode\
+	> Fertilization method & repeat\
+	> Fertilization method & crossspp\
+	> Fertilization method, maxlength, fecundity,\
+	> Fertilization method, maxlength, fecundity, reproduction mode\
+	> Fertilization method, maxlength, fecundity, repeat\
+	> Fertilization method, maxlength, fecundity, crossspp\
+	> Fertilization method, maxlength, fecundity, reproduction mode, repeat\
+	> Fertilization method, maxlength, fecundity, reproduction mode, crossspp\
+	> Fertilization method, maxlength, fecundity, reproduction mode, repeat, crossspp\
+	> Reproduction mode\
+	> Reproduction mode & maxlength\
+	> Reproduction mode & fecundity\
+	> Reproduction mode & fertilization method\
+	> Reproduction mode & repeat\
+	> Reproduction mode & crossspp\
+	> Reproduction mode, maxlength, fecundity, \
+	> Reproduction mode, maxlength, fecundity, fertilization method\
+	> Reproduction mode, maxlength, fecundity, repeat\
+	> Reproduction mode, maxlength, fecundity, crossspp\
+	> Reproduction mode, maxlength, fecundity, fertilization method, repeat\
+	> Reproduction mode, maxlength, fecundity, fertilization method, crossspp\
+	> Reproduction mode, maxlength, fecundity, fertilization method, repeat, crossspp\
+	> Repeat\
+	> Repeat & maxlength\
+	> Repeat & fecundity\
+	> Repeat & fertilization method\
+	> Repeat & reproduction mode\
+	> Repeat & crossspp\
+	> Repeat, maxlength, fecundity, \
+	> Repeat maxlength, fecundity, fertilization method\
+	> Repeat, maxlength, fecundity, reproduction mode\
+	> Repeat, maxlength, fecundity, crossspp\
+	> Repeat, maxlength, fecundity, fertilization method, reproduction mode\
+	> Repeat, maxlength, fecundity, fertilization method, crossspp\
+	> Repeat, maxlength, fecundity, fertilization method, reproduction mode, crossspp\
+- Source &\
+	> Maxlength\
+	> Maxlength & fecundity\
+	> Maxlength & fertilization method\
+	> Maxlength & reproduction mode\
+	> Maxlength & repeat\
+	> Maxlength & crossspp\
+	> Maxlength, fecundity, fertilization method\
+	> Maxlength, fecundity, fertilization method, reproduction mode\
+	> Maxlength, fecundity, fertilization method, repeat\
+	> Maxlength, fecundity, fertilization method, crossspp\
+	> Maxlength, fecundity, fertilization method, reproduction mode, repeat\
+	> Maxlength, fecundity, fertilization method, reproduction mode, crossspp\
+	> Maxlength, fecundity, fertilization method, reproduction mode, repeat, crossspp\
+	> Fecundity\
+	> Fecundity & maxlength\
+	> Fecundity & fertilization method\
+	> Fecundity & reproduction mode\
+	> Fecundity & repeat\
+	> Fecundity & crossspp\
+	> Fecundity, maxlength, fertilization method\
+	> Fecundity, maxlength, fertilization method, reproduction mode\
+	> Fecundity, maxlength, fertilization method, repeat\
+	> Fecundity, maxlength, fertilization method, crossspp\
+	> Fecundity, maxlength, fertilization method, reproduction mode, repeat\
+	> Fecundity, maxlength, fertilization method, reproduction mode, crossspp\
+	> Fecundity, maxlength, fertilization method, reproduction mode, repeat, crossspp\
+	> Fertilization method\
+	> Fertilization method & maxlength\
+	> Fertilization method & fecundity\
+	> Fertilization method & reproduction mode\
+	> Fertilization method & repeat\
+	> Fertilization method & crossspp\
+	> Fertilization method, maxlength, fecundity,\
+	> Fertilization method, maxlength, fecundity, reproduction mode\
+	> Fertilization method, maxlength, fecundity, repeat\
+	> Fertilization method, maxlength, fecundity, crossspp\
+	> Fertilization method, maxlength, fecundity, reproduction mode, repeat\
+	> Fertilization method, maxlength, fecundity, reproduction mode, crossspp\
+	> Fertilization method, maxlength, fecundity, reproduction mode, repeat, crossspp\
+	> Reproduction mode\
+	> Reproduction mode & maxlength\
+	> Reproduction mode & fecundity\
+	> Reproduction mode & fertilization method\
+	> Reproduction mode & repeat\
+	> Reproduction mode & crossspp\
+	> Reproduction mode, maxlength, fecundity, \
+	> Reproduction mode, maxlength, fecundity, fertilization method\
+	> Reproduction mode, maxlength, fecundity, repeat\
+	> Reproduction mode, maxlength, fecundity, crossspp\
+	> Reproduction mode, maxlength, fecundity, fertilization method, repeat\
+	> Reproduction mode, maxlength, fecundity, fertilization method, crossspp\
+	> Reproduction mode, maxlength, fecundity, fertilization method, repeat, crossspp\
+	> Repeat\
+	> Repeat & maxlength\
+	> Repeat & fecundity\
+	> Repeat & fertilization method\
+	> Repeat & reproduction mode\
+	> Repeat & crossspp\
+	> Repeat, maxlength, fecundity, \
+	> Repeat maxlength, fecundity, fertilization method\
+	> Repeat, maxlength, fecundity, reproduction mode\
+	> Repeat, maxlength, fecundity, crossspp\
+	> Repeat, maxlength, fecundity, fertilization method, reproduction mode\
+	> Repeat, maxlength, fecundity, fertilization method, crossspp\
+	> Repeat, maxlength, fecundity, fertilization method, reproduction mode, crossspp}
