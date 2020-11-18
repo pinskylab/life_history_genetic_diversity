@@ -67,8 +67,14 @@ mtdna_data <- mtdna_data[!is.na(mtdna_data$mtdnas.or.f), ]
 mtdna_data <- mtdna_data[!grepl('NaN',mtdna_data$logtransform.fecundity_mean.1),]
 mtdna_data$fecundity_mean <- NULL
 mtdna_data$bp <- NULL
-model <- glmer(formula = (as.factor(mtdnas.or.f)) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|spp), family=binomial, data = mtdna_data, na.action = na.fail)
 summary(mtdna_data)
+model <- glm(formula = mtdnas.or.f ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1, family=binomial, data = mtdna_data)
+model <- glmer(formula = mtdnas.or.f ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|spp) + (1|Site) + (1|Source)+ (1|MarkerName), family=binomial, data = mtdna_data)
+model <- glmer(formula = mtdnas.or.f ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|spp), family=binomial, data = mtdna_data)
+model <- glmer(formula = mtdnas.or.f ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|Site), family=binomial, data = mtdna_data)
+model <- glmer(formula = mtdnas.or.f ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|Source), family=binomial, data = mtdna_data, na.action = 'na.fail')
+model <- glmer(formula = mtdnas.or.f ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|MarkerName), family=binomial, data = mtdna_data)
+
 
 mtdna.spp <- dredge(model)
 summary_mtdna.spp <-summary(mtdna.spp)
@@ -104,13 +110,13 @@ fit.bin <- glmer(mtdnas.or.f ~ fertilizations.or.f + (1|Source), family=binomial
 fit.bin <- glmer(mtdnas.or.f ~ reproductionmodes.or.f + (1|Source), family=binomial, data=mtdna_data)
 
 #MarkerName as Random variable
-fit.bin <- glmer(mtdnas.or.f ~ logtransform.maxlength.1 + (1|MarkerName ), family=binomial, data=mtdna_data)
+fit.bin <- glmer(mtdnas.or.f ~ logtransform.maxlength.1 + (1|MarkerName), family=binomial, data=mtdna_data)
 
-fit.bin <- glmer(mtdnas.or.f ~ logtransform.fecundity_mean.1 + (1|MarkerName ), family=binomial, data=mtdna_data)
+fit.bin <- glmer(mtdnas.or.f ~ logtransform.fecundity_mean.1 + (1|MarkerName), family=binomial, data=mtdna_data)
 
-fit.bin <- glmer(mtdnas.or.f ~ fertilizations.or.f + (1|MarkerName ), family=binomial, data=mtdna_data) ####CONVERGENCE PROBLEM
+fit.bin <- glmer(mtdnas.or.f ~ fertilizations.or.f + (1|MarkerName), family=binomial, data=mtdna_data) ####CONVERGENCE PROBLEM
 
-fit.bin <- glmer(mtdnas.or.f ~ reproductionmodes.or.f + (1|MarkerName ), family=binomial, data=mtdna_data)
+fit.bin <- glmer(mtdnas.or.f ~ reproductionmodes.or.f + (1|MarkerName), family=binomial, data=mtdna_data)
 
 ##More Mixed Models with multiple fixed variables (max length constant for the following code)##
 
