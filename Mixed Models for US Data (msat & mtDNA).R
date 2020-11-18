@@ -15,6 +15,7 @@ library(dplyr)
 library(lme4)
 library(Hmisc)
 library(ggplot2)
+library(MuMIn)
 
 #read in data
 mtdna_data <- read.csv("new_mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
@@ -53,7 +54,28 @@ for (i in 1:nrow(mtdna_data)) { #get log transformation data
   mtdna_data$logtransform.maxlength.1 <- log10(mtdna_data$maxlength)
 }
 
+for (i in 1:nrow(mtdna_data)) { #get log transformation data
+  cat(paste(i, " ", sep = ''))
+  mtdna_data$logtransform.bp.1 <- log10(mtdna_data$bp)
+}
+
 ##Fit model for success/failures##
+
+#dredge for He 
+mtdna_data <- mtdna_data[!is.na(mtdna_data$bp), ]
+mtdna_data <- mtdna_data[!is.na(mtdna_data$mtdnas.or.f), ]
+mtdna_data <- mtdna_data[!grepl('NaN',mtdna_data$logtransform.fecundity_mean.1),]
+mtdna_data$fecundity_mean <- NULL
+mtdna_data$bp <- NULL
+model <- glmer(formula = (as.factor(mtdnas.or.f)) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|spp), family=binomial, data = mtdna_data, na.action = na.fail)
+summary(mtdna_data)
+
+mtdna.spp <- dredge(model)
+summary_mtdna.spp <-summary(mtdna.spp)
+
+#dredge for pi
+
+
 #spp as Random variable
 fit.bin <- glmer(mtdnas.or.f ~ logtransform.maxlength.1 + (1|spp), family=binomial, data=mtdna_data)
 
@@ -179,7 +201,7 @@ fit.bin <- glmer(mtdnas.or.f ~ logtransform.fecundity_mean.1 + reproductionmodes
 fit.bin <- glmer(mtdnas.or.f ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + (1|spp), family=binomial, data=mtdna_data)
 
 #site as Random variable
-fit.bin <- glmer(mtdnas.or.f ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + (1|Site), family=binomial, data=mtdna_data)
+fit.bin <- glmer(mtdnas.or.f ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + (1|Site), family=binomial, data=mtdna_data, na.action = na.fail)
 
 #source/study as Random variable
 fit.bin <- glmer(mtdnas.or.f ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + (1|Source), family=binomial, data=mtdna_data)
@@ -218,6 +240,15 @@ msat_data$reproductionmodes.or.f <- as.factor(msat_data$reproductionmode)
 msat_data$reproductionmodes.or.f <- as.numeric(msat_data$reproductionmodes.or.f)
 
 ##Fit model for success/failures
+
+#dredge? 
+msat_data <- msat_data[!is.na(msat_data$bp), ]
+msat_data <- msat_data[!is.na(msat_data$mtdnas.or.f), ]
+msat_data <- msat_data[!grepl('NaN',msat_data$logtransform.fecundity_mean.1),]
+model <- glm(formula = mtdnas.or.f ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + bp, data = msat_data, na.action = na.fail)
+
+mtdna.spp <- dredge(model)
+
 #spp as Random variable
 fit.bin <- glmer(msats.or.f ~ He + (1|spp), family=binomial, data=msat_data)
 
