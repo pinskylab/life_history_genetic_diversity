@@ -275,19 +275,42 @@ msat.spp <- dredge(model)
 summary_mtdna.spp <-summary(msat.spp)
 
 #spp as Random variable
-fit.bin <- glmer(msats.or.f ~ He + (1|spp), family=binomial, data=msat_data)
-
-fit.bin <- glmer(msats.or.f ~ logtransform.maxlength.2 + (1|spp), family=binomial, data=msat_data)
+fit.bin <- glmer(msats.or.f ~ logtransform.maxlength.2 + logtransform.fecundity_mean.2 + Repeat + CrossSpp + (1|spp), family=binomial, data=msat_data)
 
 fit.bin <- glmer(msats.or.f ~ logtransform.fecundity_mean.2 + (1|spp), family=binomial, data=msat_data)
 
-fit.bin <- glmer(msats.or.f ~ fertilizations.or.f + (1|spp), family=binomial, data=msat_data)
+fit.bin <- glmer(msats.or.f ~ fertilizations.or.f2 + (1|spp), family=binomial, data=msat_data)
 
-fit.bin <- glmer(msats.or.f ~ reproductionmodes.or.f + (1|spp), family=binomial, data=msat_data)
+fit.bin <- glmer(msats.or.f ~ reproductionmodes.or.f2 + (1|spp), family=binomial, data=msat_data)
 
 fit.bin <- glmer(msats.or.f ~ Repeat + (1|spp), family=binomial, data=msat_data)
 
 fit.bin <- glmer(msats.or.f ~ CrossSpp + (1|spp), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ logtransform.fecundity_mean.2 + fertilizations.or.f2 + (1|spp), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ logtransform.maxlength.2 + fertilizations.or.f2 + (1|spp), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ logtransform.fecundity_mean.2 + fertilizations.or.f2 + CrossSpp + (1|spp), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ logtransform.fecundity_mean.2 + fertilizations.or.f2 + Repeat + (1|spp), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ logtransform.maxlength.2 + Repeat + CrossSpp + (1|spp), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ Repeat + CrossSpp + (1|spp), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ logtransform.fecundity_mean.2 + fertilizations.or.f2 + (1|spp), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ logtransform.maxlength.2 + fertilizations.or.f2 + Repeat + CrossSpp + (1|spp), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f2 + reproductionmodes.or.f2 + Repeat + CrossSpp + (1|spp), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ logtransform.maxlength.2 + Repeat + (1|spp), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ logtransform.maxlength.2 + logtransform.fecundity_mean.2 + Repeat + (1|spp), family=binomial, data=msat_data)
+
+fit.bin <- glmer(msats.or.f ~ logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f2 + CrossSpp + (1|spp), family=binomial, data=msat_data)
+
 
 #site as Random variable
 fit.bin <- glmer(msats.or.f ~ He + (1|Site), family=binomial, data=msat_data)
