@@ -73,13 +73,13 @@ mtdna_data$bp <- NULL
 summary(mtdna_data)
 model <- glm(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1, family=binomial, data = mtdna_data,na.action = 'na.fail')
 model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|spp) + (1|Site) + (1|Source)+ (1|MarkerName), family=binomial, data = mtdna_data)
-model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|spp), family=binomial, data = mtdna_data)
+model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|spp), family=binomial, data = mtdna_data, na.action = 'na.fail')
 model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|Site), family=binomial, data = mtdna_data, na.action = 'na.fail')
 model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|Source), family=binomial, data = mtdna_data, na.action = 'na.fail')
-model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|MarkerName), family=binomial, data = mtdna_data)
+model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|MarkerName), family=binomial, data = mtdna_data,na.action = 'na.fail')
 
 mtdna.spp <- dredge(model)
-summary_mtdna.spp <-summary(mtdna.spp)
+View(mtdna.spp) #to get a table that can be copy and pasted to Excel
 
 #dredge for pi
 model <- glm(formula = Pi ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1, data = mtdna_data,na.action = 'na.fail')
@@ -89,7 +89,8 @@ model <- lmer(formula = Pi ~ logtransform.maxlength.1 + logtransform.fecundity_m
 model <- lmer(formula = Pi ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|Source), data = mtdna_data, na.action = 'na.fail')
 model <- lmer(formula = Pi ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|MarkerName), data = mtdna_data, na.action = 'na.fail')
 
-mtdna.spp.He <- dredge(model)
+mtdna.spp.Pi <- dredge(model)
+View(mtdna.spp.Pi) #to get a table that can be copy and pasted to Excel
 
 #spp as Random variable
 fit.bin <- glmer(mtdnas.or.f ~ logtransform.maxlength.1 + (1|spp), family=binomial, data=mtdna_data)
