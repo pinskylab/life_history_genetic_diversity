@@ -14,7 +14,7 @@ library(tidyverse)
 library(dplyr)
 
 #read in data
-msat_spp <- read.csv("fbdat_msat.csv", stringsAsFactors = FALSE) #read in msat species list
+msat_spp <- read.csv("msat_papers_USA_new.csv", stringsAsFactors = FALSE) #read in msat species list
 mtdna_spp_new <- read.csv("mtdna_papers_USA_new.csv", stringsAsFactors = FALSE) #read in mtdna species list for new 
 
 #NOTE: Branchiostoma spps in mtdna NOT in fishbase -- will need to pull out before querying FB for data
@@ -31,9 +31,9 @@ msat_spp$maxlength <- NA #create column to fill in
 
 for (i in 1:nrow(msat_spp)) { #get length data
   cat(paste(i, " ", sep = ''))
-  msat_spp$maxlength[i] <- as.numeric(species(msat_spp$fbsci[i], fields = 'Length')$Length)
+  msat_spp$maxlength[i] <- as.numeric(species(msat_spp$spp[i], fields = 'Length')$Length)
   if(is.na(msat_spp$maxlength[i])) { #if male maxlength is NA, use female maxlength
-    msat_spp$maxlength[i] <- as.numeric(species(msat_spp$fbsci[i], fields = 'LengthFemale')$LengthFemale)
+    msat_spp$maxlength[i] <- as.numeric(species(msat_spp$spp[i], fields = 'LengthFemale')$LengthFemale)
   }
 }
 
@@ -42,7 +42,7 @@ msat_spp$mortalitywild <- NA #create column to fill in
 
 for (i in 1:nrow(msat_spp)) { #get mortality data
   cat(paste(i, " ", sep = ''))
-  msat_spp$mortalitywild[i] <- species((msat_spp$fbsci[i]), field='LongevityWild')
+  msat_spp$mortalitywild[i] <- species((msat_spp$spp[i]), field='LongevityWild')
 }
 
 #add fecundity from FB
@@ -52,11 +52,11 @@ msat_spp$fecundity_mean <- NA #calculate mean fecundity (when vector is provided
 
 for (i in 1:nrow(msat_spp)) { #get fecundity data
   cat(paste(i, " ", sep = ''))
-  msat_spp$fecundity[i] <- fecundity(species=(msat_spp$fbsci[i]), field='FecundityMean')
+  msat_spp$fecundity[i] <- fecundity(species=(msat_spp$spp[i]), field='FecundityMean')
   if(sjmisc::is_empty(unlist(msat_spp$fecundity[i]), all.na.empty = TRUE)) { #if fecundity mean is NA, use fecundity minimum
-    msat_spp$fecundity[i] <- fecundity(species=msat_spp$fbsci[i], field= 'FecundityMin')
+    msat_spp$fecundity[i] <- fecundity(species=msat_spp$spp[i], field= 'FecundityMin')
     if(sjmisc::is_empty(unlist(msat_spp$fecundity[i]), all.na.empty = TRUE)) { #if fecundity minimum is NA, use fecundity maximum
-      msat_spp$fecundity[i] <- fecundity(species=(msat_spp$fbsci[i]), fields = 'FecundityMax')
+      msat_spp$fecundity[i] <- fecundity(species=(msat_spp$spp[i]), fields = 'FecundityMax')
     }
   }
   msat_spp$fecundity_mean[i] <- mean(unlist(msat_spp$fecundity[i]), na.rm = TRUE) #calculate mean fecundity
@@ -67,7 +67,7 @@ msat_spp$maturitylength <- NA #create column to fill in
 
 for (i in 1:nrow(msat_spp)) { #get maturity length data
   cat(paste(i, " ", sep = ''))
-  msat_spp$maturitylength[i] <- maturity(species=(msat_spp$fbsci[i]), field='LengthMatMin')
+  msat_spp$maturitylength[i] <- maturity(species=(msat_spp$spp[i]), field='LengthMatMin')
   msat_spp$maturitylength_mean[i] <- mean(unlist(msat_spp$maturitylength[i]), na.rm = TRUE) #calculate mean maturity length
 }
 
@@ -76,7 +76,7 @@ msat_spp$maturityage <- NA #create column to fill in
 
 for (i in 1:nrow(msat_spp)) { #get maturity age data
   cat(paste(i, " ", sep = ''))
-  msat_spp$maturityage[i] <- maturity(species=(msat_spp$fbsci[i]), field='AgeMatMin')
+  msat_spp$maturityage[i] <- maturity(species=(msat_spp$spp[i]), field='AgeMatMin')
   msat_spp$maturityage_mean[i] <- mean(unlist(msat_spp$maturityage[i]), na.rm = TRUE) #calculate mean maturity length
 }
 
@@ -85,7 +85,7 @@ msat_spp$numberofspawningcycles <- NA #create column to fill in
 
 for (i in 1:nrow(msat_spp)) { #get spawning cycles data
   cat(paste(i, " ", sep = ''))
-  msat_spp$numberofspawningcycles[i] <- reproduction(species=(msat_spp$fbsci[i]), field='Spawning')
+  msat_spp$numberofspawningcycles[i] <- reproduction(species=(msat_spp$spp[i]), field='Spawning')
 }
 
 
@@ -97,7 +97,7 @@ msat_spp$fertilization <- NA #create column to fill in
 
 for (i in 1:nrow(msat_spp)) { #get fertilization data
   cat(paste(i, " ", sep = ''))
-  msat_spp$fertilization[i] <- reproduction(species=(msat_spp$fbsci[i]), field='Fertilization')
+  msat_spp$fertilization[i] <- reproduction(species=(msat_spp$spp[i]), field='Fertilization')
 }
 
 #add reproduction mode from FB
@@ -105,7 +105,7 @@ msat_spp$reproductionmode <- NA #create column to fill in
 
 for (i in 1:nrow(msat_spp)) { #get reproduction mode data
   cat(paste(i, " ", sep = ''))
-  msat_spp$reproductionmode[i] <- reproduction(species=(msat_spp$fbsci[i]), field='ReproMode')
+  msat_spp$reproductionmode[i] <- reproduction(species=(msat_spp$spp[i]), field='ReproMode')
 }
 
 #add spawning ground from FB
@@ -113,7 +113,7 @@ msat_spp$spawningground <- NA #create column to fill in
 
 for (i in 1:nrow(msat_spp)) { #get spawning ground data
   cat(paste(i, " ", sep = ''))
-  msat_spp$spawningground[i] <- spawning(species_list=(msat_spp$fbsci[i]), field='SpawningGround')
+  msat_spp$spawningground[i] <- spawning(species_list=(msat_spp$spp[i]), field='SpawningGround')
 }
 
 #add Batch Spawner information from FB
@@ -121,7 +121,7 @@ msat_spp$batchspawner <- NA #create column to fill in
 
 for (i in 1:nrow(msat_spp)) { #get batch spawner data
   cat(paste(i, " ", sep = ''))
-  msat_spp$batchspawner[i] <- reproduction(species_list=(msat_spp$fbsci[i]), field='BatchSpawner')
+  msat_spp$batchspawner[i] <- reproduction(species_list=(msat_spp$spp[i]), field='BatchSpawner')
 }
 
 #add parental care from FB
@@ -129,7 +129,7 @@ msat_spp$parentalcare <- NA #create column to fill in
 
 for (i in 1:nrow(msat_spp)) { #get parental care data
   cat(paste(i, " ", sep = ''))
-  msat_spp$parentalcare[i] <- reproduction(species=(msat_spp$fbsci[i]), field='ParentalCareQ')
+  msat_spp$parentalcare[i] <- reproduction(species=(msat_spp$spp[i]), field='ParentalCareQ')
 }
 
 #add larvae size from FB
@@ -137,11 +137,11 @@ msat_spp$larvaesize <- NA #create column to fill in
 
 for (i in 1:nrow(msat_spp)) { #get larvae data
   cat(paste(i, " ", sep = ''))
-  msat_spp$larvaesize[i] <- larvae(species=(msat_spp$fbsci[i]), field='LhMid')
+  msat_spp$larvaesize[i] <- larvae(species=(msat_spp$spp[i]), field='LhMid')
   if(sjmisc::is_empty(unlist(msat_spp$larvaesize[i]), all.na.empty = TRUE)) { #if larvae median is NA, use larvae size minimum
-    msat_spp$larvaesize[i] <- larvae(species=msat_spp$fbsci[i], field= 'LhMin')
+    msat_spp$larvaesize[i] <- larvae(species=msat_spp$spp[i], field= 'LhMin')
     if(sjmisc::is_empty(unlist(msat_spp$larvaesize[i]), all.na.empty = TRUE)) { #if larvae minimum is NA, use larvae size maximum
-      msat_spp$larvaesize[i] <- larvae(species=(msat_spp$fbsci[i]), fields = 'LhMax')
+      msat_spp$larvaesize[i] <- larvae(species=(msat_spp$spp[i]), fields = 'LhMax')
     }
   }
   msat_spp$larvae_mean[i] <- mean(unlist(msat_spp$larvaesize[i]), na.rm = TRUE) #calculate mean larvae size
