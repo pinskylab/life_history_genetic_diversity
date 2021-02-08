@@ -454,4 +454,13 @@ msat_full_data$X.y <- NULL #removed unnecessary column
 
 ###write csv###
 
-write.csv(msat_full_data, "msat_final_data.csv")
+write.csv(msat_full_data, "new_msat_final_data.csv")
+
+###write csv for mtdna new data (no merging required###
+
+msat_spp$X.1 <- NULL #removed unnecessary column
+msat_spp$X <- NULL #removed unnecessary column
+
+msat_spp <- apply(msat_spp,2,as.character)
+
+write.csv(msat_spp, "new_msat_full_US_data.csv")
