@@ -84,6 +84,9 @@ model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + log
 model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|Source), family=binomial, data = mtdna_data, na.action = 'na.fail')
 model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|MarkerName), family=binomial, data = mtdna_data,na.action = 'na.fail')
 
+#combo of random variable for He 
+model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|MarkerName) + (1|Site), family=binomial, data = mtdna_data, na.action = 'na.fail')
+
 mtdna.spp <- dredge(model)
 View(mtdna.spp) #to get a table that can be copy and pasted to Excel
 
@@ -94,6 +97,12 @@ model <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + logtransfor
 model <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|Site), data = mtdna_data, na.action = 'na.fail', REML=FALSE)
 model <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|Source), data = mtdna_data, na.action = 'na.fail', REML=FALSE)
 model <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|MarkerName), data = mtdna_data, na.action = 'na.fail',REML=FALSE)
+
+#combo of random variable for pi 
+model <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|Site) + (1|Source), data = mtdna_data, na.action = 'na.fail', REML=FALSE)
+model <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|Source) + (1|MarkerName), data = mtdna_data, na.action = 'na.fail', REML=FALSE)
+model <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|Site) +(1|Source) + (1|MarkerName), data = mtdna_data, na.action = 'na.fail', REML=FALSE)
+
 
 mtdna.spp.Pi <- dredge(model)
 View(mtdna.spp.Pi) #to get a table that can be copy and pasted to Excel
