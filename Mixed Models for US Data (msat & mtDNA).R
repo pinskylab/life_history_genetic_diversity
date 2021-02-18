@@ -86,6 +86,9 @@ model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + log
 
 #combo of random variable for He 
 model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|MarkerName) + (1|Site), family=binomial, data = mtdna_data, na.action = 'na.fail')
+model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|MarkerName) + (1|Source), family=binomial, data = mtdna_data, na.action = 'na.fail')
+model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|MarkerName) + (1|Site) + (1|Source), family=binomial, data = mtdna_data, na.action = 'na.fail')
+
 
 mtdna.spp <- dredge(model)
 View(mtdna.spp) #to get a table that can be copy and pasted to Excel
@@ -159,6 +162,10 @@ model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.2 + log
 model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f2 + reproductionmodes.or.f2 + Repeat + CrossSpp + (1|spp), family=binomial, data = msat_data, na.action = 'na.fail')
 model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f2 + reproductionmodes.or.f2 + Repeat + CrossSpp + (1|Site), family=binomial, data = msat_data, na.action = 'na.fail')
 model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f2 + reproductionmodes.or.f2 + Repeat + CrossSpp + (1|Source), family=binomial, data = msat_data, na.action = 'na.fail')
+
+#combo of random variable for He
+model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f2 + reproductionmodes.or.f2 + Repeat + CrossSpp + (1|Site) + (1|Source) , family=binomial, data = msat_data, na.action = 'na.fail')
+
 
 msat.spp <- dredge(model)
 View(msat.spp)
