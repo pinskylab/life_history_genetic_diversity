@@ -16,6 +16,7 @@ library(lme4)
 library(Hmisc)
 library(ggplot2)
 library(MuMIn)
+library(lmerTest)
 
 #read in data
 mtdna_data <- read.csv("new_mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
@@ -93,6 +94,16 @@ model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + log
 mtdna.spp <- dredge(model)
 View(mtdna.spp) #to get a table that can be copy and pasted to Excel
 
+#Find SE & P-Value for Fixed, SD for Random
+sum <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|MarkerName) + (1|Site), family=binomial, data = mtdna_data, na.action = 'na.fail')
+summary(sum)
+
+# extract coefficients
+coefs <- data.frame(coef(summary(sum)))
+# use normal distribution to approximate p-value
+coefs$p.z <- 2 * (1 - pnorm(abs(coefs$t.value)))
+coefs
+
 #dredge for pi
 model <- glm(formula = logtransform.Pi ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1, data = mtdna_data, na.action = 'na.fail')
 model <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|spp) + (1|Site) + (1|Source)+ (1|MarkerName), data = mtdna_data, na.action = 'na.fail', REML=FALSE)
@@ -109,6 +120,12 @@ model <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + logtransfor
 
 mtdna.spp.Pi <- dredge(model)
 View(mtdna.spp.Pi) #to get a table that can be copy and pasted to Excel
+
+#Find SE & P-Value for Fixed, SD for Random
+sum <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|Site) + (1|Source), data = mtdna_data, na.action = 'na.fail', REML=FALSE)
+sum <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|Source) + (1|MarkerName), data = mtdna_data, na.action = 'na.fail', REML=FALSE)
+
+summary(sum)
 
 ################################################### msat data set ################################################### 
 
@@ -170,3 +187,7 @@ model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.2 + log
 msat.spp <- dredge(model)
 View(msat.spp)
 summary_mtdna.spp <-summary(msat.spp)
+
+#Find SE & P-Value for Fixed, SD for Random
+sum <- glm(formula = cbind(success,failure) ~ logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f2 + reproductionmodes.or.f2 + Repeat + CrossSpp, data = msat_data, family=binomial, na.action = 'na.fail')
+summary(sum)
