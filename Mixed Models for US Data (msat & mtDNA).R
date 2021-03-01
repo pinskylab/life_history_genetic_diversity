@@ -127,6 +127,26 @@ sum <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + logtransform.
 
 summary(sum)
 
+#try to fix convergence
+length(getME(model,'theta'))
+length(fixef(model))
+
+
+tt <- getME(model,"theta")
+ll <- getME(model,"lower")
+min(tt[ll==0])
+
+derivs1 <- model@optinfo$derivs
+sc_grad1 <- with(derivs1,solve(Hessian,gradient))
+max(abs(sc_grad1))
+
+max(pmin(abs(sc_grad1),abs(derivs1$gradient)))
+
+
+ss <- getME(model,c("theta","fixef"))
+m2 <- update(model,start=ss,control=glmerControl(optCtrl=list(maxfun=2e4)))
+m3 <- update(model,start=ss,control=glmerControl(optimizer="bobyqa", optCtrl=list(maxfun=2e5)))
+
 ################################################### msat data set ################################################### 
 
 ##Create variable to model success/failures
