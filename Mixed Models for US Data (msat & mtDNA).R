@@ -29,10 +29,10 @@ msat_data <- read.csv("new_msat_full_US_data.csv", stringsAsFactors = TRUE) #rea
 
 ################################################### mtDNA data set################################################### 
 
-##Create variable to model success/failures
-# REMOVE: mtdna_data$mtdnas.or.f <- round(mtdna_data$He*mtdna_data$n) & round((1-mtdna_data$He)*mtdna_data$n)  #create column of successes or failures
-mtdna_data$success <- round(mtdna_data$He*mtdna_data$n)
-mtdna_data$failure <- round((1-mtdna_data$He)*mtdna_data$n)
+#Transform He for the gtmmTMB to work
+for (i in 1:nrow(mtdna_data)) { #transform data to handle 1s (Douma & Weedon (2018) Methods in Ecology & Evolution)
+  mtdna_data$transformed_He[i] <- ((mtdna_data$He[i]*(mtdna_data$n[i] - 1)) + 0.5)/mtdna_data$n[i]
+}
 
 #Add column for final fertilization
 mtdna_data$final_fertilization [mtdna_data$fertilization =="in brood pouch or similar structure"] <- "internal (oviduct)" #convert "in brood pouch or similar structure" to internal fertilization
@@ -72,8 +72,8 @@ for (i in 1:nrow(mtdna_data)) { #get log transformation data
 #dredge for He 
 mtdna_data <- mtdna_data[!is.na(mtdna_data$bp), ]
 # REMOVE: mtdna_data <- mtdna_data[!is.na(mtdna_data$mtdnas.or.f), ]
-mtdna_data <- mtdna_data[!is.na(mtdna_data$success), ]
-mtdna_data <- mtdna_data[!is.na(mtdna_data$failure), ]
+#mtdna_data <- mtdna_data[!is.na(mtdna_data$success), ]
+#mtdna_data <- mtdna_data[!is.na(mtdna_data$failure), ]
 mtdna_data <- mtdna_data[!grepl('NaN',mtdna_data$logtransform.fecundity_mean.1),]
 mtdna_data <- mtdna_data[!is.na(mtdna_data$logtransform.Pi), ]
 mtdna_data$fecundity_mean <- NULL
@@ -91,6 +91,8 @@ model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + log
 model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|MarkerName) + (1|Source), family=binomial, data = mtdna_data, na.action = 'na.fail')
 # REMOVE: model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|MarkerName) + (1|Site) + (1|Source), family=binomial, data = mtdna_data, na.action = 'na.fail')
 
+model <- glmmTMB(transformed_He ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|spp) + (1|Source) + (1|MarkerName), family = beta_family, data = mtdna_data)
+
 
 mtdna.spp <- dredge(model)
 View(mtdna.spp) #to get a table that can be copy and pasted to Excel
@@ -101,15 +103,6 @@ fit.bin <- glmer(cbind(success,failure) ~ fertilizations.or.f + (1|spp) + (1|Sou
 fit.bin <- glmer(cbind(success,failure) ~ fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|spp) + (1|Source)+ (1|MarkerName), family=binomial, data=mtdna_data)
 fit.bin <- glmer(cbind(success,failure) ~ logtransform.maxlength.1 + fertilizations.or.f + (1|spp) + (1|Source)+ (1|MarkerName), family=binomial, data=mtdna_data)
 
-#Find SE & P-Value for Fixed, SD for Random
-sum <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + +(1|spp) + (1|MarkerName) + (1|Source), family=binomial, data = mtdna_data, na.action = 'na.fail')
-summary(sum)
-
-# extract coefficients
-coefs <- data.frame(coef(summary(sum)))
-# use normal distribution to approximate p-value
-coefs$p.z <- 2 * (1 - pnorm(abs(coefs$t.value)))
-coefs
 
 #dredge for pi
 model <- glm(formula = logtransform.Pi ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1, data = mtdna_data, na.action = 'na.fail')
@@ -165,7 +158,7 @@ m3 <- update(model,start=ss,control=glmerControl(optimizer="bobyqa", optCtrl=lis
 
 #Transform He for the gtmmTMB to work
 for (i in 1:nrow(msat_data)) { #transform data to handle 1s (Douma & Weedon (2018) Methods in Ecology & Evolution)
-  msat_data$transformed_He[i] <- ((msat_data$He[i]*(msat_data$n[i] - 1)) + 0.5)/msat_data$n[i]
+  msat_data$transformed_He2[i] <- ((msat_data$He[i]*(msat_data$n[i] - 1)) + 0.5)/msat_data$n[i]
 }
 
 #Logtransform
@@ -215,12 +208,13 @@ model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.2 + log
 model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f2 + reproductionmodes.or.f2 + Repeat + CrossSpp + PrimerNote + (1|Source), family=binomial, data = msat_data, na.action = 'na.fail')
 
 #combo of random variable for He
-model <- glmmTMB(transformed_He ~ logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f2 + reproductionmodes.or.f2 + PrimerNote + CrossSpp + Repeat + (1|spp) + (1|Source), family = beta_family, data = msat_data)
-
-MuMIn::dredge(model)
-summary(model)
+model <- glmmTMB(transformed_He2 ~ logtransform.maxlength.2 + logtransform.fecundity_mean.2 + fertilizations.or.f2 + reproductionmodes.or.f2 + PrimerNote + CrossSpp + Repeat + (1|spp) + (1|Source), family = beta_family, data = msat_data)
 
 msat.spp <- dredge(model)
+summary(model)
+
+dredge(model, evaluate = TRUE, rank = "AICc")
+
 View(msat.spp)
 summary_mtdna.spp <-summary(msat.spp)
 
