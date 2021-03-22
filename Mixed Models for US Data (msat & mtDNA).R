@@ -213,8 +213,6 @@ model <- glmmTMB(transformed_He2 ~ logtransform.maxlength.2 + logtransform.fecun
 msat.spp <- dredge(model)
 summary(model)
 
-dredge(model, evaluate = TRUE, rank = "AICc")
-
 View(msat.spp)
 summary_mtdna.spp <-summary(msat.spp)
 
