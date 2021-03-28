@@ -83,7 +83,7 @@ ggplot(mtdna_reproduction_type_He_no.na ) + geom_boxplot(aes(x = specific.repro_
 
 #####Scatter Plots: Numerical Data#####
 
-#Max Length#
+#Max Length# 
 
 mtdna_maxlength_He_no.na <- mtdna_data_new[!is.na(mtdna_data_new$maxlength) & !is.na(mtdna_data_new$He),] #create new table that excludes NA's from columns of interest
 
