@@ -572,5 +572,5 @@ Used following code to combine csv files together due to fishbone not pulling LH
 old <- read.csv("msatloci.csv")\
 new <- read.csv("msat_spp_final.csv")\
 new_full_msat_LH <- merge(x = old, y = new[ , c("spp","maxlength","fecundity_mean","fertilization","reproductionmode")], by = "spp", all.x=TRUE)\
-write.csv(new_full_msat_LH,'new_full_msat_LH.csv')\
+write.csv(new_full_msat_LH,'new_full_msat_LH.csv\'92)s\
 }
