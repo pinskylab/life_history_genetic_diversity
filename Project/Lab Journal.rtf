@@ -566,4 +566,11 @@ Worked on beta regression models.\
 \
 3/28/2021\
 Worked on beta regression models. Worked on graphs. Created presentation comparing US data vs. Full data results\
+\
+3/29/2021\
+Used following code to combine csv files together due to fishbone not pulling LH properly:\
+old <- read.csv("msatloci.csv")\
+new <- read.csv("msat_spp_final.csv")\
+new_full_msat_LH <- merge(x = old, y = new[ , c("spp","maxlength","fecundity_mean","fertilization","reproductionmode")], by = "spp", all.x=TRUE)\
+write.csv(new_full_msat_LH,'new_full_msat_LH.csv')\
 }
