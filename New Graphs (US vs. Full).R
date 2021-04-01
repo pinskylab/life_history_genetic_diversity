@@ -216,6 +216,8 @@ for (i in 1:nrow(msat_fecundity_He_no.na)) { #get log transformation data
 
 #####Box Plots: Character Data#####
 
+### He ###
+
 #Fertilization#
 
 final_fertilization_all = merge(mtdna_final_fertilization_He_no.na, msat_final_fertilization_He_no.na, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE) #merge final fertilization data form mtdna and msat together
@@ -314,7 +316,6 @@ ggplot(specificreproductionmode_all) + geom_boxplot(aes(x = specific.repro_mode,
     axis.title.y = element_text(color="red", size=14, face="bold"))+
   scale_fill_manual(values=c("turquoise2", "darkcyan")) + 
   scale_x_discrete(labels = function(x) stringr::str_wrap(x, width = 5))
-
 
 #####Scatter Plots: Numerical Data#####
 
@@ -878,48 +879,48 @@ for (i in 1:nrow(mtdna_maxlengthandfecunditymean_He_no.na_FULL)) { #get log tran
 
 ### Comparing Max length vs. Fecundity: msat ###
 
-msat_maxlengthandfecunditymean_He_no.na <- msat_data[!is.na(msat_data$maxlength) & !is.na(msat_data$He),] #create new table that excludes NA's from columns of interest
-msat_maxlengthandfecunditymean_He_no.na <- msat_data[!is.na(msat_data$fecundity_mean) & !is.na(msat_data$He),] #create new table that excludes NA's from columns of interest
+msat_maxlengthandfecunditymean_He_no.na_FULL <- msat_data[!is.na(msat_data$maxlength) & !is.na(msat_data$He),] #create new table that excludes NA's from columns of interest
+msat_maxlengthandfecunditymean_He_no.na_FULL <- msat_data[!is.na(msat_data$fecundity_mean) & !is.na(msat_data$He),] #create new table that excludes NA's from columns of interest
 
-msat_maxlengthandfecunditymean_He_no.na$logtransform.maxlength <- NA #add column to do a log transformation for max length
+msat_maxlengthandfecunditymean_He_no.na_FULL$logtransform.maxlength <- NA #add column to do a log transformation for max length
 
-for (i in 1:nrow(msat_maxlengthandfecunditymean_He_no.na)) { #get log transformation data
+for (i in 1:nrow(msat_maxlengthandfecunditymean_He_no.na_FULL)) { #get log transformation data
   cat(paste(i, " ", sep = ''))
-  msat_maxlengthandfecunditymean_He_no.na$logtransform.maxlength <- log10(msat_maxlengthandfecunditymean_He_no.na$maxlength)
+  msat_maxlengthandfecunditymean_He_no.na_FULL$logtransform.maxlength <- log10(msat_maxlengthandfecunditymean_He_no.na_FULL$maxlength)
 }
 
-msat_maxlengthandfecunditymean_He_no.na$logtransform.fecundity <- NA #add column to do a log transformation for fecundity mean
+v$logtransform.fecundity <- NA #add column to do a log transformation for fecundity mean
 
-for (i in 1:nrow(msat_maxlengthandfecunditymean_He_no.na)) { #get log transformation data
+for (i in 1:nrow(msat_maxlengthandfecunditymean_He_no.na_FULL)) { #get log transformation data
   cat(paste(i, " ", sep = ''))
-  msat_maxlengthandfecunditymean_He_no.na$logtransform.fecundity <- log10(msat_maxlengthandfecunditymean_He_no.na$fecundity_mean)
+  msat_maxlengthandfecunditymean_He_no.na_FULL$logtransform.fecundity <- log10(msat_maxlengthandfecunditymean_He_no.na_FULL$fecundity_mean)
 }
 
 #Graph
 
-final_maxlength_all_mlvsfm = merge(mtdna_maxlengthandfecunditymean_He_no.na, msat_maxlengthandfecunditymean_He_no.na, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE) #merge final fertilization data form mtdna and msat together
+final_maxlength_all_mlvsfmFULL = merge(mtdna_maxlengthandfecunditymean_He_no.na_FULL, msat_maxlengthandfecunditymean_He_no.na_FULL, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE) #merge final fertilization data form mtdna and msat together
 
-final_maxlength_all_mlvsfm$markertype <- NA #create new column to categorize marker type
+final_maxlength_all_mlvsfmFULL$markertype <- NA #create new column to categorize marker type
 
 #add marker type based on file type
-final_maxlength_all_mlvsfm$markertype [final_maxlength_all_mlvsfm$file == "mtdna101"]  <- "mtDNA"
-final_maxlength_all_mlvsfm$markertype [final_maxlength_all_mlvsfm$file == "mtdna102"]  <- "mtDNA"
-final_maxlength_all_mlvsfm$markertype [final_maxlength_all_mlvsfm$file == "mtdna103"]  <- "mtDNA"
-final_maxlength_all_mlvsfm$markertype [final_maxlength_all_mlvsfm$file == "msats000"]  <- "msat" 
-final_maxlength_all_mlvsfm$markertype [final_maxlength_all_mlvsfm$file == "msats001"]  <- "msat"
-final_maxlength_all_mlvsfm$markertype [final_maxlength_all_mlvsfm$file == "msats002"]  <- "msat"
-final_maxlength_all_mlvsfm$markertype [final_maxlength_all_mlvsfm$file == "msats200"]  <- "msat" 
-final_maxlength_all_mlvsfm$markertype [final_maxlength_all_mlvsfm$file == "msats201"]  <- "msat" 
-final_maxlength_all_mlvsfm$markertype [final_maxlength_all_mlvsfm$file == "msats100"]  <- "msat" 
-final_maxlength_all_mlvsfm$markertype [final_maxlength_all_mlvsfm$file == "msats101"]  <- "msat" 
-final_maxlength_all_mlvsfm$markertype [final_maxlength_all_mlvsfm$file == "msats301"]  <- "msat" 
-final_maxlength_all_mlvsfm$markertype [final_maxlength_all_mlvsfm$file == "msats302"]  <- "msat" 
-final_maxlength_all_mlvsfm$markertype [final_maxlength_all_mlvsfm$file == "msats303"]  <- "msat" 
-final_maxlength_all_mlvsfm$markertype [final_maxlength_all_mlvsfm$file == "msats304"]  <- "msat" 
-final_maxlength_all_mlvsfm$markertype [final_maxlength_all_mlvsfm$file == "msats305"]  <- "msat"
-final_maxlength_all_mlvsfm$markertype [final_maxlength_all_mlvsfm$file ==	"ppdat"]  <- "msat" 
+final_maxlength_all_mlvsfmFULL$markertype [final_maxlength_all_mlvsfmFULL$file == "mtdna101"]  <- "mtDNA"
+final_maxlength_all_mlvsfmFULL$markertype [final_maxlength_all_mlvsfmFULL$file == "mtdna102"]  <- "mtDNA"
+final_maxlength_all_mlvsfmFULL$markertype [final_maxlength_all_mlvsfmFULL$file == "mtdna103"]  <- "mtDNA"
+final_maxlength_all_mlvsfmFULL$markertype [final_maxlength_all_mlvsfmFULL$file == "msats000"]  <- "msat" 
+final_maxlength_all_mlvsfmFULL$markertype [final_maxlength_all_mlvsfmFULL$file == "msats001"]  <- "msat"
+final_maxlength_all_mlvsfmFULL$markertype [final_maxlength_all_mlvsfmFULL$file == "msats002"]  <- "msat"
+final_maxlength_all_mlvsfmFULL$markertype [final_maxlength_all_mlvsfmFULL$file == "msats200"]  <- "msat" 
+final_maxlength_all_mlvsfmFULL$markertype [final_maxlength_all_mlvsfmFULL$file == "msats201"]  <- "msat" 
+final_maxlength_all_mlvsfmFULL$markertype [final_maxlength_all_mlvsfmFULL$file == "msats100"]  <- "msat" 
+final_maxlength_all_mlvsfmFULL$markertype [final_maxlength_all_mlvsfmFULL$file == "msats101"]  <- "msat" 
+final_maxlength_all_mlvsfmFULL$markertype [final_maxlength_all_mlvsfmFULL$file == "msats301"]  <- "msat" 
+final_maxlength_all_mlvsfmFULL$markertype [final_maxlength_all_mlvsfmFULL$file == "msats302"]  <- "msat" 
+final_maxlength_all_mlvsfmFULL$markertype [final_maxlength_all_mlvsfmFULL$file == "msats303"]  <- "msat" 
+final_maxlength_all_mlvsfmFULL$markertype [final_maxlength_all_mlvsfmFULL$file == "msats304"]  <- "msat" 
+final_maxlength_all_mlvsfmFULL$markertype [final_maxlength_all_mlvsfmFULL$file == "msats305"]  <- "msat"
+final_maxlength_all_mlvsfmFULL$markertype [final_maxlength_all_mlvsfmFULL$file ==	"ppdat"]  <- "msat" 
 
-ggplot(final_maxlength_all_mlvsfm, aes(x=logtransform.maxlength, y=logtransform.fecundity, col=markertype, shape=markertype)) + #max length & He scatter plot
+ggplot(final_maxlength_all_mlvsfmFULL, aes(x=logtransform.maxlength, y=logtransform.fecundity, col=markertype, shape=markertype)) + #max length & He scatter plot
   geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "black", size = 1.5, fill = NA) + 
@@ -933,9 +934,11 @@ ggplot(final_maxlength_all_mlvsfm, aes(x=logtransform.maxlength, y=logtransform.
     plot.title = element_text(size=14, face="bold"),
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))+
-  annotate(geom="label", x = 2.2, y = 4, label = lm_eqn(msat_maxlengthandfecunditymean_He_no.na$logtransform.maxlength, msat_maxlengthandfecunditymean_He_no.na$logtransform.fecundity, msat_maxlengthandfecunditymean_He_no.na), 
+  annotate(geom="label", x = 2.4, y = 6, label = lm_eqn(msat_maxlengthandfecunditymean_He_no.na_FULL$logtransform.maxlength, msat_maxlengthandfecunditymean_He_no.na_FULL$logtransform.fecundity, msat_maxlengthandfecunditymean_He_no.na_FULL), 
            color="skyblue3", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
-  annotate(geom="label", x = 2, y = 7, label = lm_eqn(mtdna_maxlengthandfecunditymean_He_no.na$logtransform.maxlength, mtdna_maxlengthandfecunditymean_He_no.na$logtransform.fecundity, mtdna_maxlengthandfecunditymean_He_no.na), 
+  annotate(geom="label", x = 2, y = 3, label = lm_eqn(mtdna_maxlengthandfecunditymean_He_no.na_FULL$logtransform.maxlength, mtdna_maxlengthandfecunditymean_He_no.na_FULL$logtransform.fecundity, mtdna_maxlengthandfecunditymean_He_no.na_FULL), 
            color="blue", size = 5, parse=TRUE, alpha = 0.8) + #add regression line equation
   scale_colour_manual(values=c("skyblue2","blue")) +
   scale_shape(solid = FALSE)
+
+### Comparing US mtDNA vs. Full mtDNA Pi ###
