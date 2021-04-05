@@ -321,7 +321,7 @@ ggplot(specificreproductionmode_all) + geom_boxplot(aes(x = specific.repro_mode,
 
 #Max Length#
 
-#w/ Rhincodon typus outlier
+#w/ outliers
 final_maxlength_all = merge(mtdna_maxlength_He_no.na, msat_maxlength_He_no.na, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE) #merge final fertilization data form mtdna and msat together
 
 final_maxlength_all$markertype <- NA #create new column to categorize marker type
@@ -361,6 +361,50 @@ ggplot(final_maxlength_all, aes(x=logtransform.maxlength, y=He, col=markertype, 
   annotate(geom="label", x = 1.5, y = 0.55, label = lm_eqn(msat_maxlength_He_no.na$logtransform.maxlength, msat_maxlength_He_no.na$He, msat_maxlength_He_no.na), 
            color="skyblue3", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
   annotate(geom="label", x = 2, y = 0.91, label = lm_eqn(mtdna_maxlength_He_no.na$logtransform.maxlength, mtdna_maxlength_He_no.na$He, mtdna_maxlength_He_no.na), 
+           color="blue", size = 5, parse=TRUE, alpha = 0.8) + #add regression line equation
+  scale_colour_manual(values=c("skyblue2","blue")) +
+  scale_shape(solid = FALSE)
+
+#w/out outliers
+final_maxlength_allo = merge(mtdna_maxlength_He_no.na, msat_maxlength_He_no.na, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE) #merge final fertilization data form mtdna and msat together
+
+final_maxlength_allo$markertype <- NA #create new column to categorize marker type
+
+#add marker type based on file type
+final_maxlength_allo$markertype [final_maxlength_allo$file == "mtdna101"]  <- "mtDNA"
+final_maxlength_allo$markertype [final_maxlength_allo$file == "mtdna102"]  <- "mtDNA"
+final_maxlength_allo$markertype [final_maxlength_allo$file == "mtdna103"]  <- "mtDNA"
+final_maxlength_allo$markertype [final_maxlength_allo$file == "msats000"]  <- "msat" 
+final_maxlength_allo$markertype [final_maxlength_allo$file == "msats001"]  <- "msat"
+final_maxlength_allo$markertype [final_maxlength_allo$file == "msats002"]  <- "msat"
+final_maxlength_allo$markertype [final_maxlength_allo$file == "msats200"]  <- "msat" 
+final_maxlength_allo$markertype [final_maxlength_allo$file == "msats201"]  <- "msat" 
+final_maxlength_allo$markertype [final_maxlength_allo$file == "msats100"]  <- "msat" 
+final_maxlength_allo$markertype [final_maxlength_allo$file == "msats101"]  <- "msat" 
+final_maxlength_allo$markertype [final_maxlength_allo$file == "msats301"]  <- "msat" 
+final_maxlength_allo$markertype [final_maxlength_allo$file == "msats302"]  <- "msat" 
+final_maxlength_allo$markertype [final_maxlength_allo$file == "msats303"]  <- "msat" 
+final_maxlength_allo$markertype [final_maxlength_allo$file == "msats304"]  <- "msat" 
+final_maxlength_allo$markertype [final_maxlength_allo$file == "msats305"]  <- "msat"
+final_maxlength_allo$markertype [final_maxlength_allo$file ==	"ppdat"]  <- "msat" 
+
+ggplot(final_maxlength_allo, aes(x=logtransform.maxlength, y=He, col=markertype, shape=markertype)) + #max length & He scatter plot
+  geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, color = "black", size = 1.5, fill = NA) + 
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, size = 1.1, fill = NA) +
+  xlim(0.95,2.65)+                              #create limits
+  coord_cartesian(ylim = c(0, 1)) +
+  ggtitle("Max Length vs. He (w/out smallest & largest spp)", subtitle = "msat vs. mtDNA") + #add plot title
+  xlab("Max Length (log(cm))") + ylab("He") + #add axis labels
+  theme(                                 #specifying characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  annotate(geom="label", x = 2, y = 0.60, label = lm_eqn(msat_maxlength_He_no.na$logtransform.maxlength, msat_maxlength_He_no.na$He, msat_maxlength_He_no.na), 
+           color="skyblue3", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
+  annotate(geom="label", x = 2, y = 0.85, label = lm_eqn(mtdna_maxlength_He_no.na$logtransform.maxlength, mtdna_maxlength_He_no.na$He, mtdna_maxlength_He_no.na), 
            color="blue", size = 5, parse=TRUE, alpha = 0.8) + #add regression line equation
   scale_colour_manual(values=c("skyblue2","blue")) +
   scale_shape(solid = FALSE)
@@ -493,6 +537,47 @@ ggplot(final_maxlength_all_mlvsfm, aes(x=logtransform.maxlength, y=logtransform.
   annotate(geom="label", x = 2, y = 7, label = lm_eqn(mtdna_maxlengthandfecunditymean_He_no.na$logtransform.maxlength, mtdna_maxlengthandfecunditymean_He_no.na$logtransform.fecundity, mtdna_maxlengthandfecunditymean_He_no.na), 
            color="blue", size = 5, parse=TRUE, alpha = 0.8) + #add regression line equation
   scale_colour_manual(values=c("skyblue2","blue")) +
+  scale_shape(solid = FALSE)
+
+### Comparing He & Pi: mtDNA ###
+
+#add marker type based on file type
+mtdna_data_new$markertype <- NA #create new column to categorize marker type
+
+mtdna_data_new$markertype [mtdna_data_new$file == "mtdna101"]  <- "mtDNA"
+mtdna_data_new$markertype [mtdna_data_new$file == "mtdna102"]  <- "mtDNA"
+mtdna_data_new$markertype [mtdna_data_new$file == "mtdna103"]  <- "mtDNA"
+mtdna_data_new$markertype [mtdna_data_new$file == "msats000"]  <- "msat" 
+mtdna_data_new$markertype [mtdna_data_new$file == "msats001"]  <- "msat"
+mtdna_data_new$markertype [mtdna_data_new$file == "msats002"]  <- "msat"
+mtdna_data_new$markertype [mtdna_data_new$file == "msats200"]  <- "msat" 
+mtdna_data_new$markertype [mtdna_data_new$file =="msats201"]  <- "msat" 
+mtdna_data_new$markertype [mtdna_data_new$file == "msats100"]  <- "msat" 
+mtdna_data_new$markertype [mtdna_data_new$file == "msats101"]  <- "msat" 
+mtdna_data_new$markertype [mtdna_data_new$file == "msats301"]  <- "msat" 
+mtdna_data_new$markertype [mtdna_data_new$file == "msats302"]  <- "msat" 
+mtdna_data_new$markertype [mtdna_data_new$file == "msats303"]  <- "msat" 
+mtdna_data_new$markertype [mtdna_data_new$file == "msats304"]  <- "msat" 
+mtdna_data_new$markertype [mtdna_data_new$file == "msats305"]  <- "msat"
+mtdna_data_new$markertype [mtdna_data_new$file =="ppdat"]  <- "msat" 
+
+ggplot(mtdna_data_new, aes(x=He, y=Pi, col=markertype, shape=markertype)) + #max length & He scatter plot
+  geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, color = "black", size = 1.5, fill = NA) + 
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, size = 1.1, fill = NA) +
+  #ylim(0,1)+                              #create limits
+  #coord_cartesian(ylim = c(0, 1)) +
+  ggtitle("He vs. Pi", subtitle = "mtDNA") + #add plot title
+  xlab("He") + ylab("Pi") + #add axis labels
+  theme(                                 #specifying characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  annotate(geom="label", x = 0.5, y = 0.02, label = lm_eqn(mtdna_data_new$He, mtdna_data_new$Pi, mtdna_data_new), 
+           color="blue", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
+  scale_colour_manual(values=c("blue")) +
   scale_shape(solid = FALSE)
 
 ############################################ Full DATA ############################################ 
@@ -767,7 +852,7 @@ ggplot(specificreproductionmode_all_FULL) + geom_boxplot(aes(x = specific.repro_
 
 #Max Length#
 
-#w/ Rhincodon typus outlier
+#w/ outliers
 final_maxlength_all_FULL = merge(mtdna_maxlength_He_no.na_FULL, msat_maxlength_He_no.na_FULL, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE) #merge final fertilization data form mtdna and msat together
 
 final_maxlength_all_FULL$markertype <- NA #create new column to categorize marker type
@@ -807,6 +892,50 @@ ggplot(final_maxlength_all_FULL, aes(x=logtransform.maxlength, y=He, col=markert
   annotate(geom="label", x = 1.5, y = 0.55, label = lm_eqn(msat_maxlength_He_no.na_FULL$logtransform.maxlength, msat_maxlength_He_no.na_FULL$He, msat_maxlength_He_no.na_FULL), 
            color="skyblue3", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
   annotate(geom="label", x = 2, y = 0.91, label = lm_eqn(mtdna_maxlength_He_no.na_FULL$logtransform.maxlength, mtdna_maxlength_He_no.na_FULL$He, mtdna_maxlength_He_no.na_FULL), 
+           color="blue", size = 5, parse=TRUE, alpha = 0.8) + #add regression line equation
+  scale_colour_manual(values=c("skyblue2","blue")) +
+  scale_shape(solid = FALSE)
+
+#w/out outliers
+final_maxlength_all_FULLo = merge(mtdna_maxlength_He_no.na, msat_maxlength_He_no.na, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE) #merge final fertilization data form mtdna and msat together
+
+final_maxlength_all_FULLo$markertype <- NA #create new column to categorize marker type
+
+#add marker type based on file type
+final_maxlength_all_FULLo$markertype [final_maxlength_all_FULLo$file == "mtdna101"]  <- "mtDNA"
+final_maxlength_all_FULLo$markertype [final_maxlength_all_FULLo$file == "mtdna102"]  <- "mtDNA"
+final_maxlength_all_FULLo$markertype [final_maxlength_all_FULLo$file == "mtdna103"]  <- "mtDNA"
+final_maxlength_all_FULLo$markertype [final_maxlength_all_FULLo$file == "msats000"]  <- "msat" 
+final_maxlength_all_FULLo$markertype [final_maxlength_all_FULLo$file == "msats001"]  <- "msat"
+final_maxlength_all_FULLo$markertype [final_maxlength_all_FULLo$file == "msats002"]  <- "msat"
+final_maxlength_all_FULLo$markertype [final_maxlength_all_FULLo$file == "msats200"]  <- "msat" 
+final_maxlength_all_FULLo$markertype [final_maxlength_all_FULLo$file == "msats201"]  <- "msat" 
+final_maxlength_all_FULLo$markertype [final_maxlength_all_FULLo$file == "msats100"]  <- "msat" 
+final_maxlength_all_FULLo$markertype [final_maxlength_all_FULLo$file == "msats101"]  <- "msat" 
+final_maxlength_all_FULLo$markertype [final_maxlength_all_FULLo$file == "msats301"]  <- "msat" 
+final_maxlength_all_FULLo$markertype [final_maxlength_all_FULLo$file == "msats302"]  <- "msat" 
+final_maxlength_all_FULLo$markertype [final_maxlength_all_FULLo$file =="msats303"]  <- "msat" 
+final_maxlength_all_FULLo$markertype [final_maxlength_all_FULLo$file == "msats304"]  <- "msat" 
+final_maxlength_all_FULLo$markertype [final_maxlength_all_FULLo$file == "msats305"]  <- "msat"
+final_maxlength_all_FULLo$markertype [final_maxlength_all_FULLo$file =="ppdat"]  <- "msat" 
+
+ggplot(final_maxlength_all_FULLo, aes(x=logtransform.maxlength, y=He, col=markertype, shape=markertype)) + #max length & He scatter plot
+  geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, color = "black", size = 1.5, fill = NA) + 
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, size = 1.1, fill = NA) +
+  xlim(0.95,2.65)+                              #create limits
+  coord_cartesian(ylim = c(0, 1)) +
+  ggtitle("Max Length vs. He (w/out smallest & largest spp)", subtitle = "msat vs. mtDNA") + #add plot title
+  xlab("Max Length (log(cm))") + ylab("He") + #add axis labels
+  theme(                                 #specifying characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  annotate(geom="label", x = 2, y = 0.60, label = lm_eqn(msat_maxlength_He_no.na$logtransform.maxlength, msat_maxlength_He_no.na$He, msat_maxlength_He_no.na), 
+           color="skyblue3", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
+  annotate(geom="label", x = 2, y = 0.85, label = lm_eqn(mtdna_maxlength_He_no.na$logtransform.maxlength, mtdna_maxlength_He_no.na$He, mtdna_maxlength_He_no.na), 
            color="blue", size = 5, parse=TRUE, alpha = 0.8) + #add regression line equation
   scale_colour_manual(values=c("skyblue2","blue")) +
   scale_shape(solid = FALSE)
@@ -941,4 +1070,44 @@ ggplot(final_maxlength_all_mlvsfmFULL, aes(x=logtransform.maxlength, y=logtransf
   scale_colour_manual(values=c("skyblue2","blue")) +
   scale_shape(solid = FALSE)
 
-### Comparing US mtDNA vs. Full mtDNA Pi ###
+### Comparing He & Pi: mtDNA ###
+
+#add marker type based on file type
+mtdna_FULL$markertype <- NA #create new column to categorize marker type
+
+mtdna_FULL$markertype [mtdna_FULL$file == "mtdna101"]  <- "mtDNA"
+mtdna_FULL$markertype [mtdna_FULL$file == "mtdna102"]  <- "mtDNA"
+mtdna_FULL$markertype [mtdna_FULL$file == "mtdna103"]  <- "mtDNA"
+mtdna_FULL$markertype [mtdna_FULL$file == "msats000"]  <- "msat" 
+mtdna_FULL$markertype [mtdna_FULL$file == "msats001"]  <- "msat"
+mtdna_FULL$markertype [mtdna_FULL$file == "msats002"]  <- "msat"
+mtdna_FULL$markertype [mtdna_FULL$file == "msats200"]  <- "msat" 
+mtdna_FULL$markertype [mtdna_FULL$file =="msats201"]  <- "msat" 
+mtdna_FULL$markertype [mtdna_FULL$file == "msats100"]  <- "msat" 
+mtdna_FULL$markertype [mtdna_FULL$file == "msats101"]  <- "msat" 
+mtdna_FULL$markertype [mtdna_FULL$file == "msats301"]  <- "msat" 
+mtdna_FULL$markertype [mtdna_FULL$file == "msats302"]  <- "msat" 
+mtdna_FULL$markertype [mtdna_FULL$file == "msats303"]  <- "msat" 
+mtdna_FULL$markertype [mtdna_FULL$file == "msats304"]  <- "msat" 
+mtdna_FULL$markertype [mtdna_FULL$file == "msats305"]  <- "msat"
+mtdna_FULL$markertype [mtdna_FULL$file =="ppdat"]  <- "msat" 
+
+ggplot(mtdna_FULL, aes(x=He, y=Pi, col=markertype, shape=markertype)) + #max length & He scatter plot
+  geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, color = "black", size = 1.5, fill = NA) + 
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, size = 1.1, fill = NA) +
+  #ylim(0,1)+                              #create limits
+  #coord_cartesian(ylim = c(0, 1)) +
+  ggtitle("He vs. Pi", subtitle = "mtDNA") + #add plot title
+  xlab("He") + ylab("Pi") + #add axis labels
+  theme(                                 #specifying characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  annotate(geom="label", x = 0.5, y = 0.02, label = lm_eqn(mtdna_FULL$He, mtdna_FULL$Pi, mtdna_FULL), 
+           color="blue", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
+  scale_colour_manual(values=c("blue")) +
+  scale_shape(solid = FALSE)
+
