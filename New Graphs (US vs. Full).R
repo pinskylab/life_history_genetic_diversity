@@ -580,6 +580,114 @@ ggplot(mtdna_data_new, aes(x=He, y=Pi, col=markertype, shape=markertype)) + #max
   scale_colour_manual(values=c("blue")) +
   scale_shape(solid = FALSE)
 
+### Pi Graphs ###
+
+## Fertilization ##
+ggplot(mtdna_final_fertilization_Pi_no.na) + geom_boxplot(aes(x = final_fertilization, y = Pi, fill = final_fertilization)) + #final fertilization & He box plot
+  ggtitle("Fertilization Method vs. Pi", subtitle= "mtDNA") + #add plot title
+  xlab("Fertilization Method") + ylab("Pi") + #add axis labels
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"), 
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  labs(fill = "Fertilization") +
+  scale_fill_manual(values=c("turquoise2", "darkcyan"))
+
+## Reproduction Mode ##
+ggplot(mtdna_final_reproductionmode_Pi_no.na) + geom_boxplot(aes(x = final_reproductionmode, y = Pi, fill = final_reproductionmode)) + #final fertilization & He box plot
+  ggtitle("Reproduction Mode vs. Pi", subtitle= "mtDNA") + #add plot title
+  xlab("Reproduction Mode") + ylab("Pi") + #add axis labels
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"), 
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  labs(fill = "Reproduction Mode") +
+  scale_fill_manual(values=c("turquoise2", "darkcyan"))
+
+## Specific Repro Mode##
+ggplot(mtdna_reproduction_type_Pi_no.na) + geom_boxplot(aes(x = specific.repro_mode, y = Pi, fill = specific.repro_mode)) + #final fertilization & He box plot
+  ggtitle("Specific Reproduction Mode vs. Pi", subtitle= "mtDNA") + #add plot title
+  xlab("Specific Repro Mode") + ylab("Pi") + #add axis labels
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"), 
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  labs(fill = "Specific Repro Mode") +
+  scale_fill_manual(values=c("turquoise2", "darkcyan"))
+
+## Maxlength ##
+ggplot(mtdna_maxlength_Pi_no.na, aes(x=logtransform.maxlength, y=Pi)) + #max length & He scatter plot
+  geom_point(aes(fill=NULL)) +    # Use hollow circles
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, color = "black", size = 1.5, fill = NA) + 
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, size = 1.1, fill = NA) +
+  ggtitle("Maxlength vs. Pi", subtitle = "mtDNA") + #add plot title
+  xlab("Maxlength (log(cm))") + ylab("Pi") + #add axis labels 
+  theme(                                 #specifying characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  annotate(geom="label", x = 1.8, y = 0.02, label = lm_eqn(mtdna_maxlength_Pi_no.na$logtransform.maxlength, mtdna_maxlength_Pi_no.na$Pi, mtdna_maxlength_Pi_no.na), 
+           color="blue", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
+  scale_colour_manual(values=c("blue")) +
+  scale_shape(solid = FALSE)
+
+## Fecundity Mean ##
+ggplot(mtdna_fecundity_Pi_no.na, aes(x=logtransform.fecundity, y=Pi)) + #max length & He scatter plot
+  geom_point(aes(fill=NULL)) +    # Use hollow circles
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, color = "black", size = 1.5, fill = NA) + 
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, size = 1.1, fill = NA) +
+  ggtitle("Fecundity Mean vs. Pi", subtitle = "mtDNA") + #add plot title
+  xlab("Fecundity Mean") + ylab("Pi") + #add axis labels 
+  theme(                                 #specifying characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  annotate(geom="label", x = 3.5, y = 0.02, label = lm_eqn(mtdna_fecundity_Pi_no.na$logtransform.fecundity, mtdna_fecundity_Pi_no.na$Pi, mtdna_fecundity_Pi_no.na), 
+           color="blue", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
+  scale_colour_manual(values=c("blue")) +
+  scale_shape(solid = FALSE)
+
+### Comparing Max length vs. Fecundity for Pi: mtDNA ###
+
+mtdna_maxlengthandfecunditymean_Pi_no.na <- mtdna_data_new[!is.na(mtdna_data_new$maxlength) & !is.na(mtdna_data_new$Pi),] #create new table that excludes NA's from columns of interest
+mtdna_maxlengthandfecunditymean_Pi_no.na <- mtdna_data_new[!is.na(mtdna_data_new$fecundity_mean) & !is.na(mtdna_data_new$Pi),] #create new table that excludes NA's from columns of interest
+
+mtdna_maxlengthandfecunditymean_Pi_no.na$logtransform.maxlength <- NA #add column to do a log transformation for max length
+
+for (i in 1:nrow(mtdna_maxlengthandfecunditymean_Pi_no.na)) { #get log transformation data
+  cat(paste(i, " ", sep = ''))
+  mtdna_maxlengthandfecunditymean_Pi_no.na$logtransform.maxlength <- log10(mtdna_maxlengthandfecunditymean_Pi_no.na$maxlength)
+}
+
+mtdna_maxlengthandfecunditymean_Pi_no.na$logtransform.fecundity <- NA #add column to do a log transformation for fecundity mean
+
+for (i in 1:nrow(mtdna_maxlengthandfecunditymean_Pi_no.na)) { #get log transformation data
+  cat(paste(i, " ", sep = ''))
+  mtdna_maxlengthandfecunditymean_Pi_no.na$logtransform.fecundity <- log10(mtdna_maxlengthandfecunditymean_Pi_no.na$fecundity_mean)
+}
+
+#Graph Maxlength vs. Fecundity for Pi
+ggplot(mtdna_maxlengthandfecunditymean_Pi_no.na, aes(x=logtransform.maxlength, y=logtransform.fecundity)) + #max length & He scatter plot
+  geom_point(aes(fill=NULL)) +    # Use hollow circles
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, color = "black", size = 1.5, fill = NA) + 
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, size = 1.1, fill = NA) +
+  ggtitle("Maxlength vs. Fecundity Mean", subtitle = "mtDNA: US (log transformed data)") + #add plot title
+  xlab("Maxlength") + ylab("Fecundity Mean") + #add axis labels 
+  theme(                                 #specifying characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  annotate(geom="label", x = 2, y = 2, label = lm_eqn(mtdna_maxlengthandfecunditymean_Pi_no.na$logtransform.maxlength, mtdna_maxlengthandfecunditymean_Pi_no.na$logtransform.fecundity, mtdna_maxlengthandfecunditymean_Pi_no.na), 
+           color="blue", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
+  scale_colour_manual(values=c("blue")) +
+  scale_shape(solid = FALSE)
+
 ############################################ Full DATA ############################################ 
 #mtDNA: He#
 
@@ -1111,3 +1219,113 @@ ggplot(mtdna_FULL, aes(x=He, y=Pi, col=markertype, shape=markertype)) + #max len
   scale_colour_manual(values=c("blue")) +
   scale_shape(solid = FALSE)
 
+### Pi Graphs ###
+
+## Fertilization ##
+ggplot(mtdna_final_fertilization_Pi_no.na_FULL) + geom_boxplot(aes(x = final_fertilization, y = Pi, fill = final_fertilization)) + #final fertilization & He box plot
+  ggtitle("Fertilization Method vs. Pi", subtitle= "mtDNA: Full Data set") + #add plot title
+  xlab("Fertilization Method") + ylab("Pi") + #add axis labels
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"), 
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  labs(fill = "Fertilization") +
+  scale_fill_manual(values=c("turquoise2", "darkcyan"))
+
+## Reproduction Mode ##
+ggplot(mtdna_final_reproductionmode_Pi_no.na_FULL) + geom_boxplot(aes(x = final_reproductionmode, y = Pi, fill = final_reproductionmode)) + #final fertilization & He box plot
+  ggtitle("Reproduction Mode vs. Pi", subtitle= "mtDNA: Full Data set") + #add plot title
+  xlab("Reproduction Mode") + ylab("Pi") + #add axis labels
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"), 
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  labs(fill = "Reproduction Mode") +
+  scale_fill_manual(values=c("turquoise2", "darkcyan"))
+
+## Specific Repro Mode##
+ggplot(mtdna_reproduction_type_Pi_no.na_FULL) + geom_boxplot(aes(x = specific.repro_mode, y = Pi, fill = specific.repro_mode)) + #final fertilization & He box plot
+  ggtitle("Specific Reproduction Mode vs. Pi", subtitle= "mtDNA: Full Data set") + #add plot title
+  xlab("Specific Repro Mode") + ylab("Pi") + #add axis labels
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold", hjust = 0.3), 
+    plot.subtitle = element_text(hjust = 0.3),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  labs(fill = "Specific Repro Mode") +
+  scale_fill_manual(values=c("turquoise2", "darkcyan","deepskyblue1"))
+
+theme_update(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
+
+## Maxlength ##
+ggplot(mtdna_maxlength_Pi_no.na_FULL, aes(x=logtransform.maxlength, y=Pi)) + #max length & He scatter plot
+  geom_point(aes(fill=NULL)) +    # Use hollow circles
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, color = "black", size = 1.5, fill = NA) + 
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, size = 1.1, fill = NA) +
+  ggtitle("Maxlength vs. Pi", subtitle = "mtDNA: Full Data set") + #add plot title
+  xlab("Maxlength (log(cm))") + ylab("Pi") + #add axis labels 
+  theme(                                 #specifying characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  annotate(geom="label", x = 1.8, y = 0.02, label = lm_eqn(mtdna_maxlength_Pi_no.na_FULL$logtransform.maxlength, mtdna_maxlength_Pi_no.na_FULL$Pi, mtdna_maxlength_Pi_no.na_FULL), 
+           color="blue", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
+  scale_colour_manual(values=c("blue")) +
+  scale_shape(solid = FALSE)
+
+## Fecundity Mean ##
+ggplot(mtdna_fecundity_Pi_no.na_FULL, aes(x=logtransform.fecundity, y=Pi)) + #max length & He scatter plot
+  geom_point(aes(fill=NULL)) +    # Use hollow circles
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, color = "black", size = 1.5, fill = NA) + 
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, size = 1.1, fill = NA) +
+  ggtitle("Fecundity Mean vs. Pi", subtitle = "mtDNA: Full Data set") + #add plot title
+  xlab("Fecundity Mean") + ylab("Pi") + #add axis labels 
+  theme(                                 #specifying characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  annotate(geom="label", x = 3.5, y = 0.02, label = lm_eqn(mtdna_fecundity_Pi_no.na_FULL$logtransform.fecundity, mtdna_fecundity_Pi_no.na_FULL$Pi, mtdna_fecundity_Pi_no.na_FULL), 
+           color="blue", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
+  scale_colour_manual(values=c("blue")) +
+  scale_shape(solid = FALSE)
+
+### Comparing Max length vs. Fecundity for Pi: mtDNA ###
+
+mtdna_maxlengthandfecunditymean_Pi_no.na_FULL <- mtdna_data_new[!is.na(mtdna_data_new$maxlength) & !is.na(mtdna_data_new$Pi),] #create new table that excludes NA's from columns of interest
+mtdna_maxlengthandfecunditymean_Pi_no.na_FULL <- mtdna_data_new[!is.na(mtdna_data_new$fecundity_mean) & !is.na(mtdna_data_new$Pi),] #create new table that excludes NA's from columns of interest
+
+mtdna_maxlengthandfecunditymean_Pi_no.na_FULL$logtransform.maxlength <- NA #add column to do a log transformation for max length
+
+for (i in 1::nrow(mtdna_maxlengthandfecunditymean_Pi_no.na_FULL)) { #get log transformation data
+  cat(paste(i, " ", sep = ''))
+  mtdna_maxlengthandfecunditymean_Pi_no.na_FULL$logtransform.maxlength <- log10(mtdna_maxlengthandfecunditymean_Pi_no.na_FULL$maxlength)
+}
+
+mtdna_maxlengthandfecunditymean_Pi_no.na_FULL$logtransform.fecundity <- NA #add column to do a log transformation for fecundity mean
+
+for (i in 1:nrow(mtdna_maxlengthandfecunditymean_Pi_no.na_FULL)) { #get log transformation data
+  cat(paste(i, " ", sep = ''))
+  mtdna_maxlengthandfecunditymean_Pi_no.na_FULL$logtransform.fecundity <- log10(mtdna_maxlengthandfecunditymean_Pi_no.na_FULL$fecundity_mean)
+}
+
+#Graph Maxlength vs. Fecundity for Pi
+ggplot(mtdna_maxlengthandfecunditymean_Pi_no.na_FULL, aes(x=logtransform.maxlength, y=logtransform.fecundity)) + #max length & He scatter plot
+  geom_point(aes(fill=NULL)) +    # Use hollow circles
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, color = "black", size = 1.5, fill = NA) + 
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, size = 1.1, fill = NA) +
+  ggtitle("Maxlength vs. Fecundity Mean", subtitle = "mtDNA: Full (log transformed data)") + #add plot title
+  xlab("Maxlength") + ylab("Fecundity Mean") + #add axis labels 
+  theme(                                 #specifying characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"),
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  annotate(geom="label", x = 2, y = 2, label = lm_eqn(mtdna_maxlengthandfecunditymean_Pi_no.na_FULL$logtransform.maxlength, mtdna_maxlengthandfecunditymean_Pi_no.na_FULL$logtransform.fecundity, mtdna_maxlengthandfecunditymean_Pi_no.na_FULL), 
+           color="blue", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
+  scale_colour_manual(values=c("blue")) +
+  scale_shape(solid = FALSE)
