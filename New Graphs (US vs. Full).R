@@ -1329,3 +1329,60 @@ ggplot(mtdna_maxlengthandfecunditymean_Pi_no.na_FULL, aes(x=logtransform.maxleng
            color="blue", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
   scale_colour_manual(values=c("blue")) +
   scale_shape(solid = FALSE)
+
+########################################### ANOVA: US Combined Marker Character Data ########################################### 
+
+############## He Data ############## 
+
+##### mtDNA vs. msat #####
+
+#Fertilization#
+
+fertilizationanova.allHe <- aov(He ~ final_fertilization * markertype, data = final_fertilization_all) #perform anova test for combined data
+TukeyHSD(fertilizationanova.allHe) #perform TukeyHSD to see full table of results
+
+#Reproduction Mode#
+
+reproductionmodeanova.allHe <- aov(He ~ final_reproductionmode * markertype, data = reproductionmode_all) #perform anova test for combined data
+TukeyHSD(reproductionmodeanova.allHe) #perform TukeyHSD to see full table of results
+
+#Specific Reproduction Modes: ANOVA#
+
+specific.repro_modeanova.allHe <- aov(He ~ specific.repro_mode * markertype, data = specificreproductionmode_all) #perform anova test for combined data
+TukeyHSD(specific.repro_modeanova.allHe) #perform TukeyHSD to see full table of results
+
+##### msat #####
+
+#Fertilization#
+
+fertilizationanova.allHe <- aov(He ~ final_fertilization * markertype, data = mtdna_final_fertilization_He_no.na) #perform anova test for combined data
+TukeyHSD(fertilizationanova.all) #perform TukeyHSD to see full table of results
+
+#Reproduction Mode#
+
+reproductionmodeanova.allHe <- aov(He ~ final_reproductionmode * markertype, data = mtdna_final_reproductionmode_He_no.na) #perform anova test for combined data
+TukeyHSD(reproductionmodeanova.all) #perform TukeyHSD to see full table of results
+
+#Specific Reproduction Modes: ANOVA#
+
+specific.repro_modeanova.allHe <- aov(He ~ specific.repro_mode * markertype, data = mtdna_reproduction_type_He_no.na) #perform anova test for combined data
+TukeyHSD(specific.repro_modeanova.all) #perform TukeyHSD to see full table of results
+
+############## Pi Data ############## 
+
+#Fertilization#
+
+fertilizationanova.allPi <- aov(He ~ final_fertilization * markertype, data = final_fertilization_all) #perform anova test for combined data
+TukeyHSD(fertilizationanova.all) #perform TukeyHSD to see full table of results
+
+#Reproduction Mode#
+
+reproductionmodeanova.allPi <- aov(He ~ final_reproductionmode * markertype, data = reproductionmode_all) #perform anova test for combined data
+TukeyHSD(reproductionmodeanova.all) #perform TukeyHSD to see full table of results
+
+#Specific Reproduction Modes: ANOVA#
+
+specific.repro_modeanova.allPi <- aov(He ~ specific.repro_mode * markertype, data = specificreproductionmode_all) #perform anova test for combined data
+TukeyHSD(specific.repro_modeanova.all) #perform TukeyHSD to see full table of results
+
+
