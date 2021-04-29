@@ -1330,6 +1330,24 @@ ggplot(mtdna_maxlengthandfecunditymean_Pi_no.na_FULL, aes(x=logtransform.maxleng
   scale_colour_manual(values=c("blue")) +
   scale_shape(solid = FALSE)
 
+########################################### T-Tests for Pi: US Combined Marker Character Data ########################################### 
+
+##### mtDNA vs. msat #####
+
+#Fertilization#
+
+external.mtdna <- mtdna_final_fertilization_Pi_no.na$Pi[mtdna_final_fertilization_Pi_no.na$final_fertilization=="external"] #create vector for one aspect of t-test
+internal.mtdna <- mtdna_final_fertilization_Pi_no.na$Pi[mtdna_final_fertilization_Pi_no.na$final_fertilization=="internal (oviduct)"] #create vector
+
+fertilization_ttest.mtdna <- t.test(external.mtdna, internal.mtdna, var.equal=TRUE) #combine created vectors & perform t-test
+
+#Reproduction Mode#
+
+dioecism.mtdna <- mtdna_final_reproductionmode_Pi_no.na$Pi[mtdna_final_reproductionmode_Pi_no.na$final_reproductionmode=="Dioecious"] #create vector for one aspect of t-test
+hermaphrodite.mtdna <- mtdna_final_reproductionmode_Pi_no.na$Pi[mtdna_final_reproductionmode_Pi_no.na$final_reproductionmode=="Hermaphrodite"] #create vector
+
+reproductionmode_ttest.mtdna <- t.test(dioecism.mtdna, hermaphrodite.mtdna, var.equal=TRUE) #combine created vectors & perform t-test
+
 ########################################### ANOVA: US Combined Marker Character Data ########################################### 
 
 ############## He Data ############## 
