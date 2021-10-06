@@ -12,11 +12,16 @@ remove(list = ls())
 #load libraries
 library(tidyverse)
 library(dplyr)
+library(maps)
+library(mapdata)
 
 #read in data
 mtdna_data <- read.csv("mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
 msat_data <- read.csv("msat_full_US_data.csv", stringsAsFactors = FALSE) #read in 
 mtdna_data_new <- read.csv("new_mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
+
+#pull world map data
+geogr_data <- map_data('usa')
 
 ############### mtDNA data set ############### 
 
@@ -1715,3 +1720,51 @@ ggplot(final_fecunditymean_all, aes(x=logtransform.fecundity, y=He, col=markerty
   scale_color_manual(values=c("skyblue2","blue")) +
   scale_shape(solid = FALSE)
 
+
+####################################################################################
+
+############### Map of where data was collected ############### 
+
+##### mtDNA #####
+
+latlon_mtdna <-mtdna_data_new[!duplicated(mtdna_data_new[, c('lat','lon')]), c('lat','lon')] #grab unique lat/lon combos
+
+latlon_mtdna <- latlon[order(latlon$lat,latlonn$lon),] #order by lat then lon
+
+write.csv(latlon_mtdna, file = paste('latlon_mtdna',Sys.Date(), '.csv', sep= ''), row.names = FALSE) #build map
+
+mtdna_plot <- ggplot(geogr_data, aes(x = long, y = lat, group = group)) + 
+  geom_polygon(fill = "lightgray", colour = "white") + 
+  geom_point(data = latlon_mtdna, aes(x = lon, y = lat), size = 4, inherit.aes = FALSE)
+
+#mtdna_plot
+
+mtdna_plot_annotated <- mtdna_plot + xlab("Longitude (°)") + ylab("Latitude (°)") + theme_bw() + 
+  ggtitle("mtdna locations") + 
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.border = element_blank(), 
+        axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
+        axis.text = element_text(size = 20, color = "black"), axis.title = element_text(size = 24, face = "bold"), 
+        plot.title = element_text(size = 28, face = "bold", hjust = 0.5))
+mtdna_plot_annotated
+
+##### msat #####
+
+latlon_msat <-msat_data[!duplicated(msat_data[, c('lat','lon')]), c('lat','lon')] #grab unique lat/lon combos
+
+latlon_msat <- latlon[order(latlon$lat,latlonn$lon),] #order by lat then lon
+
+write.csv(latlon_msat, file = paste('latlon_msat',Sys.Date(), '.csv', sep= ''), row.names = FALSE) #build map
+
+msat_plot <- ggplot(geogr_data, aes(x = long, y = lat, group = group)) + 
+  geom_polygon(fill = "lightgray", colour = "white") + 
+  geom_point(data = latlon_msat, aes(x = lon, y = lat), size = 4, inherit.aes = FALSE)
+
+#msat_plot
+
+msat_plot_annotated <- msat_plot + xlab("Longitude (°)") + ylab("Latitude (°)") + theme_bw() + 
+  ggtitle("msat locations") + 
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.border = element_blank(), 
+        axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
+        axis.text = element_text(size = 20, color = "black"), axis.title = element_text(size = 24, face = "bold"), 
+        plot.title = element_text(size = 28, face = "bold", hjust = 0.5))
+msat_plot_annotated
