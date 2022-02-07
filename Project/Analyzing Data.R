@@ -1729,7 +1729,7 @@ ggplot(final_fecunditymean_all, aes(x=logtransform.fecundity, y=He, col=markerty
 
 latlon_mtdna <-mtdna_data_new[!duplicated(mtdna_data_new[, c('lat','lon')]), c('lat','lon')] #grab unique lat/lon combos
 
-latlon_mtdna <- latlon[order(latlon$lat,latlonn$lon),] #order by lat then lon
+latlon_mtdna <- latlon_mtdna[order(latlon$lat,latlonn$lon),] #order by lat then lon
 
 write.csv(latlon_mtdna, file = paste('latlon_mtdna',Sys.Date(), '.csv', sep= ''), row.names = FALSE) #build map
 
@@ -1751,7 +1751,7 @@ mtdna_plot_annotated
 
 latlon_msat <-msat_data[!duplicated(msat_data[, c('lat','lon')]), c('lat','lon')] #grab unique lat/lon combos
 
-latlon_msat <- latlon[order(latlon$lat,latlonn$lon),] #order by lat then lon
+latlon_msat <- latlon_msat[order(latlon$lat,latlonn$lon),] #order by lat then lon
 
 write.csv(latlon_msat, file = paste('latlon_msat',Sys.Date(), '.csv', sep= ''), row.names = FALSE) #build map
 
