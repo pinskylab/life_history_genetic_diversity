@@ -18,6 +18,7 @@ library(ggplot2)
 library(MuMIn)
 library(lmerTest)
 library(glmmTMB)
+library(tidyr)
 
 #read in data
 mtdna_data <- read.csv("new_mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
@@ -28,6 +29,8 @@ msat_data <- read.csv("new_msat_full_US_data.csv", stringsAsFactors = TRUE) #rea
 #in brood or similar structure --> internal
 
 ################################################### mtDNA data set################################################### 
+
+#####He##### --> should use separate datasets for Hd & for pi
 
 #Transform He for the gtmmTMB to work
 for (i in 1:nrow(mtdna_data)) { #transform data to handle 1s (Douma & Weedon (2018) Methods in Ecology & Evolution)
@@ -59,50 +62,49 @@ for (i in 1:nrow(mtdna_data)) { #get log transformation data
 
 for (i in 1:nrow(mtdna_data)) { #get log transformation data
   cat(paste(i, " ", sep = ''))
-  mtdna_data$logtransform.bp.1 <- log10(mtdna_data$bp)
-}
-
-for (i in 1:nrow(mtdna_data)) { #get log transformation data
-  cat(paste(i, " ", sep = ''))
   mtdna_data$logtransform.Pi <- log10(mtdna_data$Pi)
 }
 
+
+#scale bp instead of log-transform
+mtdna_data$bp_scale <- scale(as.numeric(mtdna_data$bp))
+
 ##Fit model for success/failures##
 
-#dredge for He 
-mtdna_data <- mtdna_data[!is.na(mtdna_data$bp), ]
-# REMOVE: mtdna_data <- mtdna_data[!is.na(mtdna_data$mtdnas.or.f), ]
-#mtdna_data <- mtdna_data[!is.na(mtdna_data$success), ]
-#mtdna_data <- mtdna_data[!is.na(mtdna_data$failure), ]
-mtdna_data <- mtdna_data[!grepl('NaN',mtdna_data$logtransform.fecundity_mean.1),]
-mtdna_data <- mtdna_data[!is.na(mtdna_data$logtransform.Pi), ]
-mtdna_data$fecundity_mean <- NULL
-mtdna_data$bp <- NULL
-summary(mtdna_data)
-model <- glm(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1, family=binomial, data = mtdna_data,na.action = 'na.fail')
-model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|spp) + (1|Source)+ (1|MarkerName), family=binomial, data = mtdna_data,  na.action = 'na.fail')
-model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|spp), family=binomial, data = mtdna_data, na.action = 'na.fail')
-# REMOVE: model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|Site), family=binomial, data = mtdna_data, na.action = 'na.fail')
-model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|Source), family=binomial, data = mtdna_data, na.action = 'na.fail')
-model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|MarkerName), family=binomial, data = mtdna_data,na.action = 'na.fail')
+mtdna_data$success <- round(mtdna_data$He*mtdna_data$n)
+mtdna_data$failure <- round((1-mtdna_data$He)*mtdna_data$n)
 
-#combo of random variable for He 
-# REMOVE: model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|MarkerName) + (1|Site), family=binomial, data = mtdna_data, na.action = 'na.fail')
-model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|MarkerName) + (1|Source), family=binomial, data = mtdna_data, na.action = 'na.fail')
-# REMOVE: model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|MarkerName) + (1|Site) + (1|Source), family=binomial, data = mtdna_data, na.action = 'na.fail')
+mtdna_data <- mtdna_data %>% drop_na(He, logtransform.maxlength.1, logtransform.fecundity_mean.1,fertilizations.or.f,reproductionmodes.or.f,
+                                     bp_scale)
 
-model <- glmmTMB(transformed_He ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|spp) + (1|Source) + (1|MarkerName), family = beta_family, data = mtdna_data)
+binomial_He_full_model_mtDNA <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + 
+                                  fertilizations.or.f + reproductionmodes.or.f + bp_scale + 
+                                  (1|spp) + (1|Source), na.action = "na.fail", 
+                                family=binomial, data = mtdna_data,
+                                control = glmerControl(optimizer = "bobyqa")) 
 
+mtdna_data <- dredge(binomial_He_full_model_mtDNA)
+View(mtdna_data) #to get a table that can be copy and pasted to Excel
+summary(binomial_He_full_model_mtDNA) #get SE, p-value, etc.
 
-mtdna.spp <- dredge(model)
-View(mtdna.spp) #to get a table that can be copy and pasted to Excel
+#####PI##### --> should use separate datasets for He & for pi
 
-#Check top 4 models individually to see if there were convergence problems for combo of all random variables
-fit.bin <- glmer(cbind(success,failure) ~ fertilizations.or.f + reproductionmodes.or.f + (1|spp) + (1|Source)+ (1|MarkerName), family=binomial, data=mtdna_data)
-fit.bin <- glmer(cbind(success,failure) ~ fertilizations.or.f + (1|spp) + (1|Source)+ (1|MarkerName), family=binomial, data=mtdna_data)
-fit.bin <- glmer(cbind(success,failure) ~ fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1 + (1|spp) + (1|Source)+ (1|MarkerName), family=binomial, data=mtdna_data)
-fit.bin <- glmer(cbind(success,failure) ~ logtransform.maxlength.1 + fertilizations.or.f + (1|spp) + (1|Source)+ (1|MarkerName), family=binomial, data=mtdna_data)
+#prep data
+mtdna_data_nona_fecunditymean <- subset(mtdna_data, mtdna_data$logtransform.fecundity_mean.1 != "NaN")
+mtdna_data_nona_fecunditymean_bpscale <- subset(mtdna_data_nona_fecunditymean, mtdna_data_nona_fecunditymean$bp_scale != "NA")
+mtdna_pi <- subset(mtdna_data_nona_fecunditymean_bpscale, mtdna_data_nona_fecunditymean_bpscale$logtransform.Pi != "NA") #remove any rows where mtdna pi wasn't calculated
+mtdna_pi
 
+#null (full) model for pi
+Pi_full_model <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + 
+                        fertilizations.or.f + reproductionmodes.or.f + bp_scale + 
+                        (1|spp) + (1|Source), na.action = "na.fail", 
+                      data = mtdna_pi, REML = FALSE,
+                      control = lmerControl(optimizer = "bobyqa")) #have Marial switch to bobyqa to get away from convergence issues AND switch to bp_scale AND make sure REML = FALSE
+
+mtdna_pi <- dredge(Pi_full_model)
+View(mtdna_pi) #to get a table that can be copy and pasted to Excel
+summary(Pi_full_model)
 
 #dredge for pi
 model <- glm(formula = logtransform.Pi ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1, data = mtdna_data, na.action = 'na.fail')
@@ -134,25 +136,6 @@ sum <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + logtransform.
 
 summary(sum)
 
-#try to fix convergence
-length(getME(model,'theta'))
-length(fixef(model))
-
-
-tt <- getME(model,"theta")
-ll <- getME(model,"lower")
-min(tt[ll==0])
-
-derivs1 <- model@optinfo$derivs
-sc_grad1 <- with(derivs1,solve(Hessian,gradient))
-max(abs(sc_grad1))
-
-max(pmin(abs(sc_grad1),abs(derivs1$gradient)))
-
-
-ss <- getME(model,c("theta","fixef"))
-m2 <- update(model,start=ss,control=glmerControl(optCtrl=list(maxfun=2e4)))
-m3 <- update(model,start=ss,control=glmerControl(optimizer="bobyqa", optCtrl=list(maxfun=2e5)))
 
 ################################################### msat data set ################################################### 
 
@@ -192,6 +175,23 @@ msat_data$reproductionmodes.or.f2 <- as.numeric(msat_data$reproductionmodes.or.f
 
 ##Fit model for success/failures
 
+msat_data$success <- round(msat_data$He*msat_data$n)
+msat_data$failure <- round((1-msat_data$He)*msat_data$n)
+
+msat_data <- msat_data %>% drop_na(He, logtransform.maxlength.2, logtransform.fecundity_mean.2,logtransform.repeat,fertilizations.or.f2,reproductionmodes.or.f2)
+
+binomial_He_full_model_msat <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.2 + logtransform.fecundity_mean.2 + logtransform.repeat +
+                                  fertilizations.or.f2 + reproductionmodes.or.f2 + CrossSpp + PrimerNote +
+                                  (1|spp) + (1|Source), na.action = "na.fail", 
+                                family=binomial, data = msat_data,
+                                control = glmerControl(optimizer = "bobyqa")) #have Marial switch to bobyqa to get away from convergence issues AND switch to bp_scale
+
+
+msat_dataHe <- dredge(binomial_He_full_model_msat)
+View(msat_dataHe) #to get a table that can be copy and pasted to Excel
+summary(binomial_He_full_model_msat)
+
+#####################################################################
 #dredge? 
 msat_data <- msat_data[!is.na(msat_data$Repeat), ]
 msat_data <- msat_data[!is.na(msat_data$fertilizations.or.f2), ]
