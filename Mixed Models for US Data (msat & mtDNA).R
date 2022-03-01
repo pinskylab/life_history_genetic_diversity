@@ -87,6 +87,10 @@ mtdna_data <- dredge(binomial_He_full_model_mtDNA)
 View(mtdna_data) #to get a table that can be copy and pasted to Excel
 summary(binomial_He_full_model_mtDNA) #get SE, p-value, etc.
 
+#find minimal model (top AIC model)
+topAIC.mtDNAHE <- lm((formula = cbind(success & failure)) ~ fertilizations.or.f + reproductionmodes.or.f, data = mtdna_data)
+summary(topAIC.mtDNAHE)
+
 #####PI##### --> should use separate datasets for He & for pi
 
 #prep data
@@ -105,6 +109,10 @@ Pi_full_model <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + log
 mtdna_pi <- dredge(Pi_full_model)
 View(mtdna_pi) #to get a table that can be copy and pasted to Excel
 summary(Pi_full_model)
+
+#find minimal model (top AIC model)
+topAIC.mtDNAPI <- lm(logtransform.Pi ~ fertilizations.or.f, data = mtdna_pi)
+summary(topAIC.mtDNAPI)
 
 #dredge for pi
 model <- glm(formula = logtransform.Pi ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + fertilizations.or.f + reproductionmodes.or.f + logtransform.bp.1, data = mtdna_data, na.action = 'na.fail')
@@ -190,6 +198,10 @@ binomial_He_full_model_msat <- glmer(formula = cbind(success,failure) ~ logtrans
 msat_dataHe <- dredge(binomial_He_full_model_msat)
 View(msat_dataHe) #to get a table that can be copy and pasted to Excel
 summary(binomial_He_full_model_msat)
+
+#find minimal model (top AIC model)
+topAIC.msatHE <- lm((formula = cbind(success & failure)) ~ logtransform.maxlength.2 + fertilizations.or.f2 + reproductionmodes.or.f2 + logtransform.repeat + CrossSpp, data = msat_data)
+summary(topAIC.msatHE)
 
 #####################################################################
 #dredge? 
