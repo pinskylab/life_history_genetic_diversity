@@ -107,7 +107,7 @@ plotResiduals(binomial_Hd_full_sim, mtdna_Hd_nona_fecunditymean$reproductionmode
 plotResiduals(binomial_Hd_full_sim, mtdna_Hd_nona_fecunditymean$bp_scale)
 
 beta_Hd_full_model <- glmmTMB(transformed_He ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + 
-                                fertilizations.or.f + reproductionmodes.or.f + bp.scale + 
+                                fertilizations.or.f + reproductionmodes.or.f + bp_scale + 
                                 (1|spp) + (1|Source) + (1|MarkerName), 
                               family = beta_family, data = mtdna_Hd)
 
