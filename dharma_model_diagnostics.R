@@ -23,9 +23,6 @@ library(DHARMa)
 #read in data
 mtdna_data <- read.csv("new_mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
 msat_data <- read.csv("new_msat_full_US_data.csv", stringsAsFactors = TRUE) #read in
-cp_info <- read.csv("spp_combined_info.csv", stringsAsFactors = FALSE)
-  mtdna_data <- merge(mtdna_data, cp_info[, c('spp', 'Genus', 'Family')], all.x = TRUE) #add Family & Genus for nested spp RE
-  msat_data <- merge(msat_data, cp_info[, c('spp', 'Genus', 'Family')], all.x = TRUE)
 IUCN_info <- read.csv("IUCN_status.csv", stringsAsFactors = FALSE)
   mtdna_data <- merge(mtdna_data, IUCN_info, all.x = TRUE)
   msat_data <- merge(msat_data, IUCN_info, all.x = TRUE)
@@ -35,11 +32,6 @@ IUCN_info <- read.csv("IUCN_status.csv", stringsAsFactors = FALSE)
 #in brood or similar structure --> internal
 
 ################################################### mtDNA data set################################################### 
-
-#Transform He for the gtmmTMB to work
-for (i in 1:nrow(mtdna_data)) { #transform data to handle 1s (Douma & Weedon (2018) Methods in Ecology & Evolution)
-  mtdna_data$transformed_He[i] <- ((mtdna_data$He[i]*(mtdna_data$n[i] - 1)) + 0.5)/mtdna_data$n[i]
-}
 
 #Add column for final fertilization
 mtdna_data$final_fertilization [mtdna_data$fertilization =="in brood pouch or similar structure"] <- "internal (oviduct)" #convert "in brood pouch or similar structure" to internal fertilization
@@ -117,43 +109,9 @@ plotResiduals(binomial_Hd_full_sim, mtdna_Hd_nona_fecunditymean$fertilizations.o
 plotResiduals(binomial_Hd_full_sim, mtdna_Hd_nona_fecunditymean$reproductionmodes.or.f)
 plotResiduals(binomial_Hd_full_sim, mtdna_Hd_nona_fecunditymean$bp_scale)
 
-beta_Hd_full_model <- glmmTMB(transformed_He ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + 
-                                fertilizations.or.f + reproductionmodes.or.f + bp_scale + 
-                                (1|spp) + (1|Source) + (1|MarkerName), 
-                              family = beta_family, data = mtdna_Hd)
-
-#dharma beta
-beta_Hd_full_sim <- simulateResiduals(fittedModel = beta_Hd_full_model, n = 1000, plot = F)
-plotQQunif(beta_Hd_full_sim)
-plotResiduals(beta_Hd_full_model)
-testDispersion(beta_Hd_full_sim)
-
-plotResiduals(beta_Hd_full_sim, mtdna_Hd_nona_fecunditymean$logtransform.maxlength.1)
-plotResiduals(beta_Hd_full_sim, mtdna_Hd_nona_fecunditymean$logtransform.fecundity_mean.1)
-plotResiduals(beta_Hd_full_sim, mtdna_Hd_nona_fecunditymean$fertilizations.or.f)
-plotResiduals(beta_Hd_full_sim, mtdna_Hd_nona_fecunditymean$reproductionmodes.or.f)
-plotResiduals(beta_Hd_full_sim, mtdna_Hd_nona_fecunditymean$bp_scale)
-
 #dredge models
 binomial_mtdna_Hd_dredge <- dredge(binomial_Hd_full_model)
 binomial_mtdna_Hd_noredlist_dredge <- dredge(binomial_Hd_noredlist_full_model)
-
-#didn't converge --> converged outside of dredge (one of top models)
-beta_Hd_check_model <- glmmTMB(transformed_He ~ 
-                                fertilizations.or.f + reproductionmodes.or.f + bp_scale + 
-                                (1|spp) + (1|Source) + (1|MarkerName), 
-                              family = beta_family, data = mtdna_Hd)
-
-#check fits of top models
-beta_Hd_top_model <- glmmTMB(transformed_He ~ 
-                                 fertilizations.or.f + reproductionmodes.or.f + bp_scale + 
-                                 (1|spp) + (1|Source) + (1|MarkerName), 
-                               family = beta_family, data = mtdna_Hd)
-
-beta_Hd_top_sim <- simulateResiduals(fittedModel = beta_Hd_top_model, n = 1000, plot = F)
-plotQQunif(beta_Hd_top_sim)
-plotResiduals(beta_Hd_top_model)
-testDispersion(beta_Hd_top_sim)
 
 #check fits of top models
 binomial_Hd_top_model <- glmer(formula = cbind(success,failure) ~  
@@ -218,11 +176,6 @@ testDispersion(Pi_top_sim)
 
 ################################################### msat data set ################################################### 
 
-#Transform He for the gtmmTMB to work
-for (i in 1:nrow(msat_data)) { #transform data to handle 1s (Douma & Weedon (2018) Methods in Ecology & Evolution)
-  msat_data$transformed_He[i] <- ((msat_data$He[i]*(msat_data$n[i] - 1)) + 0.5)/msat_data$n[i]
-}
-
 #Logtransform
 for (i in 1:nrow(msat_data)) { #get log transformation data
   cat(paste(i, " ", sep = ''))
@@ -240,7 +193,6 @@ for (i in 1:nrow(msat_data)) { #get log transformation data
 }
 
 #Add column for final fertilization
-
 msat_data$final_fertilization [msat_data$fertilization =="in brood pouch or similar structure"] <- "internal (oviduct)" #convert "in brood pouch or similar structure" to internal fertilization
 msat_data$final_fertilization [msat_data$fertilization =="external"]  <- "external"
 msat_data$final_fertilization [msat_data$fertilization =="internal (oviduct)"] <- "internal (oviduct)"
@@ -254,14 +206,13 @@ msat_data$reproductionmodes.or.f2 <- as.numeric(msat_data$reproductionmodes.or.f
 
 #######################################################################################################
 
-## model for msat He## 
+## model for msat He ## 
 
 #prep data
 ##Remove NA from variable columns
-msat_data <- msat_data %>% drop_na(He, logtransform.maxlength.2, logtransform.fecundity_mean.2,logtransform.repeat,fertilizations.or.f2,reproductionmodes.or.f2)
-
+msat_data <- msat_data %>% drop_na(He, logtransform.maxlength.2, logtransform.fecundity_mean.2, 
+                                   logtransform.repeat,fertilizations.or.f2,reproductionmodes.or.f2)
 msat_data$ID <- c(1:2163)
-
 
 msat_data$success <- round(msat_data$He*msat_data$n)
 msat_data$failure <- round((1-msat_data$He)*msat_data$n)
@@ -287,39 +238,8 @@ plotResiduals(binomial_He_full_sim, msat_data$Repeat)
 plotResiduals(binomial_He_full_sim, msat_data$PrimerNote)
 plotResiduals(binomial_He_full_sim, msat_data$CrossSpp)
 
-beta_He_full_model <- glmmTMB(transformed_He ~ logtransform.maxlength.2 + logtransform.fecundity_mean.2 + 
-                                fertilizations.or.f2 + reproductionmodes.or.f2 + CrossSpp + 
-                                (1|spp) + (1|Source), 
-                              family = beta_family, data = msat_data)
-
-#dharma beta
-beta_He_full_sim <- simulateResiduals(fittedModel = beta_He_full_model, n = 1000, plot = F)
-plotQQunif(beta_He_full_sim)
-plotResiduals(beta_He_full_model)
-testDispersion(beta_He_full_sim)
-
-plotResiduals(beta_He_full_sim, msat_data$logtransform.maxlength.2)
-plotResiduals(beta_He_full_sim, msat_data$logtransform.fecundity_mean.2)
-plotResiduals(beta_He_full_sim, msat_data$fertilizations.or.f2)
-plotResiduals(beta_He_full_sim, msat_data$reproductionmodes.or.f2)
-plotResiduals(beta_He_full_sim, msat_data$Repeat)
-plotResiduals(beta_He_full_sim, msat_data$CrossSpp)
-plotResiduals(beta_He_full_sim, msat_data$PrimerNote)
-
 #dredge models
 binomial_msat_He_dredge <- dredge(binomial_He_full_model)
-beta_msat_He_dredge <- dredge(beta_He_full_model)
-
-#check fits of top models
-beta_He_top_model <- glmmTMB(transformed_He ~ 
-                               fertilizations.or.f2 + logtransform.maxlength.2 + CrossSpp + 
-                               (1|spp) + (1|Source), 
-                             family = beta_family, data = msat_data)
-
-beta_He_top_sim <- simulateResiduals(fittedModel = beta_He_top_model, n = 1000, plot = F)
-plotQQunif(beta_He_top_sim)
-plotResiduals(beta_He_top_model)
-testDispersion(beta_He_top_sim)
 
 #check fits of top models
 binomial_He_top_model <- glmer(formula = cbind(success,failure) ~  
@@ -332,6 +252,3 @@ binomial_He_top_sim <- simulateResiduals(fittedModel = binomial_He_top_model, n 
 plotQQunif(binomial_He_top_sim)
 plotResiduals(binomial_He_top_sim)
 testDispersion(binomial_He_top_sim)
-
-
-
