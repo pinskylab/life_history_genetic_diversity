@@ -26,7 +26,10 @@ msat_data <- read.csv("new_msat_full_US_data.csv", stringsAsFactors = TRUE) #rea
 cp_info <- read.csv("spp_combined_info.csv", stringsAsFactors = FALSE)
   mtdna_data <- merge(mtdna_data, cp_info[, c('spp', 'Genus', 'Family')], all.x = TRUE) #add Family & Genus for nested spp RE
   msat_data <- merge(msat_data, cp_info[, c('spp', 'Genus', 'Family')], all.x = TRUE)
-
+IUCN_info <- read.csv("IUCN_status.csv", stringsAsFactors = FALSE)
+  mtdna_data <- merge(mtdna_data, IUCN_info, all.x = TRUE)
+  msat_data <- merge(msat_data, IUCN_info, all.x = TRUE)
+  
 #Fixed Variables: Crossspp, repeats, fecundity, body length/maxlength, reproduction mode, fertilization method, primernote
 #Random Variables: Species, source/study, marker name
 #in brood or similar structure --> internal
@@ -56,8 +59,6 @@ for (i in 1:nrow(mtdna_data)) { #get log transformation data
   mtdna_data$logtransform.fecundity_mean.1 <- log10(mtdna_data$fecundity_mean)
 }
 
-mtdna_data <- subset(mtdna_data, mtdna_data$logtransform.fecundity_mean.1 != "NaN")
-
 for (i in 1:nrow(mtdna_data)) { #get log transformation data
   cat(paste(i, " ", sep = ''))
   mtdna_data$logtransform.maxlength.1 <- log10(mtdna_data$maxlength)
@@ -77,9 +78,8 @@ for (i in 1:nrow(mtdna_data)) { #get log transformation data
 ##Fit model for success/failures##
 
 #prep data
-mtdna_data_nona_fecunditymean <- subset(mtdna_data, mtdna_data$logtransform.fecundity_mean.1 != "NaN")
-mtdna_Hd <- subset(mtdna_data, mtdna_data_nona_fecunditymean$He != "NA") #remove any rows where mtdna Hd wasn't calculated
-
+mtdna_Hd <- mtdna_data %>% drop_na(He, logtransform.maxlength.1, logtransform.fecundity_mean.1,fertilizations.or.f,reproductionmodes.or.f,
+                                        bp_scale)
 
 mtdna_Hd$success <- round(mtdna_Hd$He*mtdna_Hd$n)
 mtdna_Hd$failure <- round((1-mtdna_Hd$He)*mtdna_Hd$n)
@@ -92,6 +92,17 @@ binomial_Hd_full_model <- glmer(formula = cbind(success,failure) ~ logtransform.
                  (1|spp) + (1|Source), na.action = "na.fail", 
                family=binomial, data = mtdna_Hd,
                control = glmerControl(optimizer = "bobyqa")) #have Marial switch to bobyqa to get away from convergence issues AND switch to bp_scale
+
+#remove redlist species
+mtdna_Hd_noredlist <- subset(mtdna_Hd, mtdna_Hd$IUCN_status != "vulnerable" & 
+                               mtdna_Hd$IUCN_status != "endangered" & 
+                               mtdna_Hd$IUCN_status != "critically_endangered") #removed 4 observations
+
+binomial_Hd_noredlist_full_model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + 
+                                  fertilizations.or.f + reproductionmodes.or.f + bp_scale + 
+                                  (1|spp) + (1|Source), na.action = "na.fail", 
+                                family=binomial, data = mtdna_Hd_noredlist,
+                                control = glmerControl(optimizer = "bobyqa")) 
 
 #dharma binomial
 binomial_Hd_full_sim <- simulateResiduals(fittedModel = binomial_Hd_full_model, n = 1000, plot = F)
@@ -125,7 +136,7 @@ plotResiduals(beta_Hd_full_sim, mtdna_Hd_nona_fecunditymean$bp_scale)
 
 #dredge models
 binomial_mtdna_Hd_dredge <- dredge(binomial_Hd_full_model)
-beta_mtdna_Hd_dredge <- dredge(beta_Hd_full_model)
+binomial_mtdna_Hd_noredlist_dredge <- dredge(binomial_Hd_noredlist_full_model)
 
 #didn't converge --> converged outside of dredge (one of top models)
 beta_Hd_check_model <- glmmTMB(transformed_He ~ 
@@ -174,7 +185,7 @@ Pi_full_model <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + log
                                 control = lmerControl(optimizer = "bobyqa")) #have Marial switch to bobyqa to get away from convergence issues AND switch to bp_scale AND make sure REML = FALSE
 
 #pull p-values
-coefs <- data.frame(coef(summary(Pi_full_model)))
+coefs <- data.frame(coef(summary(Pi_top_model)))
 coefs$p.z <- 2 * (1 - pnorm(abs(coefs$t.value)))
 coefs
 
@@ -195,7 +206,7 @@ mtdna_Pi_dredge <- dredge(Pi_full_model)
 
 #check fits of top models
 Pi_top_model <- lmer(formula = logtransform.Pi ~  
-                                 fertilizations.or.f + logtransform.maxlength.1 + 
+                                 fertilizations.or.f +  
                                  (1|spp) + (1|Source), 
                                data = mtdna_pi,  REML = FALSE, na.action = 'na.fail', 
                                control = lmerControl(optimizer = "bobyqa"))
@@ -246,13 +257,9 @@ msat_data$reproductionmodes.or.f2 <- as.numeric(msat_data$reproductionmodes.or.f
 ## model for msat He## 
 
 #prep data
-msat_data <- msat_data[!is.na(msat_data$Repeat), ]
-msat_data <- msat_data[!is.na(msat_data$fertilizations.or.f2), ]
-msat_data <- msat_data[!is.na(msat_data$reproductionmodes.or.f2), ]
-msat_data <- msat_data[!is.na(msat_data$logtransform.maxlength.2), ]
-msat_data <- msat_data[!is.na(msat_data$logtransform.fecundity_mean.2), ]
-msat_data <- msat_data[!is.na(msat_data$PrimerNote), ]
-msat_data <- msat_data[!is.na(msat_data$CrossSpp), ]
+##Remove NA from variable columns
+msat_data <- msat_data %>% drop_na(He, logtransform.maxlength.2, logtransform.fecundity_mean.2,logtransform.repeat,fertilizations.or.f2,reproductionmodes.or.f2)
+
 msat_data$ID <- c(1:2163)
 
 
