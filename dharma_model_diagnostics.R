@@ -76,6 +76,11 @@ mtdna_Hd <- mtdna_data %>% drop_na(He, logtransform.maxlength.1, logtransform.fe
 mtdna_Hd$success <- round(mtdna_Hd$He*mtdna_Hd$n)
 mtdna_Hd$failure <- round((1-mtdna_Hd$He)*mtdna_Hd$n)
 
+#remove redlist species
+mtdna_Hd_noredlist <- subset(mtdna_Hd, mtdna_Hd$IUCN_status != "vulnerable" & 
+                               mtdna_Hd$IUCN_status != "endangered" & 
+                               mtdna_Hd$IUCN_status != "critically_endangered") #removed 4 observations
+
 #null (full) model for Hd --> no site for mtdna bc essentially observation-level RE
 summary(mtdna_data)
 
@@ -84,11 +89,6 @@ binomial_Hd_full_model <- glmer(formula = cbind(success,failure) ~ logtransform.
                  (1|spp) + (1|Source), na.action = "na.fail", 
                family=binomial, data = mtdna_Hd,
                control = glmerControl(optimizer = "bobyqa")) #have Marial switch to bobyqa to get away from convergence issues AND switch to bp_scale
-
-#remove redlist species
-mtdna_Hd_noredlist <- subset(mtdna_Hd, mtdna_Hd$IUCN_status != "vulnerable" & 
-                               mtdna_Hd$IUCN_status != "endangered" & 
-                               mtdna_Hd$IUCN_status != "critically_endangered") #removed 4 observations
 
 binomial_Hd_noredlist_full_model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + 
                                   fertilizations.or.f + reproductionmodes.or.f + bp_scale + 
@@ -120,6 +120,12 @@ binomial_Hd_top_model <- glmer(formula = cbind(success,failure) ~
                                           family=binomial, data = mtdna_Hd,  na.action = 'na.fail', 
                                           control = glmerControl(optimizer = "bobyqa"))
 
+binomial_Hd_noredlist_top_model <- glmer(formula = cbind(success,failure) ~  
+                                 fertilizations.or.f + logtransform.maxlength.1 + 
+                                 (1|spp) + (1|Source), 
+                               family=binomial, data = mtdna_Hd_noredlist,  na.action = 'na.fail', 
+                               control = glmerControl(optimizer = "bobyqa"))
+
 binomial_Hd_top_sim <- simulateResiduals(fittedModel = binomial_Hd_top_model, n = 1000, plot = F)
 plotQQunif(binomial_Hd_top_sim)
 plotResiduals(binomial_Hd_top_sim)
@@ -135,6 +141,12 @@ mtdna_data_nona_fecunditymean_bpscale <- subset(mtdna_data_nona_fecunditymean, m
 mtdna_pi <- subset(mtdna_data_nona_fecunditymean_bpscale, mtdna_data_nona_fecunditymean_bpscale$logtransform.Pi != "NA") #remove any rows where mtdna pi wasn't calculated
 mtdna_pi
 
+#remove redlist species
+mtdna_pi_noredlist <- subset(mtdna_pi, mtdna_pi$IUCN_status != "vulnerable" & 
+                               mtdna_pi$IUCN_status != "endangered" & 
+                               mtdna_pi$IUCN_status != "critically_endangered") #removed 10 observations
+
+
 #null (full) model for pi
 Pi_full_model <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + 
                                   fertilizations.or.f + reproductionmodes.or.f + bp_scale + 
@@ -142,8 +154,15 @@ Pi_full_model <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + log
                                 data = mtdna_pi, REML = FALSE,
                                 control = lmerControl(optimizer = "bobyqa")) #have Marial switch to bobyqa to get away from convergence issues AND switch to bp_scale AND make sure REML = FALSE
 
+Pi_full_noredlist_model <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + 
+                        fertilizations.or.f + reproductionmodes.or.f + bp_scale + 
+                        (1|spp) + (1|Source), na.action = "na.fail", 
+                      data = mtdna_pi_noredlist, REML = FALSE,
+                      control = lmerControl(optimizer = "bobyqa")) #have Marial switch to bobyqa to get away from convergence issues AND switch to bp_scale AND make sure REML = FALSE
+
+
 #pull p-values
-coefs <- data.frame(coef(summary(Pi_top_model)))
+coefs <- data.frame(coef(summary(Pi_top_noredlist_model)))
 coefs$p.z <- 2 * (1 - pnorm(abs(coefs$t.value)))
 coefs
 
@@ -161,6 +180,7 @@ plotResiduals(Pi_full_sim, mtdna_pi$bp_scale)
 
 #dredge models
 mtdna_Pi_dredge <- dredge(Pi_full_model)
+mtdna_Pi_noredlist_dredge <- dredge(Pi_full_noredlist_model)
 
 #check fits of top models
 Pi_top_model <- lmer(formula = logtransform.Pi ~  
@@ -168,6 +188,12 @@ Pi_top_model <- lmer(formula = logtransform.Pi ~
                                  (1|spp) + (1|Source), 
                                data = mtdna_pi,  REML = FALSE, na.action = 'na.fail', 
                                control = lmerControl(optimizer = "bobyqa"))
+
+Pi_top_noredlist_model <- lmer(formula = logtransform.Pi ~  
+                       fertilizations.or.f +  
+                       (1|spp) + (1|Source), 
+                     data = mtdna_pi_noredlist,  REML = FALSE, na.action = 'na.fail', 
+                     control = lmerControl(optimizer = "bobyqa"))
 
 Pi_top_sim <- simulateResiduals(fittedModel = Pi_top_model, n = 1000, plot = F)
 plotQQunif(Pi_top_sim)
@@ -217,12 +243,24 @@ msat_data$ID <- c(1:2163)
 msat_data$success <- round(msat_data$He*msat_data$n)
 msat_data$failure <- round((1-msat_data$He)*msat_data$n)
 
+#remove redlist species
+msat_data_noredlist <- subset(msat_data, msat_data$IUCN_status != "vulnerable" & 
+                               msat_data$IUCN_status != "endangered" & 
+                               msat_data$IUCN_status != "critically_endangered") #removed 640 observations
+
 #null (full) model for He
 binomial_He_full_model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.2 + logtransform.fecundity_mean.2 + 
                                   fertilizations.or.f2 + reproductionmodes.or.f2 + CrossSpp +
                                   (1|spp) + (1|Source) + (1|ID), na.action = "na.fail", 
                                 family=binomial, data = msat_data,
                                 control = glmerControl(optimizer = "bobyqa")) #have Marial switch to bobyqa to get away from convergence issues
+
+binomial_He_noredlist_full_model <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.2 + logtransform.fecundity_mean.2 + 
+                                  fertilizations.or.f2 + reproductionmodes.or.f2 + CrossSpp +
+                                  (1|spp) + (1|Source) + (1|ID), na.action = "na.fail", 
+                                family=binomial, data = msat_data_noredlist,
+                                control = glmerControl(optimizer = "bobyqa")) #have Marial switch to bobyqa to get away from convergence issues
+
 
 #dharma binomial
 binomial_He_full_sim <- simulateResiduals(fittedModel = binomial_He_full_model, n = 1000, plot = F)
@@ -240,12 +278,19 @@ plotResiduals(binomial_He_full_sim, msat_data$CrossSpp)
 
 #dredge models
 binomial_msat_He_dredge <- dredge(binomial_He_full_model)
+binomial_msat_He_noredlist_dredge <- dredge(binomial_He_noredlist_full_model)
 
 #check fits of top models
 binomial_He_top_model <- glmer(formula = cbind(success,failure) ~  
                                  fertilizations.or.f2 + logtransform.maxlength.2 + CrossSpp + 
                                  (1|spp) + (1|Source) + (1|ID), 
                                family=binomial, data = msat_data,  na.action = 'na.fail', 
+                               control = glmerControl(optimizer = "bobyqa"))
+
+binomial_He_noredlist_top_model <- glmer(formula = cbind(success,failure) ~  
+                                 fertilizations.or.f2 + CrossSpp + 
+                                 (1|spp) + (1|Source) + (1|ID), 
+                               family=binomial, data = msat_data_noredlist,  na.action = 'na.fail', 
                                control = glmerControl(optimizer = "bobyqa"))
 
 binomial_He_top_sim <- simulateResiduals(fittedModel = binomial_He_top_model, n = 1000, plot = F)
