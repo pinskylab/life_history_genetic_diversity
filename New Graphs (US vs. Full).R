@@ -15,7 +15,7 @@ library(dplyr)
 
 #read in data
 mtdna_data_new <- read.csv("new_mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
-msat_data <- read.csv("new_msat_full_US_data.csv", stringsAsFactors = TRUE) #read in
+msat_data <- read.csv("new_msat_full_US_data.csv", stringsAsFactors = FALSE) #read in
 mtdna_FULL <- read.csv("new_full_mtdna_LH.csv", stringsAsFactors = FALSE) #read in
 msat_FULL <- read.csv("new_full_msat_LH.csv", stringsAsFactors = FALSE) #read in
 

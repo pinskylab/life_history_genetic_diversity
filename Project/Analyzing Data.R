@@ -16,9 +16,8 @@ library(maps)
 library(mapdata)
 
 #read in data
-mtdna_data <- read.csv("mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
-msat_data <- read.csv("msat_full_US_data.csv", stringsAsFactors = FALSE) #read in 
 mtdna_data_new <- read.csv("new_mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
+msat_data <- read.csv("new_msat_full_US_data.csv", stringsAsFactors = FALSE) #read in 
 
 #pull world map data
 geogr_data <- map_data('usa')
@@ -129,7 +128,7 @@ mtdna_fecundity_He_no.na$logtransform.fecundity <- NA #add column to do a log tr
 
 for (i in 1:nrow(mtdna_fecundity_He_no.na)) { #get log transformation data
   cat(paste(i, " ", sep = ''))
-  mtdna_fecundity_He_no.na$logtransform.fecundity <- log10(mtdna_fecundity_Pi_no.na$fecundity_mean)
+  mtdna_fecundity_He_no.na$logtransform.fecundity <- log10(mtdna_fecundity_He_no.na$fecundity_mean)
 }
 
 ggplot(mtdna_fecundity_He_no.na, aes(x= logtransform.fecundity, y= He)) + #fecundity mean & He scatter plot
@@ -176,32 +175,33 @@ polygon(density(mtdna_fecundity_He_no.na$fecundity_mean), main="Fecundity Mean D
 
 #####T-Tests: Character Data#####
 
+#####Welch Two-Sample Tests: Numerical Data#####
+
 #Fertilization#
 
-external.mtdna <- mtdna_final_fertilization_He_no.na$He[mtdna_final_fertilization_He_no.na$final_fertilization=="external"] #create vector for one aspect of t-test
-internal.mtdna <- mtdna_final_fertilization_He_no.na$He[mtdna_final_fertilization_He_no.na$final_fertilization=="internal (oviduct)"] #create vector
+external.mtdnaHe <- mtdna_final_fertilization_He_no.na$He[mtdna_final_fertilization_He_no.na$final_fertilization=="external"] #create vector for one aspect of t-test
+internal.mtdnaHe <- mtdna_final_fertilization_He_no.na$He[mtdna_final_fertilization_He_no.na$final_fertilization=="internal (oviduct)"] #create vector
 
-fertilization_ttest.mtdna <- t.test(external.mtdna, internal.mtdna, var.equal=TRUE) #combine created vectors & perform t-test
+fertilization_ttest.mtdnaHe <- t.test(external.mtdna, internal.mtdna, var.equal=FALSE) #combine created vectors & perform t-test
 
 #Reproduction Mode#
 
-dioecism.mtdna <- mtdna_final_reproductionmode_He_no.na$He[mtdna_final_reproductionmode_He_no.na$final_reproductionmode=="Dioecious"] #create vector for one aspect of t-test
-hermaphrodite.mtdna <- mtdna_final_reproductionmode_He_no.na$He[mtdna_final_reproductionmode_He_no.na$final_reproductionmode=="Hermaphrodite"] #create vector
+dioecism.mtdnaHe <- mtdna_final_reproductionmode_He_no.na$He[mtdna_final_reproductionmode_He_no.na$final_reproductionmode=="Dioecious"] #create vector for one aspect of t-test
+hermaphrodite.mtdnaHe <- mtdna_final_reproductionmode_He_no.na$He[mtdna_final_reproductionmode_He_no.na$final_reproductionmode=="Hermaphrodite"] #create vector
 
-reproductionmode_ttest.mtdna <- t.test(dioecism.mtdna, hermaphrodite.mtdna, var.equal=TRUE) #combine created vectors & perform t-test
+reproductionmode_ttest.mtdnaHe <- t.test(dioecism.mtdna, hermaphrodite.mtdna, var.equal=FALSE) #combine created vectors & perform t-test
 
 #Specific Reproduction Modes: ANOVA TEST#
 
-specific.repro_modeanovamtdna <- aov(He ~ specific.repro_mode, data = mtdna_reproduction_type_He_no.na) #perform anova test
+specific.repro_modeanovamtdnaHe <- aov(He ~ specific.repro_mode, data = mtdna_reproduction_type_He_no.na) #perform anova test
 
 #####Wilcoxon Tests: Numerical Data#####
 
 #Max Length#
-wilcox.test( mtdna_maxlength_He_no.na[ ,'maxlength'] , mtdna_maxlength_He_no.na[ , 'He'], paired=T) #run Wilcoxon test on max length & He
-
+wilcox.test( mtdna_maxlength_He_no.na[ ,'maxlength'] , mtdna_maxlength_He_no.na[ , 'He'], paired=F) #run Wilcoxon test on max length & He
 
 #Fecundity Mean#
-wilcox.test( mtdna_fecundity_He_no.na[ ,'fecundity_mean'] , mtdna_fecundity_He_no.na[ , 'He'], paired=T) #run Wilcoxon test on max length & He
+wilcox.test( mtdna_fecundity_He_no.na[ ,'fecundity_mean'] , mtdna_fecundity_He_no.na[ , 'He'], paired=F) #run Wilcoxon test on max length & He
 
 #####Shapiro-Wilk Tests: Numerical Data#####
 
@@ -370,38 +370,38 @@ polygon(density(mtdna_fecundity_Pi_no.na$fecundity_mean), main="Fecundity Mean D
 
 #Fertilization#
 
-external.mtdna <- mtdna_final_fertilization_Pi_no.na$He[mtdna_final_fertilization_Pi_no.na$final_fertilization=="external"] #create vector for one aspect of t-test
-internal.mtdna <- mtdna_final_fertilization_Pi_no.na$He[mtdna_final_fertilization_Pi_no.na$final_fertilization=="internal (oviduct)"] #create vector
+external.mtdnaPi <- mtdna_final_fertilization_Pi_no.na$Pi[mtdna_final_fertilization_Pi_no.na$final_fertilization=="external"] #create vector for one aspect of t-test
+internal.mtdnaPi <- mtdna_final_fertilization_Pi_no.na$Pi[mtdna_final_fertilization_Pi_no.na$final_fertilization=="internal (oviduct)"] #create vector
 
-fertilization_ttest.mtdna <- t.test(external.mtdna, internal.mtdna, var.equal=TRUE) #combine created vectors & perform t-test
+fertilization_ttest.mtdnaPi <- t.test(external.mtdnaPi, internal.mtdnaPi, var.equal=FALSE) #combine created vectors & perform t-test
 
 #Reproduction Mode#
 
-dioecism.mtdna <- mtdna_final_reproductionmode_He_no.na$He[mtdna_final_reproductionmode_He_no.na$final_reproductionmode=="Dioecious"] #create vector for one aspect of t-test
-hermaphrodite.mtdna <- mtdna_final_reproductionmode_He_no.na$He[mtdna_final_reproductionmode_He_no.na$final_reproductionmode=="Hermaphrodite"] #create vector
+dioecism.mtdnaPi <- mtdna_final_reproductionmode_Pi_no.na$Pi[mtdna_final_reproductionmode_Pi_no.na$final_reproductionmode=="Dioecious"] #create vector for one aspect of t-test
+hermaphrodite.mtdnaPi <- mtdna_final_reproductionmode_Pi_no.na$Pi[mtdna_final_reproductionmode_Pi_no.na$final_reproductionmode=="Hermaphrodite"] #create vector
 
-reproductionmode_ttest.mtdna <- t.test(dioecism.mtdna, hermaphrodite.mtdna, var.equal=TRUE) #combine created vectors & perform t-test
+reproductionmode_ttest.mtdnaPi <- t.test(dioecism.mtdnaPi, hermaphrodite.mtdnaPi, var.equal=FALSE) #combine created vectors & perform t-test
 
 #Specific Reproduction Modes: ANOVA TEST#
 
-specific.repro_modeanovamtdna <- aov(He ~ specific.repro_mode, data = mtdna_reproduction_type_He_no.na) #perform anova test
+specific.repro_modeanovamtdnaPi <- aov(Pi ~ specific.repro_mode, data = mtdna_reproduction_type_Pi_no.na) #perform anova test
 
 #####Wilcoxon Tests: Numerical Data#####
 
 #Max Length#
-wilcox.test( mtdna_maxlength_He_no.na[ ,'maxlength'] , mtdna_maxlength_He_no.na[ , 'He'], paired=T) #run Wilcoxon test on max length & He
+wilcox.test( mtdna_maxlength_Pi_no.na[ ,'maxlength'] , mtdna_maxlength_Pi_no.na[ , 'Pi'], paired=F) #run Wilcoxon test on max length & He
 
 
 #Fecundity Mean#
-wilcox.test( mtdna_fecundity_He_no.na[ ,'fecundity_mean'] , mtdna_fecundity_He_no.na[ , 'He'], paired=T) #run Wilcoxon test on max length & He
+wilcox.test( mtdna_fecundity_Pi_no.na[ ,'fecundity_mean'] , mtdna_fecundity_Pi_no.na[ , 'Pi'], paired=F) #run Wilcoxon test on max length & He
 
 #####Shapiro-Wilk Tests: Numerical Data#####
 
 #Max Length#
-shapiro.test(mtdna_maxlength_He_no.na$maxlength) #run Shapiro-Wilk test on max length & He
+shapiro.test(mtdna_maxlength_Pi_no.na$maxlength) #run Shapiro-Wilk test on max length & He
 
 #Fecundity Mean#
-shapiro.test(mtdna_fecundity_He_no.na$fecundity_mean) #run Shapiro-Wilk test on max length & He
+shapiro.test(mtdna_fecundity_Pi_no.na$fecundity_mean) #run Shapiro-Wilk test on max length & He
 
 ####################################################################################
 
