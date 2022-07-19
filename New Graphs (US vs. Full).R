@@ -16,6 +16,7 @@ library(dplyr)
 #read in data
 mtdna_data_new <- read.csv("new_mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
 msat_data <- read.csv("new_msat_full_US_data.csv", stringsAsFactors = FALSE) #read in
+
 mtdna_FULL <- read.csv("new_full_mtdna_LH.csv", stringsAsFactors = FALSE) #read in
 msat_FULL <- read.csv("new_full_msat_LH.csv", stringsAsFactors = FALSE) #read in
 
@@ -1330,23 +1331,68 @@ ggplot(mtdna_maxlengthandfecunditymean_Pi_no.na_FULL, aes(x=logtransform.maxleng
   scale_colour_manual(values=c("blue")) +
   scale_shape(solid = FALSE)
 
-########################################### T-Tests for Pi: US Combined Marker Character Data ########################################### 
+########################################### T-Tests US Combined Marker Character Data ########################################### 
 
-##### mtDNA vs. msat #####
+##### msat #####
 
+##He##
 #Fertilization#
 
-external.mtdna <- mtdna_final_fertilization_Pi_no.na$Pi[mtdna_final_fertilization_Pi_no.na$final_fertilization=="external"] #create vector for one aspect of t-test
-internal.mtdna <- mtdna_final_fertilization_Pi_no.na$Pi[mtdna_final_fertilization_Pi_no.na$final_fertilization=="internal (oviduct)"] #create vector
+external.msat <- msat_final_fertilization_He_no.na$He[msat_final_fertilization_He_no.na$final_fertilization=="external"] #create vector for one aspect of t-test
+internal.msat <- msat_final_fertilization_He_no.na$He[msat_final_fertilization_He_no.na$final_fertilization=="internal (oviduct)"] #create vector
 
-fertilization_ttest.mtdna <- t.test(external.mtdna, internal.mtdna, var.equal=TRUE) #combine created vectors & perform t-test
+fertilization_ttest.msat <- t.test(external.msat, internal.msat, var.equal=FALSE) #combine created vectors & perform t-test
+fertilization_ttest.msatex <- t.test(external.msat, var.equal=FALSE)
+fertilization_ttest.msatin <- t.test(internal.msat, var.equal=FALSE)
 
 #Reproduction Mode#
 
-dioecism.mtdna <- mtdna_final_reproductionmode_Pi_no.na$Pi[mtdna_final_reproductionmode_Pi_no.na$final_reproductionmode=="Dioecious"] #create vector for one aspect of t-test
-hermaphrodite.mtdna <- mtdna_final_reproductionmode_Pi_no.na$Pi[mtdna_final_reproductionmode_Pi_no.na$final_reproductionmode=="Hermaphrodite"] #create vector
+dioecism.msat <- msat_final_reproductionmode_He_no.na$He[msat_final_reproductionmode_He_no.na$final_reproductionmode=="Dioecious"] #create vector for one aspect of t-test
+hermaphrodite.msat <- msat_final_reproductionmode_He_no.na$He[msat_final_reproductionmode_He_no.na$final_reproductionmode=="Hermaphrodite"] #create vector
 
-reproductionmode_ttest.mtdna <- t.test(dioecism.mtdna, hermaphrodite.mtdna, var.equal=TRUE) #combine created vectors & perform t-test
+reproductionmode_ttest.msat <- t.test(dioecism.msat, hermaphrodite.msat, var.equal=FALSE) #combine created vectors & perform t-test
+reproductionmode_ttest.msatdio <- t.test(dioecism.msat, var.equal=FALSE)
+reproductionmode_ttest.msatherm <- t.test(hermaphrodite.msat, var.equal=FALSE)
+
+##### mtDNA #####
+
+##He##
+#Fertilization#
+
+external.mtdnaHe <- msat_final_fertilization_He_no.na$He[msat_final_fertilization_He_no.na$final_fertilization=="external"] #create vector for one aspect of t-test
+internal.mtdnaHe <- msat_final_fertilization_He_no.na$He[msat_final_fertilization_He_no.na$final_fertilization=="internal (oviduct)"] #create vector
+
+fertilization_ttest.mtdnaHe <- t.test(external.mtdnaHe, internal.mtdnaHe, var.equal=FALSE) #combine created vectors & perform t-test
+fertilization_ttest.mtdnaHeex <- t.test(external.mtdnaHe, var.equal=FALSE)
+fertilization_ttest.mtdnaHein <- t.test(internal.mtdnaHe, var.equal=FALSE)
+
+#Reproduction Mode#
+
+dioecism.mtdnaHe <- mtdna_final_reproductionmode_He_no.na$He[mtdna_final_reproductionmode_He_no.na$final_reproductionmode=="Dioecious"] #create vector for one aspect of t-test
+hermaphrodite.mtdnaHe <- mtdna_final_reproductionmode_He_no.na$He[mtdna_final_reproductionmode_He_no.na$final_reproductionmode=="Hermaphrodite"] #create vector
+
+reproductionmode_ttest.mtdnaHe <- t.test(dioecism.mtdnaHe, hermaphrodite.mtdnaHe, var.equal=FALSE) #combine created vectors & perform t-test
+reproductionmode_ttest.mtdnaHedio <- t.test(dioecism.mtdnaHe, var.equal=FALSE)
+reproductionmode_ttest.mtdnaHeherm <- t.test(hermaphrodite.mtdnaHe, var.equal=FALSE)
+
+##Pi##
+#Fertilization#
+
+external.mtdnaPi <- mtdna_final_fertilization_Pi_no.na$Pi[mtdna_final_fertilization_Pi_no.na$final_fertilization=="external"] #create vector for one aspect of t-test
+internal.mtdnaPi <- mtdna_final_fertilization_Pi_no.na$Pi[mtdna_final_fertilization_Pi_no.na$final_fertilization=="internal (oviduct)"] #create vector
+
+fertilization_ttest.mtdnaPi <- t.test(external.mtdnaPi, internal.mtdnaPi, var.equal=FALSE) #combine created vectors & perform t-test
+fertilization_ttest.mtdnaPiex <- t.test(external.mtdnaPi, var.equal=FALSE) 
+fertilization_ttest.mtdnaPiin <- t.test(internal.mtdnaPi, var.equal=FALSE) 
+
+#Reproduction Mode#
+
+dioecism.mtdnaPi <- mtdna_final_reproductionmode_Pi_no.na$Pi[mtdna_final_reproductionmode_Pi_no.na$final_reproductionmode=="Dioecious"] #create vector for one aspect of t-test
+hermaphrodite.mtdnaPi <- mtdna_final_reproductionmode_Pi_no.na$Pi[mtdna_final_reproductionmode_Pi_no.na$final_reproductionmode=="Hermaphrodite"] #create vector
+
+reproductionmode_ttest.mtdnaPi <- t.test(dioecism.mtdnaPi, hermaphrodite.mtdnaPi, var.equal=FALSE) #combine created vectors & perform t-test
+reproductionmode_ttest.mtdnaPidio <- t.test(dioecism.mtdnaPi, var.equal=FALSE)
+reproductionmode_ttest.mtdnaPiherm <- t.test(hermaphrodite.mtdnaPi, var.equal=FALSE)
 
 ########################################### ANOVA: US Combined Marker Character Data ########################################### 
 
@@ -1354,6 +1400,7 @@ reproductionmode_ttest.mtdna <- t.test(dioecism.mtdna, hermaphrodite.mtdna, var.
 
 ##### mtDNA vs. msat #####
 
+##### combined #####
 #Fertilization#
 
 fertilizationanova.allHe <- aov(He ~ final_fertilization * markertype, data = final_fertilization_all) #perform anova test for combined data
@@ -1370,37 +1417,53 @@ specific.repro_modeanova.allHe <- aov(He ~ specific.repro_mode * markertype, dat
 TukeyHSD(specific.repro_modeanova.allHe) #perform TukeyHSD to see full table of results
 
 ##### msat #####
-
 #Fertilization#
 
-fertilizationanova.allHe <- aov(He ~ final_fertilization * markertype, data = mtdna_final_fertilization_He_no.na) #perform anova test for combined data
-TukeyHSD(fertilizationanova.all) #perform TukeyHSD to see full table of results
+fertilizationanova.msatHe <- aov(He ~ final_fertilization, data = msat_final_fertilization_He_no.na) #perform anova test for combined data
+TukeyHSD(fertilizationanova.msatHe) #perform TukeyHSD to see full table of results
 
 #Reproduction Mode#
 
-reproductionmodeanova.allHe <- aov(He ~ final_reproductionmode * markertype, data = mtdna_final_reproductionmode_He_no.na) #perform anova test for combined data
-TukeyHSD(reproductionmodeanova.all) #perform TukeyHSD to see full table of results
+reproductionmodeanova.msatHe <- aov(He ~ final_reproductionmode, data = msat_final_fertilization_He_no.na) #perform anova test for combined data
+TukeyHSD(reproductionmodeanova.msatHe) #perform TukeyHSD to see full table of results
 
 #Specific Reproduction Modes: ANOVA#
 
-specific.repro_modeanova.allHe <- aov(He ~ specific.repro_mode * markertype, data = mtdna_reproduction_type_He_no.na) #perform anova test for combined data
-TukeyHSD(specific.repro_modeanova.all) #perform TukeyHSD to see full table of results
+specific.repro_modeanova.msatHe <- aov(He ~ specific.repro_mode, data = msat_final_fertilization_He_no.na) #perform anova test for combined data
+TukeyHSD(specific.repro_modeanova.msatHe) #perform TukeyHSD to see full table of results
+
+##### mtDNA #####
+
+#Fertilization#
+
+fertilizationanova.mtdnaHe <- aov(He ~ final_fertilization, data = mtdna_final_fertilization_He_no.na) #perform anova test for combined data
+TukeyHSD(fertilizationanova.mtdnaHe) #perform TukeyHSD to see full table of results
+
+#Reproduction Mode#
+
+reproductionmodeanova.mtdnaHe <- aov(He ~ final_reproductionmode, data = mtdna_final_reproductionmode_He_no.na) #perform anova test for combined data
+TukeyHSD(reproductionmodeanova.mtdnaHe) #perform TukeyHSD to see full table of results
+
+#Specific Reproduction Modes: ANOVA#
+
+specific.repro_modeanova.mtdnaHe <- aov(He ~ specific.repro_mode, data = mtdna_reproduction_type_He_no.na) #perform anova test for combined data
+TukeyHSD(specific.repro_modeanova.mtdnaHe) #perform TukeyHSD to see full table of results
 
 ############## Pi Data ############## 
 
 #Fertilization#
 
-fertilizationanova.allPi <- aov(He ~ final_fertilization * markertype, data = final_fertilization_all) #perform anova test for combined data
+fertilizationanova.allPi <- aov(He ~ final_fertilization, data = final_fertilization_all) #perform anova test for combined data
 TukeyHSD(fertilizationanova.all) #perform TukeyHSD to see full table of results
 
 #Reproduction Mode#
 
-reproductionmodeanova.allPi <- aov(He ~ final_reproductionmode * markertype, data = reproductionmode_all) #perform anova test for combined data
+reproductionmodeanova.allPi <- aov(He ~ final_reproductionmode, data = reproductionmode_all) #perform anova test for combined data
 TukeyHSD(reproductionmodeanova.all) #perform TukeyHSD to see full table of results
 
 #Specific Reproduction Modes: ANOVA#
 
-specific.repro_modeanova.allPi <- aov(He ~ specific.repro_mode * markertype, data = specificreproductionmode_all) #perform anova test for combined data
+specific.repro_modeanova.allPi <- aov(He ~ specific.repro_mode, data = specificreproductionmode_all) #perform anova test for combined data
 TukeyHSD(specific.repro_modeanova.all) #perform TukeyHSD to see full table of results
 
 
