@@ -577,10 +577,10 @@ specific.repro_modeanovamsat <- aov(He ~ specific.repro_mode, data = msat_reprod
 #####Wilcoxon Tests: Numerical Data#####
 
 #Max Length#
-wilcox.test( msat_maxlength_He_no.na[ ,'maxlength'] , msat_maxlength_He_no.na[ , 'He'], paired=T) #run Wilcoxon test on max length & He
+wilcox.test( msat_maxlength_He_no.na[ ,'maxlength'] , msat_maxlength_He_no.na[ , 'He'], paired=F) #run Wilcoxon test on max length & He
 
 #Fecundity Mean#
-wilcox.test( msat_fecundity_He_no.na[ ,'fecundity_mean'] , msat_fecundity_He_no.na[ , 'He'], paired=T) #run Wilcoxon test on fecundity & He
+wilcox.test( msat_fecundity_He_no.na[ ,'fecundity_mean'] , msat_fecundity_He_no.na[ , 'He'], paired=F) #run Wilcoxon test on fecundity & He
 
 
 #####Shapiro-Wilk Tests: Numerical Data#####

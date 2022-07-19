@@ -192,6 +192,9 @@ msat_data$specific.repro_mode  [msat_data$reproductionmode =="true hermaphroditi
 
 msat_reproduction_type_He_no.na <- msat_data[!is.na(msat_data$specific.repro_mode ) & !is.na(msat_data$He),] #create new table that excludes NA's from columns of interest
 
+both <- mtdna_data_new[!is.na(mtdna_data_new$He)] 
+
+both <- subset(mtdna_data_new, !is.na(He))
 #Final msat Max Length
 
 msat_maxlength_He_no.na <- msat_data[!is.na(msat_data$maxlength) & !is.na(msat_data$He),] #create new table that excludes NA's from columns of interest
@@ -212,6 +215,8 @@ for (i in 1:nrow(msat_fecundity_He_no.na)) { #get log transformation data
   cat(paste(i, " ", sep = ''))
   msat_fecundity_He_no.na$logtransform.fecundity <- log10(msat_fecundity_He_no.na$fecundity_mean)
 }
+
+
 
 ############## Comparing US mtDNA and msat Data ############### 
 
@@ -1398,6 +1403,19 @@ reproductionmode_ttest.mtdnaPiherm <- t.test(hermaphrodite.mtdnaPi, var.equal=FA
 
 ############## He Data ############## 
 
+
+# msat
+
+fertilizationanova.msatHe <- aov(He ~ final_fertilization, data = msat_final_fertilization_He_no.na) #perform anova test for combined data
+TukeyHSD(fertilizationanova.msatHe) #perform TukeyHSD to see full table of results
+
+#Reproduction Mode#
+
+reproductionmodeanova.msatHe <- aov(He ~ final_reproductionmode, data = msat_final_reproductionmode_He_no.na) #perform anova test for combined data
+TukeyHSD(reproductionmodeanova.msatHe) #perform TukeyHSD to see full table of results
+
+
+# mtDNA
 ##### mtDNA vs. msat #####
 
 ##### combined #####
@@ -1466,4 +1484,58 @@ TukeyHSD(reproductionmodeanova.all) #perform TukeyHSD to see full table of resul
 specific.repro_modeanova.allPi <- aov(He ~ specific.repro_mode, data = specificreproductionmode_all) #perform anova test for combined data
 TukeyHSD(specific.repro_modeanova.all) #perform TukeyHSD to see full table of results
 
+
+
+
+########################################### Wilcoxon Tests: Numerical Data ########################################### 
+
+### He ###
+ #msat
+#Max Length#
+wilcox.test( msat_maxlength_He_no.na[ ,'maxlength'] , msat_maxlength_He_no.na[ , 'He'], paired=F) #run Wilcoxon test on max length & He
+
+#Fecundity Mean#
+wilcox.test( msat_fecundity_He_no.na[ ,'fecundity_mean'] , msat_fecundity_He_no.na[ , 'He'], paired=F) #run Wilcoxon test on fecundity & He
+
+#mtDNA
+#Max Length#
+wilcox.test( mtdna_maxlength_He_no.na[ ,'maxlength'] , mtdna_maxlength_He_no.na[ , 'He'], paired=F) #run Wilcoxon test on max length & He
+
+#Fecundity Mean#
+wilcox.test( mtdna_fecundity_He_no.na[ ,'fecundity_mean'] , mtdna_fecundity_He_no.na[ , 'He'], paired=F) #run Wilcoxon test on max length & He
+
+### Pi ###
+#mtDNA
+#Max Length#
+wilcox.test( mtdna_maxlength_Pi_no.na[ ,'maxlength'] , mtdna_maxlength_Pi_no.na[ , 'Pi'], paired=F) #run Wilcoxon test on max length & He
+
+
+#Fecundity Mean#
+wilcox.test( mtdna_fecundity_Pi_no.na[ ,'fecundity_mean'] , mtdna_fecundity_Pi_no.na[ , 'Pi'], paired=F) #run Wilcoxon test on max length & He
+
+
+########################################### Shapiro-Wilk Tests: Numerical Data ########################################### 
+### He ###
+#msat
+#Max Length#
+
+shapiro.test(msat_maxlength_He_no.na$maxlength) #run Shapiro-Wilk test on max length & He
+
+shapiro.test(msat_fecundity_He_no.na$fecundity_mean) #run Shapiro-Wilk test on fecundity mean & He
+
+#mtDNA
+#Max Length#
+shapiro.test(mtdna_maxlength_He_no.na$maxlength) #run Shapiro-Wilk test on max length & He
+
+#Fecundity Mean#
+shapiro.test(mtdna_fecundity_He_no.na$fecundity_mean) #run Shapiro-Wilk test on max length & He
+
+
+### Pi ###
+#mtDNA
+#Max Length#
+shapiro.test(mtdna_maxlength_Pi_no.na$maxlength) #run Shapiro-Wilk test on max length & He
+
+#Fecundity Mean#
+shapiro.test(mtdna_fecundity_Pi_no.na$fecundity_mean) #run Shapiro-Wilk test on max length & He
 
