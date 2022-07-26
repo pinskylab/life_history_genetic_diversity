@@ -192,9 +192,6 @@ msat_data$specific.repro_mode  [msat_data$reproductionmode =="true hermaphroditi
 
 msat_reproduction_type_He_no.na <- msat_data[!is.na(msat_data$specific.repro_mode ) & !is.na(msat_data$He),] #create new table that excludes NA's from columns of interest
 
-both <- mtdna_data_new[!is.na(mtdna_data_new$He)] 
-
-both <- subset(mtdna_data_new, !is.na(He))
 #Final msat Max Length
 
 msat_maxlength_He_no.na <- msat_data[!is.na(msat_data$maxlength) & !is.na(msat_data$He),] #create new table that excludes NA's from columns of interest
@@ -216,16 +213,12 @@ for (i in 1:nrow(msat_fecundity_He_no.na)) { #get log transformation data
   msat_fecundity_He_no.na$logtransform.fecundity <- log10(msat_fecundity_He_no.na$fecundity_mean)
 }
 
+################################ Graphing and Comparing Data ################################
 
+############## Box Plots: Character Data ##############
 
-############## Comparing US mtDNA and msat Data ############### 
-
-#####Box Plots: Character Data#####
-
-### He ###
-
-#Fertilization#
-
+########### Fertilization ###########
+### msat vs. mtDNA: He
 final_fertilization_all = merge(mtdna_final_fertilization_He_no.na, msat_final_fertilization_He_no.na, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE) #merge final fertilization data form mtdna and msat together
 
 final_fertilization_all$markertype <- NA #create new column to categorize marker type
@@ -248,16 +241,31 @@ final_fertilization_all$markertype [final_fertilization_all$file == "msats304"] 
 final_fertilization_all$markertype [final_fertilization_all$file == "msats305"]  <- "msat"
 final_fertilization_all$markertype [final_fertilization_all$file ==	"ppdat"]  <- "msat" 
 
-ggplot(final_fertilization_all) + geom_boxplot(aes(x = final_fertilization, y = He, fill=markertype)) + #final fertilization & He box plot
+Fertplot1 <- ggplot(final_fertilization_all) + geom_boxplot(aes(x = final_fertilization, y = He, fill=markertype)) + #final fertilization & He box plot
   ggtitle("Fertilization Method vs. He", subtitle= "msat vs. mtDNA") + #add plot title
   xlab("Fertilization Method") + ylab("He") + #add axis labels
   theme(                                 #specify characteristics of the plot 
     plot.title = element_text(size=14, face="bold"), 
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))+
-  scale_fill_manual(values=c("turquoise2", "darkcyan"))
+  scale_fill_manual(values=c("#00429d", "#a5d5d8"))
 
-#Reproduction Mode#
+### mtDNA: Pi
+Fertplot2 <- ggplot(mtdna_final_fertilization_Pi_no.na) + geom_boxplot(aes(x = final_fertilization, y = Pi, fill = final_fertilization)) + #final fertilization & He box plot
+  ggtitle("Fertilization Method vs. Pi", subtitle= "mtDNA") + #add plot title
+  xlab("Fertilization Method") + ylab("Pi") + #add axis labels
+  theme(                                 #specify characteristics of the plot 
+    plot.title = element_text(size=14, face="bold"), 
+    axis.title.x = element_text(color="blue", size=14, face="bold"),
+    axis.title.y = element_text(color="red", size=14, face="bold"))+
+  labs(fill = "Fertilization") +
+  scale_fill_manual(values=c("#a5d5d8", "#a5d5d8"))
+
+#Graph msat vs. mtDNA: He & mtDNA: Pi side-by-side
+Fertplot1 + Fertplot2
+
+########### Reproduction Mode ###########
+### msat vs. mtDNA: He
 reproductionmode_all = merge(msat_final_reproductionmode_He_no.na, mtdna_final_reproductionmode_He_no.na, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE) #merge final fertilization data form mtdna and msat together
 
 reproductionmode_all$markertype <- NA #create new column to categorize marker type
@@ -280,54 +288,33 @@ reproductionmode_all$markertype [reproductionmode_all$file == "msats304"]  <- "m
 reproductionmode_all$markertype [reproductionmode_all$file == "msats305"]  <- "msat"
 reproductionmode_all$markertype [reproductionmode_all$file ==	"ppdat"]  <- "msat" 
 
-ggplot(reproductionmode_all) + geom_boxplot(aes(x = final_reproductionmode, y = He, fill= markertype)) + #final fertilization & He box plot
+Reproplot1 <- ggplot(reproductionmode_all) + geom_boxplot(aes(x = final_reproductionmode, y = He, fill= markertype)) + #final fertilization & He box plot
   ggtitle("Reproduction Mode vs. He", subtitle= "msat vs. mtDNA") + #add plot title
   xlab("Reproduction Mode") + ylab("He") + #add axis labels
   theme(                                 #specify characteristics of the plot 
     plot.title = element_text(size=14, face="bold"), 
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))+
-  scale_fill_manual(values=c("turquoise2", "darkcyan"))
+  scale_fill_manual(values=c("#00429d", "#a5d5d8"))
 
-
-#Specific Reproduction Mode#
-specificreproductionmode_all = merge(msat_reproduction_type_He_no.na, mtdna_reproduction_type_He_no.na, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE) #merge final fertilization data form mtdna and msat together
-
-specificreproductionmode_all$markertype <- NA #create new column to categorize marker type
-
-#add marker type based on file type
-specificreproductionmode_all$markertype [specificreproductionmode_all$file == "mtdna101"]  <- "mtDNA"
-specificreproductionmode_all$markertype [specificreproductionmode_all$file == "mtdna102"]  <- "mtDNA"
-specificreproductionmode_all$markertype [specificreproductionmode_all$file == "mtdna103"]  <- "mtDNA"
-specificreproductionmode_all$markertype [specificreproductionmode_all$file == "msats000"]  <- "msat" 
-specificreproductionmode_all$markertype [specificreproductionmode_all$file == "msats001"]  <- "msat"
-specificreproductionmode_all$markertype [specificreproductionmode_all$file == "msats002"]  <- "msat"
-specificreproductionmode_all$markertype [specificreproductionmode_all$file == "msats200"]  <- "msat" 
-specificreproductionmode_all$markertype [specificreproductionmode_all$file == "msats201"]  <- "msat" 
-specificreproductionmode_all$markertype [specificreproductionmode_all$file == "msats100"]  <- "msat" 
-specificreproductionmode_all$markertype [specificreproductionmode_all$file == "msats101"]  <- "msat" 
-specificreproductionmode_all$markertype [specificreproductionmode_all$file == "msats301"]  <- "msat" 
-specificreproductionmode_all$markertype [specificreproductionmode_all$file == "msats302"]  <- "msat" 
-specificreproductionmode_all$markertype [specificreproductionmode_all$file == "msats303"]  <- "msat" 
-specificreproductionmode_all$markertype [specificreproductionmode_all$file == "msats304"]  <- "msat" 
-specificreproductionmode_all$markertype [specificreproductionmode_all$file == "msats305"]  <- "msat"
-specificreproductionmode_all$markertype [specificreproductionmode_all$file ==	"ppdat"]  <- "msat" 
-
-ggplot(specificreproductionmode_all) + geom_boxplot(aes(x = specific.repro_mode, y = He, fill=markertype)) + #final fertilization & He box plot
-  ggtitle("Specific Reproduction Modes vs. He", subtitle= "msat vs. mtDNA") + #add plot title
-  xlab("Specific Reproduction Mode") + ylab("He") + #add axis labels
+### mtDNA: Pi
+Reproplot2 <- ggplot(mtdna_final_reproductionmode_Pi_no.na) + geom_boxplot(aes(x = final_reproductionmode, y = Pi, fill = final_reproductionmode)) + #final fertilization & He box plot
+  ggtitle("Reproduction Mode vs. Pi", subtitle= "mtDNA") + #add plot title
+  xlab("Reproduction Mode") + ylab("Pi") + #add axis labels
   theme(                                 #specify characteristics of the plot 
     plot.title = element_text(size=14, face="bold"), 
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))+
-  scale_fill_manual(values=c("turquoise2", "darkcyan")) + 
-  scale_x_discrete(labels = function(x) stringr::str_wrap(x, width = 5))
+  labs(fill = "Reproduction Mode") +
+  scale_fill_manual(values=c("#a5d5d8", "#a5d5d8"))
+
+#Graph msat vs. mtDNA: He & mtDNA: Pi side-by-side
+Reproplot1 + Reproplot2
 
 #####Scatter Plots: Numerical Data#####
 
-#Max Length#
-
-#w/ outliers
+########### Max Length ###########
+### msat vs. mtDNA: He
 final_maxlength_all = merge(mtdna_maxlength_He_no.na, msat_maxlength_He_no.na, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE) #merge final fertilization data form mtdna and msat together
 
 final_maxlength_all$markertype <- NA #create new column to categorize marker type
@@ -350,8 +337,8 @@ final_maxlength_all$markertype [final_maxlength_all$file == "msats304"]  <- "msa
 final_maxlength_all$markertype [final_maxlength_all$file == "msats305"]  <- "msat"
 final_maxlength_all$markertype [final_maxlength_all$file ==	"ppdat"]  <- "msat" 
 
-ggplot(final_maxlength_all, aes(x=logtransform.maxlength, y=He, col=markertype, shape=markertype)) + #max length & He scatter plot
-  geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
+Maxplot1 <- ggplot(final_maxlength_all, aes(x=logtransform.maxlength, y=He, col=markertype, shape=markertype)) + #max length & He scatter plot
+  geom_point(aes(shape=markertype, fill=NULL, col=as.factor(markertype))) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "black", size = 1.5, fill = NA) + 
   geom_smooth(method=lm,   # Add linear regression line
@@ -365,58 +352,35 @@ ggplot(final_maxlength_all, aes(x=logtransform.maxlength, y=He, col=markertype, 
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))+
   annotate(geom="label", x = 1.5, y = 0.55, label = lm_eqn(msat_maxlength_He_no.na$logtransform.maxlength, msat_maxlength_He_no.na$He, msat_maxlength_He_no.na), 
-           color="skyblue3", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
+           color="#00429d", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
   annotate(geom="label", x = 2, y = 0.91, label = lm_eqn(mtdna_maxlength_He_no.na$logtransform.maxlength, mtdna_maxlength_He_no.na$He, mtdna_maxlength_He_no.na), 
-           color="blue", size = 5, parse=TRUE, alpha = 0.8) + #add regression line equation
-  scale_colour_manual(values=c("skyblue2","blue")) +
+           color="#a5d5d8", size = 5, parse=TRUE, alpha = 0.8) + #add regression line equation
+  scale_colour_manual(values=c("#00429d", "#a5d5d8")) +
   scale_shape(solid = FALSE)
 
-#w/out outliers
-final_maxlength_allo = merge(mtdna_maxlength_He_no.na, msat_maxlength_He_no.na, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE) #merge final fertilization data form mtdna and msat together
-
-final_maxlength_allo$markertype <- NA #create new column to categorize marker type
-
-#add marker type based on file type
-final_maxlength_allo$markertype [final_maxlength_allo$file == "mtdna101"]  <- "mtDNA"
-final_maxlength_allo$markertype [final_maxlength_allo$file == "mtdna102"]  <- "mtDNA"
-final_maxlength_allo$markertype [final_maxlength_allo$file == "mtdna103"]  <- "mtDNA"
-final_maxlength_allo$markertype [final_maxlength_allo$file == "msats000"]  <- "msat" 
-final_maxlength_allo$markertype [final_maxlength_allo$file == "msats001"]  <- "msat"
-final_maxlength_allo$markertype [final_maxlength_allo$file == "msats002"]  <- "msat"
-final_maxlength_allo$markertype [final_maxlength_allo$file == "msats200"]  <- "msat" 
-final_maxlength_allo$markertype [final_maxlength_allo$file == "msats201"]  <- "msat" 
-final_maxlength_allo$markertype [final_maxlength_allo$file == "msats100"]  <- "msat" 
-final_maxlength_allo$markertype [final_maxlength_allo$file == "msats101"]  <- "msat" 
-final_maxlength_allo$markertype [final_maxlength_allo$file == "msats301"]  <- "msat" 
-final_maxlength_allo$markertype [final_maxlength_allo$file == "msats302"]  <- "msat" 
-final_maxlength_allo$markertype [final_maxlength_allo$file == "msats303"]  <- "msat" 
-final_maxlength_allo$markertype [final_maxlength_allo$file == "msats304"]  <- "msat" 
-final_maxlength_allo$markertype [final_maxlength_allo$file == "msats305"]  <- "msat"
-final_maxlength_allo$markertype [final_maxlength_allo$file ==	"ppdat"]  <- "msat" 
-
-ggplot(final_maxlength_allo, aes(x=logtransform.maxlength, y=He, col=markertype, shape=markertype)) + #max length & He scatter plot
-  geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
+### mtDNA: Pi
+Maxplot2 <-ggplot(mtdna_maxlength_Pi_no.na, aes(x=logtransform.maxlength, y=Pi, color=as.factor(logtransform.maxlength))) + #max length & He scatter plot
+  geom_point(aes(shape=2, fill=NULL)) +    # Use hollow circles
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "black", size = 1.5, fill = NA) + 
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, size = 1.1, fill = NA) +
-  xlim(0.95,2.65)+                              #create limits
-  coord_cartesian(ylim = c(0, 1)) +
-  ggtitle("Max Length vs. He (w/out smallest & largest spp)", subtitle = "msat vs. mtDNA") + #add plot title
-  xlab("Max Length (log(cm))") + ylab("He") + #add axis labels
+  ggtitle("Maxlength vs. Pi", subtitle = "mtDNA") + #add plot title
+  xlab("Maxlength (log(cm))") + ylab("Pi") + #add axis labels 
   theme(                                 #specifying characteristics of the plot 
     plot.title = element_text(size=14, face="bold"),
     axis.title.x = element_text(color="blue", size=14, face="bold"),
     axis.title.y = element_text(color="red", size=14, face="bold"))+
-  annotate(geom="label", x = 2, y = 0.60, label = lm_eqn(msat_maxlength_He_no.na$logtransform.maxlength, msat_maxlength_He_no.na$He, msat_maxlength_He_no.na), 
-           color="skyblue3", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
-  annotate(geom="label", x = 2, y = 0.85, label = lm_eqn(mtdna_maxlength_He_no.na$logtransform.maxlength, mtdna_maxlength_He_no.na$He, mtdna_maxlength_He_no.na), 
-           color="blue", size = 5, parse=TRUE, alpha = 0.8) + #add regression line equation
-  scale_colour_manual(values=c("skyblue2","blue")) +
+  annotate(geom="label", x = 1.8, y = 0.02, label = lm_eqn(mtdna_maxlength_Pi_no.na$logtransform.maxlength, mtdna_maxlength_Pi_no.na$Pi, mtdna_maxlength_Pi_no.na), 
+           color="#a5d5d8", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
+  scale_colour_manual(values=c("#a5d5d8")) +
   scale_shape(solid = FALSE)
 
-#Fecundity Mean#
+#Graph msat vs. mtDNA: He & mtDNA: Pi side-by-side
+Maxplot1 + Maxplot2
 
+########### Fecundity Mean ###########
+#msat vs. mtDNA: He
 final_fecunditymean_all = merge(msat_fecundity_He_no.na, mtdna_fecundity_He_no.na, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE) #merge final fertilization data form mtdna and msat together
 
 final_fecunditymean_all$markertype <- NA #create new column to categorize marker type
@@ -589,26 +553,10 @@ ggplot(mtdna_data_new, aes(x=He, y=Pi, col=markertype, shape=markertype)) + #max
 ### Pi Graphs ###
 
 ## Fertilization ##
-ggplot(mtdna_final_fertilization_Pi_no.na) + geom_boxplot(aes(x = final_fertilization, y = Pi, fill = final_fertilization)) + #final fertilization & He box plot
-  ggtitle("Fertilization Method vs. Pi", subtitle= "mtDNA") + #add plot title
-  xlab("Fertilization Method") + ylab("Pi") + #add axis labels
-  theme(                                 #specify characteristics of the plot 
-    plot.title = element_text(size=14, face="bold"), 
-    axis.title.x = element_text(color="blue", size=14, face="bold"),
-    axis.title.y = element_text(color="red", size=14, face="bold"))+
-  labs(fill = "Fertilization") +
-  scale_fill_manual(values=c("turquoise2", "darkcyan"))
+
 
 ## Reproduction Mode ##
-ggplot(mtdna_final_reproductionmode_Pi_no.na) + geom_boxplot(aes(x = final_reproductionmode, y = Pi, fill = final_reproductionmode)) + #final fertilization & He box plot
-  ggtitle("Reproduction Mode vs. Pi", subtitle= "mtDNA") + #add plot title
-  xlab("Reproduction Mode") + ylab("Pi") + #add axis labels
-  theme(                                 #specify characteristics of the plot 
-    plot.title = element_text(size=14, face="bold"), 
-    axis.title.x = element_text(color="blue", size=14, face="bold"),
-    axis.title.y = element_text(color="red", size=14, face="bold"))+
-  labs(fill = "Reproduction Mode") +
-  scale_fill_manual(values=c("turquoise2", "darkcyan"))
+
 
 ## Specific Repro Mode##
 ggplot(mtdna_reproduction_type_Pi_no.na) + geom_boxplot(aes(x = specific.repro_mode, y = Pi, fill = specific.repro_mode)) + #final fertilization & He box plot
@@ -622,23 +570,6 @@ ggplot(mtdna_reproduction_type_Pi_no.na) + geom_boxplot(aes(x = specific.repro_m
   scale_fill_manual(values=c("turquoise2", "darkcyan"))
 
 ## Maxlength ##
-ggplot(mtdna_maxlength_Pi_no.na, aes(x=logtransform.maxlength, y=Pi)) + #max length & He scatter plot
-  geom_point(aes(fill=NULL)) +    # Use hollow circles
-  geom_smooth(method=lm,   # Add linear regression line
-              se=TRUE, color = "black", size = 1.5, fill = NA) + 
-  geom_smooth(method=lm,   # Add linear regression line
-              se=TRUE, size = 1.1, fill = NA) +
-  ggtitle("Maxlength vs. Pi", subtitle = "mtDNA") + #add plot title
-  xlab("Maxlength (log(cm))") + ylab("Pi") + #add axis labels 
-  theme(                                 #specifying characteristics of the plot 
-    plot.title = element_text(size=14, face="bold"),
-    axis.title.x = element_text(color="blue", size=14, face="bold"),
-    axis.title.y = element_text(color="red", size=14, face="bold"))+
-  annotate(geom="label", x = 1.8, y = 0.02, label = lm_eqn(mtdna_maxlength_Pi_no.na$logtransform.maxlength, mtdna_maxlength_Pi_no.na$Pi, mtdna_maxlength_Pi_no.na), 
-           color="blue", size = 5, parse=TRUE, alpha=0.8) + #add regression line equation
-  scale_colour_manual(values=c("blue")) +
-  scale_shape(solid = FALSE)
-
 ## Fecundity Mean ##
 ggplot(mtdna_fecundity_Pi_no.na, aes(x=logtransform.fecundity, y=Pi)) + #max length & He scatter plot
   geom_point(aes(fill=NULL)) +    # Use hollow circles
@@ -1401,141 +1332,74 @@ reproductionmode_ttest.mtdnaPiherm <- t.test(hermaphrodite.mtdnaPi, var.equal=FA
 
 ########################################### ANOVA: US Combined Marker Character Data ########################################### 
 
-############## He Data ############## 
 
-
-# msat
-
+############## Fertilization Method ############## 
+#msat: He
 fertilizationanova.msatHe <- aov(He ~ final_fertilization, data = msat_final_fertilization_He_no.na) #perform anova test for combined data
 TukeyHSD(fertilizationanova.msatHe) #perform TukeyHSD to see full table of results
 
-#Reproduction Mode#
+#mtDNA: He
+fertilizationanova.mtDNAHe <- aov(He ~ final_fertilization, data = mtdna_final_fertilization_He_no.na) #perform anova test for combined data
+TukeyHSD(fertilizationanova.mtDNAHe)
 
+#mtDNA: Pi
+fertilizationanova.mtDNAPi <- aov(Pi ~ final_fertilization, data = mtdna_final_fertilization_Pi_no.na) #perform anova test for combined data
+TukeyHSD(fertilizationanova.mtDNAPi)
+
+############## Reproduction Mode ############## 
+#msat: He
 reproductionmodeanova.msatHe <- aov(He ~ final_reproductionmode, data = msat_final_reproductionmode_He_no.na) #perform anova test for combined data
 TukeyHSD(reproductionmodeanova.msatHe) #perform TukeyHSD to see full table of results
 
+#mtDNA: He
+reproductionmodeanova.mtDNAHe <- aov(He ~ final_reproductionmode, data = mtdna_final_reproductionmode_He_no.na) #perform anova test for combined data
+TukeyHSD(reproductionmodeanova.mtDNAHe) 
 
-# mtDNA
-##### mtDNA vs. msat #####
-
-##### combined #####
-#Fertilization#
-
-fertilizationanova.allHe <- aov(He ~ final_fertilization * markertype, data = final_fertilization_all) #perform anova test for combined data
-TukeyHSD(fertilizationanova.allHe) #perform TukeyHSD to see full table of results
-
-#Reproduction Mode#
-
-reproductionmodeanova.allHe <- aov(He ~ final_reproductionmode * markertype, data = reproductionmode_all) #perform anova test for combined data
-TukeyHSD(reproductionmodeanova.allHe) #perform TukeyHSD to see full table of results
-
-#Specific Reproduction Modes: ANOVA#
-
-specific.repro_modeanova.allHe <- aov(He ~ specific.repro_mode * markertype, data = specificreproductionmode_all) #perform anova test for combined data
-TukeyHSD(specific.repro_modeanova.allHe) #perform TukeyHSD to see full table of results
-
-##### msat #####
-#Fertilization#
-
-fertilizationanova.msatHe <- aov(He ~ final_fertilization, data = msat_final_fertilization_He_no.na) #perform anova test for combined data
-TukeyHSD(fertilizationanova.msatHe) #perform TukeyHSD to see full table of results
-
-#Reproduction Mode#
-
-reproductionmodeanova.msatHe <- aov(He ~ final_reproductionmode, data = msat_final_fertilization_He_no.na) #perform anova test for combined data
-TukeyHSD(reproductionmodeanova.msatHe) #perform TukeyHSD to see full table of results
-
-#Specific Reproduction Modes: ANOVA#
-
-specific.repro_modeanova.msatHe <- aov(He ~ specific.repro_mode, data = msat_final_fertilization_He_no.na) #perform anova test for combined data
-TukeyHSD(specific.repro_modeanova.msatHe) #perform TukeyHSD to see full table of results
-
-##### mtDNA #####
-
-#Fertilization#
-
-fertilizationanova.mtdnaHe <- aov(He ~ final_fertilization, data = mtdna_final_fertilization_He_no.na) #perform anova test for combined data
-TukeyHSD(fertilizationanova.mtdnaHe) #perform TukeyHSD to see full table of results
-
-#Reproduction Mode#
-
-reproductionmodeanova.mtdnaHe <- aov(He ~ final_reproductionmode, data = mtdna_final_reproductionmode_He_no.na) #perform anova test for combined data
-TukeyHSD(reproductionmodeanova.mtdnaHe) #perform TukeyHSD to see full table of results
-
-#Specific Reproduction Modes: ANOVA#
-
-specific.repro_modeanova.mtdnaHe <- aov(He ~ specific.repro_mode, data = mtdna_reproduction_type_He_no.na) #perform anova test for combined data
-TukeyHSD(specific.repro_modeanova.mtdnaHe) #perform TukeyHSD to see full table of results
-
-############## Pi Data ############## 
-
-#Fertilization#
-
-fertilizationanova.allPi <- aov(He ~ final_fertilization, data = final_fertilization_all) #perform anova test for combined data
-TukeyHSD(fertilizationanova.all) #perform TukeyHSD to see full table of results
-
-#Reproduction Mode#
-
-reproductionmodeanova.allPi <- aov(He ~ final_reproductionmode, data = reproductionmode_all) #perform anova test for combined data
-TukeyHSD(reproductionmodeanova.all) #perform TukeyHSD to see full table of results
-
-#Specific Reproduction Modes: ANOVA#
-
-specific.repro_modeanova.allPi <- aov(He ~ specific.repro_mode, data = specificreproductionmode_all) #perform anova test for combined data
-TukeyHSD(specific.repro_modeanova.all) #perform TukeyHSD to see full table of results
-
-
-
+#mtDNA: Pi
+reproductionmodeanova.mtDNAPi <- aov(Pi ~ final_reproductionmode, data = mtdna_final_reproductionmode_Pi_no.na) #perform anova test for combined data
+TukeyHSD(reproductionmodeanova.mtDNAPi) 
 
 ########################################### Wilcoxon Tests: Numerical Data ########################################### 
+############## Max Length ############## 
 
-### He ###
- #msat
-#Max Length#
+#msat: He
 wilcox.test( msat_maxlength_He_no.na[ ,'maxlength'] , msat_maxlength_He_no.na[ , 'He'], paired=F) #run Wilcoxon test on max length & He
 
-#Fecundity Mean#
-wilcox.test( msat_fecundity_He_no.na[ ,'fecundity_mean'] , msat_fecundity_He_no.na[ , 'He'], paired=F) #run Wilcoxon test on fecundity & He
-
-#mtDNA
-#Max Length#
+#mtDNA: He
 wilcox.test( mtdna_maxlength_He_no.na[ ,'maxlength'] , mtdna_maxlength_He_no.na[ , 'He'], paired=F) #run Wilcoxon test on max length & He
 
-#Fecundity Mean#
-wilcox.test( mtdna_fecundity_He_no.na[ ,'fecundity_mean'] , mtdna_fecundity_He_no.na[ , 'He'], paired=F) #run Wilcoxon test on max length & He
-
-### Pi ###
-#mtDNA
-#Max Length#
+#mtDNA: Pi
 wilcox.test( mtdna_maxlength_Pi_no.na[ ,'maxlength'] , mtdna_maxlength_Pi_no.na[ , 'Pi'], paired=F) #run Wilcoxon test on max length & He
 
+############## Fecundity ############## 
+#msat: He
+wilcox.test( msat_fecundity_He_no.na[ ,'fecundity_mean'] , msat_fecundity_He_no.na[ , 'He'], paired=F) #run Wilcoxon test on fecundity & He
 
-#Fecundity Mean#
+#mtDNA: He
+wilcox.test( mtdna_fecundity_He_no.na[ ,'fecundity_mean'] , mtdna_fecundity_He_no.na[ , 'He'], paired=F) #run Wilcoxon test on max length & He
+
+#mtDNA: Pi
 wilcox.test( mtdna_fecundity_Pi_no.na[ ,'fecundity_mean'] , mtdna_fecundity_Pi_no.na[ , 'Pi'], paired=F) #run Wilcoxon test on max length & He
 
-
 ########################################### Shapiro-Wilk Tests: Numerical Data ########################################### 
-### He ###
-#msat
-#Max Length#
 
+############## Max Length ############## 
+#msat: He
 shapiro.test(msat_maxlength_He_no.na$maxlength) #run Shapiro-Wilk test on max length & He
 
-shapiro.test(msat_fecundity_He_no.na$fecundity_mean) #run Shapiro-Wilk test on fecundity mean & He
-
-#mtDNA
-#Max Length#
+#mtDNA: He
 shapiro.test(mtdna_maxlength_He_no.na$maxlength) #run Shapiro-Wilk test on max length & He
 
-#Fecundity Mean#
-shapiro.test(mtdna_fecundity_He_no.na$fecundity_mean) #run Shapiro-Wilk test on max length & He
-
-
-### Pi ###
-#mtDNA
-#Max Length#
+#mtDNA: Pi
 shapiro.test(mtdna_maxlength_Pi_no.na$maxlength) #run Shapiro-Wilk test on max length & He
 
-#Fecundity Mean#
+############## Fecundity ############## 
+#msat: He
+shapiro.test(msat_fecundity_He_no.na$fecundity_mean) #run Shapiro-Wilk test on fecundity mean & He
+
+#mtDNA: He
+shapiro.test(mtdna_fecundity_He_no.na$fecundity_mean) #run Shapiro-Wilk test on max length & He
+
+#mtDNA: Pi
 shapiro.test(mtdna_fecundity_Pi_no.na$fecundity_mean) #run Shapiro-Wilk test on max length & He
 
