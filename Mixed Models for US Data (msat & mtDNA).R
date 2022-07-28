@@ -179,7 +179,15 @@ summary(binomial_He_full_model_msat) #get SE, p-value, etc.
 ##find minimal model (top AIC model)
 topAIC.msatHE <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.2 +
                          fertilizations.or.f2 + CrossSpp +
-                         (1|spp) + (1|Source), na.action = "na.fail", 
+                         (1|spp) + (1|Source) + (1|ID), na.action = "na.fail", 
                        family=binomial, data = msat_data,
                        control = glmerControl(optimizer = "bobyqa"))
 summary(topAIC.msatHE) #get SE, p-value, etc.for top AIC model
+
+##find RVI 
+msatRVImax <- sum(msat_dataHe[complete.cases(msat_dataHe$logtransform.maxlength.2), "weight"])
+msatRVIfec <- sum(msat_dataHe[complete.cases(msat_dataHe$logtransform.fecundity_mean.2), "weight"])
+msatRVIfert <- sum(msat_dataHe[complete.cases(msat_dataHe$fertilizations.or.f2), "weight"])
+msatRVIrepro <- sum(msat_dataHe[complete.cases(msat_dataHe$reproductionmodes.or.f2), "weight"])
+msatRVIcross <- sum(msat_dataHe[complete.cases(msat_dataHe$CrossSpp), "weight"])
+
