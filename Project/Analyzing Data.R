@@ -14,6 +14,7 @@ library(tidyverse)
 library(dplyr)
 library(maps)
 library(mapdata)
+library(patchwork)
 
 #read in data
 mtdna_data_new <- read.csv("new_mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
@@ -1597,28 +1598,6 @@ ggplot(final_fecunditymean_all, aes(x=logtransform.fecundity, y=He, col=markerty
 
 ############### Map of where data was collected ############### 
 
-##### mtDNA #####
-
-latlon_mtdna <-mtdna_data_new[!duplicated(mtdna_data_new[, c('lat','lon')]), c('lat','lon')] #grab unique lat/lon combos
-
-latlon_mtdna <- latlon_mtdna[order(latlon$lat,latlonn$lon),] #order by lat then lon
-
-write.csv(latlon_mtdna, file = paste('latlon_mtdna',Sys.Date(), '.csv', sep= ''), row.names = FALSE) #build map
-
-mtdna_plot <- ggplot(geogr_data, aes(x = long, y = lat, group = group)) + 
-  geom_polygon(fill = "lightgray", colour = "white") + 
-  geom_point(data = latlon_mtdna, aes(x = lon, y = lat), size = 4, inherit.aes = FALSE)
-
-#mtdna_plot
-
-mtdna_plot_annotated <- mtdna_plot + xlab("Longitude (°)") + ylab("Latitude (°)") + theme_bw() + 
-  ggtitle("mtdna locations") + 
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.border = element_blank(), 
-        axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 20, color = "black"), axis.title = element_text(size = 24, face = "bold"), 
-        plot.title = element_text(size = 28, face = "bold", hjust = 0.5))
-mtdna_plot_annotated
-
 ##### msat #####
 
 latlon_msat <-msat_data[!duplicated(msat_data[, c('lat','lon')]), c('lat','lon')] #grab unique lat/lon combos
@@ -1634,9 +1613,32 @@ msat_plot <- ggplot(geogr_data, aes(x = long, y = lat, group = group)) +
 #msat_plot
 
 msat_plot_annotated <- msat_plot + xlab("Longitude (°)") + ylab("Latitude (°)") + theme_bw() + 
-  ggtitle("msat locations") + 
+  ggtitle("(A) msat locations") + 
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.border = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 20, color = "black"), axis.title = element_text(size = 24, face = "bold"), 
+        axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 22, face = "bold"), 
         plot.title = element_text(size = 28, face = "bold", hjust = 0.5))
-msat_plot_annotated
+
+##### mtDNA #####
+
+latlon_mtdna <-mtdna_data_new[!duplicated(mtdna_data_new[, c('lat','lon')]), c('lat','lon')] #grab unique lat/lon combos
+
+latlon_mtdna <- latlon_mtdna[order(latlon$lat,latlonn$lon),] #order by lat then lon
+
+write.csv(latlon_mtdna, file = paste('latlon_mtdna',Sys.Date(), '.csv', sep= ''), row.names = FALSE) #build map
+
+mtdna_plot <- ggplot(geogr_data, aes(x = long, y = lat, group = group)) + 
+  geom_polygon(fill = "lightgray", colour = "white") + 
+  geom_point(data = latlon_mtdna, aes(x = lon, y = lat), size = 4, inherit.aes = FALSE)
+
+#mtdna_plot
+
+mtdna_plot_annotated <- mtdna_plot + xlab("Longitude (°)") + ylab("Latitude (°)") + theme_bw() + 
+  ggtitle("(B) mtDNA locations") + 
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.border = element_blank(), 
+        axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
+        axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 22, face = "bold"), 
+        plot.title = element_text(size = 28, face = "bold", hjust = 0.5))
+
+#Graph msaps side-by-side
+msat_plot_annotated + mtdna_plot_annotated 
