@@ -249,7 +249,8 @@ Fertplot1 <- ggplot(final_fertilization_all) + geom_boxplot(aes(x = final_fertil
     plot.title = element_text(face="bold", size=22, margin = margin(b = 15)), 
     axis.title.x = element_text(face="bold", size=22, margin = margin(t = 20)),
     axis.title.y = element_text(face="bold", size=22,margin = margin(r = 20)),
-    text = element_text(size = 20))+
+    text = element_text(size = 20),
+    legend.position="bottom")+
   scale_fill_manual(values=c("#a5d5d8","#00429d"))
 
 ### mtDNA: Pi
@@ -260,7 +261,8 @@ Fertplot2 <- ggplot(mtdna_final_fertilization_Pi_no.na) + geom_boxplot(aes(x = f
     plot.title = element_text(face="bold", size=22, margin = margin(b = 15)), 
     axis.title.x = element_text(face="bold", size=22, margin = margin(t = 20)),
     axis.title.y = element_text(face="bold", size=22, margin = margin(r = 20)),
-    text = element_text(size = 20))+
+    text = element_text(size = 20),
+    legend.position="bottom")+
   labs(fill = "Fertilization") +
   scale_fill_manual(values=c("#00429d", "#00429d"))
 
@@ -298,7 +300,8 @@ Reproplot1 <- ggplot(reproductionmode_all) + geom_boxplot(aes(x = final_reproduc
     plot.title = element_text(face="bold", size=22, margin = margin(b = 15)), 
     axis.title.x = element_text(face="bold", size=22, margin = margin(t = 20)),
     axis.title.y = element_text(face="bold", size=22,margin = margin(r = 20)),
-    text = element_text(size = 22))+
+    text = element_text(size = 22),
+    legend.position="bottom")+
   scale_fill_manual(values=c("#a5d5d8","#00429d"))
 
 ### mtDNA: Pi
@@ -309,7 +312,8 @@ Reproplot2 <- ggplot(mtdna_final_reproductionmode_Pi_no.na) + geom_boxplot(aes(x
     plot.title = element_text(face="bold", size=22, margin = margin(b = 15)), 
     axis.title.x = element_text(face="bold", size=22, margin = margin(t = 20)),
     axis.title.y = element_text(face="bold", size=22, margin = margin(r = 20)),
-    text = element_text(size = 22))+
+    text = element_text(size = 22),
+    legend.position="bottom")+
   labs(fill = "Reproduction Mode") +
   scale_fill_manual(values=c("#00429d", "#00429d"))
 
@@ -356,11 +360,12 @@ Maxplot1 <- ggplot(final_maxlength_all, aes(x=logtransform.maxlength, y=He, shap
     plot.title = element_text(size=22, face="bold"),
     axis.title.x = element_text(face="bold", size=22, margin = margin(t = 20)),
     axis.title.y = element_text(face="bold", size=22, margin = margin(r = 20)),
-    text = element_text(size = 22))+
-  annotate(geom="label", x = 1.5, y = 0.57, label = lm_eqn(msat_maxlength_He_no.na$logtransform.maxlength, msat_maxlength_He_no.na$He, msat_maxlength_He_no.na), 
-           color="#389ba1", size = 5, parse=TRUE) + #add regression line equation
-  annotate(geom="label", x = 1.5, y = 0.78, label = lm_eqn(mtdna_maxlength_He_no.na$logtransform.maxlength, mtdna_maxlength_He_no.na$He, mtdna_maxlength_He_no.na), 
-           color="#00429d", size = 5, parse=TRUE) + #add regression line equation
+    text = element_text(size = 22),
+    legend.position="bottom")+
+  annotate(geom="label", x = 1.3, y = 0.50, label = lm_eqn(msat_maxlength_He_no.na$logtransform.maxlength, msat_maxlength_He_no.na$He, msat_maxlength_He_no.na), 
+           color="#389ba1", size = 10, parse=TRUE) + #add regression line equation
+  annotate(geom="label", x = 1.3, y = 0.80, label = lm_eqn(mtdna_maxlength_He_no.na$logtransform.maxlength, mtdna_maxlength_He_no.na$He, mtdna_maxlength_He_no.na), 
+           color="#00429d", size = 10, parse=TRUE) + #add regression line equation
   scale_fill_manual(values=c("#389ba1", "#00429d")) +
   scale_shape_manual(values = c(msat=1, mtDNA=17)) +
   scale_color_manual(values = c("#389ba1", "#00429d")) +
@@ -380,9 +385,10 @@ Maxplot2 <- ggplot(mtdna_maxlength_Pi_no.na, aes(x=logtransform.maxlength, y=Pi,
     plot.title = element_text(size=22, face="bold"),
     axis.title.x = element_text(face="bold", size=22, margin = margin(t = 20)),
     axis.title.y = element_text(face="bold", size=22, margin = margin(r = 20)),
-    text = element_text(size = 22)) +
-  annotate(geom="label", x = 1.8, y = 0.015, label = lm_eqn(mtdna_maxlength_Pi_no.na$logtransform.maxlength, mtdna_maxlength_Pi_no.na$Pi, mtdna_maxlength_Pi_no.na), 
-           color="#00429d", size = 5, parse=TRUE) 
+    text = element_text(size = 22),
+    legend.position="bottom") +
+  annotate(geom="label", x = 1.8, y = 0.018, label = lm_eqn(mtdna_maxlength_Pi_no.na$logtransform.maxlength, mtdna_maxlength_Pi_no.na$Pi, mtdna_maxlength_Pi_no.na), 
+           color="#00429d", size = 10, parse=TRUE) 
 
 #Graph msat vs. mtDNA: He & mtDNA: Pi side-by-side
 Maxplot1 + Maxplot2
@@ -425,11 +431,12 @@ Fec1 <- ggplot(final_fecunditymean_all, aes(x=logtransform.fecundity, y=He, col=
     plot.title = element_text(size=22, face="bold"),
     axis.title.x = element_text(size=22, face="bold", margin = margin(t = 20)),
     axis.title.y = element_text(size=22, face="bold", margin = margin(r = 20)),
-    text = element_text(size = 22))+
-  annotate(geom="label", x = 2.8, y = 0.74, label = lm_eqn(msat_fecundity_He_no.na$logtransform.fecundity, msat_fecundity_He_no.na$He, msat_fecundity_He_no.na), 
-           color="#389ba1", size = 5, parse=TRUE) + #add regression line equation
-  annotate(geom="label", x = 3.4, y = 0.55, label = lm_eqn(mtdna_fecundity_He_no.na$logtransform.fecundity, mtdna_fecundity_He_no.na$He, mtdna_fecundity_He_no.na), 
-           color="#00429d", size = 5, parse=TRUE) + #add regression line equation
+    text = element_text(size = 22),
+    legend.position="bottom")+
+  annotate(geom="label", x = 2.0, y = 0.74, label = lm_eqn(msat_fecundity_He_no.na$logtransform.fecundity, msat_fecundity_He_no.na$He, msat_fecundity_He_no.na), 
+           color="#389ba1", size = 10, parse=TRUE) + #add regression line equation
+  annotate(geom="label", x = 2.0, y = 0.40, label = lm_eqn(mtdna_fecundity_He_no.na$logtransform.fecundity, mtdna_fecundity_He_no.na$He, mtdna_fecundity_He_no.na), 
+           color="#00429d", size = 10, parse=TRUE) + #add regression line equation
   scale_fill_manual(values=c("#389ba1","#00429d")) +
   scale_shape_manual(values = c(msat=1, mtDNA=17)) +
   scale_color_manual(values = c("#389ba1", "#00429d")) +
@@ -448,9 +455,10 @@ Fec2 <- ggplot(mtdna_fecundity_Pi_no.na, aes(x=logtransform.fecundity, y=Pi, fil
     plot.title = element_text(size=22, face="bold"),
     axis.title.x = element_text(size=22, face="bold", margin = margin(t = 20)),
     axis.title.y = element_text(size=22, face="bold", margin = margin(r = 20)),
-    text = element_text(size = 22))+
-  annotate(geom="label", x = 3.5, y = 0.015, label = lm_eqn(mtdna_fecundity_Pi_no.na$logtransform.fecundity, mtdna_fecundity_Pi_no.na$Pi, mtdna_fecundity_Pi_no.na), 
-           color="#00429d", size = 5, parse=TRUE) #add regression line equation
+    text = element_text(size = 22),
+    legend.position="bottom")+
+  annotate(geom="label", x = 2.8, y = 0.015, label = lm_eqn(mtdna_fecundity_Pi_no.na$logtransform.fecundity, mtdna_fecundity_Pi_no.na$Pi, mtdna_fecundity_Pi_no.na), 
+           color="#00429d", size = 10, parse=TRUE) #add regression line equation
 
 #Graph msat vs. mtDNA: He & mtDNA: Pi side-by-side
 Fec1 + Fec2
@@ -1311,8 +1319,8 @@ reproductionmode_ttest.msatherm <- t.test(hermaphrodite.msat, var.equal=FALSE)
 ##He##
 #Fertilization#
 
-external.mtdnaHe <- msat_final_fertilization_He_no.na$He[msat_final_fertilization_He_no.na$final_fertilization=="external"] #create vector for one aspect of t-test
-internal.mtdnaHe <- msat_final_fertilization_He_no.na$He[msat_final_fertilization_He_no.na$final_fertilization=="internal (oviduct)"] #create vector
+external.mtdnaHe <- mtdna_final_fertilization_Pi_no.na$He[mtdna_final_fertilization_Pi_no.na$final_fertilization=="external"] #create vector for one aspect of t-test
+internal.mtdnaHe <- mtdna_final_fertilization_Pi_no.na$He[mtdna_final_fertilization_Pi_no.na$final_fertilization=="internal (oviduct)"] #create vector
 
 fertilization_ttest.mtdnaHe <- t.test(external.mtdnaHe, internal.mtdnaHe, var.equal=FALSE) #combine created vectors & perform t-test
 fertilization_ttest.mtdnaHeex <- t.test(external.mtdnaHe, var.equal=FALSE)
@@ -1345,77 +1353,3 @@ hermaphrodite.mtdnaPi <- mtdna_final_reproductionmode_Pi_no.na$Pi[mtdna_final_re
 reproductionmode_ttest.mtdnaPi <- t.test(dioecism.mtdnaPi, hermaphrodite.mtdnaPi, var.equal=FALSE) #combine created vectors & perform t-test
 reproductionmode_ttest.mtdnaPidio <- t.test(dioecism.mtdnaPi, var.equal=FALSE)
 reproductionmode_ttest.mtdnaPiherm <- t.test(hermaphrodite.mtdnaPi, var.equal=FALSE)
-
-########################################### ANOVA: US Combined Marker Character Data ########################################### 
-
-
-############## Fertilization Method ############## 
-#msat: He
-fertilizationanova.msatHe <- aov(He ~ final_fertilization, data = msat_final_fertilization_He_no.na) #perform anova test for combined data
-TukeyHSD(fertilizationanova.msatHe) #perform TukeyHSD to see full table of results
-
-#mtDNA: He
-fertilizationanova.mtDNAHe <- aov(He ~ final_fertilization, data = mtdna_final_fertilization_He_no.na) #perform anova test for combined data
-TukeyHSD(fertilizationanova.mtDNAHe)
-
-#mtDNA: Pi
-fertilizationanova.mtDNAPi <- aov(Pi ~ final_fertilization, data = mtdna_final_fertilization_Pi_no.na) #perform anova test for combined data
-TukeyHSD(fertilizationanova.mtDNAPi)
-
-############## Reproduction Mode ############## 
-#msat: He
-reproductionmodeanova.msatHe <- aov(He ~ final_reproductionmode, data = msat_final_reproductionmode_He_no.na) #perform anova test for combined data
-TukeyHSD(reproductionmodeanova.msatHe) #perform TukeyHSD to see full table of results
-
-#mtDNA: He
-reproductionmodeanova.mtDNAHe <- aov(He ~ final_reproductionmode, data = mtdna_final_reproductionmode_He_no.na) #perform anova test for combined data
-TukeyHSD(reproductionmodeanova.mtDNAHe) 
-
-#mtDNA: Pi
-reproductionmodeanova.mtDNAPi <- aov(Pi ~ final_reproductionmode, data = mtdna_final_reproductionmode_Pi_no.na) #perform anova test for combined data
-TukeyHSD(reproductionmodeanova.mtDNAPi) 
-
-########################################### Wilcoxon Tests: Numerical Data ########################################### 
-############## Max Length ############## 
-
-#msat: He
-wilcox.test( msat_maxlength_He_no.na[ ,'maxlength'] , msat_maxlength_He_no.na[ , 'He'], paired=F) #run Wilcoxon test on max length & He
-
-#mtDNA: He
-wilcox.test( mtdna_maxlength_He_no.na[ ,'maxlength'] , mtdna_maxlength_He_no.na[ , 'He'], paired=F) #run Wilcoxon test on max length & He
-
-#mtDNA: Pi
-wilcox.test( mtdna_maxlength_Pi_no.na[ ,'maxlength'] , mtdna_maxlength_Pi_no.na[ , 'Pi'], paired=F) #run Wilcoxon test on max length & He
-
-############## Fecundity ############## 
-#msat: He
-wilcox.test( msat_fecundity_He_no.na[ ,'fecundity_mean'] , msat_fecundity_He_no.na[ , 'He'], paired=F) #run Wilcoxon test on fecundity & He
-
-#mtDNA: He
-wilcox.test( mtdna_fecundity_He_no.na[ ,'fecundity_mean'] , mtdna_fecundity_He_no.na[ , 'He'], paired=F) #run Wilcoxon test on max length & He
-
-#mtDNA: Pi
-wilcox.test( mtdna_fecundity_Pi_no.na[ ,'fecundity_mean'] , mtdna_fecundity_Pi_no.na[ , 'Pi'], paired=F) #run Wilcoxon test on max length & He
-
-########################################### Shapiro-Wilk Tests: Numerical Data ########################################### 
-
-############## Max Length ############## 
-#msat: He
-shapiro.test(msat_maxlength_He_no.na$maxlength) #run Shapiro-Wilk test on max length & He
-
-#mtDNA: He
-shapiro.test(mtdna_maxlength_He_no.na$maxlength) #run Shapiro-Wilk test on max length & He
-
-#mtDNA: Pi
-shapiro.test(mtdna_maxlength_Pi_no.na$maxlength) #run Shapiro-Wilk test on max length & He
-
-############## Fecundity ############## 
-#msat: He
-shapiro.test(msat_fecundity_He_no.na$fecundity_mean) #run Shapiro-Wilk test on fecundity mean & He
-
-#mtDNA: He
-shapiro.test(mtdna_fecundity_He_no.na$fecundity_mean) #run Shapiro-Wilk test on max length & He
-
-#mtDNA: Pi
-shapiro.test(mtdna_fecundity_Pi_no.na$fecundity_mean) #run Shapiro-Wilk test on max length & He
-

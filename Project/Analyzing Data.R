@@ -1617,7 +1617,7 @@ msat_plot_annotated <- msat_plot + xlab("Longitude (°)") + ylab("Latitude (°)"
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.border = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
         axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 22, face = "bold"), 
-        plot.title = element_text(size = 28, face = "bold", hjust = 0.5))
+        plot.title = element_text(size = 22, face = "bold", hjust = 0.5))
 
 ##### mtDNA #####
 
