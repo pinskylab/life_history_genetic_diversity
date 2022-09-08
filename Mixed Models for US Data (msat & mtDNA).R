@@ -24,16 +24,15 @@ library(tidyr)
 mtdna_data <- read.csv("new_mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
 msat_data <- read.csv("new_msat_full_US_data.csv", stringsAsFactors = FALSE) #read in 
 
-#Fixed Variables: Crossspp, repeats, fecundity, body length/maxlength, reproduction mode, fertilization method, primernote
-#Random Variables: Species, source/study, marker name
+#Fixed Variables for mtDNA He & Pi: Body length/maxlength, fecundity mean, fertilization method, reproduction mode, Bp scale
+#Random Variables for mtDNA He & Pi: Species, source
+#Fixed Variables for msat He: Body length/maxlength, fecundity mean, fertilization method, reproduction mode, CrossSpp
+#Random Variables for msat He: Species, source, ID
 #in brood or similar structure --> internal
 
 ################################################### mtDNA data set ################################################### 
 
-#####He##### --> should use separate datasets for Hd & for pi
-
-##Create ID column
-#mtdna_data$ID <- c(1:169) CHECK WITH RENE
+##### He #####
 
 ##Add column for final fertilization
 mtdna_data$final_fertilization [mtdna_data$fertilization =="in brood pouch or similar structure"] <- "internal (oviduct)" #convert "in brood pouch or similar structure" to internal fertilization
@@ -63,7 +62,6 @@ for (i in 1:nrow(mtdna_data)) { #get log transformation data
   mtdna_data$logtransform.Pi <- log10(mtdna_data$Pi)
 }
 
-
 ##scale bp instead of log-transform
 mtdna_data$bp_scale <- scale(as.numeric(mtdna_data$bp))
 
@@ -84,7 +82,7 @@ binomial_He_full_model_mtDNA <- glmer(formula = cbind(success,failure) ~ logtran
                                 control = glmerControl(optimizer = "bobyqa")) 
 
 mtdna_data_He_dredge <- dredge(binomial_He_full_model_mtDNA) #dredge model
-View(mtdna_data_He_dredge) #to get a table that can be copy and pasted to Excel
+View(mtdna_data_He_dredge) #see table
 summary(binomial_He_full_model_mtDNA) #get SE, p-value, etc.
 
 ##find minimal model (top AIC model)
@@ -93,10 +91,10 @@ topAIC.mtDNAHE <- glmer(formula = cbind(success,failure) ~ fertilizations.or.f +
                                       family=binomial, data = mtdna_data_He,
                                       control = glmerControl(optimizer = "bobyqa")) 
 mtdna_data_He_dredge_minimal <- dredge(topAIC.mtDNAHE) #dredge model
-View(mtdna_data_He_dredge_minimal)
+View(mtdna_data_He_dredge_minimal) #see table
 summary(topAIC.mtDNAHE) #get SE, p-value, etc.for top AIC model
 
-#####PI##### --> should use separate datasets for He & for pi
+##### PI ##### 
 
 ##prep data & remove NA
 mtdna_data_nona_fecunditymean <- subset(mtdna_data, mtdna_data$logtransform.fecundity_mean.1 != "NaN")
@@ -111,7 +109,7 @@ Pi_full_model <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + log
                       control = lmerControl(optimizer = "bobyqa")) #have Marial switch to bobyqa to get away from convergence issues AND switch to bp_scale AND make sure REML = FALSE
 
 mtdna_pi_dredge <- dredge(Pi_full_model) #dredge model
-View(mtdna_pi_dredge) #to get a table that can be copy and pasted to Excel
+View(mtdna_pi_dredge) #see table
 summary(Pi_full_model) #get SE, p-value, etc.
 
 ##find minimal model (top AIC model)
@@ -123,6 +121,7 @@ mtdna_data_Pi_dredge_minimal <- dredge(topAIC.mtDNAPI) #dredge model
 View(mtdna_data_Pi_dredge_minimal)
 summary(topAIC.mtDNAPI) #get SE, p-value, etc.for top AIC model
 summary(mtdna_data_Pi_dredge_minimal)
+
 ################################################### msat data set ################################################### 
 
 ##Create ID column
@@ -138,11 +137,6 @@ for (i in 1:nrow(msat_data)) { #get log transformation data
   cat(paste(i, " ", sep = ''))
   msat_data$logtransform.maxlength.2 <- log10(msat_data$maxlength)
 }
-
-#for (i in 1:nrow(msat_data)) { #get log transformation data
-  #cat(paste(i, " ", sep = ''))
- # msat_data$logtransform.repeat <- log10(msat_data$Repeat)
-#}
 
 ##Add column for final fertilization
 
@@ -173,12 +167,11 @@ binomial_He_full_model_msat <- glmer(formula = cbind(success,failure) ~ logtrans
                                 control = glmerControl(optimizer = "bobyqa")) #have Marial switch to bobyqa to get away from convergence issues AND switch to bp_scale
 
 msat_dataHe <- dredge(binomial_He_full_model_msat) #dredge model
-View(msat_dataHe) #to get a table that can be copy and pasted to Excel
+View(msat_dataHe) #see table
 summary(binomial_He_full_model_msat) #get SE, p-value, etc.
 
 ##find minimal model (top AIC model)
-topAIC.msatHE <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.2 +
-                         fertilizations.or.f2 + CrossSpp +
+topAIC.msatHE <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.2 + fertilizations.or.f2 + CrossSpp +
                          (1|spp) + (1|Source) + (1|ID), na.action = "na.fail", 
                        family=binomial, data = msat_data,
                        control = glmerControl(optimizer = "bobyqa"))
