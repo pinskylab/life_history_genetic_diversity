@@ -15,13 +15,15 @@ library(dplyr)
 library(maps)
 library(mapdata)
 library(patchwork)
+library(ggplot2)
 
 #read in data
 mtdna_data_new <- read.csv("new_mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
 msat_data <- read.csv("new_msat_full_US_data.csv", stringsAsFactors = FALSE) #read in 
 
 #pull world map data
-geogr_data <- map_data('usa')
+geogr_data <- map_data('usa','mexico','canada')
+geogr_data <- map_data('world', regions=c('usa','mexico','canada'))
 
 ############### mtDNA data set ############### 
 
@@ -814,22 +816,24 @@ TukeyHSD(specific.repro_modeanova.all) #perform TukeyHSD to see full table of re
 
 latlon_msat <-msat_data[!duplicated(msat_data[, c('lat','lon')]), c('lat','lon')] #grab unique lat/lon combos
 
-latlon_msat <- latlon_msat[order(latlon$lat,latlonn$lon),] #order by lat then lon
+latlon_msat <- latlon_msat[order(latlon$lat,latlon$lon),] #order by lat then lon
 
 write.csv(latlon_msat, file = paste('latlon_msat',Sys.Date(), '.csv', sep= ''), row.names = FALSE) #build map
 
 msat_plot <- ggplot(geogr_data, aes(x = long, y = lat, group = group)) + 
   geom_polygon(fill = "lightgray", colour = "white") + 
   geom_point(data = latlon_msat, aes(x = lon, y = lat), size = 4, inherit.aes = FALSE)
+  
 
 #msat_plot
 
 msat_plot_annotated <- msat_plot + xlab("Longitude (°)") + ylab("Latitude (°)") + theme_bw() + 
-  ggtitle("(A) msat locations") + 
+  ggtitle("(A)") + 
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.border = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 22, face = "bold"), 
-        plot.title = element_text(size = 22, face = "bold", hjust = 0.5))
+        axis.text = element_text(size = 30, color = "black"), axis.title = element_text(size = 30, face = "bold"), 
+        plot.title = element_text(size = 28, face = "bold", hjust = 0)) +
+  coord_cartesian(xlim = c(-127, -64), ylim = c(15, 51))
 
 ##### mtDNA #####
 
@@ -846,11 +850,13 @@ mtdna_plot <- ggplot(geogr_data, aes(x = long, y = lat, group = group)) +
 #mtdna_plot
 
 mtdna_plot_annotated <- mtdna_plot + xlab("Longitude (°)") + ylab("Latitude (°)") + theme_bw() + 
-  ggtitle("(B) mtDNA locations") + 
+  ggtitle("(B)") + 
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.border = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 22, face = "bold"), 
-        plot.title = element_text(size = 28, face = "bold", hjust = 0.5))
+        axis.text = element_text(size = 30, color = "black"), axis.title = element_text(size = 30, face = "bold"), 
+        plot.title = element_text(size = 28, face = "bold", hjust = 0))+
+  coord_cartesian(xlim = c(-127, -64), ylim = c(15, 51))
+        
 
-#Graph msaps side-by-side
+#Graph maps side-by-side
 msat_plot_annotated + mtdna_plot_annotated 

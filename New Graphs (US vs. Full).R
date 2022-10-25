@@ -31,7 +31,7 @@ lm_eqn = function(x, y, df){ #set up formula for regression line equation
 }
 
 ### Center Title and Subtitle for Graphs ###
-theme_update(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
+theme_update(plot.title = element_text(hjust = 0), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
 
 ###Combined old full data set to new full data set w/ LH traits: No need to go through code again###
 
@@ -241,28 +241,31 @@ final_fertilization_all$markertype [final_fertilization_all$file == "msats305"] 
 final_fertilization_all$markertype [final_fertilization_all$file ==	"ppdat"]  <- "msat" 
 
 Fertplot1 <- ggplot(final_fertilization_all) + geom_boxplot(aes(x = final_fertilization, y = He, fill=markertype)) + #final fertilization & He box plot
-  ggtitle("(A) msat & mtDNA: He") + #add plot title
+  ggtitle("(A)") + #add plot title
   xlab("Fertilization Method") + ylab("He") + #add axis labels
+  theme_bw() +
   theme(                                 #specify characteristics of the plot 
-    plot.title = element_text(face="bold", size=22, margin = margin(b = 15)), 
-    axis.title.x = element_text(face="bold", size=22, margin = margin(t = 20)),
-    axis.title.y = element_text(face="bold", size=22,margin = margin(r = 20)),
-    text = element_text(size = 20),
-    legend.position="bottom")+
-  scale_fill_manual(values=c("#a5d5d8","#00429d"))
+    plot.title = element_text(face="bold", size=28, margin = margin(b = 15)), 
+    axis.title.x = element_text(face="bold", size=30, margin = margin(t = 20)),
+    axis.title.y = element_text(face="bold", size=30,margin = margin(r = 20)),
+    text = element_text(size = 28),
+    legend.position="bottom") +
+  labs(fill="Marker Type")+
+  scale_fill_manual(values=c("#444444", "#999999"))
 
 ### mtDNA: Pi
 Fertplot2 <- ggplot(mtdna_final_fertilization_Pi_no.na) + geom_boxplot(aes(x = final_fertilization, y = Pi, fill = final_fertilization)) + #final fertilization & He box plot
-  ggtitle("(B) mtDNA: Pi") + #add plot title
+  ggtitle("(B)") + #add plot title
   xlab("Fertilization Method") + ylab("Pi") + #add axis labels
+  theme_bw() +
   theme(                                 #specify characteristics of the plot 
-    plot.title = element_text(face="bold", size=22, margin = margin(b = 15)), 
-    axis.title.x = element_text(face="bold", size=22, margin = margin(t = 20)),
-    axis.title.y = element_text(face="bold", size=22, margin = margin(r = 20)),
-    text = element_text(size = 20),
+    plot.title = element_text(face="bold", size=28, margin = margin(b = 15)), 
+    axis.title.x = element_text(face="bold", size=30, margin = margin(t = 20)),
+    axis.title.y = element_text(face="bold", size=30, margin = margin(r = 20)),
+    text = element_text(size = 28),
     legend.position="bottom")+
   labs(fill = "Fertilization") +
-  scale_fill_manual(values=c("#00429d", "#00429d"))
+  scale_fill_manual(values=c("#444444", "#444444"))
 
 #Graph msat vs. mtDNA: He & mtDNA: Pi side-by-side
 Fertplot1 + Fertplot2
@@ -292,28 +295,31 @@ reproductionmode_all$markertype [reproductionmode_all$file == "msats305"]  <- "m
 reproductionmode_all$markertype [reproductionmode_all$file ==	"ppdat"]  <- "msat" 
 
 Reproplot1 <- ggplot(reproductionmode_all) + geom_boxplot(aes(x = final_reproductionmode, y = He, fill= markertype)) + #final fertilization & He box plot
-  ggtitle("(A) msat & mtDNA: He") + #add plot title
+  ggtitle("(A)") + #add plot title
   xlab("Reproduction Mode") + ylab("He") + #add axis labels
+  theme_bw() +
   theme(                                 #specify characteristics of the plot 
-    plot.title = element_text(face="bold", size=22, margin = margin(b = 15)), 
-    axis.title.x = element_text(face="bold", size=22, margin = margin(t = 20)),
-    axis.title.y = element_text(face="bold", size=22,margin = margin(r = 20)),
-    text = element_text(size = 22),
+    plot.title = element_text(face="bold", size=28, margin = margin(b = 15)), 
+    axis.title.x = element_text(face="bold", size=30, margin = margin(t = 20)),
+    axis.title.y = element_text(face="bold", size=30,margin = margin(r = 20)),
+    text = element_text(size = 28),
     legend.position="bottom")+
-  scale_fill_manual(values=c("#a5d5d8","#00429d"))
+  labs(fill="Marker Type")+
+  scale_fill_manual(values=c("#444444", "#999999"))
 
 ### mtDNA: Pi
 Reproplot2 <- ggplot(mtdna_final_reproductionmode_Pi_no.na) + geom_boxplot(aes(x = final_reproductionmode, y = Pi, fill = final_reproductionmode)) + #final fertilization & He box plot
-  ggtitle("(B) mtDNA: Pi") + #add plot title
+  ggtitle("(B)") + #add plot title
   xlab("Reproduction Mode") + ylab("Pi") + #add axis labels
+  theme_bw() +
   theme(                                 #specify characteristics of the plot 
-    plot.title = element_text(face="bold", size=22, margin = margin(b = 15)), 
-    axis.title.x = element_text(face="bold", size=22, margin = margin(t = 20)),
-    axis.title.y = element_text(face="bold", size=22, margin = margin(r = 20)),
-    text = element_text(size = 22),
+    plot.title = element_text(face="bold", size=28, margin = margin(b = 15)), 
+    axis.title.x = element_text(face="bold", size=30, margin = margin(t = 20)),
+    axis.title.y = element_text(face="bold", size=30, margin = margin(r = 20)),
+    text = element_text(size = 28),
     legend.position="bottom")+
   labs(fill = "Reproduction Mode") +
-  scale_fill_manual(values=c("#00429d", "#00429d"))
+  scale_fill_manual(values=c("#444444", "#444444"))
 
 #Graph msat vs. mtDNA: He & mtDNA: Pi side-by-side
 Reproplot1 + Reproplot2
@@ -344,52 +350,63 @@ final_maxlength_all$markertype [final_maxlength_all$file == "msats304"]  <- "msa
 final_maxlength_all$markertype [final_maxlength_all$file == "msats305"]  <- "msat"
 final_maxlength_all$markertype [final_maxlength_all$file ==	"ppdat"]  <- "msat" 
 
-Maxplot1 <- ggplot(final_maxlength_all, aes(x=logtransform.maxlength, y=He, shape=markertype, col=markertype)) + #max length & He scatter plot
-  geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
+Maxplot1msat <- ggplot(data=subset(final_maxlength_all, markertype == 'msat' ), aes(x=logtransform.maxlength, y=He)) +
+  geom_point(aes(shape=markertype, fill=NULL,color="#444444")) +    # Point aesthetics
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, color = "#444444", size = 2, fill = NA) +
+  labs(title= "(A)", x= "Max Length (log(cm))", y= "He", fill="Marker Type") + 
+  theme_bw() + 
+  theme(                                 #specifying characteristics of the plot 
+    plot.title = element_text(size=28, face="bold"),
+    axis.title.x = element_text(face="bold", size=30, margin = margin(t = 20)),
+    axis.title.y = element_text(face="bold", size=30, margin = margin(r = 20)),
+    text = element_text(size = 28),
+    legend.position="bottom")+
+  scale_fill_manual(values=c("#444444")) +
+  scale_shape_manual(values = c(msat=1)) +
+  scale_color_manual(values = c("#444444"), guide="none")
+
+Maxplot1mtDNA <- ggplot(data=subset(final_maxlength_all, markertype == 'mtDNA' ), aes(x=logtransform.maxlength, y=He)) +
+  geom_point(aes(shape=markertype, fill=NULL,color="#999999")) +    # Point aesthetics
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "black", size = 2.5, fill = NA) + 
   geom_smooth(method=lm,   # Add linear regression line
-              se=TRUE, size = 2, fill = NA) +
-  ylim(0,1)+                              #create limits
-  coord_cartesian(ylim = c(0, 1)) +
-  ggtitle("(A) msat & mtDNA: He") + #add plot title
-  xlab("Max Length (log(cm))") + ylab("He") + #add axis labels
+              se=TRUE, color = "#999999", size = 2, fill = NA) +
+  labs(title= "(B)", x= "Max Length (log(cm))", y= "He", fill="Marker Type") + 
+  theme_bw() + 
   theme(                                 #specifying characteristics of the plot 
-    plot.title = element_text(size=22, face="bold"),
-    axis.title.x = element_text(face="bold", size=22, margin = margin(t = 20)),
-    axis.title.y = element_text(face="bold", size=22, margin = margin(r = 20)),
-    text = element_text(size = 22),
+    plot.title = element_text(size=28, face="bold"),
+    axis.title.x = element_text(face="bold", size=30, margin = margin(t = 20)),
+    axis.title.y = element_text(face="bold", size=30, margin = margin(r = 20)),
+    text = element_text(size = 28),
     legend.position="bottom")+
-  annotate(geom="label", x = 1.3, y = 0.50, label = lm_eqn(msat_maxlength_He_no.na$logtransform.maxlength, msat_maxlength_He_no.na$He, msat_maxlength_He_no.na), 
-           color="#389ba1", size = 10, parse=TRUE) + #add regression line equation
-  annotate(geom="label", x = 1.3, y = 0.80, label = lm_eqn(mtdna_maxlength_He_no.na$logtransform.maxlength, mtdna_maxlength_He_no.na$He, mtdna_maxlength_He_no.na), 
-           color="#00429d", size = 10, parse=TRUE) + #add regression line equation
-  scale_fill_manual(values=c("#389ba1", "#00429d")) +
-  scale_shape_manual(values = c(msat=1, mtDNA=17)) +
-  scale_color_manual(values = c("#389ba1", "#00429d")) +
-  labs(fill = "Marker Type")
-  
+  scale_fill_manual(values=c("#999999")) +
+  scale_shape_manual(values = c(mtDNA=9)) +
+  scale_color_manual(values = c("#999999"), guide="none")
 
 ### mtDNA: Pi
 Maxplot2 <- ggplot(mtdna_maxlength_Pi_no.na, aes(x=logtransform.maxlength, y=Pi, fill=factor(logtransform.maxlength))) + #max length & He scatter plot
-  geom_point(aes(fill=NULL), shape=17, color="#00429d") +    # Use hollow circles
+  geom_point(aes(fill=NULL), shape=9, color="#999999") +    # Point aesthetics
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "black", size = 2.5, fill = NA) + 
   geom_smooth(method=lm,   # Add linear regression line
-              se=TRUE, color = "#00429d", size = 2, fill = NA) +
-  ggtitle("(B) mtDNA: Pi") + #add plot title
+              se=TRUE, color = "#999999", size = 2, fill = NA) +
+  ggtitle("(C)") + #add plot title
   xlab("Maxlength (log(cm))") + ylab("Pi") + #add axis labels 
+  theme_bw()+
   theme(                                 #specifying characteristics of the plot 
-    plot.title = element_text(size=22, face="bold"),
-    axis.title.x = element_text(face="bold", size=22, margin = margin(t = 20)),
-    axis.title.y = element_text(face="bold", size=22, margin = margin(r = 20)),
-    text = element_text(size = 22),
+    plot.title = element_text(size=28, face="bold"),
+    axis.title.x = element_text(face="bold", size=30, margin = margin(t = 20)),
+    axis.title.y = element_text(face="bold", size=30, margin = margin(r = 20)),
+    text = element_text(size = 28),
     legend.position="bottom") +
-  annotate(geom="label", x = 1.8, y = 0.018, label = lm_eqn(mtdna_maxlength_Pi_no.na$logtransform.maxlength, mtdna_maxlength_Pi_no.na$Pi, mtdna_maxlength_Pi_no.na), 
-           color="#00429d", size = 10, parse=TRUE) 
+  scale_fill_manual(values=c("#999999")) +
+  scale_color_manual(values = c("#999999"), guide="none") +
+  labs(fill="Marker Type")
+
 
 #Graph msat vs. mtDNA: He & mtDNA: Pi side-by-side
-Maxplot1 + Maxplot2
+Maxplot1msat + Maxplot1mtDNA + Maxplot2 
 
 ########### Fecundity Mean ###########
 #msat vs. mtDNA: He
@@ -415,48 +432,59 @@ final_fecunditymean_all$markertype [final_fecunditymean_all$file == "msats304"] 
 final_fecunditymean_all$markertype [final_fecunditymean_all$file == "msats305"]  <- "msat"
 final_fecunditymean_all$markertype [final_fecunditymean_all$file ==	"ppdat"]  <- "msat" 
 
-Fec1 <- ggplot(final_fecunditymean_all, aes(x=logtransform.fecundity, y=He, col=markertype, shape=markertype)) + #fecundity mean & He scatter plot
-  geom_point(aes(shape=markertype, fill=NULL)) +    # Use hollow circles
+Fecplot1msat <- ggplot(data=subset(final_fecunditymean_all, markertype == 'msat' ), aes(x=logtransform.fecundity, y=He)) +
+  geom_point(aes(shape=markertype, fill=NULL,color="#444444")) +    # Point aesthetics
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, color = "#444444", size = 2, fill = NA) +
+  labs(title= "(A)", x= "Fecundity Mean", y= "He", fill="Marker Type") + 
+  theme_bw() + 
+  theme(                                 #specifying characteristics of the plot 
+    plot.title = element_text(size=28, face="bold"),
+    axis.title.x = element_text(face="bold", size=30, margin = margin(t = 20)),
+    axis.title.y = element_text(face="bold", size=30, margin = margin(r = 20)),
+    text = element_text(size = 28),
+    legend.position="bottom")+
+  scale_fill_manual(values=c("#444444")) +
+  scale_shape_manual(values = c(msat=1)) +
+  scale_color_manual(values = c("#444444"), guide="none")
+
+Fecplot1mtDNA <- ggplot(data=subset(final_fecunditymean_all, markertype == 'mtDNA' ), aes(x=logtransform.fecundity, y=He)) +
+  geom_point(aes(shape=markertype, fill=NULL,color="#999999")) +    # Point aesthetics
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "black", size = 2.5, fill = NA) + 
   geom_smooth(method=lm,   # Add linear regression line
-              se=TRUE, size = 2, fill = NA) +
-  ylim(0,1)+                              #create limits
-  coord_cartesian(ylim = c(0, 1)) +
-  ggtitle("(A) msat vs. mtDNA: He") + #add plot title
-  xlab("Fecundity Mean (log)") + ylab("He") + #add axis labels
+              se=TRUE, color = "#999999", size = 2, fill = NA) +
+  labs(title= "(B)", x= "Fecundity Mean", y= "He", fill="Marker Type") + 
+  theme_bw() + 
   theme(                                 #specifying characteristics of the plot 
-    plot.title = element_text(size=22, face="bold"),
-    axis.title.x = element_text(size=22, face="bold", margin = margin(t = 20)),
-    axis.title.y = element_text(size=22, face="bold", margin = margin(r = 20)),
-    text = element_text(size = 22),
+    plot.title = element_text(size=28, face="bold"),
+    axis.title.x = element_text(face="bold", size=30, margin = margin(t = 20)),
+    axis.title.y = element_text(face="bold", size=30, margin = margin(r = 20)),
+    text = element_text(size = 28),
     legend.position="bottom")+
-  annotate(geom="label", x = 2.0, y = 0.74, label = lm_eqn(msat_fecundity_He_no.na$logtransform.fecundity, msat_fecundity_He_no.na$He, msat_fecundity_He_no.na), 
-           color="#389ba1", size = 10, parse=TRUE) + #add regression line equation
-  annotate(geom="label", x = 2.0, y = 0.40, label = lm_eqn(mtdna_fecundity_He_no.na$logtransform.fecundity, mtdna_fecundity_He_no.na$He, mtdna_fecundity_He_no.na), 
-           color="#00429d", size = 10, parse=TRUE) + #add regression line equation
-  scale_fill_manual(values=c("#389ba1","#00429d")) +
-  scale_shape_manual(values = c(msat=1, mtDNA=17)) +
-  scale_color_manual(values = c("#389ba1", "#00429d")) +
-  labs(fill = "Marker Type")
+  scale_fill_manual(values=c("#999999")) +
+  scale_shape_manual(values = c(mtDNA=9)) +
+  scale_color_manual(values = c("#999999"), guide="none")
 
 #mtDNA: Pi
-Fec2 <- ggplot(mtdna_fecundity_Pi_no.na, aes(x=logtransform.fecundity, y=Pi, fill=factor(logtransform.fecundity))) + #max length & He scatter plot
-  geom_point(aes(fill=NULL), shape=17, color="#00429d") +    # Use hollow circles
+Fecplot2 <- ggplot(mtdna_fecundity_Pi_no.na, aes(x=logtransform.fecundity, y=Pi, fill=factor(logtransform.fecundity))) + #max length & He scatter plot
+  geom_point(aes(fill=NULL), shape=9, color="#999999") +    # Point aesthetics
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "black", size = 2.5, fill = NA) + 
   geom_smooth(method=lm,   # Add linear regression line
-              se=TRUE, color="#00429d", size = 2, fill = NA) +
-  ggtitle("(B) mtDNA: Pi") + #add plot title
+              se=TRUE, color = "#999999", size = 2, fill = NA) +
+  ggtitle("(C)") + #add plot title
   xlab("Fecundity Mean") + ylab("Pi") + #add axis labels 
+  theme_bw()+
   theme(                                 #specifying characteristics of the plot 
-    plot.title = element_text(size=22, face="bold"),
-    axis.title.x = element_text(size=22, face="bold", margin = margin(t = 20)),
-    axis.title.y = element_text(size=22, face="bold", margin = margin(r = 20)),
-    text = element_text(size = 22),
-    legend.position="bottom")+
-  annotate(geom="label", x = 2.8, y = 0.015, label = lm_eqn(mtdna_fecundity_Pi_no.na$logtransform.fecundity, mtdna_fecundity_Pi_no.na$Pi, mtdna_fecundity_Pi_no.na), 
-           color="#00429d", size = 10, parse=TRUE) #add regression line equation
+    plot.title = element_text(size=28, face="bold"),
+    axis.title.x = element_text(face="bold", size=30, margin = margin(t = 20)),
+    axis.title.y = element_text(face="bold", size=30, margin = margin(r = 20)),
+    text = element_text(size = 28),
+    legend.position="bottom") +
+  scale_fill_manual(values=c("#999999")) +
+  scale_color_manual(values = c("#999999"), guide="none") +
+  labs(fill="Marker Type")
 
 #Graph msat vs. mtDNA: He & mtDNA: Pi side-by-side
-Fec1 + Fec2
+Fecplot1msat + Fecplot1mtDNA + Fecplot2
