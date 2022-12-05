@@ -176,27 +176,50 @@ polygon(density(mtdna_maxlength_He_no.na$maxlength), main="Max Length Density", 
 plot(density(mtdna_fecundity_He_no.na$fecundity_mean), main="Fecundity Mean Density") #create density plot for fecundity mean
 polygon(density(mtdna_fecundity_He_no.na$fecundity_mean), main="Fecundity Mean Density", col="blue") #specify characteristics of plot
 
-#####T-Tests: Character Data#####
-
-#####Welch Two-Sample Tests: Numerical Data#####
+#####T-Tests: Character Data 
+#####Welch Two-Sample Tests: Character Data#####
 
 #Fertilization#
 
 external.mtdnaHe <- mtdna_final_fertilization_He_no.na$He[mtdna_final_fertilization_He_no.na$final_fertilization=="external"] #create vector for one aspect of t-test
 internal.mtdnaHe <- mtdna_final_fertilization_He_no.na$He[mtdna_final_fertilization_He_no.na$final_fertilization=="internal (oviduct)"] #create vector
 
-fertilization_ttest.mtdnaHe <- t.test(external.mtdna, internal.mtdna, var.equal=FALSE) #combine created vectors & perform t-test
+fertilization_ttest.mtdnaHe <- t.test(external.mtdnaHe, internal.mtdnaHe, var.equal=FALSE) #combine created vectors & perform t-test
 
 #Reproduction Mode#
 
 dioecism.mtdnaHe <- mtdna_final_reproductionmode_He_no.na$He[mtdna_final_reproductionmode_He_no.na$final_reproductionmode=="Dioecious"] #create vector for one aspect of t-test
 hermaphrodite.mtdnaHe <- mtdna_final_reproductionmode_He_no.na$He[mtdna_final_reproductionmode_He_no.na$final_reproductionmode=="Hermaphrodite"] #create vector
 
-reproductionmode_ttest.mtdnaHe <- t.test(dioecism.mtdna, hermaphrodite.mtdna, var.equal=FALSE) #combine created vectors & perform t-test
+reproductionmode_ttest.mtdnaHe <- t.test(dioecism.mtdnaHe, hermaphrodite.mtdnaHe, var.equal=FALSE) #combine created vectors & perform t-test
 
 #Specific Reproduction Modes: ANOVA TEST#
 
 specific.repro_modeanovamtdnaHe <- aov(He ~ specific.repro_mode, data = mtdna_reproduction_type_He_no.na) #perform anova test
+
+#####T-Tests: Numerical Data#####
+
+## Max Length
+
+#Max Length msat
+t.test(msat_data[ ,'maxlength'] , msat_data[ , 'He'], paired=F)
+
+#Max Length mtDNA He
+t.test(mtdna_data_new[ ,'maxlength'] , mtdna_data_new[ , 'He'], paired=F)
+#Max Length Pi
+t.test(mtdna_data_new[ ,'maxlength'] , mtdna_data_new[ , 'Pi'], paired=F)
+
+##Fecundity
+
+#Fecundity msat
+t.test(msat_data[ ,'fecundity_mean'] , msat_data[ , 'He'], paired=F)
+
+#Fecundity mtDNA He
+t.test(mtdna_data_new[ ,'fecundity_mean'] , mtdna_fecundity_He_no.na[ , 'He'], paired=F)
+
+#Fecundity Pi
+t.test(mtdna_data_new[ ,'fecundity_mean'] , mtdna_fecundity_He_no.na[ , 'Pi'], paired=F)
+
 
 #####Wilcoxon Tests: Numerical Data#####
 
@@ -216,7 +239,6 @@ shapiro.test(mtdna_fecundity_He_no.na$fecundity_mean) #run Shapiro-Wilk test on 
 
 
 ####################################################################################
-
 ############### mtDNA new data set: focus on Pi ############### 
 
 #####Box Plots: Character Data#####

@@ -250,8 +250,9 @@ Fertplot1 <- ggplot(final_fertilization_all) + geom_boxplot(aes(x = final_fertil
     axis.title.y = element_text(face="bold", size=30,margin = margin(r = 20)),
     text = element_text(size = 28),
     legend.position="bottom") +
-  labs(fill="Marker Type")+
-  scale_fill_manual(values=c("#444444", "#999999"))
+  labs(fill="Marker Type") +
+  scale_fill_manual(values=c("#444444", "#999999"), labels=c('Microsatellite', 'mtDNA'))
+  
 
 ### mtDNA: Pi
 Fertplot2 <- ggplot(mtdna_final_fertilization_Pi_no.na) + geom_boxplot(aes(x = final_fertilization, y = Pi, fill = final_fertilization)) + #final fertilization & He box plot
@@ -265,7 +266,7 @@ Fertplot2 <- ggplot(mtdna_final_fertilization_Pi_no.na) + geom_boxplot(aes(x = f
     text = element_text(size = 28),
     legend.position="bottom")+
   labs(fill = "Fertilization") +
-  scale_fill_manual(values=c("#444444", "#444444"))
+  scale_fill_manual(values=c("#999999", "#999999"))
 
 #Graph msat vs. mtDNA: He & mtDNA: Pi side-by-side
 Fertplot1 + Fertplot2
@@ -305,7 +306,7 @@ Reproplot1 <- ggplot(reproductionmode_all) + geom_boxplot(aes(x = final_reproduc
     text = element_text(size = 28),
     legend.position="bottom")+
   labs(fill="Marker Type")+
-  scale_fill_manual(values=c("#444444", "#999999"))
+  scale_fill_manual(values=c("#444444", "#999999"), labels=c('Microsatellite', 'mtDNA'))
 
 ### mtDNA: Pi
 Reproplot2 <- ggplot(mtdna_final_reproductionmode_Pi_no.na) + geom_boxplot(aes(x = final_reproductionmode, y = Pi, fill = final_reproductionmode)) + #final fertilization & He box plot
@@ -319,7 +320,7 @@ Reproplot2 <- ggplot(mtdna_final_reproductionmode_Pi_no.na) + geom_boxplot(aes(x
     text = element_text(size = 28),
     legend.position="bottom")+
   labs(fill = "Reproduction Mode") +
-  scale_fill_manual(values=c("#444444", "#444444"))
+  scale_fill_manual(values=c("#999999", "#999999"))
 
 #Graph msat vs. mtDNA: He & mtDNA: Pi side-by-side
 Reproplot1 + Reproplot2
@@ -350,8 +351,10 @@ final_maxlength_all$markertype [final_maxlength_all$file == "msats304"]  <- "msa
 final_maxlength_all$markertype [final_maxlength_all$file == "msats305"]  <- "msat"
 final_maxlength_all$markertype [final_maxlength_all$file ==	"ppdat"]  <- "msat" 
 
-Maxplot1msat <- ggplot(data=subset(final_maxlength_all, markertype == 'msat' ), aes(x=logtransform.maxlength, y=He)) +
-  geom_point(aes(shape=markertype, fill=NULL,color="#444444")) +    # Point aesthetics
+Maxplot1msat <- ggplot(data=subset(final_maxlength_all, markertype == 'msat' ), aes(x=logtransform.maxlength, y=He, color=Color)) +
+  geom_point(aes(x=logtransform.maxlength, y=He), color="#444444", size =5, shape=1) +    # Point aesthetics
+  geom_smooth(method=lm,   # Add linear regression line
+              se=TRUE, color = "black", size = 2.5, fill = NA) +
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "#444444", size = 2, fill = NA) +
   labs(title= "(A)", x= "Max Length (log(cm))", y= "He", fill="Marker Type") + 
@@ -361,18 +364,20 @@ Maxplot1msat <- ggplot(data=subset(final_maxlength_all, markertype == 'msat' ), 
     axis.title.x = element_text(face="bold", size=30, margin = margin(t = 20)),
     axis.title.y = element_text(face="bold", size=30, margin = margin(r = 20)),
     text = element_text(size = 28),
-    legend.position="bottom")+
-  scale_fill_manual(values=c("#444444")) +
-  scale_shape_manual(values = c(msat=1)) +
-  scale_color_manual(values = c("#444444"), guide="none")
+    legend.position="bottom") +
+  scale_fill_manual(guide = "legend", values=c("#444444")) +
+  scale_shape_manual(guide = "legend", values = c(msat=1)) +
+  scale_color_manual(guide = "legend", values = c("#444444")) +
+  guides(colour = guide_legend(override.aes = list())) 
+ 
 
-Maxplot1mtDNA <- ggplot(data=subset(final_maxlength_all, markertype == 'mtDNA' ), aes(x=logtransform.maxlength, y=He)) +
-  geom_point(aes(shape=markertype, fill=NULL,color="#999999")) +    # Point aesthetics
+Maxplot1mtDNA <- ggplot(data=subset(final_maxlength_all, markertype == 'mtDNA' ), aes(x=logtransform.maxlength, y=He, color=Color)) +
+  geom_point(aes(x=logtransform.maxlength, y=He), size =5, color="#999999", shape=9) +    # Point aesthetics
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "black", size = 2.5, fill = NA) + 
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "#999999", size = 2, fill = NA) +
-  labs(title= "(B)", x= "Max Length (log(cm))", y= "He", fill="Marker Type") + 
+  labs(title= "(B)", x= "Max Length (log(cm))", y= "Haplotype Diversity", fill="Marker Type") + 
   theme_bw() + 
   theme(                                 #specifying characteristics of the plot 
     plot.title = element_text(size=28, face="bold"),
@@ -382,11 +387,13 @@ Maxplot1mtDNA <- ggplot(data=subset(final_maxlength_all, markertype == 'mtDNA' )
     legend.position="bottom")+
   scale_fill_manual(values=c("#999999")) +
   scale_shape_manual(values = c(mtDNA=9)) +
-  scale_color_manual(values = c("#999999"), guide="none")
+  scale_color_manual(values = c("#999999")) +
+  guides(colour = guide_legend(override.aes = list())) 
+
 
 ### mtDNA: Pi
 Maxplot2 <- ggplot(mtdna_maxlength_Pi_no.na, aes(x=logtransform.maxlength, y=Pi, fill=factor(logtransform.maxlength))) + #max length & He scatter plot
-  geom_point(aes(fill=NULL), shape=9, color="#999999") +    # Point aesthetics
+  geom_point(aes(fill=NULL), shape=9, color="#999999", size =5) +    # Point aesthetics
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "black", size = 2.5, fill = NA) + 
   geom_smooth(method=lm,   # Add linear regression line
@@ -403,7 +410,6 @@ Maxplot2 <- ggplot(mtdna_maxlength_Pi_no.na, aes(x=logtransform.maxlength, y=Pi,
   scale_fill_manual(values=c("#999999")) +
   scale_color_manual(values = c("#999999"), guide="none") +
   labs(fill="Marker Type")
-
 
 #Graph msat vs. mtDNA: He & mtDNA: Pi side-by-side
 Maxplot1msat + Maxplot1mtDNA + Maxplot2 
@@ -432,8 +438,8 @@ final_fecunditymean_all$markertype [final_fecunditymean_all$file == "msats304"] 
 final_fecunditymean_all$markertype [final_fecunditymean_all$file == "msats305"]  <- "msat"
 final_fecunditymean_all$markertype [final_fecunditymean_all$file ==	"ppdat"]  <- "msat" 
 
-Fecplot1msat <- ggplot(data=subset(final_fecunditymean_all, markertype == 'msat' ), aes(x=logtransform.fecundity, y=He)) +
-  geom_point(aes(shape=markertype, fill=NULL,color="#444444")) +    # Point aesthetics
+Fecplot1msat <- ggplot(data=subset(final_fecunditymean_all, markertype == 'msat' ), aes(x=logtransform.fecundity, y=He, color=Color)) +
+  geom_point(aes(x=logtransform.fecundity, y=He), size=5, shape=1, color="#444444") +    # Point aesthetics
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "#444444", size = 2, fill = NA) +
   labs(title= "(A)", x= "Fecundity Mean", y= "He", fill="Marker Type") + 
@@ -446,15 +452,16 @@ Fecplot1msat <- ggplot(data=subset(final_fecunditymean_all, markertype == 'msat'
     legend.position="bottom")+
   scale_fill_manual(values=c("#444444")) +
   scale_shape_manual(values = c(msat=1)) +
-  scale_color_manual(values = c("#444444"), guide="none")
+  scale_color_manual(values = c("#444444"))+
+  guides(colour = guide_legend(override.aes = list())) 
 
-Fecplot1mtDNA <- ggplot(data=subset(final_fecunditymean_all, markertype == 'mtDNA' ), aes(x=logtransform.fecundity, y=He)) +
-  geom_point(aes(shape=markertype, fill=NULL,color="#999999")) +    # Point aesthetics
+Fecplot1mtDNA <- ggplot(data=subset(final_fecunditymean_all, markertype == 'mtDNA' ), aes(x=logtransform.fecundity, y=He, color=Color)) +
+  geom_point(aes(x=logtransform.fecundity, y=He), size=5, shape=9, color="#999999") +    # Point aesthetics
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "black", size = 2.5, fill = NA) + 
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "#999999", size = 2, fill = NA) +
-  labs(title= "(B)", x= "Fecundity Mean", y= "He", fill="Marker Type") + 
+  labs(title= "(B)", x= "Fecundity Mean", y= "Haplotype Diversity", fill="Marker Type") + 
   theme_bw() + 
   theme(                                 #specifying characteristics of the plot 
     plot.title = element_text(size=28, face="bold"),
@@ -464,11 +471,12 @@ Fecplot1mtDNA <- ggplot(data=subset(final_fecunditymean_all, markertype == 'mtDN
     legend.position="bottom")+
   scale_fill_manual(values=c("#999999")) +
   scale_shape_manual(values = c(mtDNA=9)) +
-  scale_color_manual(values = c("#999999"), guide="none")
+  scale_color_manual(values = c("#999999")) +
+  guides(colour = guide_legend(override.aes = list())) 
 
 #mtDNA: Pi
 Fecplot2 <- ggplot(mtdna_fecundity_Pi_no.na, aes(x=logtransform.fecundity, y=Pi, fill=factor(logtransform.fecundity))) + #max length & He scatter plot
-  geom_point(aes(fill=NULL), shape=9, color="#999999") +    # Point aesthetics
+  geom_point(aes(fill=NULL), shape=9, color="#999999", size=5) +    # Point aesthetics
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "black", size = 2.5, fill = NA) + 
   geom_smooth(method=lm,   # Add linear regression line
