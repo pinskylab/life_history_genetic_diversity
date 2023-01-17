@@ -833,7 +833,6 @@ TukeyHSD(specific.repro_modeanova.all) #perform TukeyHSD to see full table of re
 
 #####################################################################################
 ############### Map of where data was collected ############### 
-
 ##### msat #####
 
 latlon_msat <-msat_data[!duplicated(msat_data[, c('lat','lon')]), c('lat','lon')] #grab unique lat/lon combos

@@ -357,7 +357,7 @@ Maxplot1msat <- ggplot(data=subset(final_maxlength_all, markertype == 'msat' ), 
               se=TRUE, color = "black", size = 2.5, fill = NA) +
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "#444444", size = 2, fill = NA) +
-  labs(title= "(A)", x= "Max Length (log(cm))", y= "He", fill="Marker Type") + 
+  labs(title= "(A)", x= "Maximum Length (cm)", y= "He", fill="Marker Type") + 
   theme_bw() + 
   theme(                                 #specifying characteristics of the plot 
     plot.title = element_text(size=28, face="bold"),
@@ -372,12 +372,12 @@ Maxplot1msat <- ggplot(data=subset(final_maxlength_all, markertype == 'msat' ), 
  
 
 Maxplot1mtDNA <- ggplot(data=subset(final_maxlength_all, markertype == 'mtDNA' ), aes(x=logtransform.maxlength, y=He, color=Color)) +
-  geom_point(aes(x=logtransform.maxlength, y=He), size =5, color="#999999", shape=9) +    # Point aesthetics
+  geom_point(aes(x=logtransform.maxlength, y=He), size =5, color="#999999", shape=1) +    # Point aesthetics
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "black", size = 2.5, fill = NA) + 
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "#999999", size = 2, fill = NA) +
-  labs(title= "(B)", x= "Max Length (log(cm))", y= "Haplotype Diversity", fill="Marker Type") + 
+  labs(title= "(B)", x= "Maximum Length (cm)", y= "Haplotype Diversity", fill="Marker Type") + 
   theme_bw() + 
   theme(                                 #specifying characteristics of the plot 
     plot.title = element_text(size=28, face="bold"),
@@ -393,13 +393,13 @@ Maxplot1mtDNA <- ggplot(data=subset(final_maxlength_all, markertype == 'mtDNA' )
 
 ### mtDNA: Pi
 Maxplot2 <- ggplot(mtdna_maxlength_Pi_no.na, aes(x=logtransform.maxlength, y=Pi, fill=factor(logtransform.maxlength))) + #max length & He scatter plot
-  geom_point(aes(fill=NULL), shape=9, color="#999999", size =5) +    # Point aesthetics
+  geom_point(aes(fill=NULL), shape=1, color="#999999", size = 5) +    # Point aesthetics
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "black", size = 2.5, fill = NA) + 
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "#999999", size = 2, fill = NA) +
   ggtitle("(C)") + #add plot title
-  xlab("Maxlength (log(cm))") + ylab("Pi") + #add axis labels 
+  xlab("Maximum Length (cm)") + ylab("Pi") + #add axis labels 
   theme_bw()+
   theme(                                 #specifying characteristics of the plot 
     plot.title = element_text(size=28, face="bold"),
@@ -442,7 +442,7 @@ Fecplot1msat <- ggplot(data=subset(final_fecunditymean_all, markertype == 'msat'
   geom_point(aes(x=logtransform.fecundity, y=He), size=5, shape=1, color="#444444") +    # Point aesthetics
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "#444444", size = 2, fill = NA) +
-  labs(title= "(A)", x= "Fecundity Mean", y= "He", fill="Marker Type") + 
+  labs(title= "(A)", x= "Fecundity", y= "He", fill="Marker Type") + 
   theme_bw() + 
   theme(                                 #specifying characteristics of the plot 
     plot.title = element_text(size=28, face="bold"),
@@ -456,12 +456,12 @@ Fecplot1msat <- ggplot(data=subset(final_fecunditymean_all, markertype == 'msat'
   guides(colour = guide_legend(override.aes = list())) 
 
 Fecplot1mtDNA <- ggplot(data=subset(final_fecunditymean_all, markertype == 'mtDNA' ), aes(x=logtransform.fecundity, y=He, color=Color)) +
-  geom_point(aes(x=logtransform.fecundity, y=He), size=5, shape=9, color="#999999") +    # Point aesthetics
+  geom_point(aes(x=logtransform.fecundity, y=He), size=5, shape=1, color="#999999") +    # Point aesthetics
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "black", size = 2.5, fill = NA) + 
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "#999999", size = 2, fill = NA) +
-  labs(title= "(B)", x= "Fecundity Mean", y= "Haplotype Diversity", fill="Marker Type") + 
+  labs(title= "(B)", x= "Fecundity", y= "Haplotype Diversity", fill="Marker Type") + 
   theme_bw() + 
   theme(                                 #specifying characteristics of the plot 
     plot.title = element_text(size=28, face="bold"),
@@ -476,13 +476,13 @@ Fecplot1mtDNA <- ggplot(data=subset(final_fecunditymean_all, markertype == 'mtDN
 
 #mtDNA: Pi
 Fecplot2 <- ggplot(mtdna_fecundity_Pi_no.na, aes(x=logtransform.fecundity, y=Pi, fill=factor(logtransform.fecundity))) + #max length & He scatter plot
-  geom_point(aes(fill=NULL), shape=9, color="#999999", size=5) +    # Point aesthetics
+  geom_point(aes(fill=NULL), shape=1, color="#999999", size=5) +    # Point aesthetics
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "black", size = 2.5, fill = NA) + 
   geom_smooth(method=lm,   # Add linear regression line
               se=TRUE, color = "#999999", size = 2, fill = NA) +
   ggtitle("(C)") + #add plot title
-  xlab("Fecundity Mean") + ylab("Pi") + #add axis labels 
+  xlab("Fecundity") + ylab("Pi") + #add axis labels 
   theme_bw()+
   theme(                                 #specifying characteristics of the plot 
     plot.title = element_text(size=28, face="bold"),
