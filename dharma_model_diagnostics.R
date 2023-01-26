@@ -162,7 +162,7 @@ Pi_full_noredlist_model <- lmer(formula = logtransform.Pi ~ logtransform.maxleng
 
 
 #pull p-values
-coefs <- data.frame(coef(summary(Pi_top_noredlist_model)))
+coefs <- data.frame(coef(summary(Pi_full_model)))
 coefs$p.z <- 2 * (1 - pnorm(abs(coefs$t.value)))
 coefs
 
