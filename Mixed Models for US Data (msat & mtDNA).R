@@ -217,7 +217,7 @@ mtdna_pi_plot_both <- ggplot() +
 mtdna_pi_fecundity_plot_annotated_both <- mtdna_pi_plot_both + theme_bw() + 
   theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
         axis.ticks = element_line(color = "black", linewidth = 1), 
-        axis.text = element_text(size = 10, color = "black"), 
+        axis.text = element_text(size = 20, color = "black"), 
         axis.line = element_line(color = "black"),
         legend.position = "top", legend.box = "vertical", 
         legend.text = element_text(size = 10), 
@@ -250,7 +250,7 @@ mtDNA_He_plot_both <- ggplot() +
 mtDNA_He_fecundity_plot_annotated_both <- mtDNA_He_plot_both + theme_bw() + 
   theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
         axis.ticks = element_line(color = "black", linewidth = 1), 
-        axis.text = element_text(size = 10, color = "black"), 
+        axis.text = element_text(size = 20, color = "black"), 
         axis.line = element_line(color = "black"),
         legend.position = "top", legend.box = "vertical", 
         legend.text = element_text(size = 10), 
@@ -283,7 +283,7 @@ msat_He_plot_both <- ggplot() +
 msat_He_fecundity_plot_annotated_both <- msat_He_plot_both + theme_bw() + 
   theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
         axis.ticks = element_line(color = "black", linewidth = 1), 
-        axis.text = element_text(size = 10, color = "black"), 
+        axis.text = element_text(size = 20, color = "black"), 
         axis.line = element_line(color = "black"),
         legend.position = "top", legend.box = "vertical", 
         legend.text = element_text(size = 10), 
@@ -293,8 +293,6 @@ msat_He_fecundity_plot_annotated_both <- msat_He_plot_both + theme_bw() +
         axis.title.y = element_text(face="bold", size=25, margin = margin(r = 20)),
         text = element_text(size = 28))
 msat_He_fecundity_plot_annotated_both
-
-
 
 ######### Mixed model figures: Max Length #######
 
@@ -325,7 +323,7 @@ mtdna_pi_plot_both_length <- ggplot() +
 mtdna_pi_length_plot_annotated_both <- mtdna_pi_plot_both_length + theme_bw() + 
   theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
         axis.ticks = element_line(color = "black", linewidth = 1), 
-        axis.text = element_text(size = 10, color = "black"), 
+        axis.text = element_text(size = 20, color = "black"), 
         axis.line = element_line(color = "black"),
         legend.position = "top", legend.box = "vertical", 
         legend.text = element_text(size = 10), 
@@ -358,7 +356,7 @@ mtDNA_He_plot_both_length <- ggplot() +
 mtDNA_He_length_plot_annotated_both <- mtDNA_He_plot_both_length + theme_bw() + 
   theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
         axis.ticks = element_line(color = "black", linewidth = 1), 
-        axis.text = element_text(size = 10, color = "black"), 
+        axis.text = element_text(size = 20, color = "black"), 
         axis.line = element_line(color = "black"),
         legend.position = "top", legend.box = "vertical", 
         legend.text = element_text(size = 10), 
@@ -391,7 +389,7 @@ msat_He_plot_both_length <- ggplot() +
 msat_He_length_plot_annotated_both <- msat_He_plot_both_length + theme_bw() + 
   theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
         axis.ticks = element_line(color = "black", linewidth = 1), 
-        axis.text = element_text(size = 10, color = "black"), 
+        axis.text = element_text(size = 20, color = "black"), 
         axis.line = element_line(color = "black"),
         legend.position = "top", legend.box = "vertical", 
         legend.text = element_text(size = 10), 
