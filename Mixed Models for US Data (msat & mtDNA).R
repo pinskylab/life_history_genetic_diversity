@@ -19,6 +19,8 @@ library(MuMIn)
 library(lmerTest)
 library(glmmTMB)
 library(tidyr)
+library(effects)
+library(sjPlot)
 
 #read in data
 mtdna_data <- read.csv("new_mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
@@ -106,7 +108,7 @@ Pi_full_model <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + log
                         fertilizations.or.f + reproductionmodes.or.f + bp_scale + 
                         (1|spp) + (1|Source), na.action = "na.fail", 
                       data = mtdna_pi, REML = FALSE,
-                      control = lmerControl(optimizer = "bobyqa")) #have Marial switch to bobyqa to get away from convergence issues AND switch to bp_scale AND make sure REML = FALSE
+                      control = lmerControl(optimizer = "bobyqa")) #switch to bobyqa to get away from convergence issues AND switch to bp_scale AND make sure REML = FALSE
 
 mtdna_pi_dredge <- dredge(Pi_full_model) #dredge model
 View(mtdna_pi_dredge) #see table
@@ -183,4 +185,142 @@ msatRVIfec <- sum(msat_dataHe[complete.cases(msat_dataHe$logtransform.fecundity_
 msatRVIfert <- sum(msat_dataHe[complete.cases(msat_dataHe$fertilizations.or.f2), "weight"])
 msatRVIrepro <- sum(msat_dataHe[complete.cases(msat_dataHe$reproductionmodes.or.f2), "weight"])
 msatRVIcross <- sum(msat_dataHe[complete.cases(msat_dataHe$CrossSpp), "weight"])
+
+################################################### Graphing results ################################################### 
+
+######### Mixed model figures #######
+
+#### Fecundity & Pi #### 
+
+Pi_fecund <- plot_model(Pi_full_model, type = "pred", terms = "logtransform.fecundity_mean.1")
+
+#pull out marginal effects dataframe
+Pi_fecund_data <- as.data.frame(Pi_fecund$data)
+
+#unscale fecundity
+fecundity_scale <- scale(mtdna_pi$logtransform.fecundity_mean.1) #bc had to convert to numeric to run model/calculate marginal effects
+Pi_fecund_data$fecundity <- (Pi_fecund_data$x * attr(fecundity_scale, "scaled:scale")) + 
+  attr(fecundity_scale, "scaled:center")
+
+#unlog pi
+Pi_fecund_data$unlog_pi <- 10^(Pi_fecund_data$predicted)
+Pi_fecund_data$unlog_conf.low <- 10^(Pi_fecund_data$conf.low)
+Pi_fecund_data$unlog_conf.high <- 10^(Pi_fecund_data$conf.high)
+Pi_fecund_data$unlog_fec <- 10^(Pi_fecund_data$fecundity)
+
+### Plot fecundity ###
+#for legend
+colors <- c("10-degree binned means" = "#3F6DAA", "Regression" = "black")
+
+#plot
+mtdna_pi_plot_both <- ggplot() + 
+  geom_line(data = Pi_fecund_data, 
+            aes(x = unlog_fec, y = unlog_pi, color = "Regression"), linewidth = 3) + 
+  geom_ribbon(data = Pi_fecund_data, 
+              aes(x = unlog_fec, ymin = unlog_conf.low, ymax = unlog_conf.high, color = "Regression"), alpha = 0.1) + 
+  xlab("Fecundity") + ylab("mtDNA pi") + labs(color = "Legend") + 
+  scale_color_manual(values = colors)
+
+mtdna_pi_fecundity_plot_annotated_both <- mtdna_pi_plot_both + theme_bw() + coord_flip() + 
+  theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
+        axis.ticks = element_line(color = "black", size = 1), 
+        axis.text = element_text(size = 10, color = "black"), 
+        axis.line = element_line(linewidth = 2, color = "black"),
+        legend.position = "top", legend.box = "vertical", 
+        legend.text = element_text(size = 10), 
+        legend.key.size = unit(1, "cm"),
+        legend.title = element_blank())
+mtdna_pi_fecundity_plot_annotated_both
+
+#### Fecundity & mtDNA He #### 
+
+mtDNAHe_fecund <- plot_model(binomial_He_full_model_mtDNA, type = "pred", terms = "logtransform.fecundity_mean.1 [all]")
+
+#pull out marginal effects dataframe
+mtDNAHe_fecund_data <- as.data.frame(mtDNAHe_fecund$data)
+
+#unscale fecundity
+fecundity_scale <- scale(mtdna_data$logtransform.fecundity_mean.1) #bc had to convert to numeric to run model/calculate marginal effects
+mtDNAHe_fecund_data$fecundity <- (mtDNAHe_fecund_data$x * attr(fecundity_scale, "scaled:scale")) + 
+  attr(fecundity_scale, "scaled:center")
+
+#unscale He
+He_scale <- scale(mtdna_data$He) #bc had to convert to numeric to run model/calculate marginal effects
+mtDNAHe_fecund_data$He <- (mtDNAHe_fecund_data$x * attr(He_scale, "scaled:scale")) + 
+  attr(fecundity_scale, "scaled:center")
+
+#unlog pi
+mtDNAHe_fecund_data$unlog_conf.low <- 10^(mtDNAHe_fecund_data$conf.low)
+mtDNAHe_fecund_data$unlog_conf.high <- 10^(mtDNAHe_fecund_data$conf.high)
+mtDNAHe_fecund_data$unlog_fec <- 10^(mtDNAHe_fecund_data$fecundity)
+
+### Plot abslat ###
+#for legend
+colors <- c("10-degree binned means" = "#3F6DAA", "Regression" = "black")
+
+#plot
+mtDNA_He_plot_both <- ggplot() + 
+  geom_line(data = mtDNAHe_fecund_data, 
+            aes(x = unlog_fec, y = He, color = "Regression"), linewidth = 3) + 
+  geom_ribbon(data = mtDNAHe_fecund_data, 
+              aes(x = unlog_fec, ymin = unlog_conf.low, ymax = unlog_conf.high, color = "Regression"), alpha = 0.1) + 
+  xlab("Fecundity") + ylab("mtDNA He") + labs(color = "Legend") + 
+  scale_color_manual(values = colors)
+
+mtDNA_He_fecundity_plot_annotated_both <- mtDNA_He_plot_both + theme_bw() + coord_flip() + 
+  theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
+        axis.ticks = element_line(color = "black", size = 1), 
+        axis.text = element_text(size = 10, color = "black"), 
+        axis.line = element_line(linewidth = 2, color = "black"),
+        legend.position = "top", legend.box = "vertical", 
+        legend.text = element_text(size = 10), 
+        legend.key.size = unit(1, "cm"),
+        legend.title = element_blank())
+mtDNA_He_fecundity_plot_annotated_both
+
+#### Fecundity & msat He #### 
+
+msatHe_fecund <- plot_model(binomial_He_full_model_msat, type = "pred", terms = "logtransform.fecundity_mean.2 [all]")
+
+#pull out marginal effects dataframe
+msatHe_fecund_data <- as.data.frame(msatHe_fecund$data)
+
+#unscale fecundity
+fecundity_scale <- scale(msat_data$logtransform.fecundity_mean.2) #bc had to convert to numeric to run model/calculate marginal effects
+msatHe_fecund_data$fecundity <- (msatHe_fecund_data$x * attr(fecundity_scale, "scaled:scale")) + 
+  attr(fecundity_scale, "scaled:center")
+
+#unscale He
+He_scale <- scale(msat_data$He) #bc had to convert to numeric to run model/calculate marginal effects
+msatHe_fecund_data$He <- (msatHe_fecund_data$x * attr(He_scale, "scaled:scale")) + 
+  attr(fecundity_scale, "scaled:center")
+
+#unlog pi
+msatHe_fecund_data$unlog_conf.low <- 10^(msatHe_fecund_data$conf.low)
+msatHe_fecund_data$unlog_conf.high <- 10^(msatHe_fecund_data$conf.high)
+msatHe_fecund_data$unlog_fec <- 10^(msatHe_fecund_data$fecundity)
+
+### Plot abslat ###
+#for legend
+colors <- c("10-degree binned means" = "#3F6DAA", "Regression" = "black")
+
+#plot
+msat_He_plot_both <- ggplot() + 
+  geom_line(data = msatHe_fecund_data, 
+            aes(x = unlog_fec, y = He, color = "Regression"), linewidth = 3) + 
+  geom_ribbon(data = msatHe_fecund_data, 
+              aes(x = unlog_fec, ymin = unlog_conf.low, ymax = unlog_conf.high, color = "Regression"), alpha = 0.1) + 
+  xlab("Fecundity") + ylab("msat He") + labs(color = "Legend") + 
+  scale_color_manual(values = colors)
+
+msat_He_fecundity_plot_annotated_both <- msat_He_plot_both + theme_bw() + coord_flip() + 
+  theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
+        axis.ticks = element_line(color = "black", size = 1), 
+        axis.text = element_text(size = 10, color = "black"), 
+        axis.line = element_line(linewidth = 2, color = "black"),
+        legend.position = "top", legend.box = "vertical", 
+        legend.text = element_text(size = 10), 
+        legend.key.size = unit(1, "cm"),
+        legend.title = element_blank())
+msat_He_fecundity_plot_annotated_both
 
