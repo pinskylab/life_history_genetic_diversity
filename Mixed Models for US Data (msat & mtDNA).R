@@ -188,7 +188,7 @@ msatRVIcross <- sum(msat_dataHe[complete.cases(msat_dataHe$CrossSpp), "weight"])
 
 ################################################### Graphing results ################################################### 
 
-######### Mixed model figures #######
+######### Mixed model figures: Fecundity #######
 
 #### Fecundity & Pi #### 
 
@@ -206,27 +206,26 @@ Pi_fecund_data$unlog_conf.low <- 10^(Pi_fecund_data$conf.low)
 Pi_fecund_data$unlog_conf.high <- 10^(Pi_fecund_data$conf.high)
 
 ### Plot fecundity ###
-#for legend
-colors <- c("10-degree binned means" = "#3F6DAA", "Regression" = "black")
 
-#plot
 mtdna_pi_plot_both <- ggplot() + 
   geom_line(data = Pi_fecund_data, 
-            aes(x = unlog_fecund, y = unlog_pi, color = "Regression"), linewidth = 3) + 
+            aes(x = unlog_fecund, y = unlog_pi), linewidth = 3) + 
   geom_ribbon(data = Pi_fecund_data, 
-              aes(x = unlog_fecund, ymin = unlog_conf.low, ymax = unlog_conf.high, color = "Regression"), alpha = 0.1) + 
-  xlab("Fecundity") + ylab("mtDNA pi") + labs(color = "Legend") + 
-  scale_color_manual(values = colors)
+              aes(x = unlog_fecund, ymin = unlog_conf.low, ymax = unlog_conf.high), alpha = 0.1) + 
+  xlab("Fecundity") + ylab("mtDNA pi")
 
 mtdna_pi_fecundity_plot_annotated_both <- mtdna_pi_plot_both + theme_bw() + 
   theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
         axis.ticks = element_line(color = "black", linewidth = 1), 
         axis.text = element_text(size = 10, color = "black"), 
-        axis.line = element_line(linewidth = 2, color = "black"),
+        axis.line = element_line(color = "black"),
         legend.position = "top", legend.box = "vertical", 
         legend.text = element_text(size = 10), 
         legend.key.size = unit(1, "cm"),
-        legend.title = element_blank())
+        legend.title = element_blank(),
+        axis.title.x = element_text(face="bold", size=25, margin = margin(t = 20)),
+        axis.title.y = element_text(face="bold", size=25, margin = margin(r = 20)),
+        text = element_text(size = 28))
 mtdna_pi_fecundity_plot_annotated_both
 
 #### Fecundity & mtDNA He #### 
@@ -240,27 +239,26 @@ mtDNAHe_fecund_data <- as.data.frame(mtDNAHe_fecund$data)
 mtDNAHe_fecund_data$unlog_fecund <- 10^(mtDNAHe_fecund_data$x)
 
 ### Plot fecundity ###
-#for legend
-colors <- c("10-degree binned means" = "#3F6DAA", "Regression" = "black")
 
-#plot
 mtDNA_He_plot_both <- ggplot() + 
   geom_line(data = mtDNAHe_fecund_data, 
-            aes(x = unlog_fecund, y = predicted, color = "Regression"), linewidth = 3) + 
+            aes(x = unlog_fecund, y = predicted), linewidth = 3) + 
   geom_ribbon(data = mtDNAHe_fecund_data, 
-              aes(x = unlog_fecund, ymin = conf.low, ymax = conf.high, color = "Regression"), alpha = 0.1) + 
-  xlab("Fecundity") + ylab("mtDNA He") + labs(color = "Legend") + 
-  scale_color_manual(values = colors)
+              aes(x = unlog_fecund, ymin = conf.low, ymax = conf.high), alpha = 0.1) + 
+  xlab("Fecundity") + ylab("mtDNA He")
 
 mtDNA_He_fecundity_plot_annotated_both <- mtDNA_He_plot_both + theme_bw() + 
   theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
         axis.ticks = element_line(color = "black", linewidth = 1), 
         axis.text = element_text(size = 10, color = "black"), 
-        axis.line = element_line(linewidth = 2, color = "black"),
+        axis.line = element_line(color = "black"),
         legend.position = "top", legend.box = "vertical", 
         legend.text = element_text(size = 10), 
         legend.key.size = unit(1, "cm"),
-        legend.title = element_blank())
+        legend.title = element_blank(),
+        axis.title.x = element_text(face="bold", size=25, margin = margin(t = 20)),
+        axis.title.y = element_text(face="bold", size=25, margin = margin(r = 20)),
+        text = element_text(size = 28))
 mtDNA_He_fecundity_plot_annotated_both
 
 #### Fecundity & msat He #### 
@@ -274,17 +272,13 @@ msatHe_fecund_data <- as.data.frame(msatHe_fecund$data)
 msatHe_fecund_data$unlog_fecund <- 10^(msatHe_fecund_data$x)
 
 ### Plot fecundity ###
-#for legend
-colors <- c("10-degree binned means" = "#3F6DAA", "Regression" = "black")
 
-#plot
 msat_He_plot_both <- ggplot() + 
   geom_line(data = msatHe_fecund_data, 
-            aes(x = unlog_fecund, y = predicted, color = "Regression"), linewidth = 3) + 
+            aes(x = unlog_fecund, y = predicted), linewidth = 3) + 
   geom_ribbon(data = msatHe_fecund_data, 
-              aes(x = unlog_fecund, ymin = conf.low, ymax = conf.high, color = "Regression"), alpha = 0.1) + 
-  xlab("Fecundity") + ylab("msat He") + labs(color = "Legend") + 
-  scale_color_manual(values = colors)
+              aes(x = unlog_fecund, ymin = conf.low, ymax = conf.high), alpha = 0.1) + 
+  xlab("Fecundity") + ylab("msat He")
 
 msat_He_fecundity_plot_annotated_both <- msat_He_plot_both + theme_bw() + 
   theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
@@ -294,6 +288,116 @@ msat_He_fecundity_plot_annotated_both <- msat_He_plot_both + theme_bw() +
         legend.position = "top", legend.box = "vertical", 
         legend.text = element_text(size = 10), 
         legend.key.size = unit(1, "cm"),
-        legend.title = element_blank())
+        legend.title = element_blank(),
+        axis.title.x = element_text(face="bold", size=25, margin = margin(t = 20)),
+        axis.title.y = element_text(face="bold", size=25, margin = margin(r = 20)),
+        text = element_text(size = 28))
 msat_He_fecundity_plot_annotated_both
 
+
+
+######### Mixed model figures: Max Length #######
+
+#### Length & Pi #### 
+
+Pi_length <- plot_model(Pi_full_model, type = "pred", terms = "logtransform.maxlength.1")
+
+#pull out marginal effects dataframe
+Pi_length_data <- as.data.frame(Pi_length$data)
+
+#unlog length
+Pi_length_data$unlog_length <- 10^(Pi_length_data$x)
+
+#unlog pi
+Pi_length_data$unlog_pi <- 10^(Pi_length_data$predicted)
+Pi_length_data$unlog_conf.low <- 10^(Pi_length_data$conf.low)
+Pi_length_data$unlog_conf.high <- 10^(Pi_length_data$conf.high)
+
+### Plot length ###
+
+mtdna_pi_plot_both_length <- ggplot() + 
+  geom_line(data = Pi_length_data, 
+            aes(x = unlog_length, y = unlog_pi), linewidth = 3) + 
+  geom_ribbon(data = Pi_length_data, 
+              aes(x = unlog_length, ymin = unlog_conf.low, ymax = unlog_conf.high), alpha = 0.1) + 
+  xlab("Maximum Length") + ylab("mtDNA pi")
+
+mtdna_pi_length_plot_annotated_both <- mtdna_pi_plot_both_length + theme_bw() + 
+  theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
+        axis.ticks = element_line(color = "black", linewidth = 1), 
+        axis.text = element_text(size = 10, color = "black"), 
+        axis.line = element_line(color = "black"),
+        legend.position = "top", legend.box = "vertical", 
+        legend.text = element_text(size = 10), 
+        legend.key.size = unit(1, "cm"),
+        legend.title = element_blank(),
+        axis.title.x = element_text(face="bold", size=25, margin = margin(t = 20)),
+        axis.title.y = element_text(face="bold", size=25, margin = margin(r = 20)),
+        text = element_text(size = 28))
+mtdna_pi_length_plot_annotated_both
+
+#### Length & mtDNA He #### 
+
+mtDNAHe_length <- plot_model(binomial_He_full_model_mtDNA, type = "pred", terms = "logtransform.maxlength.1 [all]")
+
+#pull out marginal effects dataframe
+mtDNAHe_length_data <- as.data.frame(mtDNAHe_length$data)
+
+#unlog length
+mtDNAHe_length_data$unlog_length <- 10^(mtDNAHe_length_data$x)
+
+### Plot length ###
+
+mtDNA_He_plot_both_length <- ggplot() + 
+  geom_line(data = mtDNAHe_length_data, 
+            aes(x = unlog_length, y = predicted), linewidth = 3) + 
+  geom_ribbon(data = mtDNAHe_length_data, 
+              aes(x = unlog_length, ymin = conf.low, ymax = conf.high), alpha = 0.1) + 
+  xlab("Maximum Length") + ylab("mtDNA He")
+
+mtDNA_He_length_plot_annotated_both <- mtDNA_He_plot_both_length + theme_bw() + 
+  theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
+        axis.ticks = element_line(color = "black", linewidth = 1), 
+        axis.text = element_text(size = 10, color = "black"), 
+        axis.line = element_line(color = "black"),
+        legend.position = "top", legend.box = "vertical", 
+        legend.text = element_text(size = 10), 
+        legend.key.size = unit(1, "cm"),
+        legend.title = element_blank(),
+        axis.title.x = element_text(face="bold", size=25, margin = margin(t = 20)),
+        axis.title.y = element_text(face="bold", size=25, margin = margin(r = 20)),
+        text = element_text(size = 28))
+mtDNA_He_length_plot_annotated_both
+
+#### Length & msat He #### 
+
+msatHe_length <- plot_model(binomial_He_full_model_msat, type = "pred", terms = "logtransform.maxlength.2 [all]")
+
+#pull out marginal effects dataframe
+msatHe_length_data <- as.data.frame(msatHe_length$data)
+
+#unlog length
+msatHe_length_data$unlog_length <- 10^(msatHe_length_data$x)
+
+### Plot length ###
+
+msat_He_plot_both_length <- ggplot() + 
+  geom_line(data = msatHe_length_data, 
+            aes(x = unlog_length, y = predicted), linewidth = 3) + 
+  geom_ribbon(data = msatHe_length_data, 
+              aes(x = unlog_length, ymin = conf.low, ymax = conf.high), alpha = 0.1) + 
+  xlab("Maximum Length") + ylab("msat He")
+
+msat_He_length_plot_annotated_both <- msat_He_plot_both_length + theme_bw() + 
+  theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
+        axis.ticks = element_line(color = "black", linewidth = 1), 
+        axis.text = element_text(size = 10, color = "black"), 
+        axis.line = element_line(linewidth = 2, color = "black"),
+        legend.position = "top", legend.box = "vertical", 
+        legend.text = element_text(size = 10), 
+        legend.key.size = unit(1, "cm"),
+        legend.title = element_blank(),
+        axis.title.x = element_text(face="bold", size=25, margin = margin(t = 20)),
+        axis.title.y = element_text(face="bold", size=25, margin = margin(r = 20)),
+        text = element_text(size = 28))
+msat_He_length_plot_annotated_both
