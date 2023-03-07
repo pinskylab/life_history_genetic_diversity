@@ -53,12 +53,31 @@ unique(mtDNA_He$Source) #34 sources
 #Number of spps
 unique(mtDNA_He$spp) #35 spps
 
-#Range of fecundity
+###Fecundity
+#Range
 mtDNA_He[mtDNA_He == "NaN"] <- NA
 range_fec_mtdnaHe <- max(mtDNA_He$fecundity_mean, na.rm =TRUE) - min(mtDNA_He$fecundity_mean, na.rm =TRUE) #5999999 (max = 6e+06, min = 1)
 
-#Range of max length
+#Mode
+tail(names(sort(table(mtDNA_He$fecundity_mean))), 1) #179
+
+#Mean 
+mean(mtDNA_He$fecundity_mean, na.rm =TRUE) #394261.5
+
+###Max length (cm)
+#Range
 range_maxlength_mtdnaHe <- max(mtDNA_He$maxlength, na.rm =TRUE) - min(mtDNA_He$maxlength, na.rm =TRUE) #476.3 (max = 430, min = 5.7)
+
+#Mode
+tail(names(sort(table(mtDNA_He$maxlength))), 1) #91
+
+#Mean
+mean(mtDNA_He$maxlength) #94.09924
+
+#Get # of genuses
+mtDNA_He_genus <- str_split_fixed(mtDNA_He$spp, " ", 2)
+mtDNA_He_genus <- data.frame(mtDNA_He_genus); colnames(mtDNA_He_genus) <- c("Genus", "Species")
+unique(mtDNA_He_genus$Genus) #29 genuses
 
 ############# MTDNA JUST LOOKING @ PI #############
 
@@ -76,12 +95,31 @@ unique(mtdna_data$Source) #40 sources
 #Number of spps
 unique(mtdna_data$spp) #40 spps
 
-#Range of fecundity
+###Fecundity
+#Range
 mtdna_data[mtdna_data == "NaN"] <- NA
 range_fec_mtdnaPi <- max(mtdna_data$fecundity_mean, na.rm =TRUE) - min(mtdna_data$fecundity_mean, na.rm =TRUE) #5999999(max = 6e+06, min = 1)
 
-#Range of max length
+#Mode
+tail(names(sort(table(mtdna_data$fecundity_mean))), 1) #179
+
+#Mean 
+mean(mtdna_data$fecundity_mean, na.rm =TRUE) #394261.5
+
+###Max length (cm)
+#Range
 range_maxlength_mtdnaPi <- max(mtdna_data$maxlength, na.rm =TRUE) - min(mtdna_data$maxlength, na.rm =TRUE) #445 (max = 455, min = 10)
+
+#Mode
+tail(names(sort(table(mtdna_data$maxlength))), 1) #91
+
+#Mean 
+mean(mtdna_data$maxlength) #94.09924
+
+#Get # of genuses
+mtDNA_Pi_genus <- str_split_fixed(mtdna_data$spp, " ", 2)
+mtDNA_Pi_genus <- data.frame(mtDNA_Pi_genus); colnames(mtDNA_Pi_genus) <- c("Genus", "Species")
+unique(mtDNA_Pi_genus$Genus) #32 genuses
 
 ############# MSAT #############
 
@@ -102,12 +140,31 @@ unique(msat_data$spp) #40 spps
 #Number of crossspp
 table(msat_data$CrossSpp) #0 = 1593 | 0.25 = 80 | 0.6 = 96 | 1 = 1376
 
-#Range of fecundity
+###Fecundity
+#Range
 msat_data[msat_data == "NaN"] <- NA
 range_fec_msat <- max(msat_data$fecundity_mean, na.rm =TRUE) - min(msat_data$fecundity_mean, na.rm =TRUE) #4655806 (max = 4655806, min = 1)
 
-#Range of max length
+#Mode
+tail(names(sort(table(msat_data$fecundity_mean))), 1) #4655806.5
+
+#Mean 
+mean(msat_data$fecundity_mean, na.rm =TRUE) #1385535
+
+###Max length (cm)
+#Range
 range_maxlength_msat <- max(msat_data$maxlength, na.rm =TRUE) - min(msat_data$maxlength, na.rm =TRUE) #476.3 (max = 482, min = 5.7)
+
+#Mode
+tail(names(sort(table(msat_data$maxlength))), 1) #100
+
+#Mean 
+mean(msat_data$maxlength) #94.09924
+
+#Get # of genuses
+msat_genus <- str_split_fixed(msat_data$spp, " ", 2)
+msat_genus <- data.frame(msat_genus); colnames(msat_genus) <- c("Genus", "Species")
+unique(msat_genus$Genus) #43 genuses
 
 ############# MSAT & MTDNA (full mtdna dataset) #############
 
