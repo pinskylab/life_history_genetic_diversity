@@ -212,12 +212,12 @@ mtdna_pi_plot_both <- ggplot() +
             aes(x = unlog_fecund, y = unlog_pi), linewidth = 3) + 
   geom_ribbon(data = Pi_fecund_data, 
               aes(x = unlog_fecund, ymin = unlog_conf.low, ymax = unlog_conf.high), alpha = 0.1) + 
-  xlab("Fecundity") + ylab("mtDNA pi")
+  xlab("Fecundity") + ylab("Pi")
 
 mtdna_pi_fecundity_plot_annotated_both <- mtdna_pi_plot_both + theme_bw() + 
   theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
         axis.ticks = element_line(color = "black", linewidth = 1), 
-        axis.text = element_text(size = 20, color = "black"), 
+        axis.text = element_text(size = 25, color = "black"), 
         axis.line = element_line(color = "black"),
         legend.position = "top", legend.box = "vertical", 
         legend.text = element_text(size = 10), 
@@ -245,12 +245,12 @@ mtDNA_He_plot_both <- ggplot() +
             aes(x = unlog_fecund, y = predicted), linewidth = 3) + 
   geom_ribbon(data = mtDNAHe_fecund_data, 
               aes(x = unlog_fecund, ymin = conf.low, ymax = conf.high), alpha = 0.1) + 
-  xlab("Fecundity") + ylab("mtDNA He")
+  xlab("Fecundity") + ylab("Haplotype Diversity")
 
 mtDNA_He_fecundity_plot_annotated_both <- mtDNA_He_plot_both + theme_bw() + 
   theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
         axis.ticks = element_line(color = "black", linewidth = 1), 
-        axis.text = element_text(size = 20, color = "black"), 
+        axis.text = element_text(size = 25, color = "black"), 
         axis.line = element_line(color = "black"),
         legend.position = "top", legend.box = "vertical", 
         legend.text = element_text(size = 10), 
@@ -278,12 +278,12 @@ msat_He_plot_both <- ggplot() +
             aes(x = unlog_fecund, y = predicted), linewidth = 3) + 
   geom_ribbon(data = msatHe_fecund_data, 
               aes(x = unlog_fecund, ymin = conf.low, ymax = conf.high), alpha = 0.1) + 
-  xlab("Fecundity") + ylab("msat He")
+  xlab("Fecundity") + ylab("He")
 
 msat_He_fecundity_plot_annotated_both <- msat_He_plot_both + theme_bw() + 
   theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
         axis.ticks = element_line(color = "black", linewidth = 1), 
-        axis.text = element_text(size = 20, color = "black"), 
+        axis.text = element_text(size = 25, color = "black"), 
         axis.line = element_line(color = "black"),
         legend.position = "top", legend.box = "vertical", 
         legend.text = element_text(size = 10), 
@@ -318,12 +318,12 @@ mtdna_pi_plot_both_length <- ggplot() +
             aes(x = unlog_length, y = unlog_pi), linewidth = 3) + 
   geom_ribbon(data = Pi_length_data, 
               aes(x = unlog_length, ymin = unlog_conf.low, ymax = unlog_conf.high), alpha = 0.1) + 
-  xlab("Maximum Length") + ylab("mtDNA pi")
+  xlab("Maximum Length") + ylab("Pi")
 
 mtdna_pi_length_plot_annotated_both <- mtdna_pi_plot_both_length + theme_bw() + 
   theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
         axis.ticks = element_line(color = "black", linewidth = 1), 
-        axis.text = element_text(size = 20, color = "black"), 
+        axis.text = element_text(size = 25, color = "black"), 
         axis.line = element_line(color = "black"),
         legend.position = "top", legend.box = "vertical", 
         legend.text = element_text(size = 10), 
@@ -351,12 +351,12 @@ mtDNA_He_plot_both_length <- ggplot() +
             aes(x = unlog_length, y = predicted), linewidth = 3) + 
   geom_ribbon(data = mtDNAHe_length_data, 
               aes(x = unlog_length, ymin = conf.low, ymax = conf.high), alpha = 0.1) + 
-  xlab("Maximum Length") + ylab("mtDNA He")
+  xlab("Maximum Length") + ylab("Haplotype Diversity")
 
 mtDNA_He_length_plot_annotated_both <- mtDNA_He_plot_both_length + theme_bw() + 
   theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
         axis.ticks = element_line(color = "black", linewidth = 1), 
-        axis.text = element_text(size = 20, color = "black"), 
+        axis.text = element_text(size = 25, color = "black"), 
         axis.line = element_line(color = "black"),
         legend.position = "top", legend.box = "vertical", 
         legend.text = element_text(size = 10), 
@@ -384,12 +384,12 @@ msat_He_plot_both_length <- ggplot() +
             aes(x = unlog_length, y = predicted), linewidth = 3) + 
   geom_ribbon(data = msatHe_length_data, 
               aes(x = unlog_length, ymin = conf.low, ymax = conf.high), alpha = 0.1) + 
-  xlab("Maximum Length") + ylab("msat He")
+  xlab("Maximum Length") + ylab("He")
 
 msat_He_length_plot_annotated_both <- msat_He_plot_both_length + theme_bw() + 
   theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
         axis.ticks = element_line(color = "black", linewidth = 1), 
-        axis.text = element_text(size = 20, color = "black"), 
+        axis.text = element_text(size = 25, color = "black"), 
         axis.line = element_line(color = "black"),
         legend.position = "top", legend.box = "vertical", 
         legend.text = element_text(size = 10), 
