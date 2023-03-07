@@ -18,8 +18,9 @@ Collected life history data for microsatellites and mitochondrial DNA. Created p
 ## Directory
 
 1. **Graphs (Final and Old):** contains scatter and box plots for information regarding research project work. 
-Find final graphs [here](https://github.com/pinskylab/marial_diversity/tree/master/Final%20Graphs).
-Find older graphs [here](https://github.com/pinskylab/marial_diversity/tree/master/Old%20Graphs).
+     * Find final graphs [here](https://github.com/pinskylab/marial_diversity/tree/master/Final%20Graphs).
+
+     * Find older graphs [here](https://github.com/pinskylab/marial_diversity/tree/master/Old%20Graphs).
 
 2. **Project:** contains data relevant to research project pertaing to life history traits and expected heterozygosity
 
