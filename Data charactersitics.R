@@ -168,16 +168,23 @@ unique(msat_genus$Genus) #43 genuses
 
 ############# MSAT & MTDNA (full mtdna dataset) #############
 
-#Common studies ?
-msatsource <- unique(msat_data$Source)
-mtdnasource <- unique(mtdna_data$Source)
-reduce(intersect, list(msatsource, mtdnasource))
+#merge
+mtdna_mergeready <- mtdna_data %>% select(spp, Source)
+mtdna_mergeready <- mtdna_mergeready[!duplicated(mtdna_mergeready),]
 
-tst <- c(unique(msat_data$Source), unique(mtdna_data$Source))
-tst <- tst[duplicated(tst)]
-tst[duplicated(tst)]
+msat_mergeready <- msat_data %>% select(spp, Source)
+msat_mergeready <- msat_mergeready[!duplicated(msat_mergeready),]
 
-#Common spps ?
-tst <- c(unique(msat_data$spp), unique(mtdna_data$spp))
-tst <- tst[duplicated(tst)]
-tst[duplicated(tst)]
+#Common spps& Sources
+msat_mergeready <-msat_mergeready %>% rename(Source_msat = Source) #rename rows to make it easier to merge
+mtdna_mergeready <-mtdna_mergeready %>% rename(Source_mtdna = Source) #rename rows to make it easier to merge
+
+compare_both <- merge(msat_mergeready, mtdna_mergeready) #merge
+
+compare_both$Source_mtdna[duplicated(compare_both$Source_mtdna)] <- NA #remove duplicate species to find how many common
+compare_both$Source_msat[duplicated(compare_both$Source_msat)] <- NA #remove duplicate species to find how many common
+
+#15 common spps and 8 common sources
+
+
+
