@@ -23,8 +23,8 @@ library(effects)
 library(sjPlot)
 
 #read in data
-mtdna_data <- read.csv("new_mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
-msat_data <- read.csv("new_msat_full_US_data.csv", stringsAsFactors = FALSE) #read in 
+mtdna_data <- read.csv("Datasets/new_mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
+msat_data <- read.csv("Datasets/new_msat_full_US_data.csv", stringsAsFactors = FALSE) #read in 
 
 #Fixed Variables for mtDNA He & Pi: Body length/maxlength, fecundity mean, fertilization method, reproduction mode, Bp scale
 #Random Variables for mtDNA He & Pi: Species, source

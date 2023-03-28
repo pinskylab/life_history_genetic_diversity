@@ -14,8 +14,8 @@ library(tidyverse)
 library(dplyr)
 
 #read in data
-mtdna_papers_new <- read.csv("mtdna_assembled_new.csv", stringsAsFactors = FALSE) #read in 
-msat_papers_new <- read.csv("msatloci.csv", stringsAsFactors = FALSE) #read in 
+mtdna_papers_new <- read.csv("Datasets/mtdna_assembled_new.csv", stringsAsFactors = FALSE) #read in 
+msat_papers_new <- read.csv("Datasets/msatloci.csv", stringsAsFactors = FALSE) #read in 
 
 ##########################################################################################################################################
 

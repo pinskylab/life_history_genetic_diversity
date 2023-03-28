@@ -14,8 +14,8 @@ library(tidyverse)
 library(dplyr)
 
 #read in data
-msat_spp <- read.csv("msat_papers_USA_new.csv", stringsAsFactors = FALSE) #read in msat species list
-mtdna_spp_new <- read.csv("mtdna_papers_USA_new.csv", stringsAsFactors = FALSE) #read in mtdna species list for new 
+msat_spp <- read.csv("Datasets/msat_papers_USA_new.csv", stringsAsFactors = FALSE) #read in msat species list
+mtdna_spp_new <- read.csv("Datasets/mtdna_papers_USA_new.csv", stringsAsFactors = FALSE) #read in mtdna species list for new 
 
 #NOTE: Branchiostoma spps in mtdna NOT in fishbase -- will need to pull out before querying FB for data
 

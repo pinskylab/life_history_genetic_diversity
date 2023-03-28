@@ -15,8 +15,8 @@ library(dplyr)
 library(patchwork)
 
 #read in data
-mtdna_data_new <- read.csv("new_mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
-msat_data <- read.csv("new_msat_full_US_data.csv", stringsAsFactors = FALSE) #read in
+mtdna_data_new <- read.csv("Datasets/new_mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
+msat_data <- read.csv("Datasets/new_msat_full_US_data.csv", stringsAsFactors = FALSE) #read in
 
 ### Needed Equation ###
 lm_eqn = function(x, y, df){ #set up formula for regression line equation
