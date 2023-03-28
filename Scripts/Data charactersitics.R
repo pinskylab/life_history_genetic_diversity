@@ -1,6 +1,6 @@
 ################################################### Script for dataset ########################################################
 
-#look at dataset and see differnet characteristics (ex: how many hermaphrodites in study)
+#look at dataset and see different characteristics (ex: how many hermaphrodites in study)
 
 ##########################################################################################################################################
 
