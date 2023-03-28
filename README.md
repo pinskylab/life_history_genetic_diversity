@@ -1,10 +1,8 @@
 # marial_diversity
 
-## Lab Paper Collection
+---
 
-Collected microsatellites data from lab papers.
-
-## Research Project
+## Project: Variation in marine genetic diversity across life history traits
 
 Collected life history data for microsatellites and mitochondrial DNA. Created project based on the gathered information
 1. **Specfic life history traits focused on:** body size, fecundity, fertilization, & reproduction mode
@@ -12,18 +10,16 @@ Collected life history data for microsatellites and mitochondrial DNA. Created p
 3. **Results:** 
    * Large body size decreased diversity
    * Large population sizes decreased or increased diversity depending on the different markers
-   * External fertilization increased diversity
+   * External fertilization increased diversity and seemed to be a particularly important factor in the associations with genetic diversity
    * Hermaphroditic species had more diversity
+   * Results can also vary between markers
+
+---
 
 ## Directory
 
-1. **Graphs (Final and Old):** contains scatter and box plots for information regarding research project work. 
-     * Find final graphs [here](https://github.com/pinskylab/marial_diversity/tree/master/Final%20Graphs).
+1. **Datsets:** contains necessary data for analysis
 
-     * Find older graphs [here](https://github.com/pinskylab/marial_diversity/tree/master/Old%20Graphs).
+2. **Final Graphs:** contains box plots (fertilization method & reproduction mode) and mixed model graphs (maximum length & fecundity)
 
-2. **Project:** contains data relevant to research project pertaing to life history traits and expected heterozygosity
-
-3. **Misc. Datsets:** contains information for the different data sets. Find [here](https://github.com/pinskylab/marial_diversity/tree/master/Misc.%20Datasets)
-
-4. **msat.collection:** conntains info on microsatellite collection project. Find [here](https://github.com/pinskylab/marial_diversity/tree/master/msat.collection)
+3. **Scripts:** contains scripts used to run the analyses
