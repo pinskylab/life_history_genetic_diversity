@@ -1,29 +1,26 @@
-# marial_diversity
+# Scripts Directory
 
-## Lab Paper Collection
+## Descriptions of scripts
 
-Collected microsatellites data from lab papers.
+### [Data Characteristics](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/Data%20charactersitics.R)
+Used to look at the datasets and see the different characteristics. For example: looking at number of sources or number of each reproduction category.
 
-## Research Project
+### [Mixed Models for US Data (msat & mtDNA).R](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/Mixed%20Models%20for%20US%20Data%20(msat%20%26%20mtDNA).R)
+Used to analyze and create mixed models for microsatellite and mitchondrial DNA samples. It also includes steps to graph:
+* Maximum length
+* Fecundity
 
-Collected life history data for microsatellites and mitochondrial DNA. Created project based on the gathered information
-1. **Specfic life history traits focused on:** body size, fecundity, fertilization, & reproduction mode
-2. **Objective:** See relationship between the different life history traits and genetic diversity. Draw up conclusions based on findings
-3. **Results:** 
-   * Large body size decreased diversity
-   * Large population sizes decreased or increased diversity depending on the different markers
-   * External fertilization increased diversity
-   * Hermaphroditic species had more diversity
+### [Pull LH traits.R](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/Pull%20LH%20traits.R)
+Used to pull life history traits for both microsatellite and mitchondrial DNA species from Fishbase.
 
-## Directory
+### [Subsetting to US data.R](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/Subsetting%20to%20US%20data.R)
+Used to subset marine species' data from the original microsatellite and mitchondrial DNA to just Continental USA. The range taken for latitude was from 23° to 50° while longitude range was from -128° to -65°.
 
-1. **Graphs (Final and Old):** contains scatter and box plots for information regarding research project work. 
-     * Find final graphs [here](https://github.com/pinskylab/marial_diversity/tree/master/Final%20Graphs).
+### [US Graphs.R](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/Subsetting%20to%20US%20data.R)
+Used to analyze and graph data for microsatellite and mitchondrial DNA US data. Includes steps to graph:
+* Fertilization method
+* Reproduction mode
+* Maps of Continental USA with sample locations plotted  
 
-     * Find older graphs [here](https://github.com/pinskylab/marial_diversity/tree/master/Old%20Graphs).
-
-2. **Project:** contains data relevant to research project pertaing to life history traits and expected heterozygosity
-
-3. **Misc. Datsets:** contains information for the different data sets. Find [here](https://github.com/pinskylab/marial_diversity/tree/master/Misc.%20Datasets)
-
-4. **msat.collection:** conntains info on microsatellite collection project. Find [here](https://github.com/pinskylab/marial_diversity/tree/master/msat.collection)
+---
+## Roadmap
