@@ -1,29 +1,20 @@
 # marial_diversity
 
-## Lab Paper Collection
+## Fecundity graphs
+Contains the mixed model graphs for msat He, mtDNA Hd, and mtDNA pi. These graphs were made using [`Mixed Models Models for US Data (msat & mtDNA).R`](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/Mixed%20Models%20for%20US%20Data%20(msat%20%26%20mtDNA).R) 
 
-Collected microsatellites data from lab papers.
+---
+## Fertilization graphs
+Contains the box plots for msat He, mtDNA Hd, and mtDNA pi. These graphs were made using [`US Graphs.R`](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/US%20Graphs.R) 
 
-## Research Project
+---
+## Maximum length graphs
+Contains the mixed model graphs for msat He, mtDNA Hd, and mtDNA pi. These graphs were made using [`Mixed Models Models for US Data (msat & mtDNA).R`](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/Mixed%20Models%20for%20US%20Data%20(msat%20%26%20mtDNA).R) 
 
-Collected life history data for microsatellites and mitochondrial DNA. Created project based on the gathered information
-1. **Specfic life history traits focused on:** body size, fecundity, fertilization, & reproduction mode
-2. **Objective:** See relationship between the different life history traits and genetic diversity. Draw up conclusions based on findings
-3. **Results:** 
-   * Large body size decreased diversity
-   * Large population sizes decreased or increased diversity depending on the different markers
-   * External fertilization increased diversity
-   * Hermaphroditic species had more diversity
+---
+## Reproduction mode graphs
+Contains the box plots for msat He, mtDNA Hd, and mtDNA pi. These graphs were made using [`US Graphs.R`](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/US%20Graphs.R) 
 
-## Directory
-
-1. **Graphs (Final and Old):** contains scatter and box plots for information regarding research project work. 
-     * Find final graphs [here](https://github.com/pinskylab/marial_diversity/tree/master/Final%20Graphs).
-
-     * Find older graphs [here](https://github.com/pinskylab/marial_diversity/tree/master/Old%20Graphs).
-
-2. **Project:** contains data relevant to research project pertaing to life history traits and expected heterozygosity
-
-3. **Misc. Datsets:** contains information for the different data sets. Find [here](https://github.com/pinskylab/marial_diversity/tree/master/Misc.%20Datasets)
-
-4. **msat.collection:** conntains info on microsatellite collection project. Find [here](https://github.com/pinskylab/marial_diversity/tree/master/msat.collection)
+---
+## US maps
+Contains map of Continental USA and where individuals that were analyzed in the study were located. The range taken for latitude was from 23° to 50° while longitude range was from -128° to -65°. These graphs were made using [`Subsetting to US data.R`](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/Subsetting%20to%20US%20data.R) 
