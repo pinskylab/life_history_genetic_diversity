@@ -18,8 +18,8 @@ Collected life history data for microsatellites and mitochondrial DNA. Created p
 
 ## Directory
 
-1. **Datsets:** contains necessary data for analysis
+1. **[Datsets](https://github.com/pinskylab/marial_diversity/tree/master/Datasets):** contains necessary data for analysis
 
-2. **Final Graphs:** contains box plots (fertilization method & reproduction mode) and mixed model graphs (maximum length & fecundity)
+2. **[Graphs](https://github.com/pinskylab/marial_diversity/tree/master/Graphs):** contains box plots (fertilization method & reproduction mode) and mixed model graphs (maximum length & fecundity)
 
-3. **Scripts:** contains scripts used to run the analyses
+3. **[Scripts](https://github.com/pinskylab/marial_diversity/tree/master/Scripts):** contains scripts used to run the analyses
