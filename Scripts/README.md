@@ -24,3 +24,11 @@ Used to analyze and graph data for microsatellite and mitchondrial DNA US data. 
 
 ---
 ## Roadmap
+
+This is the pathway to make the csv or have the necessary information  for each proceeding step.
+
+1. Subsetting to US data
+2. Pull LH traits
+   1) US Graphs
+   2) Mixed Models for US Data (msat & mtDNA)
+   3) Data Charactersitics
