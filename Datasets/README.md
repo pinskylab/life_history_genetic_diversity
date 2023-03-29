@@ -1,29 +1,38 @@
-# marial_diversity
+# Datasets Directory
 
-## Lab Paper Collection
+## 1. Starting CSVs
+These csvs are necessary as the start of the entire pathway. Needed to run [`Subsetting to US.R`](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/Subsetting%20to%20US%20data.R)
 
-Collected microsatellites data from lab papers.
+* [mtdna_assembled_new.csv](https://github.com/pinskylab/marial_diversity/blob/master/Datasets/mtdna_assembled_new.csv)
 
-## Research Project
+* [msatloci.csv](https://github.com/pinskylab/marial_diversity/blob/master/Datasets/msatloci.csv)
 
-Collected life history data for microsatellites and mitochondrial DNA. Created project based on the gathered information
-1. **Specfic life history traits focused on:** body size, fecundity, fertilization, & reproduction mode
-2. **Objective:** See relationship between the different life history traits and genetic diversity. Draw up conclusions based on findings
-3. **Results:** 
-   * Large body size decreased diversity
-   * Large population sizes decreased or increased diversity depending on the different markers
-   * External fertilization increased diversity
-   * Hermaphroditic species had more diversity
+<br />
 
-## Directory
+## 2. Necessary to run [`Pull LH traits.R`](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/Pull%20LH%20traits.R)
 
-1. **Graphs (Final and Old):** contains scatter and box plots for information regarding research project work. 
-     * Find final graphs [here](https://github.com/pinskylab/marial_diversity/tree/master/Final%20Graphs).
+* [msat_papers_USA_new.csv](https://github.com/pinskylab/marial_diversity/blob/master/Datasets/msat_papers_USA_new.csv)
 
-     * Find older graphs [here](https://github.com/pinskylab/marial_diversity/tree/master/Old%20Graphs).
+* [mtdna_papers_USA_new.csv](https://github.com/pinskylab/marial_diversity/blob/master/Datasets/mtdna_papers_USA_new.csv)
 
-2. **Project:** contains data relevant to research project pertaing to life history traits and expected heterozygosity
+<br />
 
-3. **Misc. Datsets:** contains information for the different data sets. Find [here](https://github.com/pinskylab/marial_diversity/tree/master/Misc.%20Datasets)
+## 3. Used for the remaining scripts
 
-4. **msat.collection:** conntains info on microsatellite collection project. Find [here](https://github.com/pinskylab/marial_diversity/tree/master/msat.collection)
+These csvs were from the previous step and are needed to run [`US Graphs`](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/Subsetting%20to%20US%20data.R), [`Mixed Models for US Data (msat & mtDNA)`](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/Mixed%20Models%20for%20US%20Data%20(msat%20%26%20mtDNA).R), & [`Data Characteristics`](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/Data%20charactersitics.R).
+
+* [new_msat_full_US_data.csv](https://github.com/pinskylab/marial_diversity/blob/master/Datasets/new_msat_full_US_data.csv)
+
+* [new_mtdna_full_US_data.csv](https://github.com/pinskylab/marial_diversity/blob/master/Datasets/new_mtdna_full_US_data.csv)
+
+<br />
+
+## Misc. CSVs
+
+* [IUCN_status.csv](https://github.com/pinskylab/marial_diversity/blob/master/Datasets/IUCN_status.csv)
+Contains the IUCN status of all the species used in this study.
+
+
+
+
+
