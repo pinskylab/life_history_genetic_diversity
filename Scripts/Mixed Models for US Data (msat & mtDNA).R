@@ -177,6 +177,8 @@ topAIC.msatHE <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength
                          (1|spp) + (1|Source) + (1|ID), na.action = "na.fail", 
                        family=binomial, data = msat_data,
                        control = glmerControl(optimizer = "bobyqa"))
+msat_dataHe_minimal <- dredge(topAIC.msatHE) #dredge model
+View(topAIC.msatHE)
 summary(topAIC.msatHE) #get SE, p-value, etc.for top AIC model
 
 ##find RVI 
@@ -207,13 +209,15 @@ Pi_fecund_data$unlog_conf.high <- 10^(Pi_fecund_data$conf.high)
 
 ### Plot fecundity ###
 
-mtdna_pi_plot_both <- ggplot() + 
+mtdna_pi_plot_both <- ggplot() +
   geom_line(data = Pi_fecund_data, 
             aes(x = unlog_fecund, y = unlog_pi), linewidth = 3) + 
   geom_ribbon(data = Pi_fecund_data, 
               aes(x = unlog_fecund, ymin = unlog_conf.low, ymax = unlog_conf.high), alpha = 0.1) + 
-  xlab("Fecundity") + ylab("Pi")
-
+  xlab("Fecundity") + ylab("Mitochondrial Pi") +
+  geom_rug(data = mtdna_pi, aes(x = fecundity_mean, y = NULL), inherit.aes = F, 
+           alpha = 0.6, length = unit(20,"pt"))
+  
 mtdna_pi_fecundity_plot_annotated_both <- mtdna_pi_plot_both + theme_bw() + 
   theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
         axis.ticks = element_line(color = "black", linewidth = 1), 
@@ -223,9 +227,10 @@ mtdna_pi_fecundity_plot_annotated_both <- mtdna_pi_plot_both + theme_bw() +
         legend.text = element_text(size = 10), 
         legend.key.size = unit(1, "cm"),
         legend.title = element_blank(),
-        axis.title.x = element_text(face="bold", size=25, margin = margin(t = 20)),
-        axis.title.y = element_text(face="bold", size=25, margin = margin(r = 20)),
-        text = element_text(size = 28))
+        axis.title.x = element_text( size=25, margin = margin(t = 20)),
+        axis.title.y = element_text(size=25, margin = margin(r = 20)),
+        text = element_text(size = 28)) +
+  xlim(c(0, 1.03e7))
 mtdna_pi_fecundity_plot_annotated_both
 
 #### Fecundity & mtDNA He #### 
@@ -245,7 +250,9 @@ mtDNA_He_plot_both <- ggplot() +
             aes(x = unlog_fecund, y = predicted), linewidth = 3) + 
   geom_ribbon(data = mtDNAHe_fecund_data, 
               aes(x = unlog_fecund, ymin = conf.low, ymax = conf.high), alpha = 0.1) + 
-  xlab("Fecundity") + ylab("Haplotype Diversity")
+  xlab("Fecundity") + ylab("Mitochondrial Hd") +
+  geom_rug(data = mtdna_data_He, aes(x = fecundity_mean, y = NULL), inherit.aes = F, 
+           alpha = 0.6, length = unit(20,"pt"))
 
 mtDNA_He_fecundity_plot_annotated_both <- mtDNA_He_plot_both + theme_bw() + 
   theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
@@ -256,9 +263,10 @@ mtDNA_He_fecundity_plot_annotated_both <- mtDNA_He_plot_both + theme_bw() +
         legend.text = element_text(size = 10), 
         legend.key.size = unit(1, "cm"),
         legend.title = element_blank(),
-        axis.title.x = element_text(face="bold", size=25, margin = margin(t = 20)),
-        axis.title.y = element_text(face="bold", size=25, margin = margin(r = 20)),
-        text = element_text(size = 28))
+        axis.title.x = element_text(size=25, margin = margin(t = 20)),
+        axis.title.y = element_text(size=25, margin = margin(r = 20)),
+        text = element_text(size = 28)) +
+  ylim(c(0, 1.05))
 mtDNA_He_fecundity_plot_annotated_both
 
 #### Fecundity & msat He #### 
@@ -278,7 +286,9 @@ msat_He_plot_both <- ggplot() +
             aes(x = unlog_fecund, y = predicted), linewidth = 3) + 
   geom_ribbon(data = msatHe_fecund_data, 
               aes(x = unlog_fecund, ymin = conf.low, ymax = conf.high), alpha = 0.1) + 
-  xlab("Fecundity") + ylab("He")
+  xlab("Fecundity") + ylab("Nuclear He") +
+  geom_rug(data = msat_data, aes(x = fecundity_mean, y = NULL), inherit.aes = F, 
+           alpha = 0.6, length = unit(20,"pt"))
 
 msat_He_fecundity_plot_annotated_both <- msat_He_plot_both + theme_bw() + 
   theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
@@ -289,8 +299,8 @@ msat_He_fecundity_plot_annotated_both <- msat_He_plot_both + theme_bw() +
         legend.text = element_text(size = 10), 
         legend.key.size = unit(1, "cm"),
         legend.title = element_blank(),
-        axis.title.x = element_text(face="bold", size=25, margin = margin(t = 20)),
-        axis.title.y = element_text(face="bold", size=25, margin = margin(r = 20)),
+        axis.title.x = element_text(size=25, margin = margin(t = 20)),
+        axis.title.y = element_text(size=25, margin = margin(r = 20)),
         text = element_text(size = 28))
 msat_He_fecundity_plot_annotated_both
 
@@ -318,7 +328,9 @@ mtdna_pi_plot_both_length <- ggplot() +
             aes(x = unlog_length, y = unlog_pi), linewidth = 3) + 
   geom_ribbon(data = Pi_length_data, 
               aes(x = unlog_length, ymin = unlog_conf.low, ymax = unlog_conf.high), alpha = 0.1) + 
-  xlab("Maximum Length") + ylab("Pi")
+  xlab("Maximum Length") + ylab("Mitochondrial Pi") +
+  geom_rug(data = mtdna_pi, aes(x = maxlength, y = NULL), inherit.aes = F, 
+           alpha = 0.6, length = unit(20,"pt"))
 
 mtdna_pi_length_plot_annotated_both <- mtdna_pi_plot_both_length + theme_bw() + 
   theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
@@ -329,8 +341,8 @@ mtdna_pi_length_plot_annotated_both <- mtdna_pi_plot_both_length + theme_bw() +
         legend.text = element_text(size = 10), 
         legend.key.size = unit(1, "cm"),
         legend.title = element_blank(),
-        axis.title.x = element_text(face="bold", size=25, margin = margin(t = 20)),
-        axis.title.y = element_text(face="bold", size=25, margin = margin(r = 20)),
+        axis.title.x = element_text(size=25, margin = margin(t = 20)),
+        axis.title.y = element_text(size=25, margin = margin(r = 20)),
         text = element_text(size = 28))
 mtdna_pi_length_plot_annotated_both
 
@@ -351,7 +363,9 @@ mtDNA_He_plot_both_length <- ggplot() +
             aes(x = unlog_length, y = predicted), linewidth = 3) + 
   geom_ribbon(data = mtDNAHe_length_data, 
               aes(x = unlog_length, ymin = conf.low, ymax = conf.high), alpha = 0.1) + 
-  xlab("Maximum Length") + ylab("Haplotype Diversity")
+  xlab("Maximum Length") + ylab("Mitochondrial Hd") +
+  geom_rug(data = mtdna_data_He, aes(x = maxlength, y = NULL), inherit.aes = F, 
+           alpha = 0.6, length = unit(20,"pt"))
 
 mtDNA_He_length_plot_annotated_both <- mtDNA_He_plot_both_length + theme_bw() + 
   theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
@@ -362,8 +376,8 @@ mtDNA_He_length_plot_annotated_both <- mtDNA_He_plot_both_length + theme_bw() +
         legend.text = element_text(size = 10), 
         legend.key.size = unit(1, "cm"),
         legend.title = element_blank(),
-        axis.title.x = element_text(face="bold", size=25, margin = margin(t = 20)),
-        axis.title.y = element_text(face="bold", size=25, margin = margin(r = 20)),
+        axis.title.x = element_text(size=25, margin = margin(t = 20)),
+        axis.title.y = element_text(size=25, margin = margin(r = 20)),
         text = element_text(size = 28))
 mtDNA_He_length_plot_annotated_both
 
@@ -384,7 +398,9 @@ msat_He_plot_both_length <- ggplot() +
             aes(x = unlog_length, y = predicted), linewidth = 3) + 
   geom_ribbon(data = msatHe_length_data, 
               aes(x = unlog_length, ymin = conf.low, ymax = conf.high), alpha = 0.1) + 
-  xlab("Maximum Length") + ylab("He")
+  xlab("Maximum Length") + ylab("Nuclear He") +
+  geom_rug(data = msat_data, aes(x = maxlength, y = NULL), inherit.aes = F, 
+           alpha = 0.6, length = unit(20,"pt"))
 
 msat_He_length_plot_annotated_both <- msat_He_plot_both_length + theme_bw() + 
   theme(panel.border = element_rect(linewidth = 1), axis.title = element_text(size = 11), 
@@ -395,7 +411,8 @@ msat_He_length_plot_annotated_both <- msat_He_plot_both_length + theme_bw() +
         legend.text = element_text(size = 10), 
         legend.key.size = unit(1, "cm"),
         legend.title = element_blank(),
-        axis.title.x = element_text(face="bold", size=25, margin = margin(t = 20)),
-        axis.title.y = element_text(face="bold", size=25, margin = margin(r = 20)),
-        text = element_text(size = 28))
+        axis.title.x = element_text(size=25, margin = margin(t = 20)),
+        axis.title.y = element_text(size=25, margin = margin(r = 20)),
+        text = element_text(size = 28)) +
+  xlim(c(0, 500.5))
 msat_He_length_plot_annotated_both
