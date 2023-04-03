@@ -416,3 +416,166 @@ msat_He_length_plot_annotated_both <- msat_He_plot_both_length + theme_bw() +
         text = element_text(size = 28)) +
   xlim(c(0, 500.5))
 msat_He_length_plot_annotated_both
+
+
+################################################### Exclude Red List ################################################### 
+
+################################################### mtDNA data set ################################################### 
+
+##### He #####
+
+##Add column for final fertilization
+mtdna_data$final_fertilization [mtdna_data$fertilization =="in brood pouch or similar structure"] <- "internal (oviduct)" #convert "in brood pouch or similar structure" to internal fertilization
+mtdna_data$final_fertilization [mtdna_data$fertilization =="external"]  <- "external"
+mtdna_data$final_fertilization [mtdna_data$fertilization =="internal (oviduct)"] <- "internal (oviduct)"
+
+##Create character to factor to integer columns
+mtdna_data$fertilizations.or.f <- as.factor(mtdna_data$final_fertilization)
+mtdna_data$fertilizations.or.f <- as.numeric(mtdna_data$fertilizations.or.f)
+
+mtdna_data$reproductionmodes.or.f <- as.factor(mtdna_data$reproductionmode)
+mtdna_data$reproductionmodes.or.f <- as.numeric(mtdna_data$reproductionmodes.or.f)
+
+##Logtransform what is needed
+for (i in 1:nrow(mtdna_data)) { #get log transformation data
+  cat(paste(i, " ", sep = ''))
+  mtdna_data$logtransform.fecundity_mean.1 <- log10(mtdna_data$fecundity_mean)
+}
+
+for (i in 1:nrow(mtdna_data)) { #get log transformation data
+  cat(paste(i, " ", sep = ''))
+  mtdna_data$logtransform.maxlength.1 <- log10(mtdna_data$maxlength)
+}
+
+for (i in 1:nrow(mtdna_data)) { #get log transformation data
+  cat(paste(i, " ", sep = ''))
+  mtdna_data$logtransform.Pi <- log10(mtdna_data$Pi)
+}
+
+##scale bp instead of log-transform
+mtdna_data$bp_scale <- scale(as.numeric(mtdna_data$bp))
+
+##Fit model for success/failures##
+
+mtdna_data$success <- round(mtdna_data$He*mtdna_data$n)
+mtdna_data$failure <- round((1-mtdna_data$He)*mtdna_data$n)
+
+##Read in and exclude spps that are vulernable, endangered, or critically endangered
+IUCN <- read.csv("Datasets/IUCN_status.csv", stringsAsFactors = FALSE)
+
+mtdna_data_IUCN <- merge(mtdna_data, IUCN, by=c('spp'), all =F)
+
+mtdna_data_IUCN <- mtdna_data_IUCN %>% filter(!IUCN_status %in% c("Endangered", "Vulnerable",  "Critically endangered")) 
+
+##Remove NA from variable columns
+mtdna_data_IUCN_He <- mtdna_data_IUCN %>% drop_na(He, logtransform.maxlength.1, logtransform.fecundity_mean.1,fertilizations.or.f,reproductionmodes.or.f,
+                                        bp_scale)
+
+##Create full model for HE
+binomial_He_full_model_mtDNA_IUCN <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + 
+                                        fertilizations.or.f + reproductionmodes.or.f + bp_scale + 
+                                        (1|spp) + (1|Source), na.action = "na.fail", 
+                                      family=binomial, data = mtdna_data_IUCN_He,
+                                      control = glmerControl(optimizer = "bobyqa")) 
+
+mtdna_data_He_dredge_IUCN <- dredge(binomial_He_full_model_mtDNA_IUCN) #dredge model
+View(mtdna_data_He_dredge_IUCN) #see table
+summary(binomial_He_full_model_mtDNA_IUCN) #get SE, p-value, etc.
+
+##find minimal model (top AIC model)
+topAIC.mtDNAHE_IUCN <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + fertilizations.or.f + 
+                          (1|spp) + (1|Source), na.action = "na.fail", 
+                        family=binomial, data = mtdna_data_IUCN_He,
+                        control = glmerControl(optimizer = "bobyqa")) 
+mtdna_data_He_dredge_minima_IUCN <- dredge(topAIC.mtDNAHE_IUCN) #dredge model
+View(mtdna_data_He_dredge_minima_IUCN) #see table
+summary(topAIC.mtDNAHE_IUCN) #get SE, p-value, etc.for top AIC model
+
+##### PI ##### 
+
+##prep data & remove NA
+mtdna_data_nona_fecunditymean_IUCN <- subset(mtdna_data_IUCN, mtdna_data_IUCN$logtransform.fecundity_mean.1 != "NaN")
+mtdna_data_nona_fecunditymean_bpscale_IUCN <- subset(mtdna_data_nona_fecunditymean_IUCN, mtdna_data_nona_fecunditymean_IUCN$bp_scale != "NA")
+mtdna_pi_IUCN <- subset(mtdna_data_nona_fecunditymean_bpscale_IUCN, mtdna_data_nona_fecunditymean_bpscale_IUCN$logtransform.Pi != "NA") #remove any rows where mtdna pi wasn't calculated
+
+##create full model for pi
+Pi_full_model_IUCN <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + 
+                        fertilizations.or.f + reproductionmodes.or.f + bp_scale + 
+                        (1|spp) + (1|Source), na.action = "na.fail", 
+                      data = mtdna_pi_IUCN, REML = FALSE,
+                      control = lmerControl(optimizer = "bobyqa")) #switch to bobyqa to get away from convergence issues 
+
+mtdna_pi_dredge_IUCN <- dredge(Pi_full_model_IUCN) #dredge model
+View(mtdna_pi_dredge_IUCN) #see table
+summary(Pi_full_model_IUCN) #get SE, p-value, etc.
+
+##find minimal model (top AIC model)
+topAIC.mtDNAPI_IUCN <- lmer(formula = logtransform.Pi +
+                         (1|spp) + (1|Source), na.action = "na.fail", 
+                       data = mtdna_pi_IUCN, REML = FALSE,
+                       control = lmerControl(optimizer = "bobyqa")) #use variables from top AIC model
+mtdna_data_Pi_dredge_minimal_IUCN <- dredge(topAIC.mtDNAPI_IUCN) #dredge model
+View(mtdna_data_Pi_dredge_minimal_IUCN)
+summary(topAIC.mtDNAPI_IUCN) #get SE, p-value, etc.for top AIC model
+
+################################################### msat data set ################################################### 
+
+##Create ID column
+msat_data$ID <- c(1:3145) 
+
+##Logtransform
+for (i in 1:nrow(msat_data)) { #get log transformation data
+  cat(paste(i, " ", sep = ''))
+  msat_data$logtransform.fecundity_mean.2 <- log10(msat_data$fecundity_mean)
+}
+
+for (i in 1:nrow(msat_data)) { #get log transformation data
+  cat(paste(i, " ", sep = ''))
+  msat_data$logtransform.maxlength.2 <- log10(msat_data$maxlength)
+}
+
+##Add column for final fertilization
+
+msat_data$final_fertilization [msat_data$fertilization =="in brood pouch or similar structure"] <- "internal (oviduct)" #convert "in brood pouch or similar structure" to internal fertilization
+msat_data$final_fertilization [msat_data$fertilization =="external"]  <- "external"
+msat_data$final_fertilization [msat_data$fertilization =="internal (oviduct)"] <- "internal (oviduct)"
+
+##Create character to factor to integer columns
+msat_data$fertilizations.or.f2 <- as.factor(msat_data$final_fertilization)
+msat_data$fertilizations.or.f2 <- as.numeric(msat_data$fertilizations.or.f2)
+
+msat_data$reproductionmodes.or.f2 <- as.factor(msat_data$reproductionmode)
+msat_data$reproductionmodes.or.f2 <- as.numeric(msat_data$reproductionmodes.or.f2)
+
+##Fit model for success/failures
+
+msat_data$success <- round(msat_data$He*msat_data$n)
+msat_data$failure <- round((1-msat_data$He)*msat_data$n)
+
+##Read in and exclude spps that are vulernable, endangered, or critically endangered
+msat_data_IUCN <- merge(msat_data, IUCN, by=c('spp'), all =F)
+
+msat_data_IUCN <- msat_data_IUCN %>% filter(!IUCN_status %in% c("Endangered", "Vulnerable",  "Critically endangered")) 
+
+##Remove NA from variable columns
+msat_data_IUCN <- msat_data_IUCN %>% drop_na(He, logtransform.maxlength.2, logtransform.fecundity_mean.2,fertilizations.or.f2,reproductionmodes.or.f2)
+
+##Create full model for HE
+binomial_He_full_model_msat_IUCN <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.2 + logtransform.fecundity_mean.2 +
+                                       fertilizations.or.f2 + reproductionmodes.or.f2 + CrossSpp +
+                                       (1|spp) + (1|Source) + (1|ID), na.action = "na.fail", 
+                                     family=binomial, data = msat_data_IUCN,
+                                     control = glmerControl(optimizer = "bobyqa")) 
+
+msat_dataHe_IUCN <- dredge(binomial_He_full_model_msat_IUCN) #dredge model
+View(msat_dataHe_IUCN) #see table
+summary(binomial_He_full_model_msat_IUCN) #get SE, p-value, etc.
+
+##find minimal model (top AIC model)
+topAIC.msatHE_IUCN <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.2 + fertilizations.or.f2 + CrossSpp +
+                         (1|spp) + (1|Source) + (1|ID), na.action = "na.fail", 
+                       family=binomial, data = msat_data_IUCN,
+                       control = glmerControl(optimizer = "bobyqa"))
+msat_dataHe_minimal_IUCN <- dredge(topAIC.msatHE_IUCN ) #dredge model
+View(msat_dataHe_minimal_IUCN)
+summary(topAIC.msatHE_IUCN) #get SE, p-value, etc.for top AIC model

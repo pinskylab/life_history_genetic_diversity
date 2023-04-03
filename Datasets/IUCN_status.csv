@@ -1,52 +1,97 @@
 spp,IUCN_status
-Anoplopoma fimbria,not_evaluated
-Gadus macrocephalus,not_evaluated
-Leuresthes tenuis,not_evaluated
-Ophiodon elongatus,not_evaluated
-Sebastes auriculatus,not_evaluated
-Sebastes caurinus,not_evaluated
-Sebastes crameri,not_evaluated
-Sebastes flavidus,not_evaluated
-Sebastes melanops,not_evaluated
-Sebastes miniatus,not_evaluated
-Sebastes mystinus,not_evaluated
-Sebastes pinniger,not_evaluated
-Sebastes rastrelliger,not_evaluated
-Clupea pallasii pallasii,data_deficient
-Polyprion americanus,data_deficient
-Acanthocybium solandri,least_concern
-Brevoortia patronus,least_concern
-Brevoortia tyrannus,least_concern
-Cymatogaster aggregata,least_concern
-Cynoscion nebulosus,least_concern
-Embiotoca jacksoni,least_concern
-Haemulon plumierii,least_concern
-Hippoglossus stenolepis,least_concern
-Menidia menidia,least_concern
-Merluccius albidus,least_concern
-Merluccius productus,least_concern
-Microstomus pacificus,least_concern
-Pagrus pagrus,least_concern
-Paralabrax clathratus,least_concern
-Paralichthys californicus,least_concern
-Sardinops sagax,least_concern
-Sciaenops ocellatus,least_concern
-Scomber japonicus,least_concern
-Scomber scombrus,least_concern
-Thunnus alalunga,least_concern
-Carcharhinus isodon,near_threatened
-Gadus chalcogrammus,near_threatened
-Hexanchus griseus,near_threatened
-Merluccius bilinearis,near_threatened
-Carcharhinus limbatus,vulnerable
-Epinephelus morio,vulnerable
-Gadus morhua,vulnerable
-Ginglymostoma cirratum,vulnerable
-Hippocampus ingens,vulnerable
-Lutjanus campechanus,vulnerable
-Melanogrammus aeglefinus,vulnerable
-Mycteroperca microlepis,vulnerable
-Semicossyphus pulcher,vulnerable
-Squalus acanthias,vulnerable
-Aetobatus narinari,endangered
-Sebastes paucispinus,critically_endangered
+Acanthocybium solandri,Least concern
+Abudefduf saxatilis,Least concern
+Aetobatus narinari,Endangered
+Anoplopoma fimbria,Not evaluated
+Archosargus probatocephalus,Least concern
+Balistes capriscus,Vulnerable
+Beryx decadactylus,Least concern
+Brevoortia gunteri,Least concern
+Brevoortia patronus,Least concern
+Brevoortia smithi,Least concern
+Brevoortia tyrannus,Least concern
+Carcharhinus isodon,Near threatened
+Carcharhinus limbatus,Vulnerable
+Centropristis striata,Least concern
+Clupea pallasii pallasii,Data deficient
+Cymatogaster aggregata,Least concern
+Cynoscion arenarius,Least concern
+Cynoscion nebulosus,Least concern
+Cynoscion nothus,Least concern
+Embiotoca jacksoni,Least concern
+Engraulis eurystole,Least concern
+Epinephelus itajara,Vulnerable
+Epinephelus morio,Vulnerable
+Epinephelus striatus,Critically endangered
+Eucyclogobius newberryi,Near threatened
+Gadus chalcogrammus,Near threatened
+Gadus macrocephalus,Not evaluated
+Gadus morhua,Vulnerable
+Ginglymostoma cirratum,Vulnerable
+Haemulon flavolineatum,Least concern
+Haemulon plumierii,Least concern
+Hexanchus griseus,Near threatened
+Hippocampus ingens,Vulnerable
+Hippoglossus stenolepis,Least concern
+Holocentrus adscensionis,Least concern
+Kajikia albida,Vulnerable
+Leuresthes tenuis,Not evaluated
+Lutjanus analis,Near threatened
+Lutjanus campechanus,Vulnerable
+Lutjanus synagris,Near threatened
+Melanogrammus aeglefinus,Vulnerable
+Menidia menidia,Least concern
+Merluccius albidus,Least concern
+Merluccius bilinearis,Near threatened
+Merluccius productus,Least concern
+Micropogonias undulatus,Least concern
+Microstomus pacificus,Least concern
+Mycteroperca microlepis,Vulnerable
+Mycteroperca phenax,Data deficient
+Myripristis jacobus,Least concern
+Ocyurus chrysurus,Data deficient
+Ophiodon elongatus,Not evaluated
+Opistognathus aurifrons,Least concern
+Pagrus pagrus,Least concern
+Paralabrax clathratus,Least concern
+Paralabrax nebulifer,Least concern
+Paralichthys californicus,Least concern
+Polyprion americanus,Data deficient
+Pomatomus saltatrix,Vulnerable
+Pseudopleuronectes americanus,Not evaluated
+Rhomboplites aurorubens,Vulnerable
+Sardinops sagax,Least concern
+Scartella cristata,Least concern
+Sciaenops ocellatus,Least concern
+Scomber japonicus,Least concern
+Scomber scombrus,Least concern
+Scomberomorus concolor,Vulnerable
+Sebastes atrovirens,Not evaluated
+Sebastes auriculatus,Not evaluated
+Sebastes caurinus,Not evaluated
+Sebastes crameri,Not evaluated
+Sebastes emphaeus,Not evaluated
+Sebastes fasciatus,Endangered
+Sebastes flavidus,Not evaluated
+Sebastes helvomaculatus,Not evaluated
+Sebastes macdonaldi,Not evaluated
+Sebastes melanops,Not evaluated
+Sebastes miniatus,Not evaluated
+Sebastes mystinus,Not evaluated
+Sebastes paucispinus,Critically endangered
+Sebastes pinniger,Not evaluated
+Sebastes rastrelliger,Not evaluated
+Semicossyphus pulcher,Vulnerable
+Seriola dumerili,Least concern
+Squalus acanthias,Vulnerable
+Stegastes partitus,Least concern
+Syngnathus auliscus,Least concern
+Syngnathus floridae,Least concern
+Syngnathus leptorhynchus,Least concern
+Syngnathus scovelli,Least concern
+Thalassoma bifasciatum,Least concern
+Thunnus alalunga,Least concern
+Totoaba macdonaldi,Vulnerable
+Trachinotus carolinus,Least concern
+Urobatis halleri,Least concern
+Xiphias gladius,Least concern

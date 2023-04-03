@@ -184,7 +184,7 @@ compare_both <- merge(msat_mergeready, mtdna_mergeready) #merge
 compare_both$Source_mtdna[duplicated(compare_both$Source_mtdna)] <- NA #remove duplicate species to find how many common
 compare_both$Source_msat[duplicated(compare_both$Source_msat)] <- NA #remove duplicate species to find how many common
 
-#15 common spps and 8 common sources
+  #15 common spps and 8 common sources
 
 
 
