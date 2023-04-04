@@ -487,8 +487,8 @@ topAIC.mtDNAHE_IUCN <- glmer(formula = cbind(success,failure) ~ logtransform.max
                           (1|spp) + (1|Source), na.action = "na.fail", 
                         family=binomial, data = mtdna_data_IUCN_He,
                         control = glmerControl(optimizer = "bobyqa")) 
-mtdna_data_He_dredge_minima_IUCN <- dredge(topAIC.mtDNAHE_IUCN) #dredge model
-View(mtdna_data_He_dredge_minima_IUCN) #see table
+mtdna_data_He_dredge_minimal_IUCN <- dredge(topAIC.mtDNAHE_IUCN) #dredge model
+View(mtdna_data_He_dredge_minimal_IUCN) #see table
 summary(topAIC.mtDNAHE_IUCN) #get SE, p-value, etc.for top AIC model
 
 ##### PI ##### 
@@ -510,7 +510,7 @@ View(mtdna_pi_dredge_IUCN) #see table
 summary(Pi_full_model_IUCN) #get SE, p-value, etc.
 
 ##find minimal model (top AIC model)
-topAIC.mtDNAPI_IUCN <- lmer(formula = logtransform.Pi +
+topAIC.mtDNAPI_IUCN <- lmer(formula = logtransform.Pi ~
                          (1|spp) + (1|Source), na.action = "na.fail", 
                        data = mtdna_pi_IUCN, REML = FALSE,
                        control = lmerControl(optimizer = "bobyqa")) #use variables from top AIC model
@@ -553,6 +553,8 @@ msat_data$success <- round(msat_data$He*msat_data$n)
 msat_data$failure <- round((1-msat_data$He)*msat_data$n)
 
 ##Read in and exclude spps that are vulernable, endangered, or critically endangered
+IUCN <- read.csv("Datasets/IUCN_status.csv", stringsAsFactors = FALSE)
+
 msat_data_IUCN <- merge(msat_data, IUCN, by=c('spp'), all =F)
 
 msat_data_IUCN <- msat_data_IUCN %>% filter(!IUCN_status %in% c("Endangered", "Vulnerable",  "Critically endangered")) 
