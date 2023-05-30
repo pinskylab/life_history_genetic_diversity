@@ -26,11 +26,12 @@ library(sjPlot)
 mtdna_data <- read.csv("Datasets/new_mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
 msat_data <- read.csv("Datasets/new_msat_full_US_data.csv", stringsAsFactors = FALSE) #read in 
 
-#Fixed Variables for mtDNA He & Pi: Body length/maxlength, fecundity mean, fertilization method, reproduction mode, Bp scale
-#Random Variables for mtDNA He & Pi: Species, source
-#Fixed Variables for msat He: Body length/maxlength, fecundity mean, fertilization method, reproduction mode, CrossSpp
-#Random Variables for msat He: Species, source, ID
-#in brood or similar structure --> internal
+## Further notes:
+# Fixed Variables for mtDNA He & Pi: Body length/maxlength, fecundity mean, fertilization method, reproduction mode, Bp scale
+# Random Variables for mtDNA He & Pi: Species, source
+# Fixed Variables for msat He: Body length/maxlength, fecundity mean, fertilization method, reproduction mode, CrossSpp
+# Random Variables for msat He: Species, source, ID
+# in brood or similar structure --> internal
 
 ################################################### mtDNA data set ################################################### 
 
@@ -49,17 +50,17 @@ mtdna_data$reproductionmodes.or.f <- as.factor(mtdna_data$reproductionmode)
 mtdna_data$reproductionmodes.or.f <- as.numeric(mtdna_data$reproductionmodes.or.f)
 
 ##Logtransform what is needed
-for (i in 1:nrow(mtdna_data)) { #get log transformation data
+for (i in 1:nrow(mtdna_data)) { #get log transformation data for fecundity mean
   cat(paste(i, " ", sep = ''))
   mtdna_data$logtransform.fecundity_mean.1 <- log10(mtdna_data$fecundity_mean)
 }
 
-for (i in 1:nrow(mtdna_data)) { #get log transformation data
+for (i in 1:nrow(mtdna_data)) { #get log transformation data for maxlength
   cat(paste(i, " ", sep = ''))
   mtdna_data$logtransform.maxlength.1 <- log10(mtdna_data$maxlength)
 }
 
-for (i in 1:nrow(mtdna_data)) { #get log transformation data
+for (i in 1:nrow(mtdna_data)) { #get log transformation data for Pi
   cat(paste(i, " ", sep = ''))
   mtdna_data$logtransform.Pi <- log10(mtdna_data$Pi)
 }
@@ -122,14 +123,13 @@ topAIC.mtDNAPI <- lmer(formula = logtransform.Pi ~ fertilizations.or.f +
 mtdna_data_Pi_dredge_minimal <- dredge(topAIC.mtDNAPI) #dredge model
 View(mtdna_data_Pi_dredge_minimal)
 summary(topAIC.mtDNAPI) #get SE, p-value, etc.for top AIC model
-summary(mtdna_data_Pi_dredge_minimal)
 
 ################################################### msat data set ################################################### 
 
 ##Create ID column
 msat_data$ID <- c(1:3145) 
 
-##Logtransform
+##Log transform
 for (i in 1:nrow(msat_data)) { #get log transformation data
   cat(paste(i, " ", sep = ''))
   msat_data$logtransform.fecundity_mean.2 <- log10(msat_data$fecundity_mean)

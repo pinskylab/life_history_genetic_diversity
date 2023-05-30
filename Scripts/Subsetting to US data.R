@@ -91,4 +91,4 @@ msat_papers_USA2_new <- msat_papers_latlon2_new %>%
 
 write.csv(mtdna_papers_USA_new,'mtdna_papers_USA_new.csv') #write csv for mtDNA new data
 
-write.csv(msat_papers_USA_new,'msat_papers_USA_new.csv') #write csv for msat data
+write.csv(msat_papers_USA_new,'msat_papers_USA_new.csv') #write csv for msat new data

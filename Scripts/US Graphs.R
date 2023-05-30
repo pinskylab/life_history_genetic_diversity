@@ -27,12 +27,12 @@ lm_eqn = function(x, y, df){ #set up formula for regression line equation
   as.character(as.expression(eq));                 
 }
 
-### Center Title and Subtitle for Graphs ###
-theme_update(plot.title = element_text(hjust = 0), plot.subtitle = element_text(hjust = 0.5)) #centered plot title
+### Move Subtitle for Graphs ###
+theme_update(plot.subtitle = element_text(hjust = 0.5)) #move plot subtitle
 
 ############################################ US DATA ############################################ 
 
-#mtDNA: He#
+##### mtDNA: He #####
 
 #Final mtDNA fertilization
 mtdna_data_new$final_fertilization <- NA #create new column to categorize fertilization methods
@@ -54,7 +54,7 @@ mtdna_data_new$final_reproductionmode  [mtdna_data_new$reproductionmode =="true 
 
 mtdna_final_reproductionmode_He_no.na <- mtdna_data_new[!is.na(mtdna_data_new$final_reproductionmode ) & !is.na(mtdna_data_new$He),] #create new table that excludes NA's from columns of interest
 
-#mtDNA: Pi#
+##### mtDNA: Pi ##### 
 
 #Final mtDNA Fertilization 
 
@@ -77,7 +77,7 @@ mtdna_data_new$final_reproductionmode  [mtdna_data_new$reproductionmode =="true 
 
 mtdna_final_reproductionmode_Pi_no.na <- mtdna_data_new[!is.na(mtdna_data_new$final_reproductionmode ) & !is.na(mtdna_data_new$Pi),] #create new table that excludes NA's from columns of interest
 
-#msat#
+##### msat ##### 
 
 #Final msat fertilization
 msat_data$final_fertilization <- NA #create new column to categorize fertilization methods
