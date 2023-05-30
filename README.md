@@ -1,4 +1,4 @@
-# marial_diversity
+# Life Histories and Genetic Diversity
 
 ---
 
