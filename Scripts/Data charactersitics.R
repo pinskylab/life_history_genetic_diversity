@@ -138,7 +138,7 @@ unique(msat_data$Source) #40 sources
 unique(msat_data$spp) #40 spps
 
 #Number of crossspp
-table(msat_data$CrossSpp) #0 = 1593 | 0.25 = 80 | 0.6 = 96 | 1 = 1376
+table(msat_data$CrossSpp) #0 (no cross spp) = 1593 | 0.25 = 80 | 0.6 = 96 | 1 (cross spp) = 1376
 
 ###Fecundity
 #Range

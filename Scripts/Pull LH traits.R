@@ -12,10 +12,11 @@ remove(list = ls())
 library(rfishbase)
 library(tidyverse)
 library(dplyr)
+library(sjmisc)
 
 #read in data
 msat_spp <- read.csv("Datasets/msat_papers_USA_new.csv", stringsAsFactors = FALSE) #read in msat species list
-mtdna_spp_new <- read.csv("Datasets/mtdna_papers_USA_new.csv", stringsAsFactors = FALSE) #read in mtdna species list for new 
+mtdna_spp_new <- read.csv("Datasets/mtdna_papers_USA_new.csv", stringsAsFactors = FALSE) #read in mtdna species list
 
 #NOTE: Branchiostoma spps in mtdna NOT in fishbase -- will need to pull out before querying FB for data
 
@@ -31,10 +32,10 @@ msat_spp$maxlength <- NA #create column to fill in
 
 for (i in 1:nrow(msat_spp)) { #get length data
   cat(paste(i, " ", sep = ''))
-  msat_spp$maxlength[i] <- as.numeric(species(msat_spp$spp[i], fields = 'Length')$Length)
+  msat_spp$maxlength[i] <- as.numeric(species(msat_spp$spp[i], fields = 'Length'))
   if(is.na(msat_spp$maxlength[i])) { #if male maxlength is NA, use female maxlength
-    msat_spp$maxlength[i] <- as.numeric(species(msat_spp$spp[i], fields = 'LengthFemale')$LengthFemale)
-  }
+    msat_spp$maxlength[i] <- as.numeric(species(msat_spp$spp[i], fields = 'LengthFemale'))
+   }
 }
 
 #add mortality from FB
@@ -42,11 +43,10 @@ msat_spp$mortalitywild <- NA #create column to fill in
 
 for (i in 1:nrow(msat_spp)) { #get mortality data
   cat(paste(i, " ", sep = ''))
-  msat_spp$mortalitywild[i] <- species((msat_spp$spp[i]), field='LongevityWild')
+  msat_spp$mortalitywild[i] <- as.numeric(species((msat_spp$spp[i]), field='LongevityWild'))
 }
 
 #add fecundity from FB
-library(sjmisc) #install for correct is_empty() function
 msat_spp$fecundity <- NA #create column to fill in for fecundity
 msat_spp$fecundity_mean <- NA #calculate mean fecundity (when vector is provided)
 
@@ -62,6 +62,9 @@ for (i in 1:nrow(msat_spp)) { #get fecundity data
   msat_spp$fecundity_mean[i] <- mean(unlist(msat_spp$fecundity[i]), na.rm = TRUE) #calculate mean fecundity
 }
 
+  msat_spp$fecundity <- as.integer(as.list(msat_spp$fecundity))
+  msat_spp$fecundity_mean <- as.integer(msat_spp$fecundity_mean)
+  
 #add maturity length from FB
 msat_spp$maturitylength <- NA #create column to fill in
 
@@ -86,6 +89,7 @@ msat_spp$numberofspawningcycles <- NA #create column to fill in
 for (i in 1:nrow(msat_spp)) { #get spawning cycles data
   cat(paste(i, " ", sep = ''))
   msat_spp$numberofspawningcycles[i] <- reproduction(species=(msat_spp$spp[i]), field='Spawning')
+  msat_spp$numberofspawningcycles <- as.character(msat_spp$numberofspawningcycles)
 }
 
 
@@ -148,12 +152,6 @@ for (i in 1:nrow(msat_spp)) { #get larvae data
 }
 
 summary(msat_spp)
-
-#Ex of code without if statement
-#for(i in 1:nrow(spps2)) { #get code that specifies exact species on FB
-#  cat(paste(i, " ", sep = ''))
-#  spps2$SpecCode[i] <- as.numeric(species(specieslist = spps2$fbsci[i], fields = 'SpecCode')$SpecCode)
-#}
 
 ##########################################################################################################################################
 
@@ -351,9 +349,6 @@ for (i in 1:nrow(mtdna_spp_new)) { #get spawning cycles data
   mtdna_spp_new$numberofspawningcycles[i] <- reproduction(species=(mtdna_spp_new$spp[i]), field='Spawning')
 }
 
-#add reproductive season length from FB
-mtdna_spp_new$reproductiveseasonlength <- NA #create column to fill in
-
 #add fertilization from FB
 mtdna_spp_new$fertilization <- NA #create column to fill in
 
@@ -411,29 +406,19 @@ for (i in 1:nrow(mtdna_spp_new)) { #get larvae data
 
 summary(mtdna_spp_new)
 
-#Ex of code without if statement
-#for(i in 1:nrow(spps2)) { #get code that specifies exact species on FB
-#  cat(paste(i, " ", sep = ''))
-#  spps2$SpecCode[i] <- as.numeric(species(specieslist = spps2$fbsci[i], fields = 'SpecCode')$SpecCode)
-#}
 
-##########################################################################################################################################
+################################################### WRITE CSV #################################################################
 
-######## Merge data from mtdna_spp_final.csv and mtdna_assembled.csv togther########
+### Write csv for msat new data ###
 
-mtdna_spp_final_1 = read.csv("mtdna_spp_final.csv", header=TRUE, sep=",")
-mtdna_assembled_2 = read.csv("mtdna_assembled.csv", header=TRUE, sep=",")
+msat_spp$X.1 <- NULL #removed unnecessary column
+msat_spp$X <- NULL #removed unnecessary column
 
-mtdna_full_data = merge(mtdna_spp_final_1, mtdna_assembled_2, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE, by="spp")
+msat_spp <- apply(msat_spp,2,as.character)
 
-mtdna_full_data$X.x <- NULL #removed unnecessary column
-mtdna_full_data$X.y <- NULL #removed unnecessary column
+write.csv(msat_spp, "new_msat_full_US_data.csv")
 
-###write csv for mtdna data###
-
-write.csv(mtdna_full_data, "mtdna_final_data.csv")
-
-###write csv for mtdna new data (no merging required###
+### Write csv for mtdna new data ###
 
 mtdna_spp_new$X.1 <- NULL #removed unnecessary column
 mtdna_spp_new$X <- NULL #removed unnecessary column
@@ -442,25 +427,3 @@ mtdna_spp_newfinal <- apply(mtdna_spp_new,2,as.character)
 
 write.csv(mtdna_spp_newfinal, "new_mtdna_full_US_data.csv")
 
-######## Merge data from msat_spp_final.csv and msat_assembled.csv togther########
-
-msat_spp_final_1 = read.csv("msat_spp_final.csv", header=TRUE, sep=",")
-msat_assembled_2 = read.csv("msat_assembled.csv", header=TRUE, sep=",")
-
-msat_full_data = merge(msat_spp_final_1, msat_assembled_2, all=TRUE, no.dups= TRUE, all.x=TRUE, all.y=TRUE, by="spp")
-
-msat_full_data$X.x <- NULL #removed unnecessary column
-msat_full_data$X.y <- NULL #removed unnecessary column
-
-###write csv###
-
-write.csv(msat_full_data, "new_msat_final_data.csv")
-
-###write csv for mtdna new data (no merging required###
-
-msat_spp$X.1 <- NULL #removed unnecessary column
-msat_spp$X <- NULL #removed unnecessary column
-
-msat_spp <- apply(msat_spp,2,as.character)
-
-write.csv(msat_spp, "new_msat_full_US_data.csv")
