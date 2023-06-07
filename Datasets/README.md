@@ -1,7 +1,7 @@
 # Datasets Directory
 
 ## 1. Starting CSVs
-These csvs are necessary as the start of the entire pathway. Needed to run [`Subsetting to US.R`](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/Subsetting%20to%20US%20data.R)
+These csvs are necessary as the start of the entire pathway and were created during intial data collection (see Materials and Methods section in manuscript). Needed to run [`Subsetting to US.R`](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/Subsetting%20to%20US%20data.R)
 
 * [msatloci.csv](https://github.com/pinskylab/marial_diversity/blob/master/Datasets/msatloci.csv) : Contains the collected marine species and important information related.
 The columns are: 
@@ -31,6 +31,7 @@ The columns are:
 <br />
 
 ## 2. Necessary to run [`Pull LH traits.R`](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/Pull%20LH%20traits.R)
+These CSVs were created from the above CSVs with Subsetting to US.R script.
 
 * [msat_papers_USA_new.csv](https://github.com/pinskylab/marial_diversity/blob/master/Datasets/msat_papers_USA_new.csv) : Contains the collected marine species and important information related subsetted to the appropriate coordinates. Columns are same as the starting CSVs: 
 > Species name, common name, source, primer note, country, site, latitude and longitude, stock ID, collection year, number of markers, marker name, cross spp, n, repeat, He, Hese, and file
@@ -42,7 +43,7 @@ The columns are:
 
 ## 3. Used for the remaining scripts
 
-These csvs were from the previous step and are needed to run [`US Graphs`](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/Subsetting%20to%20US%20data.R), [`Mixed Models for US Data (msat & mtDNA)`](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/Mixed%20Models%20for%20US%20Data%20(msat%20%26%20mtDNA).R), & [`Data Characteristics`](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/Data%20charactersitics.R).
+These csvs were created the previous step's CSVs + Pull LH traits.R script and are needed to run [`US Graphs`](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/Subsetting%20to%20US%20data.R), [`Mixed Models for US Data (msat & mtDNA)`](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/Mixed%20Models%20for%20US%20Data%20(msat%20%26%20mtDNA).R), & [`Data Characteristics`](https://github.com/pinskylab/marial_diversity/blob/master/Scripts/Data%20charactersitics.R).
 
 * [new_msat_full_US_data.csv](https://github.com/pinskylab/marial_diversity/blob/master/Datasets/new_msat_full_US_data.csv) : Contains the necessary information for the species to run analyses. Columns are similar to msat_papers_USA_new.csv with the inclusion of the traits used in the study:
 > Species name, common name, source, primer note, country, site, latitude and longitude, stock ID, collection year, number of markers, marker name, cross spp, n, repeat, He, Hese, file PLUS the traits shown below &#8595;
