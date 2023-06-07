@@ -19,3 +19,24 @@ Contacts: Marial Malabag (mjm751@scarletmail.rutgers.edu), René Clark, and Mali
 2. **[Graphs](https://github.com/pinskylab/marial_diversity/tree/master/Graphs):** contains box plots (fertilization method & reproduction mode) and mixed model graphs (maximum length & fecundity)
 
 3. **[Scripts](https://github.com/pinskylab/marial_diversity/tree/master/Scripts):** contains scripts used to run the analyses
+
+---
+### Necessary software:
+
+1. **R**: Version 4.3.0
+2. **R Studio**: Version 2023.03.1+446
+
+### Necessary packages (for R Studio):
+1. tidyverse
+2. dplyr
+3. rfishbase
+4. sjmisc
+5. patchwork
+6. lme4
+7. Hmisc
+8. ggplot2
+9. MuMIn
+10. lmerTest
+11. glmmTMB
+12. effects
+13. sjPlot
