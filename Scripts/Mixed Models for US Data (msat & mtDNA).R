@@ -21,16 +21,17 @@ library(glmmTMB)
 library(tidyr)
 library(effects)
 library(sjPlot)
+library(stringr)
 
 #read in data
 mtdna_data <- read.csv("Datasets/new_mtdna_full_US_data.csv", stringsAsFactors = FALSE) #read in 
 msat_data <- read.csv("Datasets/new_msat_full_US_data.csv", stringsAsFactors = FALSE) #read in 
 
 ## Further notes:
-# Fixed Variables for mtDNA He & Pi: Body length/maxlength, fecundity mean, fertilization method, reproduction mode, Bp scale
-# Random Variables for mtDNA He & Pi: Species, source
-# Fixed Variables for msat He: Body length/maxlength, fecundity mean, fertilization method, reproduction mode, CrossSpp
-# Random Variables for msat He: Species, source, ID
+# Fixed Variables for mtDNA He & Pi: Body length/maxlength, fecundity mean, fertilization method, reproduction mode, maturity age, generation time, adult lifespan, Bp scale
+# Random Variables for mtDNA He & Pi: Species, source, genus
+# Fixed Variables for msat He: Body length/maxlength, fecundity mean, fertilization method, reproduction mode, maturity age, generation time, adult lifespan, CrossSpp
+# Random Variables for msat He: Species, source, genus, ID, PrimerNote
 # in brood or similar structure --> internal
 
 ################################################### mtDNA data set ################################################### 
@@ -73,15 +74,18 @@ mtdna_data$bp_scale <- scale(as.numeric(mtdna_data$bp))
 mtdna_data$success <- round(mtdna_data$He*mtdna_data$n)
 mtdna_data$failure <- round((1-mtdna_data$He)*mtdna_data$n)
 
+##Create a column for genus
+mtdna_data$genus <- word(mtdna_data$spp, 1)
+
 ##Remove NA from variable columns
 mtdna_data_He <- mtdna_data %>% drop_na(He, logtransform.maxlength.1, logtransform.fecundity_mean.1,fertilizations.or.f,reproductionmodes.or.f,
-                                     bp_scale)
+                                        maturityage_mean, generationtime, adultlifespan, bp_scale)
 
 ##Create full model for HE
 binomial_He_full_model_mtDNA <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + 
-                                  fertilizations.or.f + reproductionmodes.or.f + bp_scale + 
-                                  (1|spp) + (1|Source), na.action = "na.fail", 
-                                family=binomial, data = mtdna_data_He,
+                                  maturityage_mean + generationtime + adultlifespan + fertilizations.or.f + reproductionmodes.or.f + bp_scale + 
+                                  (1|Source) + (1|spps) + (1|family/genus), na.action = "na.fail", 
+                                family = binomial, data = mtdna_data_He,
                                 control = glmerControl(optimizer = "bobyqa")) 
 
 mtdna_data_He_dredge <- dredge(binomial_He_full_model_mtDNA) #dredge model
@@ -89,13 +93,20 @@ View(mtdna_data_He_dredge) #see table
 summary(binomial_He_full_model_mtDNA) #get SE, p-value, etc.
 
 ##find minimal model (top AIC model)
-topAIC.mtDNAHE <- glmer(formula = cbind(success,failure) ~ fertilizations.or.f + reproductionmodes.or.f +
+topAIC.mtDNAHE <- glmer(formula = cbind(success,failure) ~ reproductionmodes.or.f +
                                         (1|spp) + (1|Source), na.action = "na.fail", 
                                       family=binomial, data = mtdna_data_He,
                                       control = glmerControl(optimizer = "bobyqa")) 
 mtdna_data_He_dredge_minimal <- dredge(topAIC.mtDNAHE) #dredge model
 View(mtdna_data_He_dredge_minimal) #see table
 summary(topAIC.mtDNAHE) #get SE, p-value, etc.for top AIC model
+
+topAIC.mtDNAHE <- glmer(formula = cbind(success,failure) ~ adultlifespan + reproductionmodes.or.f +
+                          (1|spp) + (1|Source), na.action = "na.fail", 
+                        family=binomial, data = mtdna_data_He,
+                        control = glmerControl(optimizer = "bobyqa")) 
+mtdna_data_He_dredge_minimal <- dredge(topAIC.mtDNAHE) #dredge model
+View(mtdna_data_He_dredge_minimal) #see table
 
 ##### PI ##### 
 
@@ -104,10 +115,13 @@ mtdna_data_nona_fecunditymean <- subset(mtdna_data, mtdna_data$logtransform.fecu
 mtdna_data_nona_fecunditymean_bpscale <- subset(mtdna_data_nona_fecunditymean, mtdna_data_nona_fecunditymean$bp_scale != "NA")
 mtdna_pi <- subset(mtdna_data_nona_fecunditymean_bpscale, mtdna_data_nona_fecunditymean_bpscale$logtransform.Pi != "NA") #remove any rows where mtdna pi wasn't calculated
 
+mtdna_pi <- mtdna_data %>% drop_na(He, logtransform.maxlength.1, logtransform.fecundity_mean.1,fertilizations.or.f,reproductionmodes.or.f,
+                       maturityage_mean, generationtime, adultlifespan, bp_scale)
+
 ##create full model for pi
 Pi_full_model <- lmer(formula = logtransform.Pi ~ logtransform.maxlength.1 + logtransform.fecundity_mean.1 + 
-                        fertilizations.or.f + reproductionmodes.or.f + bp_scale + 
-                        (1|spp) + (1|Source), na.action = "na.fail", 
+                        maturityage_mean + generationtime + adultlifespan + fertilizations.or.f + reproductionmodes.or.f + bp_scale + 
+                        (1|spp) + (1|Source) + (1|genus), na.action = "na.fail", 
                       data = mtdna_pi, REML = FALSE,
                       control = lmerControl(optimizer = "bobyqa")) #switch to bobyqa to get away from convergence issues AND switch to bp_scale AND make sure REML = FALSE
 
@@ -116,13 +130,21 @@ View(mtdna_pi_dredge) #see table
 summary(Pi_full_model) #get SE, p-value, etc.
 
 ##find minimal model (top AIC model)
-topAIC.mtDNAPI <- lmer(formula = logtransform.Pi ~ fertilizations.or.f + 
+topAIC.mtDNAPI <- lmer(formula = logtransform.Pi ~ 
                          (1|spp) + (1|Source), na.action = "na.fail", 
                        data = mtdna_pi, REML = FALSE,
                        control = lmerControl(optimizer = "bobyqa")) #use variables from top AIC model
 mtdna_data_Pi_dredge_minimal <- dredge(topAIC.mtDNAPI) #dredge model
 View(mtdna_data_Pi_dredge_minimal)
 summary(topAIC.mtDNAPI) #get SE, p-value, etc.for top AIC model
+
+
+topAIC.mtDNAPI <- lmer(formula = logtransform.Pi ~ logtransform.fecundity_mean.1 + reproductionmodes.or.f +  
+                         (1|spp) + (1|Source), na.action = "na.fail", 
+                       data = mtdna_pi, REML = FALSE,
+                       control = lmerControl(optimizer = "bobyqa")) #use variables from top AIC model
+mtdna_data_Pi_dredge_minimal <- dredge(topAIC.mtDNAPI) #dredge model
+View(mtdna_data_Pi_dredge_minimal)
 
 ################################################### msat data set ################################################### 
 
@@ -145,6 +167,14 @@ for (i in 1:nrow(msat_data)) { #get log transformation data
 msat_data$final_fertilization [msat_data$fertilization =="in brood pouch or similar structure"] <- "internal (oviduct)" #convert "in brood pouch or similar structure" to internal fertilization
 msat_data$final_fertilization [msat_data$fertilization =="external"]  <- "external"
 msat_data$final_fertilization [msat_data$fertilization =="internal (oviduct)"] <- "internal (oviduct)"
+msat_data$final_fertilization [msat_data$fertilization =="c(\"internal (oviduct)\", \"internal (oviduct)\")"] <- "internal (oviduct)"
+
+##Add column for final fertilization
+msat_data$final_reproductionmode  [msat_data$reproductionmode =="dioecism"]  <- "Dioecious"
+msat_data$final_reproductionmode  [msat_data$reproductionmode =="c(\"dioecism\", \"dioecism\")"]  <- "Dioecious"
+msat_data$final_reproductionmode  [msat_data$reproductionmode =="protogyny"] <- "Hermaphrodite" #for protogyny, label as "Hermpahrodites"
+msat_data$final_reproductionmode  [msat_data$reproductionmode =="protandry"] <- "Hermaphrodite" #for protandry, label as "Hermpahrodites"
+msat_data$final_reproductionmode  [msat_data$reproductionmode =="true hermaphroditism"] <- "Hermaphrodite" #for true hermaphroditism, label as "Hermpahrodites"
 
 ##Create character to factor to integer columns
 msat_data$fertilizations.or.f2 <- as.factor(msat_data$final_fertilization)
@@ -158,27 +188,33 @@ msat_data$reproductionmodes.or.f2 <- as.numeric(msat_data$reproductionmodes.or.f
 msat_data$success <- round(msat_data$He*msat_data$n)
 msat_data$failure <- round((1-msat_data$He)*msat_data$n)
 
+##Create a column for genus
+msat_data$genus <- word(msat_data$spp, 1)
+
 ##Remove NA from variable columns
-msat_data <- msat_data %>% drop_na(He, logtransform.maxlength.2, logtransform.fecundity_mean.2,fertilizations.or.f2,reproductionmodes.or.f2)
+msat_data <- msat_data %>% drop_na(He, logtransform.maxlength.2, logtransform.fecundity_mean.2,fertilizations.or.f2,reproductionmodes.or.f2, maturityage_mean, generationtime,
+                                   adultlifespan)
 
 ##Create full model for HE
 binomial_He_full_model_msat <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.2 + logtransform.fecundity_mean.2 +
-                                  fertilizations.or.f2 + reproductionmodes.or.f2 + CrossSpp +
-                                  (1|spp) + (1|Source) + (1|ID), na.action = "na.fail", 
+                                  fertilizations.or.f2 + reproductionmodes.or.f2 + maturityage_mean +
+                                    generationtime + adultlifespan + CrossSpp +
+                                  #(1|spp) + 
+                                    (1|Source) + (1|ID) + (1|PrimerNote) + (1|Kingdom/Phylum/Division/Class/Order/Family/Genus/Species), na.action = "na.fail", 
                                 family=binomial, data = msat_data,
-                                control = glmerControl(optimizer = "bobyqa")) #have Marial switch to bobyqa to get away from convergence issues AND switch to bp_scale
+                                control = glmerControl(optimizer = "bobyqa")) 
 
 msat_dataHe <- dredge(binomial_He_full_model_msat) #dredge model
 View(msat_dataHe) #see table
 summary(binomial_He_full_model_msat) #get SE, p-value, etc.
 
 ##find minimal model (top AIC model)
-topAIC.msatHE <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.2 + fertilizations.or.f2 + CrossSpp +
-                         (1|spp) + (1|Source) + (1|ID), na.action = "na.fail", 
+topAIC.msatHE <- glmer(formula = cbind(success,failure) ~ logtransform.maxlength.2 + fertilizations.or.f2 + reproductionmodes.or.f2 +
+                         (1|spp) + (1|Source) + (1|ID) + (1|PrimerNote) + (1|genus), na.action = "na.fail", 
                        family=binomial, data = msat_data,
                        control = glmerControl(optimizer = "bobyqa"))
 msat_dataHe_minimal <- dredge(topAIC.msatHE) #dredge model
-View(topAIC.msatHE)
+View(msat_dataHe_minimal)
 summary(topAIC.msatHE) #get SE, p-value, etc.for top AIC model
 
 ##find RVI 

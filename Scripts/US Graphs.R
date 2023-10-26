@@ -84,6 +84,7 @@ msat_data$final_fertilization <- NA #create new column to categorize fertilizati
 
 msat_data$final_fertilization [msat_data$fertilization =="external"]  <- "External"
 msat_data$final_fertilization [msat_data$fertilization =="internal (oviduct)"] <- "Internal"
+msat_data$final_fertilization [msat_data$fertilization =="c(\"internal (oviduct)\", \"internal (oviduct)\")"] <- "Internal"
 msat_data$final_fertilization [msat_data$fertilization =="in brood pouch or similar structure"] <- "Internal" #convert "in brood pouch or similar structure" to internal fertilization
 
 msat_final_fertilization_He_no.na <- msat_data[!is.na(msat_data$final_fertilization) & !is.na(msat_data$He),] #create new table that excludes NA's from columns of interest
@@ -92,6 +93,7 @@ msat_final_fertilization_He_no.na <- msat_data[!is.na(msat_data$final_fertilizat
 msat_data$final_reproductionmode <- NA #create new column to categorize reproduction mode
 
 msat_data$final_reproductionmode  [msat_data$reproductionmode =="dioecism"]  <- "Dioecious"
+msat_data$final_reproductionmode  [msat_data$reproductionmode =="c(\"dioecism\", \"dioecism\")"]  <- "Dioecious"
 msat_data$final_reproductionmode  [msat_data$reproductionmode =="protogyny"] <- "Hermaphrodite" #for protogyny, label as "Hermpahrodites"
 msat_data$final_reproductionmode  [msat_data$reproductionmode =="protandry"] <- "Hermaphrodite" #for protandry, label as "Hermpahrodites"
 msat_data$final_reproductionmode  [msat_data$reproductionmode =="true hermaphroditism"] <- "Hermaphrodite" #for true hermaphroditism, label as "Hermpahrodites"
@@ -111,10 +113,8 @@ final_fertilization_all$markertype <- NA #create new column to categorize marker
 #add marker type based on file type
 final_fertilization_all$markertype [final_fertilization_all$file == "mtdna101"]  <- "mtDNA"
 final_fertilization_all$markertype [final_fertilization_all$file == "mtdna102"]  <- "mtDNA"
-final_fertilization_all$markertype [final_fertilization_all$file == "mtdna103"]  <- "mtDNA"
 final_fertilization_all$markertype [final_fertilization_all$file == "msats000"]  <- "msat" 
 final_fertilization_all$markertype [final_fertilization_all$file == "msats001"]  <- "msat"
-final_fertilization_all$markertype [final_fertilization_all$file == "msats002"]  <- "msat"
 final_fertilization_all$markertype [final_fertilization_all$file == "msats200"]  <- "msat" 
 final_fertilization_all$markertype [final_fertilization_all$file == "msats201"]  <- "msat" 
 final_fertilization_all$markertype [final_fertilization_all$file == "msats100"]  <- "msat" 
@@ -165,10 +165,8 @@ reproductionmode_all$markertype <- NA #create new column to categorize marker ty
 #add marker type based on file type
 reproductionmode_all$markertype [reproductionmode_all$file == "mtdna101"]  <- "mtDNA"
 reproductionmode_all$markertype [reproductionmode_all$file == "mtdna102"]  <- "mtDNA"
-reproductionmode_all$markertype [reproductionmode_all$file == "mtdna103"]  <- "mtDNA"
 reproductionmode_all$markertype [reproductionmode_all$file == "msats000"]  <- "msat" 
 reproductionmode_all$markertype [reproductionmode_all$file == "msats001"]  <- "msat"
-reproductionmode_all$markertype [reproductionmode_all$file == "msats002"]  <- "msat"
 reproductionmode_all$markertype [reproductionmode_all$file == "msats200"]  <- "msat" 
 reproductionmode_all$markertype [reproductionmode_all$file == "msats201"]  <- "msat" 
 reproductionmode_all$markertype [reproductionmode_all$file == "msats100"]  <- "msat" 

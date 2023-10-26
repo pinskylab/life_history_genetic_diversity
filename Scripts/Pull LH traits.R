@@ -78,29 +78,46 @@ for (i in 1:nrow(msat_spp)) { #get reproduction mode data
 #add age at first maturity from FB
 msat_spp$maturityage <- NA #create column to fill in
 
-for (i in 1:nrow(msat_spp)) { #get maturity age data
+for (i in 1:nrow(msat_spp)) { #get maturity age data (was stopped at species Gadus chalcogrammus line 3008-3017)
   cat(paste(i, " ", sep = ''))
-  msat_spp$maturityage[i] <- maturity(species=(msat_spp$spp[i]), field='tm')
-  msat_spp$maturityage_mean[i] <- mean(unlist(msat_spp$maturityage[i]), na.rm = TRUE) #calculate mean maturity length
+  Predict <- (Plot_taxa(Search_species(Genus=msat_spp$genus[i], Species=msat_spp$species[i])$match_taxonomy))
+  msat_spp$maturityage[i] <- (exp(Predict[[1]]$Mean_pred['tm']))
 }
 
-#add generation time/length from FB
-msat_spp$generationtime <- NA #create column to fill in
-msat_spp$K <- NA 
-
-for (i in 1:nrow(msat_spp)) { #get generation time/length data
+for (i in 3017:nrow(msat_spp)) { #get maturity age data (was stopped at species Urobatis halleri line 3111-3145)
   cat(paste(i, " ", sep = ''))
-  msat_spp$K[i] <- popgrowth(species=(msat_spp$spp[i]), field='K')
-  msat_spp$K_mean[i] <- mean(unlist(msat_spp$K[i]), na.rm = TRUE)
-  msat_spp$generationtime[i] <- log(3)/msat_spp$K_mean[i]
-}  
+  Predict <- (Plot_taxa(Search_species(Genus=msat_spp$genus[i], Species=msat_spp$species[i])$match_taxonomy))
+  msat_spp$maturityage[i] <- (exp(Predict[[1]]$Mean_pred['tm']))
+}
 
 #add adult lifespan from FB
 msat_spp$adultlifespan <- NA #create column to fill in
 
-for (i in 1:nrow(msat_spp)) { #get adult lifespan data
+for (i in 1:nrow(msat_spp)) { #get adult lifespan data (was stopped at species Gadus chalcogrammus line 3008-3017)
   cat(paste(i, " ", sep = ''))
-  msat_spp$adultlifespan[i] <- species(species=(msat_spp$spp[i]), field='LongevityWild')
+  Predict <- (Plot_taxa(Search_species(Genus=msat_spp$genus[i], Species=msat_spp$species[i])$match_taxonomy))
+  msat_spp$adultlifespan[i] <- (exp(Predict[[1]]$Mean_pred['tmax']))
+}
+
+for (i in 3017:nrow(msat_spp)) { #get adult lifespan data (was stopped at species Urobatis halleri line 3111-3145)
+  cat(paste(i, " ", sep = ''))
+  Predict <- (Plot_taxa(Search_species(Genus=msat_spp$genus[i], Species=msat_spp$species[i])$match_taxonomy))
+  msat_spp$adultlifespan[i] <- (exp(Predict[[1]]$Mean_pred['tmax']))
+}
+
+#add generation time/length from FB
+msat_spp$generationtime <- NA #create column to fill in
+
+for (i in 1:nrow(msat_spp)) { #get generation time data (was stopped at species Gadus chalcogrammus line 3008-3017)
+  cat(paste(i, " ", sep = ''))
+  Predict <- (Plot_taxa(Search_species(Genus=msat_spp$genus[i], Species=msat_spp$species[i])$match_taxonomy))
+  msat_spp$generationtime[i] <- (exp(Predict[[1]]$Mean_pred['G']))
+}
+
+for (i in 3017:nrow(msat_spp)) { #get generation time  data (was stopped at species Urobatis halleri line 3111-3145)
+  cat(paste(i, " ", sep = ''))
+  Predict <- (Plot_taxa(Search_species(Genus=msat_spp$genus[i], Species=msat_spp$species[i])$match_taxonomy))
+  msat_spp$generationtime[i] <- (exp(Predict[[1]]$Mean_pred['G']))
 }
 
 #pull taxonomy
@@ -119,6 +136,10 @@ msat_spp <- transform(msat_spp,family = replace(family, grepl('Clupea pallasii p
 msat_spp$genus <- NA
 msat_spp$genus <- tax_name(msat_spp$spp, get = 'genus', db = 'itis')$genus
 msat_spp <- transform(msat_spp,genus = replace(genus, grepl('Clupea pallasii pallasii', spp, fixed=TRUE), 'Clupea')) #Had to manually add for this spp
+
+msat_spp$species <- NA
+msat_spp$species <- word(msat_spp$spp, 2, -1)
+msat_spp <- msat_spp %>% relocate(species, .after = genus)
 
 summary(msat_spp) #see results
 
@@ -175,27 +196,26 @@ mtdna_spp_new$maturityage <- NA #create column to fill in
 
 for (i in 1:nrow(mtdna_spp_new)) { #get maturity age data
   cat(paste(i, " ", sep = ''))
-  mtdna_spp_new$maturityage[i] <- maturity(species=(mtdna_spp_new$spp[i]), field='tm')
-  mtdna_spp_new$maturityage_mean[i] <- mean(unlist(mtdna_spp_new$maturityage[i]), na.rm = TRUE) #calculate mean maturity length
+  Predict <- (Plot_taxa(Search_species(Genus=mtdna_spp_new$genus[i], Species=mtdna_spp_new$species[i])$match_taxonomy))
+  mtdna_spp_new$maturityage[i] <- (exp(Predict[[1]]$Mean_pred['tm']))
 }
-
-#add generation time/length from FB
-mtdna_spp_new$generationtime <- NA #create column to fill in
-
-mtdna_spp_new$K <- NA 
-for (i in 1:nrow(mtdna_spp_new)) { #get generation time/length data
-  cat(paste(i, " ", sep = ''))
-  mtdna_spp_new$K[i] <- popgrowth(species=(mtdna_spp_new$spp[i]), field='K')
-  mtdna_spp_new$K_mean[i] <- mean(unlist(mtdna_spp_new$K[i]), na.rm = TRUE)
-  mtdna_spp_new$generationtime[i] <- log(3)/mtdna_spp_new$K_mean[i]
-}  
 
 #add adult lifespan from FB
 mtdna_spp_new$adultlifespan <- NA #create column to fill in
 
 for (i in 1:nrow(mtdna_spp_new)) { #get adult lifespan data
   cat(paste(i, " ", sep = ''))
-  mtdna_spp_new$adultlifespan[i] <- species(species=(mtdna_spp_new$spp[i]), field='LongevityWild')
+  Predict <- (Plot_taxa(Search_species(Genus=mtdna_spp_new$genus[i], Species=mtdna_spp_new$species[i])$match_taxonomy))
+  mtdna_spp_new$adultlifespan[i] <- (exp(Predict[[1]]$Mean_pred['tmax']))
+}
+
+#add generation time/length from FB
+mtdna_spp_new$generationtime <- NA #create column to fill in
+
+for (i in 1:nrow(mtdna_spp_new)) { #get generation time data
+  cat(paste(i, " ", sep = ''))
+  Predict <- (Plot_taxa(Search_species(Genus=mtdna_spp_new$genus[i], Species=mtdna_spp_new$species[i])$match_taxonomy))
+  mtdna_spp_new$generationtime[i] <- (exp(Predict[[1]]$Mean_pred['G']))
 }
 
 #pull taxonomy
@@ -212,6 +232,10 @@ mtdna_spp_new$family <- tax_name(mtdna_spp_new$spp, get = 'family', db = 'ncbi')
 
 mtdna_spp_new$genus <- NA
 mtdna_spp_new$genus <- tax_name(mtdna_spp_new$spp, get = 'genus', db = 'ncbi')$genus
+
+mtdna_spp_new$species <- NA
+mtdna_spp_new$species <- word(mtdna_spp_new$spp, 2, -1)
+mtdna_spp_new <- mtdna_spp_new %>% relocate(species, .after = genus)
 
 summary(mtdna_spp_new) #see results
 ################################################### WRITE CSV #################################################################
